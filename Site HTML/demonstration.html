@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Démonstration — Noumensia</title>
+<meta name="description" content="Des modèles de démonstration construits à partir de la littérature scientifique, à explorer de façon interactive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <!-- PLACEHOLDER logo — remplacer par le fichier logo réel (Newsreader) -->
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <line x1="7" y1="6" x2="7" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="7" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="25" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <circle cx="7" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="7" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+      </svg>
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="demonstration.html" aria-current="page">Démonstration</a></li>
+      <li><a href="credibilite.html">Crédibilité</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ DÉMONSTRATION ============ -->
+  <section class="section" id="demonstration">
+    <div class="wrap">
+      <p class="eyebrow">Démonstration</p>
+      <h2>Des modèles construits, pas des promesses</h2>
+      <p class="lede">
+        Les modèles ci-dessous sont des modèles de démonstration, construits indépendamment à
+        partir de la littérature scientifique — pas des livrables réalisés pour un client.
+        Vous pouvez changer une variable et observer comment les autres évoluent.
+      </p>
+
+      <div class="demo-frame">
+        <!-- PLACEHOLDER : remplacer ce bloc par l'iframe d'intégration interactive -->
+        <span>Simulation interactive — intégration à venir</span>
+      </div>
+
+      <div class="model-grid">
+        <article class="model-card">
+          <!-- PLACEHOLDER : remplacer ce div par <img src="..." alt="..."> -->
+          <div class="model-shot"><span>Capture à ajouter</span></div>
+          <div class="model-body">
+            <p class="eyebrow eyebrow--on-light">Modèle · 46&nbsp;variables</p>
+            <h3>Turnover volontaire</h3>
+            <p>
+              De la rémunération perçue à la qualité de l'intégration, ce modèle représente
+              les chemins — souvent indirects — qui mènent un collaborateur à partir.
+            </p>
+            <!-- PLACEHOLDER : remplacer href par le lien de la fiche détaillée -->
+            <a class="model-link" href="#">Explorer le modèle ↗</a>
+          </div>
+        </article>
+
+        <article class="model-card">
+          <div class="model-shot"><span>Capture à ajouter</span></div>
+          <div class="model-body">
+            <p class="eyebrow eyebrow--on-light">Modèle · V4</p>
+            <h3>Absentéisme &amp; présentéisme</h3>
+            <p>
+              Construit à partir de Miraglia &amp; Johns, Aronsson et al., et des benchmarks
+              DARES, ce modèle distingue les absences contraintes des absences évitables.
+            </p>
+            <a class="model-link" href="#">Explorer le modèle ↗</a>
+          </div>
+        </article>
+
+        <article class="model-card">
+          <div class="model-shot"><span>Capture à ajouter</span></div>
+          <div class="model-body">
+            <p class="eyebrow eyebrow--on-light">Modèle · 42&nbsp;variables · COPSOQ</p>
+            <h3>Risques psychosociaux &amp; épuisement</h3>
+            <p>
+              Structuré autour du cadre COPSOQ — exigences et ressources au travail — pour
+              comprendre ce qui mène à l'épuisement professionnel, et où agir en premier.
+            </p>
+            <a class="model-link" href="#">Explorer le modèle ↗</a>
+          </div>
+        </article>
+      </div>
+
+      <p class="model-note">
+        D'autres modèles existent déjà — adéquation poste/personne, détection de signaux de
+        management toxique — et seront documentés ici progressivement.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn--ghost" href="methode.html">La méthode derrière ces modèles</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <span>© 2026 Noumensia — Modélisation causale pour la fonction RH</span>
+    <ul>
+      <li><a href="demonstration.html">Démonstration</a></li>
+      <li><a href="credibilite.html">Crédibilité</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
