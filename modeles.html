@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modèles — Noumensia</title>
+<meta name="description" content="Des réseaux bayésiens construits à partir de la littérature scientifique, consultables et explorables de façon interactive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <line x1="7" y1="6" x2="7" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="7" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="25" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <circle cx="7" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="7" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+      </svg>
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="modeles.html" aria-current="page">Modèles</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="modeles">
+    <div class="wrap">
+      <p class="eyebrow">Modèles</p>
+      <h2>Des réseaux bayésiens construits, pas des promesses</h2>
+      <p class="lede">
+        Chaque modèle ci-dessous est construit indépendamment, à partir de la
+        littérature scientifique — pas à partir de données client. Ils
+        illustrent concrètement ce que produit l'approche&nbsp;: une structure
+        de facteurs reliés entre eux, que vous pouvez explorer et interroger.
+      </p>
+
+      <!-- ============ GRILLE DES MODÈLES ============ -->
+      <div class="model-grid">
+
+        <article class="model-card">
+          <!-- PLACEHOLDER : remplacer par <img src="..." alt="..."> -->
+          <div class="model-shot"><span>Capture à ajouter</span></div>
+          <div class="model-body">
+            <p class="eyebrow eyebrow--on-light">46 variables</p>
+            <h3>Turnover volontaire</h3>
+            <p>
+              De la rémunération perçue à la qualité de l'intégration, ce modèle
+              représente les chemins — souvent indirects — qui mènent un
+              collaborateur à partir.
+            </p>
+            <!-- TODO : remplacer href par la page dédiée du modèle -->
+            <a class="model-link" href="#">Lire l'article &amp; explorer le modèle ↗</a>
+          </div>
+        </article>
+
+        <article class="model-card">
+          <div class="model-shot"><span>Capture à ajouter</span></div>
+          <div class="model-body">
+            <p class="eyebrow eyebrow--on-light">V4 · Miraglia &amp; Johns, Aronsson et al.</p>
+            <h3>Absentéisme &amp; présentéisme</h3>
+            <p>
+              Construit à partir de la méta-analyse de Miraglia &amp; Johns et
+              des travaux d'Aronsson sur le présentéisme, ce modèle distingue
+              les absences contraintes des absences évitables et intègre le
+              mécanisme de substitution absentéisme/présentéisme.
+            </p>
+            <a class="model-link" href="#">Lire l'article &amp; explorer le modèle ↗</a>
+          </div>
+        </article>
+
+        <article class="model-card">
+          <div class="model-shot"><span>Capture à ajouter</span></div>
+          <div class="model-body">
+            <p class="eyebrow eyebrow--on-light">42 variables · cadre COPSOQ III</p>
+            <h3>Risques psychosociaux &amp; épuisement</h3>
+            <p>
+              Structuré autour du cadre COPSOQ — exigences et ressources au
+              travail — pour comprendre les chemins qui mènent à l'épuisement
+              professionnel, et identifier où une intervention aurait le plus
+              d'effet.
+            </p>
+            <a class="model-link" href="#">Lire l'article &amp; explorer le modèle ↗</a>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="model-note">
+        D'autres modèles existent déjà — adéquation poste/personne, détection de
+        signaux de management toxique, sécurité au travail — et seront documentés
+        ici progressivement. Chaque modèle dispose de son propre article détaillé,
+        de la visualisation du réseau, et d'un lien vers le simulateur interactif.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn--ghost" href="methode.html">La méthode derrière ces modèles</a>
+        <a class="btn btn--ghost" href="contact.html">Discuter d'un sujet spécifique</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <span>© 2026 Noumensia — Modélisation probabiliste pour la fonction RH</span>
+    <ul>
+      <li><a href="modeles.html">Modèles</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

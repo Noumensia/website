@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Méthode — Noumensia</title>
-<meta name="description" content="Comment un modèle causal est construit : structure causale, calibration, simulation.">
+<meta name="description" content="Comment un réseau bayésien est construit : fondements scientifiques, structure, calibration, simulation — et les limites de l'approche.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,7 +16,6 @@
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <!-- PLACEHOLDER logo — remplacer par le fichier logo réel (Newsreader) -->
       <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
         <line x1="7" y1="6" x2="7" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
         <line x1="7" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
@@ -31,8 +30,7 @@
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Accueil</a></li>
-      <li><a href="demonstration.html">Démonstration</a></li>
-      <li><a href="credibilite.html">Crédibilité</a></li>
+      <li><a href="modeles.html">Modèles</a></li>
       <li><a href="methode.html" aria-current="page">Méthode</a></li>
       <li><a href="a-propos.html">À propos</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -42,60 +40,149 @@
 
 <main>
 
-  <!-- ============ MÉTHODE ============ -->
+  <!-- ============ INTRO ============ -->
   <section class="section" id="methode">
     <div class="wrap">
       <p class="eyebrow">Méthode</p>
-      <h2>Comment un modèle causal est construit</h2>
+      <h2>Comment un réseau bayésien est construit — et sur quoi il repose</h2>
       <p class="lede">
-        Un réseau bayésien est une représentation graphique des relations entre variables&nbsp;:
-        chaque lien porte une force estimée et une incertitude associée. Contrairement à un
-        modèle « boîte noire », chaque relation peut être inspectée, discutée et corrigée.
+        Un réseau bayésien est une représentation graphique des relations entre
+        variables&nbsp;: chaque nœud est un facteur, chaque lien porte une
+        force estimée et une incertitude associée. Contrairement à un modèle
+        «&nbsp;boîte noire&nbsp;», chaque relation peut être inspectée, discutée
+        et corrigée.
       </p>
+    </div>
+  </section>
+
+  <!-- ============ PROCESSUS ============ -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <p class="eyebrow">Le processus</p>
+      <h2>Trois étapes, trois sources de connaissance</h2>
 
       <div class="steps">
         <div class="step">
           <span class="step-num">I</span>
-          <h3>Structure causale</h3>
+          <h3>Structure</h3>
           <p>
-            Les variables et leurs relations sont d'abord posées à partir de la littérature
-            scientifique, puis discutées et ajustées avec vos équipes RH — qui apportent une
-            connaissance du terrain qu'aucune donnée seule ne contient.
+            Les variables et leurs relations sont d'abord posées à partir de la
+            littérature scientifique — méta-analyses, cadres validés, données
+            publiques (DARES, COPSOQ). Puis elles sont discutées et ajustées avec
+            vos équipes RH, qui apportent une connaissance du terrain qu'aucune
+            donnée seule ne contient. La structure du modèle reflète ce
+            croisement.
           </p>
         </div>
         <div class="step">
           <span class="step-num">II</span>
           <h3>Calibration</h3>
           <p>
-            Les paramètres sont calibrés sur la littérature, puis affinés avec vos données
-            lorsqu'elles existent. Le modèle reste utilisable même sans données internes
-            suffisantes pour entraîner un modèle statistique classique.
+            Les paramètres sont d'abord estimés à partir de la littérature, puis
+            affinés avec vos données lorsqu'elles existent. Le modèle reste
+            utilisable même sans données internes suffisantes pour entraîner un
+            modèle statistique classique — c'est l'un des avantages de
+            l'approche bayésienne.
           </p>
         </div>
         <div class="step">
           <span class="step-num">III</span>
           <h3>Simulation</h3>
           <p>
-            Une fois calibré, le modèle permet d'explorer des scénarios — «&nbsp;si l'on agit
-            sur X, qu'est-ce qui change sur Y&nbsp;?&nbsp;» — avec une estimation de
-            l'incertitude associée.
+            Une fois calibré, le modèle permet d'explorer des scénarios&nbsp;:
+            «&nbsp;si l'on agit sur X, qu'est-ce qui change sur Y&nbsp;?&nbsp;»
+            Les résultats sont exprimés en probabilités et en fourchettes — avec
+            une estimation explicite de l'incertitude.
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ FONDEMENTS ============ -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Fondements</p>
+      <h2>Ancré dans la recherche, pas dans l'intuition</h2>
+      <div class="prose">
+        <p>
+          La structure de chaque modèle s'appuie sur des cadres de recherche
+          publiés et reconnus. Les hypothèses causales ne sont pas inventées —
+          elles sont extraites de la littérature, documentées, et discutables.
+          Quelques références structurantes&nbsp;:
+        </p>
+      </div>
+
+      <ul class="sources">
+        <li><strong>DARES</strong> — Enquêtes Conditions de travail et Risques psychosociaux (données nationales françaises)</li>
+        <li><strong>Miraglia &amp; Johns (2016)</strong> — <em>Going to work ill</em> : méta-analyse sur le présentéisme et ses déterminants</li>
+        <li><strong>Aronsson et al.</strong> — <em>Sickness presenteeism</em> : mécanismes de substitution absentéisme/présentéisme</li>
+        <li><strong>COPSOQ III</strong> — Copenhagen Psychosocial Questionnaire : cadre exigences-ressources pour les RPS</li>
+      </ul>
 
       <div class="prose">
-        <h3>Les outils</h3>
         <p>
-          La construction et la calibration des modèles s'appuient sur BayesiaLab, logiciel
-          de référence pour les réseaux bayésiens. Noumensia travaille en lien étroit avec
-          Bayesia, son éditeur, ce qui permet un accès privilégié aux développements
+          Chaque modèle publié sur la page <a href="modeles.html">Modèles</a>
+          cite ses sources et permet de voir comment la littérature a été
+          traduite en structure de réseau.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUTILS ============ -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <p class="eyebrow">Les outils</p>
+      <h2>BayesiaLab et WebSimulator</h2>
+      <div class="prose">
+        <p>
+          La construction et la calibration des modèles s'appuient sur
+          <a href="https://www.bayesia.com" target="_blank" rel="noopener">BayesiaLab</a>,
+          logiciel de référence pour les réseaux bayésiens, utilisé en recherche
+          et en industrie. Noumensia travaille en lien étroit avec Bayesia, son
+          éditeur, ce qui permet un accès privilégié aux développements
           méthodologiques récents.
         </p>
         <p>
-          Cette approche — structure causale explicite, calibration, simulation — s'applique
-          au-delà des problématiques RH. C'est sur ces dernières que Noumensia concentre
-          aujourd'hui son expertise.
+          Les modèles de démonstration sont rendus interactifs via WebSimulator —
+          une interface qui permet de manipuler les variables et d'observer
+          comment les probabilités évoluent, sans aucune compétence technique
+          requise.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIMITES ============ -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Ce qu'un modèle ne fait pas</p>
+      <h2>Limites et conditions d'utilisation</h2>
+      <div class="prose">
+        <p>
+          Un réseau bayésien ne prédit pas l'avenir avec certitude. Il propose
+          une estimation conditionnelle — «&nbsp;si ces facteurs sont dans cet
+          état, alors tel résultat est plus probable&nbsp;» — dont la qualité
+          dépend de la qualité des données et des hypothèses retenues.
+        </p>
+        <p>
+          Le modèle n'est pas un substitut à la connaissance terrain de vos
+          équipes RH. Il est un outil de structuration et de raisonnement qui
+          vient compléter — pas remplacer — l'expertise humaine. Un modèle mal
+          structuré ou construit sur des données biaisées produira des résultats
+          trompeurs, comme tout outil quantitatif.
+        </p>
+        <p>
+          Enfin, «&nbsp;causal&nbsp;» dans ce contexte signifie que le modèle
+          explicite des hypothèses de direction entre variables, pas qu'il prouve
+          la causalité au sens expérimental. La distinction est importante et
+          fait partie de la restitution.
+        </p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="modeles.html">Voir les modèles</a>
+        <a class="btn btn--ghost" href="contact.html">Discuter de votre contexte</a>
       </div>
     </div>
   </section>
@@ -105,13 +192,13 @@
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
-    <span>© 2026 Noumensia — Modélisation causale pour la fonction RH</span>
+    <span>© 2026 Noumensia — Modélisation probabiliste pour la fonction RH</span>
     <ul>
-      <li><a href="demonstration.html">Démonstration</a></li>
-      <li><a href="credibilite.html">Crédibilité</a></li>
+      <li><a href="modeles.html">Modèles</a></li>
       <li><a href="methode.html">Méthode</a></li>
       <li><a href="a-propos.html">À propos</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
     </ul>
   </div>
 </footer>
