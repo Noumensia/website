@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À propos — Noumensia</title>
+<meta name="description" content="Noumensia est porté par Arthur Jouffe — parcours, origine du nom, et lien avec l'écosystème BayesiaLab.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <!-- PLACEHOLDER logo — remplacer par le fichier logo réel (Newsreader) -->
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <line x1="7" y1="6" x2="7" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="7" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="25" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <circle cx="7" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="7" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+      </svg>
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="demonstration.html">Démonstration</a></li>
+      <li><a href="credibilite.html">Crédibilité</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html" aria-current="page">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ À PROPOS ============ -->
+  <section class="section" id="apropos">
+    <div class="wrap">
+      <p class="eyebrow">Qui</p>
+      <h2>Une pratique indépendante, construite sur des outils connus de l'intérieur</h2>
+      <div class="prose">
+        <p>
+          Noumensia est porté par Arthur Jouffe, formé en autodidacte aux réseaux bayésiens
+          et à l'inférence causale, avec un accès direct à l'écosystème BayesiaLab /
+          WebSimulator depuis ses débuts.
+        </p>
+        <p>
+          Cette approche causale a d'abord été testée hors du champ RH&nbsp;: une
+          collaboration de recherche en pharmacologie (mention, en cours de publication) a
+          servi de premier terrain — avant d'être appliquée aux questions de turnover,
+          d'absentéisme et de risques psychosociaux.
+        </p>
+        <p>
+          Le nom vient d'une distinction kantienne, entre le phénomène — ce qui apparaît —
+          et le noumène — ce qui est, indépendamment de notre perception. Une manière de
+          dire que les indicateurs RH sont des phénomènes&nbsp;; les modèles causaux
+          cherchent ce qu'il y a derrière.
+        </p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="contact.html">Discuter de votre contexte</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <span>© 2026 Noumensia — Modélisation causale pour la fonction RH</span>
+    <ul>
+      <li><a href="demonstration.html">Démonstration</a></li>
+      <li><a href="credibilite.html">Crédibilité</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

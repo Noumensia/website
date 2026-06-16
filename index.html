@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noumensia — Modélisation probabiliste pour la fonction RH</title>
+<meta name="description" content="Noumensia construit des modèles probabilistes qui relient turnover, absentéisme et risques psychosociaux aux facteurs qui y contribuent, pour explorer différents scénarios d'action.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Noumensia — Modélisation probabiliste pour la fonction RH">
+<meta property="og:description" content="Des modèles qui relient vos indicateurs RH — turnover, absentéisme, risques psychosociaux — aux facteurs qui y contribuent, pour explorer différents scénarios d'action.">
+<!-- TODO: ajouter og:image (1200x630) une fois disponible -->
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- STYLE TEMPORAIRE — à supprimer une fois les visuels HellixMap/WebSimulator
+     intégrés et/ou ces classes ajoutées à style.css -->
+<style>
+  .visual-placeholder {
+    border: 1px dashed var(--ardoise);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--ardoise);
+    background: var(--blanc-casse);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 280px;
+    gap: 0.5rem;
+  }
+  .visual-placeholder p { margin: 0; }
+  .placeholder-note {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    font-style: italic;
+  }
+  .prose-lead { margin-bottom: 2rem; }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <!-- PLACEHOLDER logo — remplacer par le fichier logo réel (Newsreader) -->
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <line x1="7" y1="6" x2="7" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="7" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="25" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <circle cx="7" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="7" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+      </svg>
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" aria-current="page">Accueil</a></li>
+      <li><a href="demonstration.html">Démonstration</a></li>
+      <li><a href="credibilite.html">Crédibilité</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="accueil">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Turnover · Absentéisme · Risques psychosociaux</p>
+        <h1>Vos indicateurs RH évoluent. Comprenez enfin pourquoi — et ce qui pourrait les faire bouger.</h1>
+        <p>
+          Turnover qui grimpe dans un service, absentéisme qui ne baisse pas malgré
+          les actions menées, signaux de mal-être qui se multiplient&nbsp;: ces
+          situations ont des causes multiples, souvent imbriquées, que les
+          tableaux de bord habituels ne permettent pas de démêler.
+        </p>
+        <p>
+          Noumensia construit, à partir de vos données RH, un modèle qui représente
+          ces facteurs et leurs interactions. Vous pouvez ensuite l'interroger&nbsp;:
+          quels facteurs comptent le plus dans votre situation&nbsp;? Et si l'on agissait
+          sur l'un d'eux, qu'est-ce que cela changerait, selon le modèle, pour
+          l'indicateur qui vous préoccupe&nbsp;?
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn--primary" href="demonstration.html">Voir un exemple</a>
+          <a class="btn btn--ghost" href="contact.html">Discuter de votre contexte</a>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER VISUEL — à remplacer par un export HellixMap montrant
+           un graphe de dépendances (nœuds = facteurs RH, arcs = relations).
+           Dimensions cibles indicatives : ~640x480, fond transparent ou
+           cohérent avec --ardoise / --bordeaux / --blanc-casse.
+           Légende suggérée sous l'image : "Exemple de structure de modèle —
+           données fictives" -->
+      <div class="visual-placeholder" aria-hidden="true">
+        <p>Placeholder — graphe HellixMap à intégrer</p>
+        <p class="placeholder-note">Exemple de structure de modèle (nœuds = facteurs RH, arcs = relations) — données fictives</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAS D'USAGE CONCRETS ============ -->
+  <section class="section section--alt" id="cas-usage">
+    <div class="wrap">
+      <p class="eyebrow">Des situations que vous reconnaissez peut-être</p>
+      <h2>Trois questions RH typiques, et comment un modèle aide à y répondre</h2>
+      <div class="prose">
+        <h3>« Pourquoi le turnover est-il plus élevé dans cette équipe que dans une équipe comparable ? »</h3>
+        <p>
+          Le modèle compare les profils des deux équipes sur l'ensemble des
+          facteurs renseignés — charge de travail, ancienneté, qualité du
+          management perçue, rémunération relative — et identifie ceux qui
+          expliquent le mieux la différence observée. Vous obtenez une liste de
+          facteurs classés, pas une intuition isolée.
+        </p>
+        <h3>« L'absentéisme reste élevé malgré nos actions sur le bien-être. Pourquoi ? »</h3>
+        <p>
+          Le modèle permet de tester si les facteurs sur lesquels vous avez agi
+          sont réellement ceux qui pèsent le plus dans votre contexte, ou si
+          d'autres facteurs — charge de travail, organisation, management de
+          proximité — jouent un rôle plus important que prévu.
+        </p>
+        <h3>« Avant de lancer un plan d'action RPS, sur quoi prioriser ? »</h3>
+        <p>
+          Plutôt que de traiter tous les facteurs de risque avec la même
+          intensité, le modèle aide à identifier ceux dont l'évolution aurait,
+          selon les données disponibles, l'effet le plus net sur les indicateurs
+          que vous suivez&nbsp;— pour concentrer un budget ou un temps d'action
+          limités.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CE QUE ÇA PERMET ============ -->
+  <section class="section" id="ce-que-ca-permet">
+    <div class="wrap">
+      <p class="eyebrow">Ce que ça permet</p>
+      <h2>Passer du constat à la priorisation</h2>
+      <div class="prose">
+        <h3>Identifier les facteurs qui comptent vraiment dans votre contexte</h3>
+        <p>
+          Deux entreprises, deux services, deux populations n'ont pas forcément
+          les mêmes facteurs explicatifs pour un même problème. Le modèle est
+          construit à partir de <em>vos</em> données&nbsp;: il met en évidence ce
+          qui joue un rôle chez vous, pas une liste générique de bonnes pratiques
+          RH.
+        </p>
+        <h3>Comparer plusieurs pistes d'action avant de choisir</h3>
+        <p>
+          Plutôt que d'arbitrer entre plusieurs hypothèses à l'aveugle (charge de
+          travail, management, organisation des plannings...), vous pouvez
+          confronter ces hypothèses au modèle et voir laquelle a, selon les
+          données, le poids le plus important sur l'indicateur visé.
+        </p>
+        <h3>Disposer d'un support pour étayer une décision</h3>
+        <p>
+          Les résultats sont présentés sous forme de probabilités et de
+          fourchettes&nbsp;— une base argumentée pour discuter en comité de
+          direction, avec le CSE, ou avec les équipes concernées, plutôt qu'une
+          intuition difficile à objectiver.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMMENT ÇA FONCTIONNE ============ -->
+  <section class="section section--alt" id="comment-ca-fonctionne">
+    <div class="wrap">
+      <div class="prose-lead">
+        <p class="eyebrow">Comment ça fonctionne</p>
+        <h2>Un modèle bayésien, c'est une carte des facteurs qui s'influencent entre eux</h2>
+        <div class="prose">
+          <p>
+            La plupart des outils RH s'arrêtent à la corrélation&nbsp;: ils signalent
+            qu'un service a plus de turnover, plus d'absences, ou un score
+            d'engagement en baisse — sans dire quels facteurs y sont le plus
+            associés, ni comment ces facteurs interagissent entre eux.
+          </p>
+          <p>
+            Un modèle bayésien représente explicitement les facteurs en jeu — charge
+            de travail, reconnaissance, autonomie, qualité du management — et les
+            relations entre eux et vos indicateurs. On peut ensuite poser des
+            questions de type scénario&nbsp;: «&nbsp;si la charge de travail de cette
+            équipe diminuait, qu'est-ce que cela changerait, selon le modèle, pour la
+            probabilité de départ&nbsp;?&nbsp;»
+          </p>
+          <p>
+            Le modèle ne fournit pas une réponse définitive&nbsp;— il propose une
+            estimation, construite à partir de vos données et des hypothèses
+            retenues avec vous, qui peut ensuite être discutée, affinée et confrontée
+            au terrain. Ce n'est pas une boîte noire qui prédit&nbsp;: c'est une
+            structure qu'on peut interroger et faire évoluer.
+          </p>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER VISUEL — à remplacer par une ou plusieurs captures
+           d'écran WebSimulator montrant l'interface de simulation
+           (curseurs de scénario, résultats en probabilités/fourchettes).
+           Dimensions cibles indicatives : ~960x600 ou format carrousel
+           si plusieurs captures. -->
+      <div class="visual-placeholder" aria-hidden="true">
+        <p>Placeholder — capture(s) d'écran WebSimulator à intégrer</p>
+        <p class="placeholder-note">Exemple d'interface de simulation de scénario — données fictives</p>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn--primary" href="methode.html">Comprendre la méthode en détail</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CE QUE VOUS RECEVEZ ============ -->
+  <section class="section" id="ce-que-vous-recevez">
+    <div class="wrap">
+      <p class="eyebrow">Ce que vous recevez</p>
+      <h2>Un modèle construit avec vous, et une lecture claire des résultats</h2>
+      <div class="prose">
+        <h3>Une vision multivariée de votre situation</h3>
+        <p>
+          Le modèle ne regarde pas un facteur isolé&nbsp;: il représente
+          simultanément des dizaines de variables — charge de travail, ancienneté,
+          qualité du management, rémunération, climat d'équipe — et la façon dont
+          elles s'influencent entre elles. Une corrélation à deux variables masque
+          souvent l'effet d'une troisième.
+        </p>
+        <h3>Des résultats exprimés en probabilités et en fourchettes</h3>
+        <p>
+          Pas de chiffres absolus présentés comme des certitudes&nbsp;: le modèle
+          indique ce qui devient plus ou moins probable selon le scénario envisagé
+          — une base pour la décision, pas une prédiction garantie.
+        </p>
+        <h3>Des leviers d'action classés par impact estimé</h3>
+        <p>
+          Une analyse de sensibilité permet de classer les facteurs par ordre
+          d'impact estimé sur l'indicateur étudié, pour concentrer les efforts là
+          où ils comptent le plus.
+        </p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="demonstration.html">Voir un exemple concret</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRANSITION / ALLER PLUS LOIN ============ -->
+  <section class="section section--alt" id="aller-plus-loin">
+    <div class="wrap">
+      <p class="eyebrow">Aller plus loin</p>
+      <h2>Comprendre comment ces modèles sont construits, et qui les construit</h2>
+      <div class="prose">
+        <p>
+          La page <a href="methode.html">Méthode</a> détaille comment un modèle est
+          construit à partir de vos données et de la connaissance du terrain, quelles
+          hypothèses il repose sur, et comment ses résultats doivent être interprétés.
+          La page <a href="a-propos.html">À propos</a> présente le parcours derrière
+          Noumensia et les outils utilisés.
+        </p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="contact.html">Discuter de votre contexte</a>
+        <a class="btn btn--ghost" href="methode.html">Lire la méthode</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <span>© 2026 Noumensia — Modélisation probabiliste pour la fonction RH</span>
+    <ul>
+      <li><a href="demonstration.html">Démonstration</a></li>
+      <li><a href="credibilite.html">Crédibilité</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
