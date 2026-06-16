@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Méthode — Noumensia</title>
+<meta name="description" content="Comment un réseau bayésien est construit : structure, calibration, simulation — et pourquoi cette approche complète le diagnostic RH sans remplacer l'expertise humaine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── Styles spécifiques à la page Méthode ── */
+
+  /* DAG pédagogique */
+  .dag-fig {
+    margin: 2.5rem 0 0;
+  }
+  .dag-fig figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-style: italic;
+    opacity: 0.6;
+    text-align: center;
+  }
+
+  /* Comparaison WebSimulator avant/après */
+  .ws-compare {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem 0 0.5rem;
+  }
+  .ws-compare figure {
+    margin: 0;
+  }
+  .ws-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 0.4rem;
+  }
+  .ws-compare img {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .ws-compare figcaption {
+    margin-top: 0.5rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+  .ws-note {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.8rem;
+    font-style: italic;
+    opacity: 0.6;
+    text-align: center;
+    margin-top: 0.25rem;
+  }
+  @media (max-width: 560px) {
+    .ws-compare { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <line x1="7" y1="6" x2="7" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="7" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="25" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <circle cx="7" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="7" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+      </svg>
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="modeles.html">Modèles</a></li>
+      <li><a href="methode.html" aria-current="page">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="methode">
+    <div class="wrap">
+      <p class="eyebrow">Méthode</p>
+      <h2>Comment les modèles sont construits — et ce qu'on peut en attendre</h2>
+      <p class="lede">
+        Un réseau bayésien est une représentation graphique des relations entre
+        variables&nbsp;: chaque nœud est un facteur, chaque flèche porte une
+        hypothèse d'influence et une intensité estimée. Cette page explique
+        comment ils sont construits, sur quoi ils reposent, et ce qu'ils
+        ne font pas.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ PRINCIPE ============ -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <p class="eyebrow">Le principe</p>
+      <h2>Un réseau bayésien, en clair</h2>
+      <div class="prose">
+        <p>
+          Chaque nœud représente un facteur — charge de travail, soutien
+          managérial, épuisement émotionnel, intention de départ. Les flèches
+          expriment des hypothèses d'influence&nbsp;: «&nbsp;selon la
+          littérature, A est un antécédent probable de B&nbsp;». Ce n'est pas
+          une causalité prouvée — c'est une hypothèse structurée, documentée,
+          et discutable.
+        </p>
+        <p>
+          À chaque relation est associée une table de probabilités
+          conditionnelles, estimée depuis les données ou la littérature. Le
+          réseau répond alors à des questions du type&nbsp;: «&nbsp;si ce
+          facteur change, qu'est-ce qui bouge, et de combien&nbsp;?&nbsp;» —
+          en tenant compte de toutes les variables simultanément.
+        </p>
+        <p>
+          Contrairement à un modèle statistique classique, chaque relation est
+          visible et discutable. Si un lien semble inexact ou si une variable
+          manque, on corrige la structure et on observe comment les résultats
+          changent. C'est un outil de raisonnement, pas une boîte noire.
+        </p>
+      </div>
+
+      <!--
+        DAG pédagogique — redessiné en palette Noumensia à partir du modèle BayesiaLab.
+        Structure identique au modèle d'origine (5 nœuds, 4 arêtes orientées).
+        À remplacer par un export BayesiaLab au besoin (même structure, autre rendu).
+      -->
+      <figure class="dag-fig" aria-label="Réseau bayésien pédagogique à 5 nœuds">
+        <svg viewBox="0 0 580 135" xmlns="http://www.w3.org/2000/svg"
+             style="width:100%;max-width:580px;display:block;margin:0 auto;height:auto"
+             role="img"
+             aria-label="Réseau bayésien : charge de travail et soutien managérial influencent l'épuisement émotionnel, qui influence l'intention de départ et l'absentéisme">
+          <defs>
+            <marker id="dag-arw" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M0,0 L10,5 L0,10 Z" fill="#7A1F2D"/>
+            </marker>
+          </defs>
+
+          <!-- Arêtes — dessinées avant les nœuds -->
+          <!-- Charge de travail → Épuisement émotionnel -->
+          <line x1="157" y1="25" x2="204" y2="60"
+                stroke="#7A1F2D" stroke-width="1.5" marker-end="url(#dag-arw)"/>
+          <!-- Soutien managérial → Épuisement émotionnel -->
+          <line x1="157" y1="110" x2="204" y2="74"
+                stroke="#7A1F2D" stroke-width="1.5" marker-end="url(#dag-arw)"/>
+          <!-- Épuisement émotionnel → Intention de départ -->
+          <line x1="382" y1="60" x2="422" y2="25"
+                stroke="#7A1F2D" stroke-width="1.5" marker-end="url(#dag-arw)"/>
+          <!-- Épuisement émotionnel → Absentéisme -->
+          <line x1="382" y1="74" x2="434" y2="110"
+                stroke="#7A1F2D" stroke-width="1.5" marker-end="url(#dag-arw)"/>
+
+          <!-- Nœuds d'entrée : blanc cassé / bordure ardoise -->
+          <rect x="8" y="10" width="149" height="30" rx="3"
+                fill="#F2EFEA" stroke="#1E2630" stroke-width="1.5"/>
+          <text x="82" y="25" text-anchor="middle" dominant-baseline="central"
+                font-family="'IBM Plex Sans',Helvetica,Arial,sans-serif"
+                font-size="11" font-weight="500" fill="#1E2630">Charge de travail</text>
+
+          <rect x="8" y="95" width="149" height="30" rx="3"
+                fill="#F2EFEA" stroke="#1E2630" stroke-width="1.5"/>
+          <text x="82" y="110" text-anchor="middle" dominant-baseline="central"
+                font-family="'IBM Plex Sans',Helvetica,Arial,sans-serif"
+                font-size="11" font-weight="500" fill="#1E2630">Soutien managérial</text>
+
+          <!-- Nœud intermédiaire : bordeaux -->
+          <rect x="204" y="52" width="178" height="30" rx="3" fill="#7A1F2D"/>
+          <text x="293" y="67" text-anchor="middle" dominant-baseline="central"
+                font-family="'IBM Plex Sans',Helvetica,Arial,sans-serif"
+                font-size="11" font-weight="500" fill="#F2EFEA">Épuisement émotionnel</text>
+
+          <!-- Nœuds de sortie : ardoise -->
+          <rect x="422" y="10" width="150" height="30" rx="3" fill="#1E2630"/>
+          <text x="497" y="25" text-anchor="middle" dominant-baseline="central"
+                font-family="'IBM Plex Sans',Helvetica,Arial,sans-serif"
+                font-size="11" font-weight="500" fill="#F2EFEA">Intention de départ</text>
+
+          <rect x="434" y="95" width="124" height="30" rx="3" fill="#1E2630"/>
+          <text x="496" y="110" text-anchor="middle" dominant-baseline="central"
+                font-family="'IBM Plex Sans',Helvetica,Arial,sans-serif"
+                font-size="11" font-weight="500" fill="#F2EFEA">Absentéisme</text>
+        </svg>
+        <figcaption>
+          Extrait simplifié — modèle réel disponible sur la page
+          <a href="modeles.html">Modèles</a>. Chaque flèche représente
+          une hypothèse d'influence extraite de la littérature, pas une
+          preuve de causalité.
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ============ PROCESSUS ============ -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Le processus</p>
+      <h2>Trois étapes, trois sources de connaissance</h2>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">I</span>
+          <h3>Structure</h3>
+          <p>
+            Les variables et leurs relations sont posées à partir de la
+            littérature scientifique — méta-analyses, cadres validés, données
+            publiques (DARES, COPSOQ). Elles sont ensuite discutées et ajustées
+            avec vos équipes RH, qui apportent une connaissance du terrain
+            qu'aucune donnée ne contient. La structure du modèle reflète ce
+            croisement.
+          </p>
+        </div>
+        <div class="step">
+          <span class="step-num">II</span>
+          <h3>Calibration</h3>
+          <p>
+            Les paramètres du modèle sont d'abord estimés depuis la littérature,
+            puis affinés avec vos données. Celles-ci peuvent prendre des formes
+            variées&nbsp;: extraits SIRH, baromètres internes, enquêtes
+            psychosociales existantes, ou questionnaires passés directement aux
+            collaborateurs — chaque source alimente les paramètres du modèle de
+            façon tracée. Quand les données internes sont insuffisantes,
+            les paramètres issus de la littérature restent opérationnels — là
+            où un modèle statistique classique serait bloqué.
+          </p>
+        </div>
+        <div class="step">
+          <span class="step-num">III</span>
+          <h3>Simulation et restitution</h3>
+          <p>
+            Une fois calibré, le modèle explore des scénarios&nbsp;:
+            «&nbsp;si l'on agit sur X, qu'est-ce qui change sur Y&nbsp;?&nbsp;»
+            Les résultats sont exprimés en distributions de probabilités, avec
+            une estimation explicite de l'incertitude — pas un chiffre unique.
+            Vous recevez le modèle interactif et les résultats commentés,
+            conçus pour être présentés en CODIR ou avec le CSE.
+          </p>
+        </div>
+      </div>
+
+      <div class="prose" style="margin-top:1.5rem">
+        <p>
+          L'ensemble prend typiquement 4 à 8 semaines selon la disponibilité
+          des données et les itérations nécessaires. Les données restent chez
+          vous, le traitement respecte le RGPD, et les échanges sont couverts
+          par un accord de confidentialité.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POSITIONNEMENT ============ -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <p class="eyebrow">Positionnement</p>
+      <h2>Ce que cette approche fait — et ce qu'elle ne remplace pas</h2>
+      <div class="prose">
+        <p>
+          Un algorithme de machine learning vise avant tout à maximiser la
+          précision prédictive — parfois au détriment de la lisibilité. Un
+          réseau bayésien peut aussi se prêter à la prédiction, mais ce n'est
+          pas là que réside sa valeur principale. Ce qui le distingue&nbsp;: le
+          raisonnement est visible et modifiable, et des scénarios d'action sont
+          simulables.
+        </p>
+        <p>
+          Un consultant RH apporte de l'expérience et des grilles d'analyse
+          éprouvées. La modélisation ne remplace pas cette expertise — elle
+          l'outille&nbsp;: confronter des intuitions à des données, quantifier
+          ce qui était qualitatif, rendre les arbitrages plus traçables.
+        </p>
+        <p>
+          Cette approche complète aussi les enquêtes internes et les tableaux
+          de bord existants. Elle relie les variables qu'ils mesurent
+          séparément pour passer du constat
+          («&nbsp;l'absentéisme a augmenté&nbsp;») au diagnostic structuré
+          («&nbsp;voici les facteurs qui y contribuent le plus, et dans quel
+          ordre probable&nbsp;»).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FONDEMENTS ============ -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Fondements</p>
+      <h2>Ce que chaque modèle doit à la recherche</h2>
+      <div class="prose">
+        <p>
+          La structure de chaque modèle repose sur des cadres de recherche
+          publiés. Les hypothèses d'influence entre variables sont extraites
+          de la littérature, documentées, et ouvertes à la discussion.
+          Quelques références structurantes&nbsp;:
+        </p>
+      </div>
+
+      <ul class="sources">
+        <li>
+          <strong>Turnover volontaire</strong> —
+          Rubenstein et al. (2018), méta-analyse des antécédents du turnover
+          volontaire&nbsp;; Mobley (1977), modèle de décision de
+          départ&nbsp;; Mitchell et al. (2001), théorie de l'encastrement
+          (<em>job embeddedness</em>)
+        </li>
+        <li>
+          <strong>Absentéisme et présentéisme</strong> —
+          Miraglia &amp; Johns (2016), méta-analyse des déterminants du
+          présentéisme&nbsp;; Aronsson et al., mécanismes de substitution
+          absentéisme / présentéisme
+        </li>
+        <li>
+          <strong>Risques psychosociaux</strong> —
+          COPSOQ III (Copenhagen Psychosocial Questionnaire), cadre
+          exigences-ressources&nbsp;; données DARES (enquêtes nationales
+          françaises sur les conditions de travail)
+        </li>
+      </ul>
+
+      <div class="prose">
+        <p>
+          Chaque modèle publié sur la page <a href="modeles.html">Modèles</a>
+          cite ses sources et rend visible la façon dont la littérature a été
+          traduite en structure de réseau. Pour la méthodologie bayésienne
+          elle-même, les fondements formels sont établis de longue date&nbsp;;
+          Koller &amp; Friedman, <em>Probabilistic Graphical Models</em>,
+          en constitue la référence standard.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUTILS ============ -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <p class="eyebrow">Les outils</p>
+      <h2>BayesiaLab et WebSimulator</h2>
+      <div class="prose">
+        <p>
+          La construction et la calibration des modèles s'appuient sur
+          <a href="https://www.bayesia.com" target="_blank" rel="noopener">BayesiaLab</a>,
+          logiciel de référence pour les réseaux bayésiens, utilisé en
+          recherche et en industrie depuis plus de vingt ans. Noumensia
+          travaille en lien étroit avec Bayesia, son éditeur — ce qui permet
+          un accès privilégié aux développements méthodologiques récents.
+        </p>
+        <p>
+          Les modèles livrés sont rendus interactifs via WebSimulator — une
+          interface navigateur qui permet de fixer des variables, de simuler
+          des scénarios et d'observer comment les probabilités évoluent en
+          temps réel, sans aucune compétence technique requise.
+        </p>
+      </div>
+
+      <!--
+        Captures WebSimulator — modèle burn-out (démonstration).
+        ws-reference.png  = état sans observation (risque = 0,57)
+        ws-scenario.png   = charge élevée + exigences modérées (risque = 0,73)
+      -->
+      <div class="ws-compare" role="group" aria-label="Comparaison de scénarios WebSimulator">
+        <figure>
+          <p class="ws-label">État de référence</p>
+          <img src="images/ws/ws-reference.png"
+               alt="WebSimulator — sans observation fixée : risque de burn-out estimé à 0,57"
+               loading="lazy">
+          <figcaption>
+            Sans observation fixée — risque de burn-out&nbsp;: <strong>0,57</strong>
+          </figcaption>
+        </figure>
+        <figure>
+          <p class="ws-label">Scénario simulé</p>
+          <img src="images/ws/ws-scenario.png"
+               alt="WebSimulator — charge de travail élevée et exigences émotionnelles modérées : risque de burn-out à 0,73"
+               loading="lazy">
+          <figcaption>
+            Charge élevée + exigences modérées&nbsp;: risque <strong>0,73</strong>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="ws-note">
+        Chaque modification d'une variable recalcule instantanément l'ensemble
+        du réseau — aucune compétence technique requise.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ============ LIMITES ============ -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Limites</p>
+      <h2>Ce qu'un modèle ne fait pas</h2>
+      <div class="prose">
+        <p>
+          Un réseau bayésien ne prédit pas l'avenir avec certitude. Il produit
+          une estimation conditionnelle — «&nbsp;si ces facteurs sont dans cet
+          état, tel résultat est plus probable&nbsp;» — dont la qualité dépend
+          des données et des hypothèses retenues. Un modèle construit sur des
+          données biaisées ou des hypothèses fausses produira des résultats
+          trompeurs, comme tout outil quantitatif.
+        </p>
+        <p>
+          Le modèle ne remplace pas la connaissance terrain de vos équipes. Il
+          la structure et la quantifie, pour que les arbitrages reposent sur
+          une base plus explicite et traçable.
+        </p>
+        <p>
+          Point de vocabulaire important&nbsp;: une flèche de A vers B signifie
+          que l'hypothèse «&nbsp;A influence B&nbsp;» a été jugée plausible
+          d'après la littérature ou les données. Ce n'est pas une preuve de
+          causalité au sens expérimental. La simulation de scénarios exploite
+          cette structure pour raisonner sur des leviers probables — pas pour
+          prédire des effets garantis. Cette distinction fait partie de chaque
+          restitution.
+        </p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="modeles.html">Voir les modèles</a>
+        <a class="btn btn--ghost" href="contact.html">Discuter de votre contexte</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <span>© 2026 Noumensia — Modélisation probabiliste pour la fonction RH</span>
+    <ul>
+      <li><a href="modeles.html">Modèles</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Noumensia</title>
+<meta name="description" content="Discutons de votre contexte RH et de ce qu'un réseau bayésien pourrait y apporter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <line x1="7" y1="6" x2="7" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="7" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <line x1="25" y1="6" x2="25" y2="26" stroke="var(--blanc-casse)" stroke-width="1.5"/>
+        <circle cx="7" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="7" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="6" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+        <circle cx="25" cy="26" r="3" fill="var(--bordeaux)" stroke="var(--blanc-casse)" stroke-width="1"/>
+      </svg>
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="modeles.html">Modèles</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--on-bordeaux">Prochaine étape</p>
+      <h2>Discutons de ce que ça donnerait avec vos données</h2>
+      <p>
+        Pas de proposition standard envoyée à l'aveugle. La première étape est un
+        échange sur votre contexte — quels indicateurs vous préoccupent, quelles
+        données existent déjà — pour voir si une modélisation a du sens chez vous,
+        et sous quelle forme.
+      </p>
+      <div class="contact-links">
+        <!-- TODO : remplacer par l'adresse e-mail et le lien LinkedIn réels -->
+        <a href="mailto:arthur@noumensia.com">Écrire à Arthur</a>
+        <a href="https://www.linkedin.com/in/arthur-jouffe" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <span>© 2026 Noumensia — Modélisation probabiliste pour la fonction RH</span>
+    <ul>
+      <li><a href="modeles.html">Modèles</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
