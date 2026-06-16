@@ -76,8 +76,8 @@ h1,h2,h3{ font-family:var(--font-display); font-weight:600; line-height:1.15; }
 .brand{ display:flex; align-items:center; gap:.6rem; color:var(--blanc-casse); }
 .brand:hover{ text-decoration:none; }
 .brand-icon{
-  width:28px;
-  height:28px;
+  width:32px;
+  height:32px;
   flex-shrink:0;
 }
 .brand-name{ font-family:var(--font-display); font-size:1.25rem; font-weight:600; letter-spacing:.01em; }
