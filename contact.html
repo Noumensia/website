@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Noumensia</title>
-<meta name="description" content="Discutons de votre contexte RH et de ce qu'un réseau bayésien pourrait y apporter.">
+<meta name="description" content="Premier échange de 30 minutes pour cadrer votre problématique RH. Réponse sous 48 h ouvrées.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,13 +16,12 @@
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="index.html">
-  <img src="images/logo/noumensia-favicon-light.svg"
-       alt=""
-       aria-hidden="true"
-       class="brand-icon">
-
-  <span class="brand-name">Noumensia</span>
-</a>
+      <img src="images/logo/noumensia-favicon-light.svg"
+           alt=""
+           aria-hidden="true"
+           class="brand-icon">
+      <span class="brand-name">Noumensia</span>
+    </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Accueil</a></li>
@@ -36,21 +35,239 @@
 
 <main>
 
-  <!-- ============ CONTACT ============ -->
+  <!-- ============ INTRO ============ -->
   <section class="contact" id="contact">
     <div class="wrap">
       <p class="eyebrow eyebrow--on-bordeaux">Prochaine étape</p>
-      <h2>Discutons de ce que ça donnerait avec vos données</h2>
+      <h1>Parlons de ce que vous cherchez à comprendre</h1>
       <p>
-        Pas de proposition standard envoyée à l'aveugle. La première étape est un
-        échange sur votre contexte — quels indicateurs vous préoccupent, quelles
-        données existent déjà — pour voir si une modélisation a du sens chez vous,
-        et sous quelle forme.
+        Chaque organisation a ses indicateurs critiques, ses données disponibles et ses
+        contraintes propres. Un premier échange de 30 minutes permet de cadrer votre
+        problématique et de déterminer si un réseau bayésien est l'outil adapté —
+        et ce que ça impliquerait concrètement.
+      </p>
+
+      <!--
+        États gérés par @formspree/ajax :
+        - data-fs-success : affiché après soumission réussie (le formulaire est masqué)
+        - data-fs-error   : affiché en cas d'erreur globale
+        Ces deux éléments sont cachés par défaut par la librairie.
+      -->
+      <div data-fs-success class="form-success">
+        Votre demande a bien été envoyée. Je reviens vers vous sous 48 h ouvrées.
+      </div>
+      <div data-fs-error class="form-error-global"></div>
+
+      <form id="contact-form" action="https://formspree.io/f/mojzoazo" method="POST" novalidate>
+        <!-- Honeypot anti-spam (ne jamais retirer) -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              placeholder="Prénom Nom"
+              required
+              data-fs-field>
+            <span data-fs-error="nom" class="form-field-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email professionnel</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="vous@organisation.com"
+              required
+              data-fs-field>
+            <span data-fs-error="email" class="form-field-error"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="organisation">
+            Organisation <span class="form-optional">(facultatif)</span>
+          </label>
+          <input
+            type="text"
+            id="organisation"
+            name="organisation"
+            placeholder="Nom de votre entreprise ou collectivité">
+        </div>
+
+        <div class="form-group">
+          <label for="contexte">Quel phénomène RH cherchez-vous à comprendre ?</label>
+          <textarea
+            id="contexte"
+            name="contexte"
+            rows="4"
+            placeholder="Turnover, absentéisme, risques psychosociaux, recrutement… Décrivez brièvement votre contexte."
+            required
+            data-fs-field></textarea>
+          <span data-fs-error="contexte" class="form-field-error"></span>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn--primary" data-fs-submit-btn>
+            Envoyer ma demande
+          </button>
+          <p class="contact-note">Réponse sous 48 h ouvrées.</p>
+        </div>
+      </form>
+
+      <div class="contact-alternatives">
+        <a
+          href="https://www.cal.eu/arthur.jouffe-noumensia/30min"
+          target="_blank"
+          rel="noopener"
+          class="contact-alt-link">Réserver un créneau directement ↗</a>
+        <span class="contact-alt-sep">ou</span>
+        <a href="mailto:contact@noumensia.com" class="contact-alt-link">contact@noumensia.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMMENT ÇA SE PASSE ============ -->
+  <section class="process">
+    <div class="wrap">
+      <p class="eyebrow">Comment ça se passe</p>
+      <h2>Du premier échange au livrable</h2>
+      <div class="process-grid">
+
+        <div class="process-step">
+          <span class="process-number">01</span>
+          <h3>Cadrage</h3>
+          <p>
+            Échange de 30 min (visio ou téléphone) pour comprendre votre contexte :
+            quels phénomènes RH vous cherchez à expliquer, quelles données existent,
+            quelles décisions le modèle devrait éclairer.
+          </p>
+        </div>
+
+        <div class="process-step">
+          <span class="process-number">02</span>
+          <h3>Note de cadrage</h3>
+          <p>
+            Je vous transmets un document formalisant le périmètre envisagé,
+            les données nécessaires, les limites identifiées, et l'estimation
+            de charge et de tarif. C'est sur cette base que la décision de
+            lancer le projet est prise.
+          </p>
+        </div>
+
+        <div class="process-step">
+          <span class="process-number">03</span>
+          <h3>Modélisation</h3>
+          <p>
+            Construction du réseau bayésien, calibration sur vos données ou sur des
+            priors experts, tests de sensibilité. Livrables : le modèle fonctionnel,
+            un rapport d'interprétation, et un simulateur interactif.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq">
+    <div class="wrap">
+      <p class="eyebrow">Questions fréquentes</p>
+      <h2>Avant de prendre contact</h2>
+
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>Combien coûte une modélisation ?</summary>
+          <p>
+            Le tarif dépend du périmètre et de la complexité du modèle.
+            Un modèle exploratoire sur un phénomène ciblé — un facteur de turnover,
+            un risque psychosocial — représente typiquement quelques jours de travail.
+            L'estimation précise est formalisée dans la note de cadrage,
+            établie avant toute décision de lancement.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Qu'est-ce que je reçois concrètement ?</summary>
+          <p>
+            Trois livrables : un réseau bayésien fonctionnel (fichier BayesiaLab),
+            un rapport d'interprétation documentant la structure du modèle, ses
+            hypothèses et ses limites, et un accès au WebSimulator — un simulateur
+            interactif qui vous permet de tester des scénarios en autonomie, sans
+            manipuler BayesiaLab directement.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>De quelles données avez-vous besoin ?</summary>
+          <p>
+            Ça dépend du modèle. Dans certains cas, des données RH existantes
+            (SIRH, enquêtes internes, entretiens annuels) suffisent. Dans d'autres,
+            le modèle est construit sur des priors experts et de la littérature,
+            puis calibré progressivement à mesure que des données deviennent
+            disponibles. Il n'est pas nécessaire d'avoir une base structurée pour
+            démarrer — c'est précisément ce que l'échange de cadrage permet de
+            déterminer.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Comment mes données RH sont-elles traitées ?</summary>
+          <p>
+            Les données transmises sont strictement confidentielles et utilisées
+            exclusivement dans le cadre du projet. Aucun transfert à des tiers.
+            Si les données contiennent des informations nominatives ou sensibles,
+            les modalités d'anonymisation sont définies avant tout échange.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>À qui appartiennent les modèles produits ?</summary>
+          <p>
+            Les livrables vous sont intégralement cédés à la livraison : le modèle,
+            le rapport d'interprétation et l'accès au simulateur sont les vôtres.
+            La structure méthodologique sous-jacente reste ma propriété — mais vos
+            données et votre modèle spécifique ne sont jamais réutilisés.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Quelle est la durée d'un projet typique ?</summary>
+          <p>
+            Entre deux et six semaines pour un modèle ciblé, selon la complexité
+            du périmètre et la disponibilité des données. Le calendrier est précisé
+            dans la note de cadrage.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Travaillez-vous à distance ?</summary>
+          <p>
+            Oui. Le travail de modélisation se fait entièrement à distance.
+            Les échanges de cadrage et de restitution se font en visioconférence.
+            Un déplacement sur site est possible si le projet le justifie.
+          </p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="cta-final">
+    <div class="wrap">
+      <h2>Pas de données structurées ? Ce n'est pas un prérequis.</h2>
+      <p>
+        La majorité des projets démarrent sans base de données constituée.
+        Le rôle du premier échange est de déterminer ce qui existe, ce qui
+        manque, et si une modélisation vaut l'investissement.
       </p>
       <div class="contact-links">
-        <!-- TODO : remplacer par l'adresse e-mail et le lien LinkedIn réels -->
-        <a href="mailto:arthur@noumensia.com">Écrire à Arthur</a>
-        <a href="https://www.linkedin.com/in/arthur-jouffe" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="#contact" class="btn btn--primary">Décrire ma problématique</a>
       </div>
     </div>
   </section>
@@ -70,7 +287,14 @@
     </ul>
   </div>
 </footer>
-
+<script>
+  window.formspree = window.formspree || function () {
+    (formspree.q = formspree.q || []).push(arguments);
+  };
+  formspree('initForm', { formElement: '#contact-form', formId: 'mojzoazo' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 <script src="script.js"></script>
+
 </body>
 </html>
