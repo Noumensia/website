@@ -53,12 +53,14 @@
         - data-fs-error   : affiché en cas d'erreur globale
         Ces deux éléments sont cachés par défaut par la librairie.
       -->
+      <div class="contact-card">
+
       <div data-fs-success class="form-success">
         Votre demande a bien été envoyée. Je reviens vers vous sous 48 h ouvrées.
       </div>
       <div data-fs-error class="form-error-global"></div>
 
-      <form id="contact-form" action="https://formspree.io/f/mojzoazo" method="POST" novalidate>
+      <form id="contact-form" class="contact-form" action="https://formspree.io/f/mojzoazo" method="POST" novalidate>
         <!-- Honeypot anti-spam (ne jamais retirer) -->
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -120,13 +122,15 @@
 
       <div class="contact-alternatives">
         <a
-          href="https://www.cal.eu/arthur.jouffe-noumensia/30min"
+          href="https://cal.com/arthur.jouffe-noumensia/30min"
           target="_blank"
           rel="noopener"
           class="contact-alt-link">Réserver un créneau directement ↗</a>
         <span class="contact-alt-sep">ou</span>
         <a href="mailto:contact@noumensia.com" class="contact-alt-link">contact@noumensia.com</a>
       </div>
+
+      </div><!-- /.contact-card -->
     </div>
   </section>
 
