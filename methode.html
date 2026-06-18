@@ -100,11 +100,14 @@
       <p class="eyebrow">Méthode</p>
       <h2>Comment les modèles sont construits — et ce qu'on peut en attendre</h2>
       <p class="lede">
-        Un réseau bayésien est une représentation graphique des relations entre
-        variables&nbsp;: chaque nœud est un facteur, chaque flèche porte une
-        hypothèse d'influence et une intensité estimée. Cette page explique
-        comment ils sont construits, sur quoi ils reposent, et ce qu'ils
-        ne font pas.
+        Ce que vous observez au sein de votre organisation via vos indicateurs
+        et votre expérience résulte de l'interaction de nombreux facteurs.
+        Vos outils mesurent déjà certaines de ces variables plus ou moins indirectement,
+        mais la difficulté est de comprendre comment elles se combinent.
+        C'est ce qu'un réseau bayésien rend visible&nbsp;: chaque nœud est un
+        facteur, chaque flèche une hypothèse d'influence assortie d'une intensité
+        estimée. Cette page explique comment ces modèles sont construits, sur
+        quoi ils reposent, et ce qu'ils ne font pas.
       </p>
     </div>
   </section>
@@ -141,8 +144,7 @@
       <!--
         DAG pédagogique — redessiné en palette Noumensia à partir du modèle BayesiaLab.
         Structure identique au modèle d'origine (5 nœuds, 4 arêtes orientées).
-        À remplacer par un export BayesiaLab au besoin (même structure, autre rendu).
-      -->
+     -->
       <figure class="dag-fig" aria-label="Réseau bayésien pédagogique à 5 nœuds">
         <svg viewBox="0 0 580 135" xmlns="http://www.w3.org/2000/svg"
              style="width:100%;max-width:580px;display:block;margin:0 auto;height:auto"
@@ -155,7 +157,7 @@
             </marker>
           </defs>
 
-          <!-- Arêtes — dessinées avant les nœuds -->
+          <!-- Arêtes -->
           <!-- Charge de travail → Épuisement émotionnel -->
           <line x1="157" y1="25" x2="204" y2="60"
                 stroke="#7A1F2D" stroke-width="1.5" marker-end="url(#dag-arw)"/>
@@ -200,7 +202,7 @@
                 font-size="11" font-weight="500" fill="#F2EFEA">Absentéisme</text>
         </svg>
         <figcaption>
-          Extrait simplifié — modèle réel disponible sur la page
+          Extrait simplifié — graphe complet disponible dans la section
           <a href="modeles.html">Modèles</a>. Chaque flèche représente
           une hypothèse d'influence extraite de la littérature, pas une
           preuve de causalité.
@@ -223,10 +225,9 @@
           <p>
             Les variables et leurs relations sont posées à partir de la
             littérature scientifique — méta-analyses, cadres validés, données
-            publiques (DARES, COPSOQ). Elles sont ensuite discutées et ajustées
-            avec vos équipes RH, qui apportent une connaissance du terrain
-            qu'aucune donnée ne contient. La structure du modèle reflète ce
-            croisement.
+            publiques (DARES, INRS). Elles sont ensuite discutées et ajustées
+            avec vos équipes RH, qui apportent une autre forme de donnée : l'expertise 
+            et la connaissance du terrain. La structure du modèle reflète ce croisement.
           </p>
         </div>
         <div class="step">
@@ -234,13 +235,13 @@
           <h3>Calibration</h3>
           <p>
             Les paramètres du modèle sont d'abord estimés depuis la littérature,
-            puis affinés avec vos données. Celles-ci peuvent prendre des formes
-            variées&nbsp;: extraits SIRH, baromètres internes, enquêtes
-            psychosociales existantes, ou questionnaires passés directement aux
-            collaborateurs — chaque source alimente les paramètres du modèle de
-            façon tracée. Quand les données internes sont insuffisantes,
-            les paramètres issus de la littérature restent opérationnels là
-            où un modèle statistique classique serait bloqué.
+            puis affinés avec vos données disponibles. Celles-ci peuvent prendre 
+            des formes variées&nbsp;: extraits SIRH, baromètres internes, enquêtes
+            psychosociales existantes, ou questionnaires sur-mesures récoltés 
+            directement auprès des collaborateurs — chaque source alimente 
+            les paramètres du modèle de façon tracée. Quand les données internes 
+            sont insuffisantes, les paramètres issus de la littérature restent 
+            opérationnels là où un modèle statistique classique serait bloqué.
           </p>
         </div>
         <div class="step">
@@ -249,10 +250,10 @@
           <p>
             Une fois calibré, le modèle explore des scénarios&nbsp;:
             «&nbsp;si l'on agit sur X, qu'est-ce qui change sur Y&nbsp;?&nbsp;»
-            Les résultats sont exprimés en distributions de probabilités, avec
-            une estimation explicite de l'incertitude — pas un chiffre unique.
-            Vous recevez le modèle interactif et les résultats commentés,
-            conçus pour être présentés en CODIR ou avec le CSE.
+            Les résultats sont exprimés en distributions de probabilités, 
+            plutôt qu'en score unique et aggrégé, avec une estimation explicite 
+            de l'incertitude. Vous recevez le simulateur interactif et les 
+            résultats commentés, conçus pour être présentés en CODIR ou avec le CSE.
           </p>
         </div>
       </div>
@@ -272,22 +273,26 @@
   <section class="section section--alt">
     <div class="wrap">
       <p class="eyebrow">Positionnement</p>
-      <h2>Ce que cette approche fait — et ce qu'elle ne remplace pas</h2>
+      <h2>Ce que cette approche fait et ce qu'elle ne remplace pas</h2>
       <div class="prose">
         <p>
-        Un expert en RH apporte une lecture humaine, du recul et des grilles
-        d'analyse éprouvées. La modélisation ne vient pas concurrencer cette
-        expertise — elle lui donne un support structuré&nbsp;: tester des
-        hypothèses sur des données réelles, quantifier ce qui restait
-        qualitatif, rendre les arbitrages explicites et partageables.
+        Un expert en RH apporte une lecture humaine, du recul, de l'intuition 
+        et des grilles d'analyse éprouvées. La modélisation ne vient pas 
+        concurrencer cette expertise, au contraire, elle lui donne un support 
+        structuré&nbsp;: tester des hypothèses sur des données réelles, quantifier 
+        ce qui restait qualitatif et rendre les arbitrages explicites et partageables.
         </p>
         <p>
         Les enquêtes internes et les tableaux de bord mesurent déjà beaucoup.
-        Mais ils mesurent chaque variable séparément. Ce que la modélisation
-        apporte&nbsp;: relier ces variables dans un même système pour passer
-        du constat («&nbsp;l'absentéisme a augmenté&nbsp;») au diagnostic
-        («&nbsp;voici les facteurs qui y contribuent le plus, et dans quelle
-        proportion&nbsp;»). Et de là, simuler ce qu'activer tel levier pourrait probablement produire sur l'ensemble du système.
+        Mais ils mesurent chaque variable séparément. Ce que Noumensia permet
+        via la modélisation bayésienne c'est de relier ces variables dans un 
+        même système pour passer du constat («&nbsp;l'absentéisme a augmenté&nbsp;») 
+        au diagnostic («&nbsp;voici les facteurs qui y sont le plus associés, 
+        et dans quelles proportions&nbsp;»). Et de là, comparer plusieurs pistes 
+        sur une même base&nbsp;: le modèle montre comment se redéploient 
+        les probabilités quand on fixe la valeur d'un facteur — une distinction 
+        entre ce que les données montrent et ce qu'une action produirait, 
+        que chaque restitution explicite.
         </p>
       </div>
     </div>
@@ -311,21 +316,26 @@
         <li>
           <strong>Turnover volontaire</strong> —
           Rubenstein et al. (2018), méta-analyse des antécédents du turnover
-          volontaire&nbsp;; Mobley (1977), modèle de décision de
-          départ&nbsp;; Mitchell et al. (2001), théorie de l'encastrement
-          (<em>job embeddedness</em>)
-        </li>
+          volontaire, <em>Personnel Psychology</em>&nbsp;;
+          Mobley (1977), modèle de décision de départ&nbsp;;
+          Mitchell et al. (2001), théorie de l'encastrement
+         (<em>job embeddedness</em>), <em>Academy of Management Journal</em>
         <li>
           <strong>Absentéisme et présentéisme</strong> —
-          Miraglia &amp; Johns (2016), méta-analyse des déterminants du
-          présentéisme&nbsp;; Aronsson et al., mécanismes de substitution
-          absentéisme / présentéisme
+          Miraglia &amp; Johns (2016), méta-analyse des corrélats du
+          présentéisme et modèle dual-path,
+          <em>Journal of Occupational Health Psychology</em>&nbsp;;
+          Aronsson &amp; Gustafsson (2000), étude empirique fondatrice
+          sur le présentéisme-maladie,
+          <em>Journal of Epidemiology and Community Health</em>
         </li>
         <li>
           <strong>Risques psychosociaux</strong> —
-          COPSOQ III (Copenhagen Psychosocial Questionnaire), cadre
-          exigences-ressources&nbsp;; données DARES (enquêtes nationales
-          françaises sur les conditions de travail)
+          Burr et al. (2019), troisième version du Copenhagen Psychosocial
+          Questionnaire (COPSOQ III), cadre exigences-ressources&nbsp;;
+          Aronsson &amp; Gustafsson (2000), étude empirique fondatrice sur
+          le présentéisme-maladie&nbsp;; données DARES, enquête
+          <em>Conditions de travail</em> (2019)
         </li>
       </ul>
 
@@ -333,10 +343,7 @@
         <p>
           Chaque modèle publié sur la page <a href="modeles.html">Modèles</a>
           cite ses sources et rend visible la façon dont la littérature a été
-          traduite en structure de réseau. Pour la méthodologie bayésienne
-          elle-même, les fondements formels sont établis de longue date&nbsp;;
-          Koller &amp; Friedman, <em>Probabilistic Graphical Models</em>,
-          en constitue la référence standard.
+          traduite en structure de réseau. 
         </p>
       </div>
     </div>
@@ -352,46 +359,44 @@
           La construction et la calibration des modèles s'appuient sur
           <a href="https://www.bayesia.com" target="_blank" rel="noopener">BayesiaLab</a>,
           logiciel de référence pour les réseaux bayésiens, utilisé en
-          recherche et en industrie depuis plus de vingt ans. Noumensia
-          travaille en lien étroit avec Bayesia, son éditeur — ce qui permet
-          un accès privilégié aux développements méthodologiques récents.
+          recherche et en industrie depuis plus de vingt ans. 
         </p>
         <p>
-          Les modèles livrés sont rendus interactifs via WebSimulator — une
-          interface navigateur qui permet de fixer des variables, de simuler
-          des scénarios et d'observer comment les probabilités évoluent en
-          temps réel, sans aucune compétence technique requise.
+          Les modèles livrés sont rendus interactifs et accessibles sans
+          compétences techniques via WebSimulator — une interface navigateur 
+          qui permet aux décideurs de tester des scénarios concrets,
+          modifier une variable (charge de travail, autonomie, reconnaissance)
+          et observer en temps réel comment les probabilités évoluent sur les
+          indicateurs qui comptent. 
         </p>
       </div>
 
       <!--
         Captures WebSimulator — modèle burn-out (démonstration).
-        ws-reference.png  = état sans observation (risque = 0,57)
-        ws-scenario.png   = charge élevée + exigences modérées (risque = 0,73)
       -->
-      <div class="ws-compare" role="group" aria-label="Comparaison de scénarios WebSimulator">
+      <div class="ws-compare" role="group" aria-label="Comparaison de scénarios WebSimulator (données de démonstration)">
         <figure>
           <p class="ws-label">État de référence</p>
           <img src="images/ws/ws-reference.png"
-               alt="WebSimulator — sans observation fixée : risque de burn-out estimé à 0,57"
+               alt="WebSimulator — après un premier diagnostic : risque de burn-out estimé à 0,73"
                loading="lazy">
           <figcaption>
-            Sans observation fixée — risque de burn-out&nbsp;: <strong>0,57</strong>
+            Après un premier diagnostic — risque de burn-out&nbsp;: <strong>0,73</strong>
           </figcaption>
         </figure>
         <figure>
           <p class="ws-label">Scénario simulé</p>
           <img src="images/ws/ws-scenario.png"
-               alt="WebSimulator — charge de travail élevée et exigences émotionnelles modérées : risque de burn-out à 0,73"
+               alt="WebSimulator — diagnostic post-action : baisse du risque de burn-out à 0,62"
                loading="lazy">
           <figcaption>
-            Charge élevée + exigences modérées&nbsp;: risque <strong>0,73</strong>
+            Diagnostic post-action&nbsp;: risque <strong>0,62</strong>
           </figcaption>
         </figure>
       </div>
       <p class="ws-note">
-        Chaque modification d'une variable recalcule instantanément l'ensemble
-        du réseau — aucune compétence technique requise.
+        Chaque modification d'une variable recalcule instantanément les probabilités 
+        sur l'ensemble du réseau, sans compétence technique requise.
       </p>
 
     </div>
@@ -421,7 +426,7 @@
           que l'hypothèse «&nbsp;A influence B&nbsp;» a été jugée plausible
           d'après la littérature ou les données. Ce n'est pas une preuve de
           causalité au sens expérimental. La simulation de scénarios exploite
-          cette structure pour raisonner sur des leviers probables — pas pour
+          cette structure pour raisonner sur des leviers probables, pas pour
           prédire des effets garantis. Cette distinction fait partie de chaque
           restitution.
         </p>
@@ -438,7 +443,7 @@
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
-    <span>© 2026 Noumensia — Modélisation probabiliste pour la fonction RH</span>
+    <span>© 2026 Noumensia — Modélisation bayésienne des phénomènes RH</span>
     <ul>
       <li><a href="modeles.html">Modèles</a></li>
       <li><a href="methode.html">Méthode</a></li>
