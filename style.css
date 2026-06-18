@@ -237,8 +237,21 @@ h1,h2,h3{ font-family:var(--font-display); font-weight:600; line-height:1.15; }
 
 /* ============ CONTACT ============ */
 .contact{ background:var(--bordeaux); padding:clamp(3rem,8vw,5.5rem) 0; }
+.contact h1{
+  color:var(--blanc-casse);
+  font-size:clamp(1.9rem, 3.5vw, 2.8rem);
+  max-width:42rem;
+  margin-bottom:1.25rem;
+}
 .contact h2{ color:var(--blanc-casse); max-width:38rem; }
 .contact p{ color:#f4e4e7; max-width:36rem; margin-bottom:1.75rem; }
+/* Surcharge : la note "48h" ne prend pas le margin-bottom de .contact p */
+.contact .contact-note{
+  font-size:.85rem;
+  color:rgba(242,239,234,.65);
+  margin:0;
+  max-width:none;
+}
 .contact-links{ display:flex; gap:1rem; flex-wrap:wrap; }
 .contact-links a{
   font-family:var(--font-body); font-weight:600; font-size:.95rem;
@@ -246,6 +259,176 @@ h1,h2,h3{ font-family:var(--font-display); font-weight:600; line-height:1.15; }
   color:var(--blanc-casse);
 }
 .contact-links a:hover{ background:var(--blanc-casse); color:var(--bordeaux); text-decoration:none; }
+
+/* Liens alternatifs sous le formulaire (Cal.com + email) */
+.contact-alternatives{
+  display:flex; align-items:center; gap:.75rem;
+  margin-top:1.5rem; flex-wrap:wrap; font-size:.9rem;
+}
+.contact-alt-link{
+  color:var(--blanc-casse); opacity:.72;
+  text-decoration:underline; text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.3);
+  transition:opacity .15s;
+}
+.contact-alt-link:hover{ opacity:1; text-decoration:underline; }
+.contact-alt-sep{ opacity:.35; color:var(--blanc-casse); }
+
+/* ============ FORMULAIRE (page contact) ============ */
+
+/* Cache les états Formspree jusqu'à soumission */
+[data-fs-success],
+[data-fs-error]{ display:none; }
+
+.contact-form{
+  margin-top:2rem;
+  display:flex; flex-direction:column; gap:1.25rem;
+}
+.form-row{
+  display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;
+}
+.form-group{
+  display:flex; flex-direction:column; gap:.4rem;
+}
+.form-group label{
+  font-size:.875rem; font-weight:500; color:var(--blanc-casse);
+}
+.form-optional{
+  font-weight:400; opacity:.6; font-size:.8rem;
+}
+.form-group input,
+.form-group textarea{
+  font-family:var(--font-body); font-size:1rem;
+  padding:.65rem .85rem;
+  background:rgba(255,255,255,.11);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:4px;
+  color:var(--blanc-casse);
+  width:100%;
+  transition:border-color .15s, background .15s;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder{ color:rgba(242,239,234,.38); }
+.form-group input:focus,
+.form-group textarea:focus{
+  outline:none;
+  border-color:rgba(255,255,255,.7);
+  background:rgba(255,255,255,.17);
+}
+.form-group textarea{ resize:vertical; min-height:120px; }
+
+/* Bouton submit inversé pour contraste sur fond bordeaux */
+.contact-form .btn--primary{
+  background:var(--blanc-casse);
+  color:var(--bordeaux);
+  border-color:transparent;
+}
+.contact-form .btn--primary:hover{
+  background:rgba(242,239,234,.85);
+  color:var(--bordeaux);
+  text-decoration:none;
+}
+.contact-form .btn--primary[disabled]{
+  opacity:.55; cursor:wait;
+}
+.form-actions{
+  display:flex; align-items:center;
+  gap:1.5rem; flex-wrap:wrap; margin-top:.25rem;
+}
+
+/* Retour succès Formspree */
+.form-success{
+  padding:1.25rem 1.5rem;
+  background:rgba(255,255,255,.14);
+  border-left:3px solid var(--blanc-casse);
+  border-radius:4px;
+  color:var(--blanc-casse);
+  font-size:1rem; line-height:1.65;
+}
+/* Retour erreur globale Formspree */
+.form-error-global{
+  padding:.75rem 1rem;
+  background:rgba(0,0,0,.18);
+  border-left:3px solid #e08090;
+  border-radius:4px;
+  font-size:.9rem; color:var(--blanc-casse);
+}
+/* Erreur par champ (texte sous l'input) */
+.form-field-error{
+  display:block; font-size:.8rem;
+  color:#e8a0a8; min-height:1em;
+}
+/* Bordure rouge sur les champs invalides (aria-invalid injecté par @formspree/ajax) */
+input[aria-invalid="true"],
+textarea[aria-invalid="true"]{ border-color:#e08090 !important; }
+
+/* ============ PROCESS ============ */
+.process{ background:var(--ardoise-2); padding:clamp(3rem,8vw,5.5rem) 0; }
+.process h2{
+  font-size:clamp(1.7rem, 3vw, 2.4rem);
+  max-width:42rem; margin-bottom:2.5rem;
+}
+.process-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:2rem;
+  padding-top:2rem; border-top:1px solid var(--ardoise-3);
+}
+.process-number{
+  display:block; font-family:var(--font-mono); font-size:.85rem;
+  color:var(--bordeaux-vif); letter-spacing:.12em; margin-bottom:.6rem;
+}
+.process-step h3{ font-size:1.15rem; margin-bottom:.6rem; }
+.process-step p{ color:var(--gris-doux); font-size:.92rem; }
+
+/* ============ FAQ ============ */
+.faq{ padding:clamp(3rem,8vw,5.5rem) 0; }
+.faq h2{
+  font-size:clamp(1.7rem, 3vw, 2.4rem);
+  max-width:42rem; margin-bottom:2.5rem;
+}
+.faq-list{
+  max-width:42rem;
+  border-top:1px solid var(--ardoise-3);
+}
+.faq-item{ border-bottom:1px solid var(--ardoise-3); }
+.faq-item summary{
+  list-style:none;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.1rem 0; cursor:pointer; gap:1rem; user-select:none;
+  font-family:var(--font-display); font-size:1.05rem;
+  font-weight:600; color:var(--blanc-casse);
+}
+.faq-item summary::-webkit-details-marker{ display:none; }
+.faq-item summary::after{
+  content:"+";
+  font-family:var(--font-mono); font-size:1.1rem;
+  color:var(--bordeaux-vif); flex-shrink:0; line-height:1;
+  transition:transform .2s ease;
+}
+.faq-item[open] summary::after{ transform:rotate(45deg); }
+.faq-item p{
+  padding:.25rem 0 1.25rem;
+  color:var(--gris-doux); font-size:.96rem;
+  max-width:38rem; line-height:1.7;
+}
+
+/* ============ CTA FINAL ============ */
+.cta-final{
+  background:var(--ardoise-2);
+  padding:clamp(3rem,8vw,5rem) 0;
+  border-top:1px solid var(--ardoise-3);
+}
+.cta-final h2{
+  font-size:clamp(1.5rem, 2.8vw, 2.1rem);
+  max-width:42rem; margin-bottom:1rem;
+}
+.cta-final p{
+  color:var(--gris-doux); max-width:36rem; margin-bottom:2rem;
+}
+/* Neutralise le border:blanc-casse hérité de .contact-links a sur fond sombre */
+.cta-final .contact-links a.btn{ border-color:transparent; }
+.cta-final .contact-links a.btn:hover{
+  background:#8f2536; color:var(--blanc-casse); text-decoration:none;
+}
 
 /* ============ FOOTER ============ */
 footer{ padding:2.5rem 0; border-top:1px solid var(--ardoise-3); }
@@ -272,7 +455,9 @@ footer a:hover{ color:var(--bordeaux-vif); }
   .hero-grid{ grid-template-columns:1fr; }
   .model-grid{ grid-template-columns:1fr; }
   .steps{ grid-template-columns:1fr; gap:1.75rem; }
+  .process-grid{ grid-template-columns:1fr; gap:1.75rem; }
 }
 @media (max-width:600px){
   .hero h1{ font-size:2rem; }
+  .form-row{ grid-template-columns:1fr; }
 }
