@@ -327,7 +327,7 @@ h1,h2,h3{ font-family:var(--font-display); font-weight:600; line-height:1.15; }
 }
 .contact-links a:hover{ background:var(--blanc-casse); color:var(--bordeaux); text-decoration:none; }
 
-/* Liens alternatifs sous le formulaire (Cal.com + email) */
+/* Liens alternatifs sous le formulaire (Cal.eu + email) */
 .contact-alternatives{
   display:flex; align-items:center; gap:.75rem;
   margin-top:1.5rem; flex-wrap:wrap; font-size:.9rem;
