@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Noumensia</title>
+<meta name="description" content="Réponses aux questions fréquentes sur la modélisation bayésienne appliquée à la fonction RH : méthode, rigueur, données et RGPD, déroulé, livrables, légitimité et démarrage.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="FAQ — Noumensia">
+<meta property="og:description" content="Méthode, rigueur, données, RGPD, déroulé, livrables : les réponses aux questions que se posent les directions RH avant de se lancer.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── Styles spécifiques à la FAQ ── */
+  .faq-intro { max-width: 42rem; color: var(--gris-doux); margin-bottom: 2.5rem; }
+  .faq-group { margin-bottom: 2.75rem; }
+  .faq-group:last-of-type { margin-bottom: 0; }
+  .faq-group-title {
+    font-family: var(--font-mono); font-size: .78rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--bordeaux-vif); margin-bottom: .5rem;
+  }
+  .faq-list { max-width: 46rem; }
+  .faq-item { border-top: 1px solid var(--ardoise-3); }
+  .faq-group .faq-item:last-child { border-bottom: 1px solid var(--ardoise-3); }
+  .faq-item > summary {
+    cursor: pointer; list-style: none;
+    padding: 1.15rem 2.25rem 1.15rem 0; position: relative;
+    font-family: var(--font-display); font-size: 1.12rem; font-weight: 600;
+    color: var(--blanc-casse); line-height: 1.3;
+  }
+  .faq-item > summary::-webkit-details-marker { display: none; }
+  .faq-item > summary::after {
+    content: "+"; position: absolute; right: 0; top: 1rem;
+    font-family: var(--font-mono); font-size: 1.3rem; color: var(--bordeaux-vif);
+  }
+  .faq-item[open] > summary::after { content: "\2013"; }
+  .faq-item > summary:focus-visible { outline: 2px solid var(--bordeaux-vif); outline-offset: 3px; }
+  .faq-answer { padding: 0 2.25rem 1.4rem 0; max-width: 42rem; }
+  .faq-answer p { color: var(--gris-doux); margin-bottom: .8rem; font-size: 1rem; }
+  .faq-answer p:last-child { margin-bottom: 0; }
+  .faq-answer a { color: var(--bordeaux-vif); text-decoration: underline; text-decoration-color: var(--ardoise-3); }
+  .faq-answer a:hover { text-decoration-color: var(--bordeaux-vif); }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="images/logo/noumensia-favicon-light.svg"
+           alt=""
+           aria-hidden="true"
+           class="brand-icon">
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="modeles.html">Modèles</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <section class="section" id="faq">
+    <div class="wrap">
+      <p class="eyebrow">Questions fréquentes</p>
+      <h2>Ce que les directions RH demandent avant de se lancer</h2>
+      <p class="faq-intro">
+        Les questions ci-dessous reviennent le plus souvent — sur la rigueur de
+        la méthode, la sécurité de vos données, le déroulé et ce que vous
+        recevez. Si la vôtre n'y figure pas, l'entretien de cadrage est fait pour
+        ça.
+      </p>
+
+      <!-- ====== GROUPE 1 ====== -->
+      <div class="faq-group">
+        <p class="faq-group-title">La méthode et sa rigueur</p>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>Est-ce de l'intelligence artificielle, une « boîte noire » ?</summary>
+            <div class="faq-answer">
+              <p>
+                Non. Un réseau bayésien n'apprend pas seul des règles opaques&nbsp;:
+                chaque relation entre facteurs y est visible, documentée et
+                modifiable. Vous pouvez ouvrir le modèle, examiner chaque hypothèse
+                d'influence et la discuter. C'est l'inverse d'une boîte noire — un
+                outil de raisonnement transparent.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Le modèle identifie-t-il ce qui <em>cause</em> le turnover ou le burn-out, ou seulement des corrélations ?</summary>
+            <div class="faq-answer">
+              <p>
+                C'est une distinction que Noumensia prend au sérieux. La structure
+                du modèle encode des hypothèses d'influence issues de la littérature
+                scientifique — pas des causalités démontrées expérimentalement. Les
+                simulations raisonnent sur des leviers <em>probables</em>, et chaque
+                restitution distingue explicitement ce que les données montrent de
+                ce qu'une action produirait.
+              </p>
+              <p>
+                Un prestataire qui vous promet des effets garantis surinterprète ses
+                propres modèles. Ici, cette limite est posée clairement — c'est une
+                condition de l'honnêteté du résultat, pas un détail.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>En quoi est-ce différent d'un tableau de bord ou d'un baromètre RH ?</summary>
+            <div class="faq-answer">
+              <p>
+                Un tableau de bord mesure chaque indicateur séparément et constate
+                qu'il bouge. Le modèle relie ces indicateurs dans un même
+                système&nbsp;: il montre quels facteurs contribuent le plus, et dans
+                quelle proportion, puis permet de comparer des scénarios. C'est un
+                complément à vos outils, pas un remplacement.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>En quoi est-ce différent d'un cabinet de conseil RH ?</summary>
+            <div class="faq-answer">
+              <p>
+                Un cabinet apporte une lecture humaine et des grilles d'analyse
+                éprouvées — une valeur que la modélisation ne remplace pas. Ce que
+                Noumensia ajoute&nbsp;: un livrable que vous gardez et pouvez
+                interroger vous-même, plutôt qu'un rapport figé.
+              </p>
+              <p>
+                Les deux approches se combinent bien&nbsp;: Noumensia travaille
+                aussi avec des cabinets qui souhaitent enrichir leurs diagnostics
+                d'une dimension quantitative.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Est-ce scientifiquement fondé ?</summary>
+            <div class="faq-answer">
+              <p>
+                Oui. La structure de chaque modèle s'appuie sur des cadres et
+                méta-analyses publiés — turnover, présentéisme, risques
+                psychosociaux — cités sur la page <a href="methode.html">Méthode</a>.
+                Le formalisme bayésien lui-même est établi de longue date. Les
+                hypothèses retenues sont documentées et ouvertes à la discussion.
+              </p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      <!-- ====== GROUPE 2 ====== -->
+      <div class="faq-group">
+        <p class="faq-group-title">Vos données et leur confidentialité</p>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>De combien de données ai-je besoin ?</summary>
+            <div class="faq-answer">
+              <p>
+                De données structurées sur quelques dizaines de collaborateurs au
+                moins. Vous n'avez pas besoin de mettre en place un nouveau
+                dispositif de recueil&nbsp;: extraits SIRH, baromètres internes et
+                enquêtes existantes suffisent généralement à démarrer.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Et si mes données sont incomplètes ou de qualité inégale ?</summary>
+            <div class="faq-answer">
+              <p>
+                C'est une force du cadre bayésien&nbsp;: quand les données internes
+                sont insuffisantes, les paramètres issus de la littérature gardent
+                le modèle opérationnel là où un modèle statistique classique serait
+                bloqué.
+              </p>
+              <p>
+                La part respective de vos données et de la littérature est
+                explicitée, jamais masquée — vous savez toujours sur quoi repose
+                chaque résultat.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Où vont mes données ? Sont-elles protégées ?</summary>
+            <div class="faq-answer">
+              <p>
+                Elles restent chez vous. Le traitement respecte les exigences du
+                RGPD, le travail porte sur des données agrégées et anonymisées, et
+                les échanges sont couverts par un accord de confidentialité dès la
+                première réunion.
+              </p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      <!-- ====== GROUPE 3 ====== -->
+      <div class="faq-group">
+        <p class="faq-group-title">Le déroulé et ce que vous recevez</p>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>Combien de temps cela prend-il ?</summary>
+            <div class="faq-answer">
+              <p>
+                Tout commence par un entretien de cadrage, sans engagement. La
+                modélisation prend ensuite typiquement 4 à 8 semaines, selon la
+                disponibilité des données et le périmètre retenu.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Que reçois-je concrètement ?</summary>
+            <div class="faq-answer">
+              <p>
+                Le modèle interactif, un simulateur de scénarios accessible via
+                navigateur (WebSimulator), les résultats commentés, et une
+                restitution conçue pour être présentée en comité de direction ou
+                avec le CSE.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Faut-il des compétences techniques pour utiliser le livrable ?</summary>
+            <div class="faq-answer">
+              <p>
+                Non. WebSimulator s'utilise dans un navigateur&nbsp;: vous fixez des
+                variables et observez comment les probabilités se redéploient, sans
+                aucune compétence technique. Le modèle vous appartient — vous n'êtes
+                pas dépendant de Noumensia pour le consulter.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Et si le modèle ne donne rien d'exploitable ?</summary>
+            <div class="faq-answer">
+              <p>
+                La démarche commence volontairement par un périmètre resserré,
+                choisi pour démontrer la valeur avant d'élargir. La qualité d'un
+                modèle dépend des données et des hypothèses retenues&nbsp;: cette
+                dépendance est posée dès le cadrage, pas découverte à la fin. C'est
+                aussi pourquoi la première étape est sans engagement.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Comment cela se passe-t-il avec le CSE ou les représentants du personnel ?</summary>
+            <div class="faq-answer">
+              <p>
+                La restitution est conçue pour être partagée, hypothèses comprises.
+                Le travail porte sur des données agrégées, et la transparence du
+                modèle facilite le dialogue social plutôt que de l'opacifier.
+              </p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      <!-- ====== GROUPE 4 ====== -->
+      <div class="faq-group">
+        <p class="faq-group-title">Légitimité, périmètre et démarrage</p>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>Vous utilisez BayesiaLab — pourquoi vous, et pas son éditeur directement ?</summary>
+            <div class="faq-answer">
+              <p>
+                Le logiciel ne fait pas le modèle, de la même façon qu'un tableur ne
+                fait pas l'analyse financière. La valeur tient à la conception&nbsp;:
+                le choix des variables, la traduction de la littérature en structure
+                de réseau, la calibration, l'interprétation, et la spécialisation RH.
+              </p>
+              <p>
+                Noumensia travaille en lien étroit avec Bayesia, ce qui donne accès
+                aux développements méthodologiques récents.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Avez-vous des références ou des clients ?</summary>
+            <div class="faq-answer">
+              <p>
+                Noumensia est une structure récente, et le dit franchement.
+                <!-- À COMPLÉTER par Arthur : insérer ici l'élément de crédibilité vérifiable
+                     (ex. travail de modélisation mené en recherche, publication, etc.).
+                     Ne rien affirmer qui ne soit vérifiable. -->
+                La méthode, elle, n'est pas récente&nbsp;: elle repose sur des cadres
+                scientifiques publiés et un formalisme éprouvé.
+              </p>
+              <p>
+                À ce stade, la rigueur méthodologique prime sur l'argument
+                d'autorité — et la meilleure façon de juger reste un premier
+                périmètre limité, sur lequel évaluer la valeur concrètement.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Travaillez-vous uniquement sur des sujets RH ?</summary>
+            <div class="faq-answer">
+              <p>
+                La méthode est agnostique au domaine — elle s'applique partout où des
+                facteurs nombreux interagissent. Le focus actuel de Noumensia est la
+                fonction RH, mais le périmètre peut s'étendre à d'autres
+                problématiques de décision organisationnelle.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Combien cela coûte-t-il ?</summary>
+            <div class="faq-answer">
+              <p>
+                Le coût dépend du périmètre, de la complexité du sujet et de la
+                disponibilité des données. Il se définit lors de l'entretien de
+                cadrage, une fois le besoin précisé.
+                <!-- Option Arthur : ajouter ici une fourchette indicative (« typiquement de X à Y k€ »)
+                     pour qualifier le pipeline en amont. À tester. -->
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Comment démarre-t-on ?</summary>
+            <div class="faq-answer">
+              <p>
+                Par un entretien de cadrage, sans engagement, pour vérifier si
+                l'approche est adaptée à votre situation et définir un premier
+                périmètre. C'est aussi l'occasion de poser toutes les questions que
+                cette page n'aurait pas couvertes.
+              </p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn--primary" href="contact.html">Demander un entretien de cadrage</a>
+        <a class="btn btn--ghost" href="methode.html">Comprendre la méthode</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <span>© 2026 Noumensia — Modélisation probabiliste pour la fonction RH</span>
+    <ul>
+      <li><a href="modeles.html">Modèles</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
