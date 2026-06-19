@@ -16,6 +16,12 @@
 <link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
 <link rel="stylesheet" href="style.css">
 <style>
+  /* Neutralise les règles FAQ du style.css global */
+.faq-list          { border-top: none; }
+.faq-item          { border-bottom: none; }
+.faq-item summary  { display: block; }
+.faq-item[open] > summary::after { transform: none; }
+.faq-item p        { padding: 0; }
   /* ── Styles spécifiques à la FAQ ── */
   .faq-intro { max-width: 42rem; color: var(--gris-doux); margin-bottom: 2.5rem; }
   .faq-group { margin-bottom: 2.75rem; }
