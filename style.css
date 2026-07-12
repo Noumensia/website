@@ -59,16 +59,16 @@ body::before{
   content:"";
   position:fixed; inset:0; z-index:-2; pointer-events:none;
   background:
-    radial-gradient(58rem 40rem at 82% -8%, rgba(122,31,45,.16), transparent 60%),
-    radial-gradient(46rem 34rem at -6% 8%, rgba(58,71,86,.30), transparent 62%),
-    radial-gradient(60rem 50rem at 50% 118%, rgba(122,31,45,.10), transparent 60%);
+    radial-gradient(58rem 40rem at 84% -10%, rgba(122,31,45,.22), transparent 60%),
+    radial-gradient(48rem 36rem at -8% 6%, rgba(58,71,86,.38), transparent 62%),
+    radial-gradient(60rem 50rem at 50% 120%, rgba(122,31,45,.12), transparent 60%);
 }
 body::after{
   content:"";
   position:fixed; inset:0; z-index:-2; pointer-events:none;
-  opacity:.5;
-  background-image:radial-gradient(rgba(168,180,194,.05) 1px, transparent 1.4px);
-  background-size:34px 34px;
+  opacity:.7;
+  background-image:radial-gradient(rgba(168,180,194,.07) 1px, transparent 1.4px);
+  background-size:32px 32px;
   mask-image:linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.35) 55%, transparent);
   -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.35) 55%, transparent);
 }
@@ -358,16 +358,16 @@ figure{ margin:0; }
   background:linear-gradient(180deg, transparent 55%, rgba(20,26,34,.28));
   pointer-events:none;
 }
-/* Placeholder rayé (cartes sans capture) */
+/* Placeholder discret (cartes sans capture) */
 .model-shot--placeholder{
-  background:repeating-linear-gradient(
-    45deg, rgba(30,38,48,.06), rgba(30,38,48,.06) 10px,
-    transparent 10px, transparent 20px);
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(58,71,86,.35), transparent 70%),
+    var(--ardoise-2);
 }
 .model-shot--placeholder::after{ display:none; }
 .model-shot span{
-  font-family:var(--font-mono); font-size:.75rem; letter-spacing:.06em;
-  color:rgba(30,38,48,.55); text-transform:uppercase;
+  font-family:var(--font-mono); font-size:.72rem; letter-spacing:.14em;
+  color:var(--gris-doux); text-transform:uppercase; opacity:.7;
 }
 .model-body{ padding:1.25rem 1.4rem 1.5rem; display:flex; flex-direction:column; flex:1; }
 .model-body .eyebrow{ margin-bottom:.6rem; }
@@ -763,33 +763,30 @@ textarea[aria-invalid="true"]{
 .cta-final .contact-links a.btn:hover{ background:#8f2536; color:var(--blanc-casse); text-decoration:none; }
 
 /* ============ FOOTER ============ */
-footer{ padding:2.75rem 0 2.5rem; border-top:1px solid var(--ardoise-3); background:var(--ardoise-4); }
+footer{ padding:2.5rem 0; border-top:1px solid var(--ardoise-3); }
 .footer-top{
-  display:flex; flex-wrap:wrap; gap:1.5rem 2rem;
+  display:flex; flex-wrap:wrap; gap:1rem 1.5rem;
   justify-content:space-between; align-items:center;
 }
-footer .footer-brand{
-  display:flex; align-items:center; gap:.55rem; color:var(--blanc-casse);
-}
-footer .footer-brand img{ width:30px; height:30px; }
-footer .footer-brand span{ font-family:var(--font-display); font-size:1.05rem; }
-footer nav ul{ list-style:none; display:flex; gap:1.4rem; flex-wrap:wrap; }
+.footer-brand{ display:none; }          /* pas de logo agrandi dans le footer */
+footer nav ul{ list-style:none; display:flex; gap:1.25rem; flex-wrap:wrap; }
 footer nav a{ color:var(--gris-doux); font-size:.9rem; transition:color var(--t-fast); }
 footer nav a:hover{ color:var(--bordeaux-vif); }
-/* Icône LinkedIn */
+/* Icône LinkedIn — discrète */
 .social-link{
-  display:inline-grid; place-items:center; width:38px; height:38px;
-  border:1px solid var(--ardoise-3); border-radius:8px; color:var(--gris-doux);
-  transition:color var(--t-fast), border-color var(--t-fast), background var(--t-fast), transform var(--t-fast);
+  display:inline-grid; place-items:center; width:30px; height:30px;
+  border:1px solid var(--ardoise-3); border-radius:7px; color:var(--gris-doux);
+  transition:color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+  flex-shrink:0;
 }
 .social-link:hover{
   color:var(--blanc-casse); border-color:var(--bordeaux-vif);
-  background:rgba(217,138,149,.1); transform:translateY(-2px); text-decoration:none;
+  background:rgba(217,138,149,.1); text-decoration:none;
 }
-.social-link svg{ width:19px; height:19px; }
+.social-link svg{ width:16px; height:16px; }
 .footer-bottom{
   display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; justify-content:space-between;
-  align-items:center; margin-top:1.75rem; padding-top:1.5rem;
+  align-items:center; margin-top:1.5rem; padding-top:1.25rem;
   border-top:1px solid var(--ardoise-3);
   font-size:.82rem; color:var(--gris-doux);
 }
@@ -816,5 +813,5 @@ footer nav a:hover{ color:var(--bordeaux-vif); }
 @media (max-width:600px){
   .hero h1{ font-size:2rem; }
   .form-row{ grid-template-columns:1fr; }
-  .footer-top{ flex-direction:column; align-items:flex-start; }
+  .footer-inner{ justify-content:flex-start; }
 }

@@ -1,0 +1,25 @@
+# robots.txt — Noumensia
+# Site vitrine : tout est indexable, y compris par les moteurs de réponse IA (GEO).
+
+User-agent: *
+Allow: /
+
+# Moteurs génératifs / assistants IA — explicitement autorisés
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://noumensia.com/sitemap.xml

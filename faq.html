@@ -9,13 +9,15 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="FAQ — Noumensia">
 <meta property="og:description" content="Méthode, rigueur, données, RGPD, déroulé, livrables : les réponses aux questions que se posent les directions RH avant de se lancer.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://noumensia.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://noumensia.com/images/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
 <link rel="canonical" href="https://noumensia.com/faq.html">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=2">
 <style>
   /* Neutralise règles FAQ style.css global */
 .faq-list          { border-top: none; }
@@ -53,10 +55,32 @@
   .faq-answer a { color: var(--bordeaux-vif); text-decoration: underline; text-decoration-color: var(--ardoise-3); }
   .faq-answer a:hover { text-decoration-color: var(--bordeaux-vif); }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "C'est de l'intelligence artificielle, donc une « boîte noire » ?", "acceptedAnswer": { "@type": "Answer", "text": "Non, dans un réseau bayésien, contrairement à de nombreux systèmes d'intelligence artificielle, vous ne voyez pas que l'entrée et la sortie : chaque facteur pris en compte par le modèle est visible, documenté, discuté et discutable. Vous pouvez explorer le modèle, examiner chaque hypothèse d'influence et la modifier. C'est l'inverse d'une boîte noire, un outil de raisonnement transparent vous permettant de comprendre comment les différentes variables interagissent et contribuent à un phénomène complexe, comme le turnover ou le burn-out, pour vous aider à structurer votre prise de décision." } },
+    { "@type": "Question", "name": "Le modèle identifie-t-il ce qui cause le turnover ou le burn-out, ou seulement des corrélations ?", "acceptedAnswer": { "@type": "Answer", "text": "C'est une distinction fondamentale. La structure du modèle encode des hypothèses d'influence issues de la littérature scientifique, pas forcément des causalités démontrées expérimentalement. Les simulations raisonnent sur des leviers probables, et chaque restitution distingue explicitement ce que les données montrent de ce qu'une action produirait." } },
+    { "@type": "Question", "name": "En quoi est-ce différent d'un tableau de bord ou d'un baromètre RH ?", "acceptedAnswer": { "@type": "Answer", "text": "Un tableau de bord mesure chaque indicateur séparément et constate les mouvements. Le modèle relie ces indicateurs dans un même système : il montre quels facteurs contribuent le plus, lesquels s'influencent et dans quelles proportions, puis permet de comparer des scénarios. C'est un complément de vos outils et un support pour votre expertise." } },
+    { "@type": "Question", "name": "En quoi est-ce différent d'un cabinet de conseil RH ?", "acceptedAnswer": { "@type": "Answer", "text": "Un cabinet apporte une lecture humaine et des grilles d'analyse éprouvées — une valeur que la modélisation ne remplace pas. Noumensia ajoute un livrable interactif plutôt qu'un rapport statique, accessible par des non-experts : un modèle de votre système décisionnel, navigable et quantifié, que vous pouvez interroger vous-même. Les deux approches se combinent : Noumensia travaille aussi avec des cabinets qui veulent enrichir leurs diagnostics d'une dimension quantitative." } },
+    { "@type": "Question", "name": "Est-ce scientifiquement fondé ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. La structure de chaque modèle s'appuie sur des cadres et méta-analyses publiés — turnover, présentéisme, risques psychosociaux — cités sur la page Méthode. Le formalisme bayésien lui-même est établi de longue date. Les hypothèses retenues sont documentées et ouvertes à la discussion." } },
+    { "@type": "Question", "name": "De quelle quantité de données ai-je besoin ?", "acceptedAnswer": { "@type": "Answer", "text": "Extraits SIRH, baromètres internes et enquêtes existantes suffisent généralement à démarrer. Un audit en début de projet fait l'inventaire de votre patrimoine de données. La modélisation bayésienne est justement adaptée aux situations où les données sont limitées, hétérogènes ou de qualité inégale, car elle intègre aussi l'expertise métier et les connaissances scientifiques publiées." } },
+    { "@type": "Question", "name": "Et si mes données sont incomplètes ou de qualité inégale ?", "acceptedAnswer": { "@type": "Answer", "text": "C'est une force du cadre bayésien : quand les données internes sont insuffisantes, les paramètres issus de la littérature gardent le modèle opérationnel là où un modèle statistique classique serait bloqué. La part respective de vos données et de la littérature est explicitée, jamais masquée." } },
+    { "@type": "Question", "name": "Où vont mes données ? Sont-elles protégées ?", "acceptedAnswer": { "@type": "Answer", "text": "Elles restent chez vous. Le traitement respecte les exigences du RGPD, le travail porte sur des données agrégées et anonymisées, et les échanges sont couverts par un accord de confidentialité dès la première réunion." } },
+    { "@type": "Question", "name": "Combien de temps cela prend-il ?", "acceptedAnswer": { "@type": "Answer", "text": "Tout commence par un entretien de cadrage, sans engagement. La modélisation prend ensuite typiquement 4 à 8 semaines, selon la disponibilité des données et le périmètre retenu." } },
+    { "@type": "Question", "name": "Que reçois-je concrètement ?", "acceptedAnswer": { "@type": "Answer", "text": "Un accès privé ou public au moteur d'inférence de votre modèle, sous forme de simulateur interactif accessible via navigateur ou intégrable à vos outils internes via API. Les résultats sont commentés et la restitution est conçue pour être présentée en comité de direction ou avec le CSE." } },
+    { "@type": "Question", "name": "Faut-il des compétences techniques pour utiliser le livrable ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. L'expertise réside dans la traduction de votre question métier en modèle graphique probabiliste. Les décideurs disposent ensuite d'un outil simple et interactif, utilisable en autonomie, sans compétence en statistiques : en manipulant les variables, vous observez comment les probabilités se propagent et l'incertitude évolue." } },
+    { "@type": "Question", "name": "Et si le modèle ne donne rien d'exploitable ?", "acceptedAnswer": { "@type": "Answer", "text": "La démarche commence volontairement par un périmètre resserré, choisi pour démontrer la valeur avant d'élargir. La qualité d'un modèle dépend des données et des hypothèses retenues : cette dépendance est posée dès le cadrage, pas découverte à la fin. C'est aussi pourquoi la première étape est sans engagement." } },
+    { "@type": "Question", "name": "Comment cela se passe-t-il avec le CSE ou les représentants du personnel ?", "acceptedAnswer": { "@type": "Answer", "text": "La restitution est conçue pour être partagée, hypothèses comprises. Le travail porte sur des données agrégées, et la transparence du modèle facilite le dialogue social plutôt que de l'opacifier." } },
+    { "@type": "Question", "name": "Combien cela coûte-t-il ?", "acceptedAnswer": { "@type": "Answer", "text": "Le coût dépend du périmètre, de la complexité du sujet et de la disponibilité des données. Il se définit lors de l'entretien de cadrage, une fois le besoin précisé." } },
+    { "@type": "Question", "name": "Comment démarre-t-on ?", "acceptedAnswer": { "@type": "Answer", "text": "Par un entretien de cadrage, sans engagement, pour vérifier si l'approche est adaptée à votre situation et définir un premier périmètre. C'est aussi l'occasion de poser toutes les questions que cette page n'aurait pas couvertes." } }
+  ]
+}
+</script>
 </head>
 <body>
 
-<a class="skip-link" href="#main">Aller au contenu</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 
 <!-- ============ NAV ============ -->
@@ -387,6 +411,6 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=2"></script>
 </body>
 </html>
