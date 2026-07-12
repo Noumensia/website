@@ -345,16 +345,22 @@ figure{ margin:0; }
 .model-card{
   position:relative;
   background:var(--blanc-casse); color:var(--ardoise);
-  border-radius:10px; overflow:hidden; display:flex; flex-direction:column;
+  border-radius:14px; overflow:hidden; display:flex; flex-direction:column;
   box-shadow:var(--shadow-sm);
   transition:transform var(--t-base), box-shadow var(--t-base);
 }
 .model-card:hover{
-  transform:translateY(-4px);
+  transform:translateY(-5px);
   box-shadow:var(--shadow-xl);
 }
-/* Carte entièrement cliquable via lien en superposition */
-.model-card .stretched{ position:absolute; inset:0; z-index:2; }
+/* Accent haut qui se déploie au survol */
+.model-card::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:3px; z-index:4;
+  background:linear-gradient(90deg, var(--bordeaux), var(--bordeaux-vif));
+  transform:scaleX(0); transform-origin:left center;
+  transition:transform var(--t-base);
+}
+.model-card:hover::before{ transform:scaleX(1); }
 .model-shot{
   position:relative; aspect-ratio:16/10; overflow:hidden;
   background:var(--ardoise);
@@ -388,12 +394,16 @@ figure{ margin:0; }
 .model-body h3{ font-size:1.18rem; margin-bottom:.6rem; color:var(--ardoise); }
 .model-body p{ font-size:.92rem; color:#4a5566; margin-bottom:1.1rem; flex:1; }
 .model-body .model-link{
-  position:relative; z-index:3;
-  font-family:var(--font-mono); font-size:.85rem; font-weight:500;
-  color:var(--bordeaux); display:inline-flex; align-items:center; gap:.35rem;
+  font-family:var(--font-mono); font-size:.85rem; font-weight:600;
+  color:var(--bordeaux); display:inline-flex; align-items:center; gap:.4rem;
   transition:gap var(--t-fast);
 }
-.model-card:hover .model-body .model-link{ gap:.6rem; }
+/* Le lien étire sa zone cliquable sur toute la carte (UX + accessibilité) */
+.model-body .model-link::after{ content:""; position:absolute; inset:0; z-index:2; }
+.model-body .model-link .arrow{ transition:transform var(--t-fast); }
+.model-card:hover .model-body .model-link{ gap:.7rem; }
+.model-card:hover .model-body .model-link .arrow{ transform:translate(2px,-2px); }
+.model-card:focus-within{ box-shadow:var(--shadow-xl), var(--ring); }
 .model-note{ color:var(--gris-doux); font-size:.92rem; max-width:42rem; }
 /* Badge "à venir" sur carte non documentée */
 .model-badge{

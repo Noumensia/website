@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
 <link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -93,9 +93,9 @@
         visible, relation par relation, et permet de tester les leviers avant d'agir.
       </p>
       <div class="article-meta">
-        <span><strong>Structure&nbsp;:</strong> 22 variables reliées</span>
+        <span><strong>Structure&nbsp;:</strong> 22 variables (12 observables → latentes → cible)</span>
         <span><strong>Sortie principale&nbsp;:</strong> risque de départ volontaire</span>
-        <span><strong>Base&nbsp;:</strong> littérature + calibration sur données</span>
+        <span><strong>Base&nbsp;:</strong> littérature scientifique (méta-analyses)</span>
       </div>
     </div>
   </section>
@@ -115,7 +115,7 @@
         </a>
         <a class="tool-link" href="https://simulator.bayesialab.com/simulator/60898933782" target="_blank" rel="noopener">
           <span class="tool-link__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h4M6 6v4M14 17h4M11 12h9M4 12h3M17 5v4"/><path d="m9 15-3 4M15 9l3-4" opacity="0"/><circle cx="10" cy="8" r="1.4"/><circle cx="17" cy="17" r="1.4"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="7" r="2.3" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r="2.3" fill="currentColor" stroke="none"/><circle cx="14" cy="17" r="2.3" fill="currentColor" stroke="none"/></svg>
           </span>
           <span class="tool-link__body">
             <span class="tool-link__title">Ouvrir le simulateur <span class="arrow" aria-hidden="true">↗</span></span>
@@ -162,21 +162,29 @@
         <p>
           Le modèle représente les facteurs du turnover volontaire et les
           hypothèses d'influence qui les relient, sous forme d'un graphe orienté.
-          Chaque nœud est un facteur — <strong>reconnaissance et valorisation</strong>,
-          <strong>charge de travail perçue</strong>, <strong>latitude décisionnelle</strong>,
-          <strong>qualité du management direct</strong>, <strong>justice organisationnelle</strong>,
-          <strong>rémunération relative au marché</strong>, <strong>alternatives internes</strong>,
-          <strong>employabilité perçue</strong>, <strong>ancienneté</strong>,
-          <strong>événement-choc déclencheur</strong>… Chaque flèche est une hypothèse
-          d'influence, extraite de la littérature et discutée avec vos équipes.
+          Il s'organise autour de trois grandes forces&nbsp;: la
+          <strong>satisfaction au travail</strong> (charge, reconnaissance, autonomie),
+          l'<strong>engagement organisationnel</strong> (management, justice perçue,
+          perspectives internes) et l'<strong>attractivité du marché externe</strong>
+          (rémunération relative, employabilité, opportunités).
         </p>
         <p>
-          Ces facteurs alimentent des variables intermédiaires — satisfaction au
-          travail, qualité de vie au travail, lien organisationnel, coût de sortie
-          perçu, intention de départ — qui convergent vers l'indicateur de sortie&nbsp;:
-          le <strong>risque de départ volontaire</strong>. C'est la transparence de
-          cette chaîne qui fait la valeur du modèle&nbsp;: chaque relation est
-          justifiable, et chaque levier d'action est identifiable sur le graphe.
+          Concrètement, une douzaine de facteurs <em>observables</em> — charge de
+          travail perçue, reconnaissance managériale, latitude décisionnelle, qualité
+          du management, justice organisationnelle, rémunération relative,
+          employabilité, ancienneté, événement-choc déclencheur… — alimentent des
+          <em>variables latentes</em> (qualité de vie au travail, satisfaction, lien
+          organisationnel, intention de départ, coût de sortie perçu) qui convergent
+          vers l'indicateur cible&nbsp;: le <strong>risque de départ volontaire</strong>.
+          Chaque nœud a au plus deux parents — une contrainte qui garde le réseau
+          lisible — et chaque flèche est une hypothèse d'influence extraite de la
+          littérature scientifique, jamais un coefficient opaque.
+        </p>
+        <p>
+          Ce modèle public est construit <strong>uniquement à partir de la
+          littérature scientifique</strong> (méta-analyses et cadres validés). En
+          mission, la même structure est ensuite enrichie de vos données et de
+          l'expertise de vos équipes.
         </p>
 
         <figure class="article-figure bleed reveal">
@@ -234,7 +242,7 @@
           <figcaption>
             WebSimulator — modèle turnover. À gauche, les leviers&nbsp;; à droite, les
             indicateurs recalculés en temps réel (ici le risque de départ volontaire).
-            Valeurs de démonstration, sur données fictives.
+            Valeurs illustratives, à des fins de démonstration.
           </figcaption>
         </figure>
 
@@ -270,9 +278,10 @@
         <div class="explore-cta reveal">
           <h3>Explorer ce modèle</h3>
           <p>
-            Le graphe et le simulateur ci-dessous sont des versions de démonstration,
-            construites sur la littérature et des données fictives. Votre modèle serait
-            calibré sur votre contexte.
+            Le graphe et le simulateur ci-dessous sont construits <strong>uniquement à
+            partir de la littérature scientifique</strong>. Les valeurs affichées
+            servent la démonstration&nbsp;; un modèle sur-mesure intégrerait ensuite
+            vos données et l'expertise de vos équipes.
           </p>
           <div class="tool-links" style="margin:0">
             <a class="tool-link" href="https://hellixmap.bayesia.com/display/1b6247c58b13fe6b" target="_blank" rel="noopener">
@@ -286,7 +295,7 @@
             </a>
             <a class="tool-link" href="https://simulator.bayesialab.com/simulator/60898933782" target="_blank" rel="noopener">
               <span class="tool-link__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h4M6 6v4M14 17h4M11 12h9M4 12h3"/><circle cx="10" cy="8" r="1.4"/><circle cx="17" cy="17" r="1.4"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="7" r="2.3" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r="2.3" fill="currentColor" stroke="none"/><circle cx="14" cy="17" r="2.3" fill="currentColor" stroke="none"/></svg>
               </span>
               <span class="tool-link__body">
                 <span class="tool-link__title">Ouvrir le simulateur <span class="arrow" aria-hidden="true">↗</span></span>
@@ -296,29 +305,29 @@
           </div>
         </div>
 
-        <h2>Fondements</h2>
+        <h2>Fondements scientifiques</h2>
         <p>
-          La structure du modèle s'appuie sur des cadres de recherche publiés,
-          dont&nbsp;:
+          La structure du réseau et l'orientation de chaque relation reposent sur des
+          cadres théoriques et des méta-analyses publiés. Les principales références&nbsp;:
         </p>
         <ul class="sources">
-          <li>
-            <strong>Rubenstein et al. (2018)</strong> — méta-analyse des antécédents
-            du turnover volontaire, <em>Personnel Psychology</em>.
-          </li>
-          <li>
-            <strong>Mobley (1977)</strong> — modèle séquentiel de la décision de
-            départ (de l'insatisfaction à l'intention puis au départ).
-          </li>
-          <li>
-            <strong>Mitchell et al. (2001)</strong> — théorie de l'encastrement
-            professionnel (<em>job embeddedness</em>), <em>Academy of Management Journal</em>.
-          </li>
+          <li><strong>Bakker &amp; Demerouti (2007)</strong> — modèle <em>Job Demands-Resources</em> (JD-R)&nbsp;: équilibre entre exigences et ressources au travail.</li>
+          <li><strong>Karasek (1979)</strong> — modèle demande-contrôle&nbsp;: la latitude décisionnelle comme ressource protectrice.</li>
+          <li><strong>Colquitt (2001)</strong> — justice organisationnelle, prédicteur robuste de l'intention de départ (r&nbsp;≈&nbsp;−0,45).</li>
+          <li><strong>Adams (1965)</strong> — théorie de l'équité&nbsp;: la rémunération jugée relativement au marché.</li>
+          <li><strong>Mitchell et al. (2001)</strong> — encastrement professionnel (<em>job embeddedness</em>), <em>Academy of Management Journal</em>.</li>
+          <li><strong>Lee &amp; Mitchell (1994)</strong> — <em>unfolding model</em>&nbsp;: le rôle des «&nbsp;chocs&nbsp;» déclencheurs (30-40&nbsp;% des départs volontaires).</li>
+          <li><strong>Farrell &amp; Rusbult (1986)</strong> — modèle de l'investissement&nbsp;: le coût de sortie perçu comme frein au départ.</li>
+          <li><strong>Forrier &amp; Sels (2003)&nbsp;; De Cuyper &amp; De Witte (2011)</strong> — employabilité perçue.</li>
+          <li><strong>Gajendran &amp; Harrison (2007)</strong> — télétravail et flexibilité (effet positif sur la satisfaction).</li>
+          <li><strong>Steel &amp; Ovalle (1984)</strong> — relation entre intention et départ effectif (r&nbsp;≈&nbsp;0,50).</li>
+          <li><strong>Ozkan et al. (2020)</strong> — méta-analyse des antécédents de l'intention de départ (N&nbsp;≈&nbsp;312&nbsp;000).</li>
+          <li><strong>Rubenstein et al. (2018)</strong> — méta-analyse des antécédents du turnover volontaire, <em>Personnel Psychology</em>.</li>
+          <li><strong>Mobley (1977)</strong> — modèle séquentiel de la décision de départ.</li>
         </ul>
         <p>
           La page <a href="methode.html">Méthode</a> détaille comment la littérature
-          est traduite en structure de réseau, calibrée, puis simulée — et ce qu'un
-          modèle ne fait pas.
+          est traduite en structure de réseau, puis simulée — et ce qu'un modèle ne fait pas.
         </p>
 
         <div class="cta-row">
