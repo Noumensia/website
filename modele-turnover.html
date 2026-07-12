@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modèle Turnover volontaire — Noumensia</title>
+<meta name="description" content="Un réseau bayésien du turnover volontaire : comprendre pourquoi un salarié part alors que chaque indicateur pris isolément semble bon, lire le graphe des facteurs, et tester des leviers dans le simulateur.">
+<link rel="canonical" href="https://noumensia.com/modele-turnover.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Noumensia">
+<meta property="og:title" content="Modèle Turnover volontaire — Noumensia">
+<meta property="og:description" content="Pourquoi un salarié part alors que chaque indicateur semble bon : lire le réseau des facteurs du turnover et tester des leviers dans le simulateur.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Aller au contenu</a>
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="images/logo/noumensia-favicon-light.svg" alt="" aria-hidden="true" class="brand-icon">
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="modeles.html" aria-current="page">Modèles</a></li>
+      <li><a href="methode.html">Méthode</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html" class="nav-cta">Prendre contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ARTICLE ============ -->
+  <article>
+  <section class="article-hero">
+    <div class="wrap reveal">
+      <p class="breadcrumb"><a href="index.html">Accueil</a><span>/</span><a href="modeles.html">Modèles</a><span>/</span>Turnover volontaire</p>
+      <p class="eyebrow">Modèle · Réseau bayésien</p>
+      <h1>Turnover volontaire&nbsp;: pourquoi on part quand tout semble aller bien</h1>
+      <p class="standfirst">
+        Un salarié peut être correctement payé, satisfait de son manager et
+        engagé — et partir quand même. La décision de quitter n'émerge pas d'une
+        variable isolée&nbsp;: elle émerge d'un système. Ce modèle rend ce système
+        visible, relation par relation, et permet de tester les leviers avant d'agir.
+      </p>
+      <div class="article-meta">
+        <span><strong>Structure&nbsp;:</strong> ~46 variables reliées</span>
+        <span><strong>Sortie principale&nbsp;:</strong> risque de départ volontaire</span>
+        <span><strong>Base&nbsp;:</strong> littérature + calibration sur données</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACCÈS INTERACTIF (haut) ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap reveal" style="max-width:var(--maxw-prose)">
+      <div class="tool-links">
+        <a class="tool-link" href="https://hellixmap.bayesia.com/display/1b6247c58b13fe6b" target="_blank" rel="noopener">
+          <span class="tool-link__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.2 10.5 16M17.2 7.2 13.5 16M7 6h10"/></svg>
+          </span>
+          <span class="tool-link__body">
+            <span class="tool-link__title">Explorer le graphe <span class="arrow" aria-hidden="true">↗</span></span>
+            <span class="tool-link__desc">La carte complète des interactions, sur HellixMap</span>
+          </span>
+        </a>
+        <a class="tool-link" href="https://simulator.bayesialab.com/simulator/60898933782" target="_blank" rel="noopener">
+          <span class="tool-link__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h4M6 6v4M14 17h4M11 12h9M4 12h3M17 5v4"/><path d="m9 15-3 4M15 9l3-4" opacity="0"/><circle cx="10" cy="8" r="1.4"/><circle cx="17" cy="17" r="1.4"/></svg>
+          </span>
+          <span class="tool-link__body">
+            <span class="tool-link__title">Ouvrir le simulateur <span class="arrow" aria-hidden="true">↗</span></span>
+            <span class="tool-link__desc">Testez l'impact de vos actions dans le WebSimulator</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CORPS ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="article-body reveal">
+
+        <h2>Le problème&nbsp;: un départ n'a presque jamais une seule cause</h2>
+        <p>
+          Les analyses RH classiques cherchent souvent «&nbsp;la&nbsp;» raison d'un
+          départ. Mais la plupart des enquêtes de satisfaction mesurent chaque
+          dimension séparément — la rémunération d'un côté, le management de
+          l'autre, l'engagement encore ailleurs — et ratent précisément ce qui
+          déclenche la décision&nbsp;: la façon dont ces dimensions se combinent.
+        </p>
+        <p>
+          Une charge élevée ne fait pas partir si la reconnaissance compense.
+          Une rémunération dans la moyenne ne pose pas problème tant qu'aucune
+          alternative crédible n'apparaît. À l'inverse, un ensemble de signaux
+          modérés — un peu moins d'autonomie, un management qui se dégrade, un
+          événement personnel — peut suffire à faire basculer une intention en
+          décision. Le turnover est un phénomène de <em>système</em>, pas de
+          facteur isolé.
+        </p>
+
+        <div class="callout">
+          <span class="callout-label">L'idée en une phrase</span>
+          <p>
+            On ne prédit pas un départ en regardant la variable la plus visible,
+            mais en regardant comment plusieurs facteurs, chacun modéré, s'alignent
+            — et un réseau bayésien est fait pour raisonner exactement là-dessus.
+          </p>
+        </div>
+
+        <h2>Le modèle&nbsp;: une structure causale rendue explicite</h2>
+        <p>
+          Le modèle représente les facteurs du turnover volontaire et les
+          hypothèses d'influence qui les relient, sous forme d'un graphe orienté.
+          Chaque nœud est un facteur — <strong>reconnaissance et valorisation</strong>,
+          <strong>charge de travail perçue</strong>, <strong>latitude décisionnelle</strong>,
+          <strong>qualité du management direct</strong>, <strong>justice organisationnelle</strong>,
+          <strong>rémunération relative au marché</strong>, <strong>alternatives internes</strong>,
+          <strong>employabilité perçue</strong>, <strong>ancienneté</strong>,
+          <strong>événement-choc déclencheur</strong>… Chaque flèche est une hypothèse
+          d'influence, extraite de la littérature et discutée avec vos équipes.
+        </p>
+        <p>
+          Ces facteurs alimentent des variables intermédiaires — satisfaction au
+          travail, qualité de vie au travail, lien organisationnel, coût de sortie
+          perçu, intention de départ — qui convergent vers l'indicateur de sortie&nbsp;:
+          le <strong>risque de départ volontaire</strong>. C'est la transparence de
+          cette chaîne qui fait la valeur du modèle&nbsp;: chaque relation est
+          justifiable, et chaque levier d'action est identifiable sur le graphe.
+        </p>
+
+        <figure class="article-figure bleed reveal">
+          <div class="figure-frame">
+            <img src="images/dag/turnover-risk-dark.svg"
+                 alt="Réseau bayésien du turnover volontaire : facteurs d'entrée (reconnaissance, charge, autonomie, management, rémunération, alternatives, ancienneté) reliés par des flèches à des variables intermédiaires (satisfaction, qualité de vie au travail, intention de départ) puis au risque de départ volontaire"
+                 loading="lazy">
+          </div>
+          <figcaption>
+            Le réseau du turnover volontaire. Les nœuds à gauche sont des facteurs
+            observables&nbsp;; les flèches, des hypothèses d'influence&nbsp;; le nœud
+            de droite, le risque de départ. Version explorable&nbsp;:
+            <a href="https://hellixmap.bayesia.com/display/1b6247c58b13fe6b" target="_blank" rel="noopener">carte interactive HellixMap ↗</a>.
+          </figcaption>
+        </figure>
+
+        <div class="callout reveal">
+          <span class="callout-label">Comment lire le graphe</span>
+          <p>
+            <strong>Les nœuds</strong> sont les facteurs. Ceux de gauche sont ceux
+            sur lesquels on peut agir ou qu'on observe (charge, reconnaissance,
+            autonomie…)&nbsp;; ceux de droite sont les résultats qui vous intéressent
+            (intention de départ, risque de départ volontaire).
+          </p>
+          <p>
+            <strong>Les flèches</strong> se lisent «&nbsp;A influence B&nbsp;». Une
+            flèche n'est pas une preuve de causalité expérimentale&nbsp;: c'est une
+            hypothèse d'influence jugée plausible d'après la littérature ou les
+            données, et assumée comme telle.
+          </p>
+          <p>
+            <strong>Les chemins</strong> comptent autant que les nœuds. Un facteur
+            peut peser fortement de façon <em>indirecte</em> — en passant par la
+            satisfaction ou le lien organisationnel — même si son lien direct avec
+            le départ paraît faible. C'est précisément ce qu'une liste de
+            corrélations ne montre jamais.
+          </p>
+        </div>
+
+        <h2>Le simulateur&nbsp;: tester un levier, voir tout le réseau réagir</h2>
+        <p>
+          Une fois le modèle calibré, il devient interactif via le WebSimulator.
+          À gauche, vous ajustez les facteurs (curseurs par niveau&nbsp;: faible /
+          moyen / élevé). À droite, chaque indicateur — risque de départ, coût de
+          sortie perçu, qualité de vie au travail, satisfaction — se recalcule
+          instantanément et affiche une probabilité, pas un score figé.
+        </p>
+
+        <figure class="article-figure bleed reveal">
+          <div class="figure-frame">
+            <img src="images/ws/ws-turnover.png"
+                 alt="Interface WebSimulator du modèle turnover : à gauche les facteurs ajustables regroupés par thème, à droite les jauges d'indicateurs — risque de départ volontaire à 0,30, qualité de vie au travail, autonomie perçue — données de démonstration"
+                 loading="lazy">
+          </div>
+          <figcaption>
+            WebSimulator — modèle turnover. À gauche, les leviers&nbsp;; à droite, les
+            indicateurs recalculés en temps réel (ici le risque de départ volontaire).
+            Valeurs de démonstration, sur données fictives.
+          </figcaption>
+        </figure>
+
+        <div class="callout reveal">
+          <span class="callout-label">Comment lire le simulateur</span>
+          <p>
+            <strong>Les curseurs de gauche</strong> fixent l'état d'un facteur. Les
+            modifier revient à poser une question&nbsp;: «&nbsp;si l'autonomie passait
+            de faible à élevée, toutes choses égales par ailleurs, que deviendrait le
+            risque&nbsp;?&nbsp;»
+          </p>
+          <p>
+            <strong>Les jauges de droite</strong> affichent une probabilité entre 0 et
+            1. On ne lit pas une valeur absolue comme une vérité&nbsp;: on lit un
+            <em>écart</em> entre deux scénarios comparés sur la même base.
+          </p>
+          <p>
+            Cela permet de <strong>hiérarchiser les leviers accessibles</strong>&nbsp;:
+            le facteur le plus corrélé au départ n'est pas toujours le plus actionnable,
+            et un levier moins spectaculaire mais atteignable peut, cumulé à un autre,
+            produire plus d'effet.
+          </p>
+        </div>
+
+        <h2>Ce que le modèle permet de faire</h2>
+        <ul>
+          <li><strong>Comparer deux équipes</strong> sur l'ensemble des facteurs et classer ceux qui expliquent le mieux un écart de turnover observé.</li>
+          <li><strong>Comparer des plans d'action</strong> à budget équivalent&nbsp;: le modèle montre lequel déplace le plus le risque, sur une même base chiffrée.</li>
+          <li><strong>Distinguer le direct de l'indirect</strong>&nbsp;: repérer les facteurs qui pèsent surtout par leurs chemins, invisibles à une lecture par corrélations.</li>
+          <li><strong>Rendre l'arbitrage partageable</strong>&nbsp;: une restitution qui explicite les hypothèses, pour un CODIR ou un CSE.</li>
+        </ul>
+
+        <div class="explore-cta reveal">
+          <h3>Explorer ce modèle</h3>
+          <p>
+            Le graphe et le simulateur ci-dessous sont des versions de démonstration,
+            construites sur la littérature et des données fictives. Votre modèle serait
+            calibré sur votre contexte.
+          </p>
+          <div class="tool-links" style="margin:0">
+            <a class="tool-link" href="https://hellixmap.bayesia.com/display/1b6247c58b13fe6b" target="_blank" rel="noopener">
+              <span class="tool-link__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.2 10.5 16M17.2 7.2 13.5 16M7 6h10"/></svg>
+              </span>
+              <span class="tool-link__body">
+                <span class="tool-link__title">Explorer le graphe <span class="arrow" aria-hidden="true">↗</span></span>
+                <span class="tool-link__desc">Carte des interactions — HellixMap</span>
+              </span>
+            </a>
+            <a class="tool-link" href="https://simulator.bayesialab.com/simulator/60898933782" target="_blank" rel="noopener">
+              <span class="tool-link__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h4M6 6v4M14 17h4M11 12h9M4 12h3"/><circle cx="10" cy="8" r="1.4"/><circle cx="17" cy="17" r="1.4"/></svg>
+              </span>
+              <span class="tool-link__body">
+                <span class="tool-link__title">Ouvrir le simulateur <span class="arrow" aria-hidden="true">↗</span></span>
+                <span class="tool-link__desc">Tester des scénarios — WebSimulator</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <h2>Fondements</h2>
+        <p>
+          La structure du modèle s'appuie sur des cadres de recherche publiés,
+          dont&nbsp;:
+        </p>
+        <ul class="sources">
+          <li>
+            <strong>Rubenstein et al. (2018)</strong> — méta-analyse des antécédents
+            du turnover volontaire, <em>Personnel Psychology</em>.
+          </li>
+          <li>
+            <strong>Mobley (1977)</strong> — modèle séquentiel de la décision de
+            départ (de l'insatisfaction à l'intention puis au départ).
+          </li>
+          <li>
+            <strong>Mitchell et al. (2001)</strong> — théorie de l'encastrement
+            professionnel (<em>job embeddedness</em>), <em>Academy of Management Journal</em>.
+          </li>
+        </ul>
+        <p>
+          La page <a href="methode.html">Méthode</a> détaille comment la littérature
+          est traduite en structure de réseau, calibrée, puis simulée — et ce qu'un
+          modèle ne fait pas.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn btn--primary" href="contact.html">Discuter d'un modèle sur votre contexte</a>
+          <a class="btn btn--ghost" href="modeles.html">Voir les autres modèles</a>
+        </div>
+
+        <nav class="model-pager" aria-label="Navigation entre modèles">
+          <a href="modeles.html">← Tous les modèles</a>
+          <a href="modele-burnout.html">Modèle Burn-out / RPS →</a>
+        </nav>
+
+      </div>
+    </div>
+  </section>
+  </article>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand" href="index.html">
+        <img src="images/logo/noumensia-favicon-light.svg" alt="" aria-hidden="true">
+        <span>Noumensia</span>
+      </a>
+      <nav aria-label="Pied de page">
+        <ul>
+          <li><a href="modeles.html">Modèles</a></li>
+          <li><a href="methode.html">Méthode</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+        </ul>
+      </nav>
+      <a class="social-link"
+         href="https://www.linkedin.com/in/arthur-jouffe"
+         target="_blank" rel="noopener"
+         aria-label="Profil LinkedIn d'Arthur Jouffe (nouvel onglet)"
+         title="LinkedIn — Arthur Jouffe">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.15 2.07 2.07 0 0 1 0 4.15zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0z"/></svg>
+      </a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Noumensia — Modélisation bayésienne des phénomènes RH</span>
+      <span>Arthur Jouffe · <a href="mailto:contact@noumensia.com">contact@noumensia.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

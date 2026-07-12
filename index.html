@@ -5,8 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Noumensia — Modélisation probabiliste pour la fonction RH</title>
 <meta name="description" content="Noumensia construit des modèles probabilistes qui relient vos indicateurs RH aux facteurs qui les influencent, pour comparer plusieurs pistes d'action sur une même base avant de décider.">
+<link rel="canonical" href="https://noumensia.com/index.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Noumensia">
+<meta property="og:url" content="https://noumensia.com/">
 <meta property="og:title" content="Noumensia — Modélisation probabiliste pour la fonction RH">
 <meta property="og:description" content="Des modèles qui relient vos indicateurs RH aux facteurs qui les influencent, pour comparer plusieurs pistes d'action sur une même base avant de décider.">
 <!-- TODO: ajouter og:image (1200x630) une fois disponible -->
@@ -14,42 +17,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon"
-      type="image/svg+xml"
-      href="images/logo/noumensia-favicon-light.svg">
+<link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
 <link rel="stylesheet" href="style.css">
-<style>
-  figure { margin: 0; }
-  .model-visual,
-  .ws-visual-img {
-    width: 115%;
-    max-width:none;
-    margin-left:-8%;
-    filter:drop-shadow(0 12px 30px rgba(0,0,0,.35));
-    height: auto;
-  }
-  .visual-caption {
-    font-size: 0.8rem;
-    color: var(--ardoise);
-    opacity: 0.7;
-    font-style: italic;
-    text-align: center;
-    margin-top: 0.5rem;
-    margin-bottom: 0;
-  }
-  .prose-lead { margin-bottom: 2rem; }
-</style>
 </head>
 <body>
+
+<a class="skip-link" href="#main">Aller au contenu</a>
+<div class="scroll-progress" aria-hidden="true"></div>
 
 <!-- ============ NAV ============ -->
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <img src="images/logo/noumensia-favicon-light.svg"
-           alt=""
-           aria-hidden="true"
-           class="brand-icon">
+      <img src="images/logo/noumensia-favicon-light.svg" alt="" aria-hidden="true" class="brand-icon">
       <span class="brand-name">Noumensia</span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
@@ -57,19 +37,19 @@
       <li><a href="index.html" aria-current="page">Accueil</a></li>
       <li><a href="modeles.html">Modèles</a></li>
       <li><a href="methode.html">Méthode</a></li>
-      <li><a href="contact.html">Contact</a></li>
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html" class="nav-cta">Prendre contact</a></li>
     </ul>
   </div>
 </header>
 
-<main>
+<main id="main">
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="accueil">
     <div class="wrap hero-grid">
-      <div>
+      <div class="reveal">
         <p class="eyebrow">Turnover · Absentéisme · Risques psychosociaux · Fidélisation · Intégration</p>
         <h1>Vos indicateurs RH bougent rarement pour une seule raison. Noumensia identifie les facteurs qui pèsent le plus — pour savoir où concentrer vos moyens.</h1>
         <p>
@@ -88,17 +68,19 @@
           <a class="btn btn--ghost" href="contact.html">Discuter de votre contexte</a>
         </div>
       </div>
-      <figure>
+      <figure class="reveal" data-delay="1">
         <img src="images/dag/Burn-out_Risk.svg"
-             alt="Graphe du modèle probabiliste du risque de burn-out"
-             class="model-visual">
+             alt="Graphe du modèle probabiliste du risque de burn-out : dizaines de facteurs reliés par des flèches d'influence"
+             class="model-visual"
+             loading="eager">
+        <figcaption class="visual-caption">Extrait d'un modèle Noumensia — le risque de burn-out et ses facteurs, reliés en réseau</figcaption>
       </figure>
     </div>
   </section>
 
   <!-- ============ CAS D'USAGE ============ -->
   <section class="section section--alt" id="cas-usage">
-    <div class="wrap">
+    <div class="wrap reveal">
       <p class="eyebrow">Des situations que vous reconnaissez peut-être</p>
       <h2>Trois questions concrètes, et comment un modèle aide à y répondre</h2>
       <div class="prose">
@@ -121,8 +103,8 @@
         <h3>« Avant de lancer un plan d'action RPS, sur quoi concentrer nos moyens&nbsp;? »</h3>
         <p>
           Plutôt que de disperser vos efforts et votre budget en essayant de traiter
-          tous les facteurs de risque avec la même intensité, le modèle hiérarchise 
-          les facteurs selon leur contribution estimée aux indicateurs que vous suivez — 
+          tous les facteurs de risque avec la même intensité, le modèle hiérarchise
+          les facteurs selon leur contribution estimée aux indicateurs que vous suivez —
           pour concentrer vos ressources là où elles auront le plus d'impact.
         </p>
       </div>
@@ -131,7 +113,7 @@
 
   <!-- ============ CE QUE VOUS OBTENEZ ============ -->
   <section class="section" id="ce-que-vous-obtenez">
-    <div class="wrap">
+    <div class="wrap reveal">
       <p class="eyebrow">Ce que vous obtenez</p>
       <h2>Un modèle que vous pouvez interroger, pas un rapport figé</h2>
       <div class="prose">
@@ -149,11 +131,11 @@
           Le modèle est alimenté par trois sources&nbsp;: vos données RH
           existantes (extraits SIRH, résultats d'enquêtes, indicateurs de
           suivi), votre connaissance du terrain, et la littérature scientifique
-          qui structure les hypothèses. Leur poids respectif dépend de ce dont 
+          qui structure les hypothèses. Leur poids respectif dépend de ce dont
           vous disposez&nbsp;: plus vos données sont riches, plus le modèle s'y
           ancre&nbsp;; à défaut, l'expertise et la littérature prennent le
-          relais — et la part de chacune est explicitée, jamais masquée. 
-          Ce qui en sort est propre à votre organisation et votre situation, 
+          relais — et la part de chacune est explicitée, jamais masquée.
+          Ce qui en sort est propre à votre organisation et votre situation,
           pas calqué sur une grille standard.
         </p>
         <h3>Des scénarios que vous pouvez comparer avant de décider</h3>
@@ -174,8 +156,7 @@
         </p>
       </div>
 
-      <!-- WebSimulator Burn-out Risk — ajuster l'extension si nécessaire -->
-      <figure style="margin-top: 2rem;">
+      <figure class="reveal" data-delay="1" style="margin-top: 2rem;">
         <img src="images/ws/ws-accueil.png"
              alt="Interface WebSimulator du modèle Burn-out Risk — panneau de simulation des facteurs à gauche, tableaux de bord des indicateurs à droite (données fictives)"
              class="ws-visual-img"
@@ -191,7 +172,7 @@
 
   <!-- ============ EN PRATIQUE ============ -->
   <section class="section section--alt" id="en-pratique">
-    <div class="wrap">
+    <div class="wrap reveal">
       <p class="eyebrow">En pratique</p>
       <h2>Un travail collaboratif, à partir de ce que vous avez déjà</h2>
       <div class="prose">
@@ -203,14 +184,14 @@
         <p>
           La construction du modèle part de données que vous collectez
           déjà (extraits SIRH, résultats d'enquêtes, indicateurs de suivi)
-          et celles collectées pendant la mission. Le travail respecte les 
+          et celles collectées pendant la mission. Le travail respecte les
           exigences du RGPD, et les échanges sont couverts par un accord de
           confidentialité dès la première réunion.
         </p>
         <p>
           La démarche commence par un entretien de cadrage — sans engagement —
           pour vérifier si l'approche est adaptée à votre situation et définir
-          un premier périmètre, volontairement resserré, sur lequel démontrer 
+          un premier périmètre, volontairement resserré, sur lequel démontrer
           la valeur avant d'élargir. Le travail de modélisation prend ensuite
           typiquement 4 à 8 semaines selon la disponibilité des données et la
           complexité du sujet.
@@ -228,15 +209,33 @@
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
-    <span>© 2026 Noumensia — Modélisation bayésienne des phénomènes RH</span>
-    <ul>
-      <li><a href="modeles.html">Modèles</a></li>
-      <li><a href="methode.html">Méthode</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-      <li><a href="a-propos.html">À propos</a></li>
-      <li><a href="mentions-legales.html">Mentions légales</a></li>
-    </ul>
+    <div class="footer-top">
+      <a class="footer-brand" href="index.html">
+        <img src="images/logo/noumensia-favicon-light.svg" alt="" aria-hidden="true">
+        <span>Noumensia</span>
+      </a>
+      <nav aria-label="Pied de page">
+        <ul>
+          <li><a href="modeles.html">Modèles</a></li>
+          <li><a href="methode.html">Méthode</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+        </ul>
+      </nav>
+      <a class="social-link"
+         href="https://www.linkedin.com/in/arthur-jouffe"
+         target="_blank" rel="noopener"
+         aria-label="Profil LinkedIn d'Arthur Jouffe (nouvel onglet)"
+         title="LinkedIn — Arthur Jouffe">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.15 2.07 2.07 0 0 1 0 4.15zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0z"/></svg>
+      </a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Noumensia — Modélisation bayésienne des phénomènes RH</span>
+      <span>Arthur Jouffe · <a href="mailto:contact@noumensia.com">contact@noumensia.com</a></span>
+    </div>
   </div>
 </footer>
 

@@ -4,42 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modèles — Noumensia</title>
-<meta name="description" content="Des réseaux bayésiens construits à partir de la littérature scientifique, consultables et explorables de façon interactive.">
+<meta name="description" content="Des réseaux bayésiens construits à partir de la littérature scientifique, consultables et explorables de façon interactive : turnover volontaire, burn-out et risques psychosociaux.">
+<link rel="canonical" href="https://noumensia.com/modeles.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Noumensia">
+<meta property="og:title" content="Modèles — Noumensia">
+<meta property="og:description" content="Des réseaux bayésiens explorables : turnover volontaire, burn-out et risques psychosociaux. Chaque modèle a son article, son graphe et son simulateur.">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<a class="skip-link" href="#main">Aller au contenu</a>
+<div class="scroll-progress" aria-hidden="true"></div>
 
 <!-- ============ NAV ============ -->
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="index.html">
-  <img src="images/logo/noumensia-favicon-light.svg"
-       alt=""
-       aria-hidden="true"
-       class="brand-icon">
-
-  <span class="brand-name">Noumensia</span>
-</a>
+      <img src="images/logo/noumensia-favicon-light.svg" alt="" aria-hidden="true" class="brand-icon">
+      <span class="brand-name">Noumensia</span>
+    </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Accueil</a></li>
       <li><a href="modeles.html" aria-current="page">Modèles</a></li>
       <li><a href="methode.html">Méthode</a></li>
-      <li><a href="contact.html">Contact</a></li>
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="a-propos.html">À propos</a></li>
+      <li><a href="contact.html" class="nav-cta">Prendre contact</a></li>
     </ul>
   </div>
 </header>
 
-<main>
+<main id="main">
 
   <!-- ============ INTRO ============ -->
   <section class="section" id="modeles">
-    <div class="wrap">
+    <div class="wrap reveal">
+      <p class="breadcrumb"><a href="index.html">Accueil</a><span>/</span>Modèles</p>
       <p class="eyebrow">Modèles</p>
       <h2>Des réseaux bayésiens construits, pas des promesses</h2>
       <p class="lede">
@@ -47,31 +55,53 @@
         littérature scientifique — pas à partir de données client. Ils
         illustrent concrètement ce que produit l'approche&nbsp;: une structure
         de facteurs reliés entre eux, que vous pouvez explorer et interroger.
+        Chaque modèle documenté dispose de son article, du graphe complet et
+        d'un simulateur interactif.
       </p>
 
       <!-- ============ GRILLE DES MODÈLES ============ -->
       <div class="model-grid">
 
-        <article class="model-card">
-          <!-- PLACEHOLDER : remplacer par <img src="..." alt="..."> -->
-          <div class="model-shot"><span>Capture à ajouter</span></div>
+        <article class="model-card reveal">
+          <a class="stretched" href="modele-turnover.html" aria-label="Lire l'article sur le modèle Turnover volontaire"></a>
+          <div class="model-shot">
+            <img src="images/ws/ws-turnover2.png" alt="Aperçu du simulateur du modèle turnover volontaire" loading="lazy">
+          </div>
           <div class="model-body">
-            <p class="eyebrow eyebrow--on-light">46 variables</p>
+            <p class="eyebrow eyebrow--on-light">~46 variables · Rubenstein · Mobley · Mitchell</p>
             <h3>Turnover volontaire</h3>
             <p>
               De la rémunération perçue à la qualité de l'intégration, ce modèle
               représente les chemins — souvent indirects — qui mènent un
-              collaborateur à partir.
+              collaborateur à partir, même quand chaque indicateur pris isolément
+              semble bon.
             </p>
-            <!-- TODO : remplacer href par la page dédiée du modèle -->
-            <a class="model-link" href="#">Lire l'article &amp; explorer le modèle ↗</a>
+            <span class="model-link">Lire l'article &amp; explorer le modèle <span aria-hidden="true">↗</span></span>
           </div>
         </article>
 
-        <article class="model-card">
-          <div class="model-shot"><span>Capture à ajouter</span></div>
+        <article class="model-card reveal" data-delay="1">
+          <a class="stretched" href="modele-burnout.html" aria-label="Lire l'article sur le modèle Burn-out et risques psychosociaux"></a>
+          <div class="model-shot">
+            <img src="images/ws/ws-accueil.png" alt="Aperçu du simulateur du modèle burn-out" loading="lazy">
+          </div>
           <div class="model-body">
-            <p class="eyebrow eyebrow--on-light">V4 · Miraglia &amp; Johns, Aronsson et al.</p>
+            <p class="eyebrow eyebrow--on-light">27 variables · Karasek · Maslach · COPSOQ III</p>
+            <h3>Risques psychosociaux &amp; burn-out</h3>
+            <p>
+              Structuré autour des exigences et ressources au travail — charge,
+              autonomie, soutien, reconnaissance — pour comprendre les chemins qui
+              mènent à l'épuisement, et hiérarchiser les leviers réellement
+              accessibles.
+            </p>
+            <span class="model-link">Lire l'article &amp; explorer le modèle <span aria-hidden="true">↗</span></span>
+          </div>
+        </article>
+
+        <article class="model-card reveal" data-delay="2">
+          <div class="model-shot model-shot--placeholder"><span>Article à venir</span></div>
+          <div class="model-body">
+            <p class="eyebrow eyebrow--on-light">Miraglia &amp; Johns · Aronsson et al.</p>
             <h3>Absentéisme &amp; présentéisme</h3>
             <p>
               Construit à partir de la méta-analyse de Miraglia &amp; Johns et
@@ -79,22 +109,7 @@
               les absences contraintes des absences évitables et intègre le
               mécanisme de substitution absentéisme/présentéisme.
             </p>
-            <a class="model-link" href="#">Lire l'article &amp; explorer le modèle ↗</a>
-          </div>
-        </article>
-
-        <article class="model-card">
-          <div class="model-shot"><span>Capture à ajouter</span></div>
-          <div class="model-body">
-            <p class="eyebrow eyebrow--on-light">42 variables · cadre COPSOQ III</p>
-            <h3>Risques psychosociaux &amp; épuisement</h3>
-            <p>
-              Structuré autour du cadre COPSOQ — exigences et ressources au
-              travail — pour comprendre les chemins qui mènent à l'épuisement
-              professionnel, et identifier où une intervention aurait le plus
-              d'effet.
-            </p>
-            <a class="model-link" href="#">Lire l'article &amp; explorer le modèle ↗</a>
+            <span class="model-badge">Documenté prochainement</span>
           </div>
         </article>
 
@@ -119,14 +134,33 @@
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
-    <span>© 2026 Noumensia — Modélisation bayésienne des phénomènes RH</span>
-    <ul>
-      <li><a href="methode.html">Méthode</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-      <li><a href="a-propos.html">À propos</a></li>
-      <li><a href="mentions-legales.html">Mentions légales</a></li>
-    </ul>
+    <div class="footer-top">
+      <a class="footer-brand" href="index.html">
+        <img src="images/logo/noumensia-favicon-light.svg" alt="" aria-hidden="true">
+        <span>Noumensia</span>
+      </a>
+      <nav aria-label="Pied de page">
+        <ul>
+          <li><a href="modeles.html">Modèles</a></li>
+          <li><a href="methode.html">Méthode</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+        </ul>
+      </nav>
+      <a class="social-link"
+         href="https://www.linkedin.com/in/arthur-jouffe"
+         target="_blank" rel="noopener"
+         aria-label="Profil LinkedIn d'Arthur Jouffe (nouvel onglet)"
+         title="LinkedIn — Arthur Jouffe">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.15 2.07 2.07 0 0 1 0 4.15zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0z"/></svg>
+      </a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Noumensia — Modélisation bayésienne des phénomènes RH</span>
+      <span>Arthur Jouffe · <a href="mailto:contact@noumensia.com">contact@noumensia.com</a></span>
+    </div>
   </div>
 </footer>
 
