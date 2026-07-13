@@ -3,33 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mentions légales — Noumensia</title>
-<meta name="description" content="Mentions légales du site noumensia.fr">
+<title>Page introuvable — Noumensia</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Cette page n'existe pas ou a été déplacée.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="canonical" href="https://noumensia.com/mentions-legales.html">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
 <link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css?v=5">
+<style>
+  .error-wrap{ min-height:60vh; display:flex; align-items:center; padding:clamp(3rem,8vw,6rem) 0; }
+  .error-code{
+    font-family:var(--font-mono); font-size:.8rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--bordeaux-vif); margin-bottom:1rem;
+    display:inline-flex; align-items:center; gap:.55rem;
+  }
+  .error-code::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--bordeaux-vif); }
+  .error-wrap h1{ font-size:clamp(2.2rem,5vw,3.4rem); letter-spacing:-.02em; margin-bottom:1rem; max-width:20ch; }
+  .error-wrap p{ color:var(--gris-doux); max-width:34rem; font-size:1.08rem; margin-bottom:2rem; }
+</style>
 </head>
 <body>
 
 <div class="scroll-progress" aria-hidden="true"></div>
 
-<!-- ============ NAV ============ -->
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="index.html">
-  <img src="images/logo/noumensia-favicon-light.svg"
-       alt=""
-       aria-hidden="true"
-       class="brand-icon">
-
-  <span class="brand-name">Noumensia</span>
-</a>
+      <img src="images/logo/noumensia-favicon-light.svg" alt="" aria-hidden="true" class="brand-icon">
+      <span class="brand-name">Noumensia</span>
+    </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Accueil</a></li>
@@ -43,66 +49,24 @@
 </header>
 
 <main id="main">
-
-  <section class="section" id="mentions-legales">
-    <div class="wrap">
-      <p class="eyebrow">Informations légales</p>
-      <h2>Mentions légales</h2>
-      <div class="prose">
-
-        <h3>Éditeur du site</h3>
+  <section class="section">
+    <div class="wrap error-wrap">
+      <div>
+        <p class="error-code">Erreur 404</p>
+        <h1>Cette page s'est perdue dans le réseau.</h1>
         <p>
-          Arthur Jouffe<br>
-          Entrepreneur individuel<br>
-          SIREN : 853 584 431<br>
-          E-mail : arthur@noumensia.com<br>
-          Adresse de domiciliation :<br> 
-          2 rue du Bois Vert<br>
-          53960 Bonchamp-lès-Laval<br> 
-          FRANCE
+          Le lien est peut-être ancien, ou l'adresse comporte une coquille.
+          Aucune inférence possible à partir d'ici — mais voici par où repartir.
         </p>
-        <p>Directeur de la publication : Arthur Jouffe</p>
-
-        <h3>Hébergement</h3>
-        <p>
-          Ce site est hébergé par :<br>
-          Cloudflare, Inc.<br>
-          101 Townsend Street<br>
-          San Francisco, CA 94107<br>
-          États-Unis<br>
-          https://www.cloudflare.com/
-        </p>
-
-        <h3>Propriété intellectuelle</h3>
-        <p>
-          L'ensemble du contenu de ce site — textes, graphiques, modèles,
-          illustrations — est protégé par le droit d'auteur. Toute reproduction
-          ou représentation, même partielle, est soumise à autorisation
-          préalable.
-        </p>
-
-        <h3>Responsabilité</h3>
-        <p>
-          Les modèles présentés sur ce site sont des modèles de démonstration
-          construits à partir de la littérature scientifique. Ils ne constituent
-          ni un conseil en gestion des ressources humaines, ni un avis médical,
-          juridique ou scientifique. Les résultats d'un modèle dépendent des
-          données et des hypothèses utilisées et ne sauraient être interprétés
-          comme des prédictions ou des garanties.
-        </p>
-
-        <h3>Données personnelles</h3>
-        <p>
-          Le traitement des données personnelles est décrit dans la
-          <a href="confidentialite.html">politique de confidentialité</a>.
-        </p> 
+        <div class="hero-ctas">
+          <a class="btn btn--primary" href="index.html">Retour à l'accueil</a>
+          <a class="btn btn--ghost" href="modeles.html">Voir les modèles</a>
+        </div>
       </div>
     </div>
   </section>
-
 </main>
 
-<!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
     <div class="footer-top">

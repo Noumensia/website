@@ -92,6 +92,9 @@ a:focus-visible, button:focus-visible{
 }
 h1,h2,h3{ font-family:var(--font-display); font-weight:600; line-height:1.15; }
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 var(--pad); }
+/* Décale les ancres pour ne pas passer sous la barre de nav sticky */
+:target{ scroll-margin-top:88px; }
+[id]{ scroll-margin-top:88px; }
 
 /* Lien d'évitement (accessibilité clavier) */
 .skip-link{
@@ -755,11 +758,31 @@ textarea[aria-invalid="true"]{
   padding-top:2rem; border-top:1px solid var(--ardoise-3);
 }
 .process-number{
-  display:block; font-family:var(--font-mono); font-size:.85rem;
-  color:var(--bordeaux-vif); letter-spacing:.12em; margin-bottom:.6rem;
+  display:inline-grid; place-items:center; width:2.5rem; height:2.5rem;
+  border:1px solid var(--ardoise-3); border-radius:50%;
+  background:rgba(217,138,149,.07);
+  font-family:var(--font-mono); font-size:.9rem; font-weight:500;
+  color:var(--bordeaux-vif); letter-spacing:.02em; margin-bottom:1rem;
+  transition:border-color var(--t-base), background var(--t-base);
+}
+.process-step:hover .process-number{
+  border-color:var(--bordeaux-vif); background:rgba(217,138,149,.14);
 }
 .process-step h3{ font-size:1.15rem; margin-bottom:.6rem; }
 .process-step p{ color:var(--gris-doux); font-size:.92rem; }
+
+/* Badges de confiance (page contact) */
+.trust-badges{
+  display:flex; flex-wrap:wrap; gap:.6rem .7rem; margin:1.5rem 0 0; list-style:none;
+}
+.trust-badge{
+  display:inline-flex; align-items:center; gap:.45rem;
+  font-family:var(--font-mono); font-size:.74rem; letter-spacing:.02em;
+  color:rgba(242,239,234,.9);
+  border:1px solid rgba(255,255,255,.20); border-radius:999px;
+  padding:.42rem .85rem; background:rgba(255,255,255,.05);
+}
+.trust-badge svg{ width:14px; height:14px; opacity:.95; flex-shrink:0; }
 
 /* ============ FAQ ============ */
 .faq{ padding:clamp(3rem,8vw,5.5rem) 0; }
@@ -785,6 +808,10 @@ textarea[aria-invalid="true"]{
   max-width:38rem; line-height:1.7;
 }
 .faq-item p + p{ padding-top:0; }
+/* Ouverture douce des accordéons (FAQ page + FAQ contact) */
+.faq-item[open] > .faq-answer,
+.faq-item[open] > p{ animation:faqOpen .34s var(--ease-out); }
+@keyframes faqOpen{ from{ opacity:0; transform:translateY(-6px); } to{ opacity:1; transform:none; } }
 
 /* ============ CTA FINAL ============ */
 .cta-final{
