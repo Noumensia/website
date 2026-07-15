@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modèle Turnover volontaire — Noumensia</title>
-<meta name="description" content="Un réseau bayésien du turnover volontaire : comprendre pourquoi un salarié part alors que chaque indicateur pris isolément semble bon, lire le graphe des facteurs, et tester des leviers dans le simulateur.">
+<title>Turnover : comprendre les causes des départs et où agir — Noumensia</title>
+<meta name="description" content="Turnover volontaire en entreprise : comprendre pourquoi un salarié part alors que chaque indicateur semble bon, identifier les vrais facteurs de départ et les leviers de rétention, à l'aide d'un modèle bayésien issu de la recherche RH.">
 <link rel="canonical" href="https://noumensia.com/modele-turnover.html">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Noumensia">
-<meta property="og:title" content="Modèle Turnover volontaire — Noumensia">
+<meta property="og:title" content="Turnover : comprendre les causes des départs et où agir">
 <meta property="og:description" content="Pourquoi un salarié part alors que chaque indicateur semble bon : lire le réseau des facteurs du turnover et tester des leviers dans le simulateur.">
 <meta property="og:image" content="https://noumensia.com/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
 <link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -188,11 +188,12 @@
         </p>
 
         <figure class="article-figure bleed reveal">
-          <div class="figure-frame">
+          <a class="figure-frame fig-link" href="https://hellixmap.bayesia.com/display/1b6247c58b13fe6b" target="_blank" rel="noopener">
+            <span class="fig-hint">Explorer le graphe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
             <img src="images/dag/turnover-risk-dark.svg"
                  alt="Réseau bayésien du turnover volontaire : facteurs d'entrée (reconnaissance, charge, autonomie, management, rémunération, alternatives, ancienneté) reliés par des flèches à des variables intermédiaires (satisfaction, qualité de vie au travail, intention de départ) puis au risque de départ volontaire"
                  loading="lazy">
-          </div>
+          </a>
           <figcaption>
             Le réseau du turnover volontaire. Les nœuds à gauche sont des facteurs
             observables&nbsp;; les flèches, des hypothèses d'influence&nbsp;; le nœud
@@ -234,11 +235,12 @@
         </p>
 
         <figure class="article-figure bleed reveal">
-          <div class="figure-frame">
+          <a class="figure-frame fig-link" href="https://simulator.bayesialab.com/simulator/60898933782" target="_blank" rel="noopener">
+            <span class="fig-hint">Ouvrir le simulateur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
             <img src="images/ws/ws-turnover.png"
-                 alt="Interface WebSimulator du modèle turnover : à gauche les facteurs ajustables regroupés par thème, à droite les jauges d'indicateurs — risque de départ volontaire à 0,30, qualité de vie au travail, autonomie perçue — données de démonstration"
+                 alt="Interface WebSimulator du modèle turnover : à gauche les facteurs ajustables regroupés par thème, à droite les jauges d'indicateurs — risque de départ volontaire, qualité de vie au travail, autonomie perçue — valeurs illustratives"
                  loading="lazy">
-          </div>
+          </a>
           <figcaption>
             WebSimulator — modèle turnover. À gauche, les leviers&nbsp;; à droite, les
             indicateurs recalculés en temps réel (ici le risque de départ volontaire).
@@ -380,6 +382,7 @@
   </div>
 </footer>
 
-<script src="script.js?v=2"></script>
+<script src="script.js"></script>
+<!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8bd3e2f66b3c4bbba0b38cbcbbc972e0"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

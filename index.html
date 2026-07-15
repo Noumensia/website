@@ -26,7 +26,7 @@
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
 <link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -99,10 +99,13 @@
         </div>
       </div>
       <figure class="hero-graph reveal" data-delay="1">
-        <img src="images/dag/Burn-out_Risk.svg"
-             alt="Graphe du modèle probabiliste du risque de burn-out : dizaines de facteurs reliés par des flèches d'influence"
-             class="hero-graph-img"
-             loading="eager">
+        <a class="fig-link" href="modele-burnout.html" aria-label="Lire l'article et explorer le modèle burn-out">
+          <span class="fig-hint">Lire l'article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <img src="images/dag/Burn-out_Risk.svg"
+               alt="Graphe du modèle probabiliste du risque de burn-out : dizaines de facteurs reliés par des flèches d'influence"
+               class="hero-graph-img"
+               loading="eager">
+        </a>
         <figcaption class="visual-caption">Un modèle Noumensia du risque de burn-out — chaque nœud est un facteur, chaque flèche une hypothèse d'influence</figcaption>
       </figure>
     </div>
@@ -187,10 +190,13 @@
       </div>
 
       <figure class="reveal" data-delay="1" style="margin-top: 2rem;">
-        <img src="images/ws/ws-accueil.png"
-             alt="Interface WebSimulator du modèle Burn-out Risk — panneau de simulation des facteurs à gauche, tableaux de bord des indicateurs à droite (valeurs illustratives)"
-             class="ws-visual-img"
-             loading="lazy">
+        <a class="fig-link" href="modele-burnout.html" aria-label="Lire l'article et explorer le modèle burn-out">
+          <span class="fig-hint">Lire l'article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <img src="images/ws/ws-accueil.png"
+               alt="Interface WebSimulator du modèle Burn-out Risk — panneau de simulation des facteurs à gauche, tableaux de bord des indicateurs à droite (valeurs illustratives)"
+               class="ws-visual-img"
+               loading="lazy">
+        </a>
         <figcaption class="visual-caption">WebSimulator Burn-out Risk — interface de simulation de scénarios — valeurs illustratives</figcaption>
       </figure>
 
@@ -269,6 +275,7 @@
   </div>
 </footer>
 
-<script src="script.js?v=2"></script>
+<script src="script.js"></script>
+<!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8bd3e2f66b3c4bbba0b38cbcbbc972e0"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
