@@ -167,7 +167,10 @@ h1,h2,h3{ font-family:var(--font-display); font-weight:600; line-height:1.15; }
   width:42px;
   height:42px;
   flex-shrink:0;
+  /* Logo theme-aware : confounder toujours bordeaux ; collider crème sur fond sombre, ardoise sur fond clair */
+  content:url("images/logo/noumensia-icon-light.svg");
 }
+html[data-theme="light"] .brand-icon{ content:url("images/logo/noumensia-icon-color.svg"); }
 .brand-name{ font-family:var(--font-display); font-size:1.25rem; font-weight:600; letter-spacing:.01em; }
 .nav-links{ display:flex; gap:1.75rem; list-style:none; align-items:center; }
 .nav-links a{
@@ -221,20 +224,39 @@ h1,h2,h3{ font-family:var(--font-display); font-weight:600; line-height:1.15; }
              box-shadow var(--t-base);
   will-change:transform;
 }
+.btn{ position:relative; }
 .btn:hover{ transform:translateY(-2px); text-decoration:none; }
 .btn:active{ transform:translateY(0); }
-.btn--primary{ background:var(--bordeaux); color:var(--blanc-casse); }
+
+/* Primaire : balayage lumineux qui traverse au survol */
+.btn--primary{ background:var(--bordeaux); color:var(--blanc-casse); overflow:hidden; }
+.btn--primary::after{
+  content:""; position:absolute; top:0; left:-130%; width:55%; height:100%;
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,.22), transparent);
+  transform:skewX(-18deg); pointer-events:none;
+  transition:left .55s var(--ease-out, ease);
+}
 .btn--primary:hover{
   background:#8f2536; text-decoration:none;
   box-shadow:0 8px 22px rgba(122, 31, 45, .38);
 }
+.btn--primary:hover::after{ left:140%; }
+
+/* Ghost : la bordure bordeaux se trace autour du bouton au survol (même geste que l'icône LinkedIn) */
 .btn--ghost{ border-color:var(--ardoise-3); color:var(--blanc-casse); }
-.btn--ghost:hover{
-  border-color:var(--bordeaux-vif); color:var(--bordeaux-vif);
-  text-decoration:none;
-  box-shadow:0 4px 14px rgba(217, 138, 149, .15);
+.btn--ghost::before{
+  content:""; position:absolute; inset:0; border-radius:5px; padding:1px;
+  background:conic-gradient(from -90deg, var(--bordeaux-vif) var(--lk-fill), transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  --lk-fill:0%; opacity:0; pointer-events:none;
+  transition:--lk-fill .55s linear, opacity .18s ease;
 }
-.btn svg{ width:1.05em; height:1.05em; flex-shrink:0; }
+.btn--ghost:hover{
+  border-color:transparent; color:var(--bordeaux-vif); text-decoration:none;
+}
+.btn--ghost:hover::before{ --lk-fill:100%; opacity:1; }
+.btn svg{ width:1.05em; height:1.05em; flex-shrink:0; position:relative; }
 .cta-row{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2rem; }
 
 /* ============ HERO (accueil) ============ */
@@ -539,9 +561,9 @@ figure{ margin:0; }
   margin:2.5rem 0;
 }
 .article-figure.bleed{
-  width:min(100vw, 1480px);
+  width:min(calc(100vw - 2rem), 1480px);
   margin-left:50%; transform:translateX(-50%);
-  padding:0 var(--pad);
+  padding:0;
 }
 .figure-frame{
   border-radius:10px; overflow:hidden;
@@ -610,9 +632,9 @@ figure{ margin:0; }
 }
 /* Comparatif qui sort de la colonne de texte pour être vraiment lisible */
 .ws-compare--wide{
-  width:min(100vw, 1480px);
+  width:min(calc(100vw - 2rem), 1480px);
   margin-left:50%; transform:translateX(-50%);
-  padding:0 var(--pad); gap:2rem;
+  padding:0; gap:2rem;
 }
 .ws-compare--wide .ws-label{ text-align:center; opacity:.75; font-size:.78rem; }
 .ws-compare--wide figcaption{ text-align:center; font-size:.9rem; }
@@ -914,6 +936,16 @@ footer{ padding:2.5rem 0; border-top:1px solid var(--ardoise-3); }
 footer nav ul{ list-style:none; display:flex; gap:1.25rem; flex-wrap:wrap; }
 footer nav a{ color:var(--gris-doux); font-size:.9rem; transition:color var(--t-fast); }
 footer nav a:hover{ color:var(--bordeaux-vif); }
+/* Soulignement qui se dessine — partout : footer, pager, fil d'Ariane, e-mail */
+footer nav a, .footer-bottom a, .model-pager a, .breadcrumb a{
+  text-decoration:none;
+  background-image:linear-gradient(currentColor, currentColor);
+  background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat;
+  transition:background-size .35s cubic-bezier(.22,1,.36,1), color var(--t-fast);
+}
+footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:hover{
+  background-size:100% 1.5px;
+}
 /* Icône LinkedIn — la bordure se trace au survol, comme un chargement, en bleu LinkedIn */
 @property --lk-fill{ syntax:"<percentage>"; inherits:false; initial-value:0%; }
 .social-link{
@@ -962,6 +994,7 @@ footer nav a:hover{ color:var(--bordeaux-vif); }
   .steps{ grid-template-columns:1fr; gap:1.75rem; }
   .process-grid{ grid-template-columns:1fr; gap:1.75rem; }
   .article-figure.bleed{ width:100%; margin-left:0; transform:none; padding:0; }
+  .ws-compare--wide{ width:100%; margin-left:0; transform:none; padding:0; }
 }
 @media (max-width:600px){
   .hero h1{ font-size:2.35rem; }
