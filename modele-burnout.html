@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
-<link rel="icon" type="image/svg+xml" href="images/logo/noumensia-favicon-light.svg">
+<link rel="icon" type="image/svg+xml" href="images/logo/noumensia-badge-slate.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">
@@ -36,7 +36,7 @@
   "publisher": {
     "@type": "Organization",
     "name": "Noumensia",
-    "logo": { "@type": "ImageObject", "url": "https://noumensia.com/images/logo/noumensia-favicon-light.svg" }
+    "logo": { "@type": "ImageObject", "url": "https://noumensia.com/images/logo/noumensia-badge-slate.svg" }
   },
   "mainEntityOfPage": "https://noumensia.com/modele-burnout.html",
   "about": ["Burn-out", "Risques psychosociaux", "Réseaux bayésiens"]
@@ -62,7 +62,7 @@
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <img src="images/logo/noumensia-favicon-light.svg" alt="" aria-hidden="true" class="brand-icon">
+      <img src="images/logo/noumensia-badge-slate.svg" alt="" aria-hidden="true" class="brand-icon">
       <span class="brand-name">Noumensia</span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
@@ -215,60 +215,82 @@
           <p>
             L'essentiel se joue dans <strong>les chemins qui convergent</strong>.
             Plusieurs facteurs alimentent l'épuisement émotionnel, qui alimente à son
-            tour le risque. Agir sur deux facteurs «&nbsp;secondaires&nbsp;» mais
-            accessibles peut infléchir ce nœud central davantage que de viser le
-            facteur dominant mais hors de portée.
+            tour le risque. Quand le facteur dominant est hors de portée, agir sur
+            plusieurs facteurs accessibles — même «&nbsp;secondaires&nbsp;» — permet
+            d'infléchir ce nœud central de façon utile, à défaut d'être spectaculaire.
           </p>
         </div>
 
-        <h2>Un exemple&nbsp;: le levier évident n'est pas toujours le meilleur</h2>
+        <h2>Un exemple&nbsp;: agir sur les leviers accessibles, pas sur les plus forts</h2>
         <p>
-          Prenons un cas classique&nbsp;: une équipe de soignants en situation
-          d'<em>iso-strain</em> — charge maximale, autonomie nulle, soutien
-          inexistant. Le modèle estime un risque élevé de burn-out. On peut alors
-          simuler deux directions&nbsp;:
+          Prenons une équipe d'aides-soignants sous tension&nbsp;: charge de travail
+          élevée, fortes exigences émotionnelles, conditions dégradées. Le modèle
+          estime un risque de burn-out élevé — <strong>0,89</strong>. Problème&nbsp;:
+          les deux facteurs les plus corrélés au burn-out — la <strong>charge</strong>
+          et les <strong>exigences émotionnelles</strong> — sont justement les plus
+          difficiles à actionner. On ne recrute pas des soignants du jour au lendemain,
+          et on ne supprime pas la charge émotionnelle du soin.
+        </p>
+        <p>
+          Que reste-t-il&nbsp;? Agir sur les <em>ressources</em>, celles qui sont à
+          portée&nbsp;: autonomie décisionnelle, soutien social, reconnaissance,
+          qualité du management, sens du travail. On simule ce plan <strong>sans
+          toucher à la pression</strong> — elle reste à 1,78.
         </p>
 
-        <div class="stat-band reveal" role="group" aria-label="Comparaison de deux scénarios d'action (démonstration)">
+        <div class="ws-compare reveal" role="group" aria-label="Comparaison avant / après sur le risque de burn-out (démonstration)">
+          <figure>
+            <p class="ws-label">Situation initiale</p>
+            <img src="images/ws/ws-burnout-avant.jpg" alt="WebSimulator burn-out — situation initiale : risque de burn-out 0,89, pression globale 1,78" loading="lazy">
+            <figcaption>Risque de burn-out&nbsp;: <strong>0,89</strong></figcaption>
+          </figure>
+          <figure>
+            <p class="ws-label">Après actions ciblées sur les ressources</p>
+            <img src="images/ws/ws-burnout-apres.jpg" alt="WebSimulator burn-out — après actions sur les ressources : risque 0,73, pression globale toujours 1,78" loading="lazy">
+            <figcaption>Risque&nbsp;: <strong>0,73</strong></figcaption>
+          </figure>
+        </div>
+
+        <div class="stat-band reveal" role="group" aria-label="Variables de résultat, avant et après">
           <div class="stat">
-            <span class="stat-num">43&nbsp;<em>%</em></span>
-            <span class="stat-label">Risque élevé de départ — état de départ modélisé</span>
+            <span class="stat-num">0,89&nbsp;→&nbsp;<em>0,73</em></span>
+            <span class="stat-label">Risque de burn-out — en n'agissant que sur les ressources accessibles</span>
           </div>
           <div class="stat">
-            <span class="stat-num">34&nbsp;<em>%</em></span>
-            <span class="stat-label">En réduisant la charge — le facteur le plus corrélé (souvent le moins réaliste)</span>
+            <span class="stat-num">1,04&nbsp;→&nbsp;<em>1,25</em></span>
+            <span class="stat-label">Ressources organisationnelles — le levier réellement activé</span>
           </div>
           <div class="stat">
-            <span class="stat-num">28&nbsp;<em>%</em></span>
-            <span class="stat-label">Sans toucher à la charge&nbsp;: en améliorant autonomie et soutien social</span>
+            <span class="stat-num">1,78</span>
+            <span class="stat-label">Pression globale — <strong>inchangée</strong>&nbsp;: charge et exigences émotionnelles non touchées</span>
           </div>
         </div>
+
         <p>
-          Soit <strong>15 points de risque en moins sans actionner le levier
-          principal</strong>. C'est ce qu'une liste de facteurs ne montre jamais&nbsp;:
-          certaines variables pèsent moins individuellement, mais sont plus
-          accessibles — et leur effet cumulé peut dépasser celui du levier évident.
+          L'effet est <strong>réel mais modéré</strong> — et c'est justement ce qui
+          rend le résultat crédible. Le modèle ne promet pas un miracle&nbsp;: en
+          s'interdisant les deux leviers les plus puissants parce qu'ils sont hors de
+          portée, on obtient une baisse partielle. Il chiffre ce qu'un plan
+          <em>réaliste</em> peut vraiment espérer, plutôt que de vanter l'effet
+          d'actions impossibles.
         </p>
         <p class="visual-caption" style="text-align:left;max-width:44rem">
-          Valeurs issues d'une simulation de démonstration sur un cas illustratif, à des
-          fins pédagogiques. Un modèle réel produirait ses propres estimations sur vos données.
+          Valeurs issues d'une simulation de démonstration sur un cas illustratif.
+          Un modèle réel produirait ses propres estimations sur vos données.
         </p>
 
-        <h2>Le simulateur&nbsp;: comparer deux plans d'action à budget égal</h2>
+        <h2>Le simulateur&nbsp;: tout le réseau réagit, en direct</h2>
         <p>
-          Le WebSimulator rend cette comparaison manipulable. On y confronte, par
-          exemple, deux plans de même coût et même faisabilité&nbsp;: un plan centré
-          sur la formation des managers, le soutien social et la reconnaissance&nbsp;;
-          un plan centré sur l'autonomie décisionnelle, la clarification des rôles et
-          une reconnaissance ciblée. À situation de départ identique, l'écart de
-          risque simulé entre les deux peut atteindre plusieurs points — de quoi
-          arbitrer sur une base chiffrée plutôt qu'à l'intuition.
+          Chaque curseur déplacé recalcule instantanément l'ensemble des indicateurs —
+          risque de burn-out, épuisement émotionnel, cynisme, tension professionnelle.
+          On lit moins une valeur absolue qu'un <em>écart</em> entre deux scénarios
+          comparés sur la même base, sans compétence technique requise.
         </p>
 
         <figure class="article-figure bleed reveal">
           <a class="figure-frame fig-link" href="https://simulator.bayesialab.com/simulator/47192424779" target="_blank" rel="noopener">
             <span class="fig-hint">Ouvrir le simulateur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
-            <img src="images/ws/ws-accueil.png"
+            <img src="images/ws/ws-accueil.jpg"
                  alt="Interface WebSimulator du modèle burn-out : facteurs ajustables à gauche, jauges d'indicateurs à droite avec le risque de burn-out et ses composantes — valeurs illustratives"
                  loading="lazy">
           </a>
@@ -277,23 +299,6 @@
             instantanément tout le réseau. Valeurs illustratives, à des fins de démonstration.
           </figcaption>
         </figure>
-
-        <div class="ws-compare reveal" role="group" aria-label="Comparaison de scénarios avant / après (démonstration)">
-          <figure>
-            <p class="ws-label">État de référence</p>
-            <img src="images/ws/ws-reference.png" alt="WebSimulator — risque de burn-out estimé à 0,73 après un premier diagnostic" loading="lazy">
-            <figcaption>Après un premier diagnostic — risque de burn-out&nbsp;: <strong>0,73</strong></figcaption>
-          </figure>
-          <figure>
-            <p class="ws-label">Scénario simulé</p>
-            <img src="images/ws/ws-scenario.png" alt="WebSimulator — baisse du risque de burn-out à 0,62 après action simulée" loading="lazy">
-            <figcaption>Diagnostic post-action&nbsp;: risque <strong>0,62</strong></figcaption>
-          </figure>
-        </div>
-        <p class="ws-note">
-          Chaque modification d'une variable recalcule instantanément les probabilités
-          sur l'ensemble du réseau, sans compétence technique requise.
-        </p>
 
         <div class="callout reveal">
           <span class="callout-label">Comment lire ces résultats</span>
@@ -386,7 +391,7 @@
   <div class="wrap">
     <div class="footer-top">
       <a class="footer-brand" href="index.html">
-        <img src="images/logo/noumensia-favicon-light.svg" alt="" aria-hidden="true">
+        <img src="images/logo/noumensia-badge-slate.svg" alt="" aria-hidden="true">
         <span>Noumensia</span>
       </a>
       <nav aria-label="Pied de page">

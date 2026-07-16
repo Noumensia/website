@@ -657,36 +657,53 @@ figure{ margin:0; }
 
 /* ============ FONDATEUR (à-propos) ============ */
 .founder{
-  display:grid; grid-template-columns:minmax(0,290px) 1fr;
-  gap:clamp(1.5rem,4vw,3rem); align-items:start; margin-top:1.75rem;
+  display:grid; grid-template-columns:200px 1fr;
+  gap:clamp(1.5rem,4vw,2.75rem); align-items:start; margin-top:1.75rem;
 }
-.founder-photo{
-  margin:0; position:relative; border-radius:16px;
-  background:linear-gradient(160deg, var(--ardoise-2), var(--ardoise-4));
-}
-/* halo bordeaux discret derrière la photo */
+.founder-photo{ margin:0; position:relative; width:200px; }
+/* halo bordeaux discret derrière la photo ronde */
 .founder-photo::before{
-  content:""; position:absolute; inset:-10% -8% -8% -10%; z-index:0;
-  background:radial-gradient(closest-side, rgba(217,138,149,.18), transparent 72%);
+  content:""; position:absolute; inset:-9%; z-index:0; border-radius:50%;
+  background:radial-gradient(closest-side, rgba(217,138,149,.22), transparent 72%);
   filter:blur(6px);
 }
-.founder-photo img{
-  position:relative; z-index:1; width:100%; height:auto; display:block;
-  border-radius:16px; border:1px solid var(--ardoise-3); box-shadow:var(--shadow-lg);
-  aspect-ratio:1/1; object-fit:cover;
+.founder-photo-link{
+  position:relative; z-index:1; display:block; width:200px; height:200px;
+  border-radius:50%; overflow:hidden; border:1px solid var(--ardoise-3);
+  box-shadow:var(--shadow-lg);
 }
+.founder-photo-link img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform var(--t-slow);
+}
+.founder-photo-link:hover img,
+.founder-photo-link:focus-visible img{ transform:scale(1.05); }
+/* pastille LinkedIn qui apparaît au survol de la photo */
+.founder-photo-badge{
+  position:absolute; inset:0; display:grid; place-items:center;
+  background:rgba(10,102,194,.34); color:#fff;
+  opacity:0; transition:opacity var(--t-base);
+}
+.founder-photo-link:hover .founder-photo-badge,
+.founder-photo-link:focus-visible .founder-photo-badge{ opacity:1; }
+.founder-photo-badge svg{ width:40px; height:40px; }
 .founder-bio{ max-width:40rem; }
 .founder-bio p:first-child{ margin-top:0; }
 .founder-linkedin{
   display:inline-flex; align-items:center; gap:.5rem;
   font-family:var(--font-mono); font-size:.9rem; font-weight:500;
   color:var(--bordeaux-vif); text-decoration:none;
+  transition:color var(--t-fast);
 }
 .founder-linkedin svg{ width:16px; height:16px; }
-.founder-linkedin:hover{ text-decoration:underline; text-underline-offset:3px; }
+.founder-linkedin:hover{ color:#0A66C2; text-decoration:underline; text-underline-offset:3px; }
+/* survol de la photo -> le lien "Me suivre sur LinkedIn" s'illumine (logique liée) */
+.founder-photo:hover ~ .founder-bio .founder-linkedin{
+  color:#0A66C2; text-decoration:underline; text-underline-offset:3px;
+}
 @media (max-width:700px){
-  .founder{ grid-template-columns:1fr; }
-  .founder-photo{ max-width:240px; }
+  .founder{ grid-template-columns:1fr; justify-items:center; text-align:left; }
+  .founder-bio{ justify-self:stretch; }
 }
 
 /* ============ CONTACT ============ */
@@ -888,8 +905,9 @@ footer nav a:hover{ color:var(--bordeaux-vif); }
   flex-shrink:0;
 }
 .social-link:hover{
-  color:var(--blanc-casse); border-color:var(--bordeaux-vif);
-  background:rgba(217,138,149,.1); text-decoration:none;
+  color:#0A66C2; border-color:#0A66C2;
+  background:rgba(10,102,194,.12); text-decoration:none;
+  transform:translateY(-2px);
 }
 .social-link svg{ width:16px; height:16px; }
 .footer-bottom{
@@ -984,14 +1002,16 @@ html[data-theme="light"] .process{
 }
 html[data-theme="light"] .cta-final{ background:#EFE9DE; }
 /* cartes modèles : îlots blancs à texte foncé dans les deux thèmes */
-html[data-theme="light"] .model-card{ --blanc-casse:#FFFFFF; --ardoise:#20272F; box-shadow:var(--shadow-md); }
+html[data-theme="light"] .model-card{ --blanc-casse:#FCF9F2; --ardoise:#20272F; box-shadow:var(--shadow-md); }
 html[data-theme="light"] .model-shot{ background:#e7e0d3; }
 /* panneaux de graphes/captures : restent sombres (inset premium) */
 html[data-theme="light"] .figure-frame{ background:#233041; border-color:#2c3948; }
 html[data-theme="light"] .hero-graph-img{ border-color:rgba(0,0,0,.14); box-shadow:var(--shadow-lg); }
 /* encadrés translucides -> papier sur crème */
-html[data-theme="light"] .tool-link{ background:#FFFFFF; box-shadow:var(--shadow-sm); }
-html[data-theme="light"] .tool-link:hover{ background:#FFFFFF; }
+html[data-theme="light"] .tool-link{ background:#FBF7EF; box-shadow:var(--shadow-sm); }
+html[data-theme="light"] .tool-link:hover{ background:#FBF7EF; }
+/* garder les petits symboles clairs sur la pastille bordeaux, même en thème clair */
+html[data-theme="light"] .tool-link__icon{ color:#F7F3EC; }
 html[data-theme="light"] .callout{ background:#FBF8F1; }
 html[data-theme="light"] .explore-cta{ background:linear-gradient(135deg,#F1EBDF,#EAE3D5); }
 html[data-theme="light"] .contact-card{ background:rgba(255,255,255,.06); }

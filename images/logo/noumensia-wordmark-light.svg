@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 60" width="260" height="60" role="img" aria-label="Noumensia">
-  <text x="130" y="42" font-family="'Newsreader', serif" font-weight="500" font-size="36" letter-spacing="1.5" fill="#3D4A52" text-anchor="middle">Noumensia</text>
+  <g>
+    <text x="130" y="42" font-family="'Newsreader', 'Liberation Serif', serif" font-weight="500" font-size="36" letter-spacing="1.5" fill="#F2EFEA" text-anchor="middle">Noumensia</text>
+  </g>
 </svg>
