@@ -313,8 +313,17 @@ h1,h2,h3{ font-family:var(--font-display); font-weight:600; line-height:1.15; }
   margin:2rem 0 .75rem;
 }
 .prose h3:first-child{ margin-top:0; }
-.prose a{ text-decoration:underline; text-decoration-color:var(--ardoise-3); text-underline-offset:2px; }
-.prose a:hover{ text-decoration-color:var(--bordeaux-vif); }
+/* Liens de contenu : soulignement qui se dessine depuis la gauche (moderne, pas le souligné plat) */
+.prose a, .sources a, .callout a, .founder-bio a, .not-list a, .lede a{
+  color:var(--bordeaux-vif); text-decoration:none;
+  background-image:linear-gradient(currentColor, currentColor);
+  background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat;
+  padding-bottom:1px;
+  transition:background-size .35s cubic-bezier(.22,1,.36,1);
+}
+.prose a:hover, .sources a:hover, .callout a:hover, .founder-bio a:hover, .not-list a:hover, .lede a:hover{
+  background-size:100% 1.5px;
+}
 .prose-lead{ margin-bottom:2rem; }
 .section--alt .prose p{ color:var(--blanc-casse); }
 
@@ -530,7 +539,7 @@ figure{ margin:0; }
   margin:2.5rem 0;
 }
 .article-figure.bleed{
-  width:min(100vw, 1320px);
+  width:min(100vw, 1480px);
   margin-left:50%; transform:translateX(-50%);
   padding:0 var(--pad);
 }
@@ -599,6 +608,14 @@ figure{ margin:0; }
 .ws-compare{
   display:grid; grid-template-columns:1fr; gap:1.25rem; margin:2rem 0 .5rem;
 }
+/* Comparatif qui sort de la colonne de texte pour être vraiment lisible */
+.ws-compare--wide{
+  width:min(100vw, 1480px);
+  margin-left:50%; transform:translateX(-50%);
+  padding:0 var(--pad); gap:2rem;
+}
+.ws-compare--wide .ws-label{ text-align:center; opacity:.75; font-size:.78rem; }
+.ws-compare--wide figcaption{ text-align:center; font-size:.9rem; }
 .ws-label{
   font-family:var(--font-mono); font-size:.72rem; letter-spacing:.08em;
   text-transform:uppercase; opacity:.6; margin-bottom:.4rem;
@@ -897,19 +914,31 @@ footer{ padding:2.5rem 0; border-top:1px solid var(--ardoise-3); }
 footer nav ul{ list-style:none; display:flex; gap:1.25rem; flex-wrap:wrap; }
 footer nav a{ color:var(--gris-doux); font-size:.9rem; transition:color var(--t-fast); }
 footer nav a:hover{ color:var(--bordeaux-vif); }
-/* Icône LinkedIn — discrète */
+/* Icône LinkedIn — la bordure se trace au survol, comme un chargement, en bleu LinkedIn */
+@property --lk-fill{ syntax:"<percentage>"; inherits:false; initial-value:0%; }
 .social-link{
+  position:relative;
   display:inline-grid; place-items:center; width:30px; height:30px;
   border:1px solid var(--ardoise-3); border-radius:7px; color:var(--gris-doux);
   transition:color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
   flex-shrink:0;
 }
+.social-link::before{
+  content:""; position:absolute; inset:-1px; border-radius:8px; padding:1.6px;
+  background:conic-gradient(from -90deg, #0A66C2 var(--lk-fill), transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  --lk-fill:0%; opacity:0;
+  transition:--lk-fill .62s linear, opacity .18s ease;
+  pointer-events:none;
+}
 .social-link:hover{
-  color:#0A66C2; border-color:#0A66C2;
-  background:rgba(10,102,194,.12); text-decoration:none;
+  color:#0A66C2; border-color:transparent;
+  background:rgba(10,102,194,.1); text-decoration:none;
   transform:translateY(-2px);
 }
-.social-link svg{ width:16px; height:16px; }
+.social-link:hover::before{ --lk-fill:100%; opacity:1; }
+.social-link svg{ width:16px; height:16px; position:relative; }
 .footer-bottom{
   display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; justify-content:space-between;
   align-items:center; margin-top:1.5rem; padding-top:1.25rem;
@@ -971,51 +1000,52 @@ footer nav a:hover{ color:var(--bordeaux-vif); }
 
 /* ============ THÈME CLAIR (opt-in) ============ */
 html[data-theme="light"]{
-  --ardoise:#F7F3EC;
-  --ardoise-2:#EFE9DE;
-  --ardoise-3:#E4DCCD;
-  --ardoise-4:#ECE5D8;
-  --blanc-casse:#20272F;
-  --gris-doux:#57616D;
+  --ardoise:#F1E7D3;        /* fond page : crème chaud, plus de blanc pur */
+  --ardoise-2:#E7DAC1;      /* surfaces alternées : cran plus foncé */
+  --ardoise-3:#D6C8AC;      /* bordures : crème sableux */
+  --ardoise-4:#E0D2B9;
+  --blanc-casse:#221E17;    /* texte : brun-encre chaud plutôt que gris froid */
+  --gris-doux:#5c5342;
   --bordeaux-vif:#8f2233;
   color-scheme:light;
 }
 html[data-theme="light"] body::before{
   background:
-    radial-gradient(52rem 34rem at 86% -6%, rgba(122,31,45,.07), transparent 60%),
-    radial-gradient(46rem 32rem at -6% 4%, rgba(122,31,45,.045), transparent 62%);
+    radial-gradient(52rem 34rem at 86% -6%, rgba(122,31,45,.08), transparent 60%),
+    radial-gradient(46rem 32rem at -6% 4%, rgba(140,96,40,.06), transparent 62%);
 }
 html[data-theme="light"] body::after{
-  background-image:radial-gradient(rgba(31,39,48,.06) 1px, transparent 1.4px);
+  background-image:radial-gradient(rgba(90,70,40,.07) 1px, transparent 1.4px);
 }
-html[data-theme="light"] .nav{ background:rgba(247,243,236,.82); }
-html[data-theme="light"] .nav.is-scrolled{ background:rgba(247,243,236,.95); box-shadow:0 4px 20px rgba(31,39,48,.07); }
-html[data-theme="light"] .btn--primary{ color:#F7F3EC; }
-html[data-theme="light"] .nav-links .nav-cta:hover{ color:#F7F3EC; }
+html[data-theme="light"] .nav{ background:rgba(241,231,211,.82); }
+html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); box-shadow:0 4px 20px rgba(60,45,25,.09); }
+html[data-theme="light"] .btn--primary{ color:#F5EEDD; }
+html[data-theme="light"] .nav-links .nav-cta:hover{ color:#F5EEDD; }
 html[data-theme="light"] .section--alt{
   background:
-    radial-gradient(80% 120% at 92% 0%, rgba(122,31,45,.05), transparent 60%),
-    linear-gradient(180deg, #EFE9DE 0%, #E8E1D4 100%);
+    radial-gradient(80% 120% at 92% 0%, rgba(122,31,45,.055), transparent 60%),
+    linear-gradient(180deg, #E9DCC4 0%, #DFD0B4 100%);
 }
 html[data-theme="light"] .process{
-  background:linear-gradient(180deg, #EFE9DE 0%, #E8E1D4 100%);
+  background:linear-gradient(180deg, #E9DCC4 0%, #DFD0B4 100%);
 }
-html[data-theme="light"] .cta-final{ background:#EFE9DE; }
-/* cartes modèles : îlots blancs à texte foncé dans les deux thèmes */
-html[data-theme="light"] .model-card{ --blanc-casse:#FCF9F2; --ardoise:#20272F; box-shadow:var(--shadow-md); }
-html[data-theme="light"] .model-shot{ background:#e7e0d3; }
+html[data-theme="light"] .cta-final{ background:#E9DCC4; }
+/* cartes modèles : îlots crème (pas blanc), texte foncé dans les deux thèmes */
+html[data-theme="light"] .model-card{ --blanc-casse:#FAF3E4; --ardoise:#221E17; box-shadow:var(--shadow-md); }
+html[data-theme="light"] .model-shot{ background:#ded0b6; }
 /* panneaux de graphes/captures : restent sombres (inset premium) */
 html[data-theme="light"] .figure-frame{ background:#233041; border-color:#2c3948; }
 html[data-theme="light"] .hero-graph-img{ border-color:rgba(0,0,0,.14); box-shadow:var(--shadow-lg); }
-/* encadrés translucides -> papier sur crème */
-html[data-theme="light"] .tool-link{ background:#FBF7EF; box-shadow:var(--shadow-sm); }
-html[data-theme="light"] .tool-link:hover{ background:#FBF7EF; }
+/* encadrés -> papier crème sur fond crème plus clair */
+html[data-theme="light"] .tool-link{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
+html[data-theme="light"] .tool-link:hover{ background:#F5EBD6; }
 /* garder les petits symboles clairs sur la pastille bordeaux, même en thème clair */
-html[data-theme="light"] .tool-link__icon{ color:#F7F3EC; }
-html[data-theme="light"] .callout{ background:#FBF8F1; }
-html[data-theme="light"] .explore-cta{ background:linear-gradient(135deg,#F1EBDF,#EAE3D5); }
+html[data-theme="light"] .tool-link__icon{ color:#F5EEDD; }
+html[data-theme="light"] .callout{ background:#F3EAD4; }
+html[data-theme="light"] .explore-cta{ background:linear-gradient(135deg,#EBDFC7,#E1D3B8); }
+html[data-theme="light"] .figure-frame--pad{ background:#EDE3CD; }
 html[data-theme="light"] .contact-card{ background:rgba(255,255,255,.06); }
 /* le bloc contact reste bordeaux : on rétablit localement les tokens clairs sur fond sombre */
-html[data-theme="light"] .contact{ --blanc-casse:#F7F3EC; --gris-doux:#f3dee2; --ardoise-3:rgba(255,255,255,.22); }
+html[data-theme="light"] .contact{ --blanc-casse:#F5EEDD; --gris-doux:#f3dee2; --ardoise-3:rgba(255,255,255,.22); }
 html[data-theme="light"] .contact-form .btn--primary{ color:var(--bordeaux); }
-html[data-theme="light"] .fig-link .fig-hint{ color:#F7F3EC; }
+html[data-theme="light"] .fig-link .fig-hint{ color:#F5EEDD; }
