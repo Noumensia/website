@@ -507,7 +507,9 @@ figure{ margin:0; }
 .breadcrumb a:hover{ color:var(--bordeaux-vif); }
 .breadcrumb span{ opacity:.5; margin:0 .5rem; }
 
-.article-body{ max-width:var(--maxw-prose); }
+/* Colonne d'article centrée dans la page → permet aux figures pleine largeur de se centrer proprement */
+.article-body{ max-width:var(--maxw-prose); margin-inline:auto; }
+.article-hero .wrap{ max-width:calc(var(--maxw-prose) + 2 * var(--pad)); }
 .article-body > p{ margin-bottom:1.15rem; }
 .article-body h2{
   font-size:clamp(1.5rem,2.6vw,2rem); margin:2.75rem 0 1rem;
@@ -560,14 +562,13 @@ figure{ margin:0; }
 .article-figure{
   margin:2.5rem 0;
 }
+/* Pleine largeur centrée sur la PAGE (la colonne d'article est centrée, cf. .article-body/.article-hero .wrap).
+   94vw : grand, centré, et jamais hors-cadre (marge de sécurité pour la barre de défilement). */
 .article-figure.bleed{
-  width:min(calc(100% + 2 * var(--pad)), 1480px);
-  margin-left:calc(-1 * var(--pad));
+  width:min(94vw, 1500px);
+  margin-left:50%; transform:translateX(-50%);
   padding:0;
 }
-/* Pas de translateX ici : la colonne d'article est alignée à gauche, pas centrée,
-   donc translateX(-50%) déborderait. La règle de base (symétrique autour de la
-   colonne, jamais hors-cadre) s'applique à toutes les tailles. */
 .figure-frame{
   border-radius:10px; overflow:hidden;
   border:1px solid var(--ardoise-3);
@@ -635,11 +636,10 @@ figure{ margin:0; }
 }
 /* Comparatif qui sort de la colonne de texte pour être vraiment lisible */
 .ws-compare--wide{
-  width:min(calc(100% + 2 * var(--pad)), 1480px);
-  margin-left:calc(-1 * var(--pad));
+  width:min(94vw, 1500px);
+  margin-left:50%; transform:translateX(-50%);
   padding:0;
 }
-/* idem : on garde la règle de base symétrique, sans translateX, pour ne jamais déborder */
 .ws-compare--wide .ws-label{ text-align:center; opacity:.75; font-size:.78rem; }
 .ws-compare--wide figcaption{ text-align:center; font-size:.9rem; }
 .ws-label{
@@ -997,8 +997,6 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
   .model-grid{ grid-template-columns:1fr; }
   .steps{ grid-template-columns:1fr; gap:1.75rem; }
   .process-grid{ grid-template-columns:1fr; gap:1.75rem; }
-  .article-figure.bleed{ width:100%; margin-left:0; transform:none; padding:0; }
-  .ws-compare--wide{ width:100%; margin-left:0; transform:none; padding:0; }
 }
 @media (max-width:600px){
   .hero h1{ font-size:2.35rem; }
