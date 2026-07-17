@@ -249,13 +249,13 @@ html[data-theme="light"] .brand-icon{ content:url("images/logo/noumensia-icon-co
   background:conic-gradient(from -90deg, var(--bordeaux-vif) var(--lk-fill), transparent 0);
   -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite:xor; mask-composite:exclude;
-  --lk-fill:0%; opacity:0; pointer-events:none;
-  transition:--lk-fill .55s linear, opacity .18s ease;
+  --lk-fill:0%; opacity:1; pointer-events:none;
+  transition:--lk-fill .6s cubic-bezier(.4,0,.2,1);
 }
 .btn--ghost:hover{
   border-color:transparent; color:var(--bordeaux-vif); text-decoration:none;
 }
-.btn--ghost:hover::before{ --lk-fill:100%; opacity:1; }
+.btn--ghost:hover::before{ --lk-fill:100%; }
 .btn svg{ width:1.05em; height:1.05em; flex-shrink:0; position:relative; }
 .cta-row{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2rem; }
 
@@ -565,12 +565,9 @@ figure{ margin:0; }
   margin-left:calc(-1 * var(--pad));
   padding:0;
 }
-@media (min-width:1180px){
-  .article-figure.bleed{
-    width:min(calc(100vw - 2rem), 1480px);
-    margin-left:50%; transform:translateX(-50%);
-  }
-}
+/* Pas de translateX ici : la colonne d'article est alignée à gauche, pas centrée,
+   donc translateX(-50%) déborderait. La règle de base (symétrique autour de la
+   colonne, jamais hors-cadre) s'applique à toutes les tailles. */
 .figure-frame{
   border-radius:10px; overflow:hidden;
   border:1px solid var(--ardoise-3);
@@ -642,12 +639,7 @@ figure{ margin:0; }
   margin-left:calc(-1 * var(--pad));
   padding:0;
 }
-@media (min-width:1180px){
-  .ws-compare--wide{
-    width:min(calc(100vw - 2rem), 1480px);
-    margin-left:50%; transform:translateX(-50%);
-  }
-}
+/* idem : on garde la règle de base symétrique, sans translateX, pour ne jamais déborder */
 .ws-compare--wide .ws-label{ text-align:center; opacity:.75; font-size:.78rem; }
 .ws-compare--wide figcaption{ text-align:center; font-size:.9rem; }
 .ws-label{
@@ -972,8 +964,8 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
   background:conic-gradient(from -90deg, #0A66C2 var(--lk-fill), transparent 0);
   -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite:xor; mask-composite:exclude;
-  --lk-fill:0%; opacity:0;
-  transition:--lk-fill .62s linear, opacity .18s ease;
+  --lk-fill:0%; opacity:1;
+  transition:--lk-fill .7s cubic-bezier(.4,0,.2,1);
   pointer-events:none;
 }
 .social-link:hover{
@@ -981,7 +973,7 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
   background:rgba(10,102,194,.1); text-decoration:none;
   transform:translateY(-2px);
 }
-.social-link:hover::before{ --lk-fill:100%; opacity:1; }
+.social-link:hover::before{ --lk-fill:100%; }
 .social-link svg{ width:16px; height:16px; position:relative; }
 .footer-bottom{
   display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; justify-content:space-between;
