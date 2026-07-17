@@ -638,9 +638,15 @@ figure{ margin:0; }
 }
 /* Comparatif qui sort de la colonne de texte pour être vraiment lisible */
 .ws-compare--wide{
-  width:min(calc(100vw - 2rem), 1480px);
-  margin-left:50%; transform:translateX(-50%);
+  width:min(calc(100% + 2 * var(--pad)), 1480px);
+  margin-left:calc(-1 * var(--pad));
   padding:0;
+}
+@media (min-width:1180px){
+  .ws-compare--wide{
+    width:min(calc(100vw - 2rem), 1480px);
+    margin-left:50%; transform:translateX(-50%);
+  }
 }
 .ws-compare--wide .ws-label{ text-align:center; opacity:.75; font-size:.78rem; }
 .ws-compare--wide figcaption{ text-align:center; font-size:.9rem; }
