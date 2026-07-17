@@ -566,7 +566,7 @@ figure{ margin:0; }
    94vw : grand, centré, et jamais hors-cadre (marge de sécurité pour la barre de défilement). */
 .article-figure.bleed{
   width:min(94vw, 1500px);
-  margin-left:50%; transform:translateX(-50%);
+  margin-left:calc(50% - min(47vw, 750px));  /* centrage par marge, pas par transform (le reveal remet transform:none) */
   padding:0;
 }
 .figure-frame{
@@ -637,7 +637,7 @@ figure{ margin:0; }
 /* Comparatif qui sort de la colonne de texte pour être vraiment lisible */
 .ws-compare--wide{
   width:min(94vw, 1500px);
-  margin-left:50%; transform:translateX(-50%);
+  margin-left:calc(50% - min(47vw, 750px));  /* centrage par marge, pas par transform (le reveal remet transform:none) */
   padding:0;
 }
 .ws-compare--wide .ws-label{ text-align:center; opacity:.75; font-size:.78rem; }
