@@ -561,9 +561,15 @@ figure{ margin:0; }
   margin:2.5rem 0;
 }
 .article-figure.bleed{
-  width:min(calc(100vw - 3rem), 1480px);
-  margin-left:50%; transform:translateX(-50%);
+  width:min(calc(100% + 2 * var(--pad)), 1480px);
+  margin-left:calc(-1 * var(--pad));
   padding:0;
+}
+@media (min-width:1180px){
+  .article-figure.bleed{
+    width:min(calc(100vw - 2rem), 1480px);
+    margin-left:50%; transform:translateX(-50%);
+  }
 }
 .figure-frame{
   border-radius:10px; overflow:hidden;
