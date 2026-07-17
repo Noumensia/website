@@ -561,7 +561,7 @@ figure{ margin:0; }
   margin:2.5rem 0;
 }
 .article-figure.bleed{
-  width:min(calc(100vw - 2rem), 1480px);
+  width:min(calc(100vw - 3rem), 1480px);
   margin-left:50%; transform:translateX(-50%);
   padding:0;
 }
@@ -632,12 +632,12 @@ figure{ margin:0; }
 }
 /* Comparatif qui sort de la colonne de texte pour être vraiment lisible */
 .ws-compare--wide{
-  width:min(100vw, 1480px);
+  width:min(calc(100vw - 2rem), 1480px);
   margin-left:50%; transform:translateX(-50%);
-  padding:0 var(--pad); gap:2rem;
+  padding:0;
 }
-.ws-compare--wide .ws-label{ text-align:left; opacity:.75; font-size:.78rem; }
-.ws-compare--wide figcaption{ text-align:left; font-size:.9rem; }
+.ws-compare--wide .ws-label{ text-align:center; opacity:.75; font-size:.78rem; }
+.ws-compare--wide figcaption{ text-align:center; font-size:.9rem; }
 .ws-label{
   font-family:var(--font-mono); font-size:.72rem; letter-spacing:.08em;
   text-transform:uppercase; opacity:.6; margin-bottom:.4rem;
