@@ -632,9 +632,9 @@ figure{ margin:0; }
 }
 /* Comparatif qui sort de la colonne de texte pour être vraiment lisible */
 .ws-compare--wide{
-  width:min(calc(100vw - 2rem), 1480px);
+  width:min(100vw, 1480px);
   margin-left:50%; transform:translateX(-50%);
-  padding:0;
+  padding:0 var(--pad); gap:2rem;
 }
 .ws-compare--wide .ws-label{ text-align:left; opacity:.75; font-size:.78rem; }
 .ws-compare--wide figcaption{ text-align:left; font-size:.9rem; }
