@@ -168,7 +168,7 @@ h1,h2,h3{ font-family:var(--font-display); font-weight:600; line-height:1.15; }
   height:42px;
   flex-shrink:0;
   /* Logo theme-aware : confounder toujours bordeaux ; collider crème sur fond sombre, ardoise sur fond clair */
-  content:url("images/logo/noumensia-badge-cream.svg");
+  content:url("images/logo/noumensia-icon-cream.svg");
 }
 html[data-theme="light"] .brand-icon{ content:url("images/logo/noumensia-icon-color.svg"); }
 .brand-name{ font-family:var(--font-display); font-size:1.25rem; font-weight:600; letter-spacing:.01em; }
