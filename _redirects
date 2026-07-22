@@ -1,0 +1,22 @@
+# Redirections permanentes — Noumensia (Cloudflare Pages)
+# Anciennes URLs (avant réorganisation en dossiers) → nouvelles URLs propres.
+# 301 = redirection définitive, bon pour le SEO (transfère l'autorité de l'ancienne page).
+
+# Modèles : anciens fichiers plats → dossier /modeles/
+/modele-turnover.html   /modeles/turnover   301
+/modele-turnover        /modeles/turnover   301
+/modele-burnout.html    /modeles/burnout    301
+/modele-burnout         /modeles/burnout    301
+/modeles.html           /modeles/           301
+
+# Confidentialité : ancien fichier à la racine → sous mentions-legales/
+/confidentialite.html   /mentions-legales/confidentialite   301
+/confidentialite        /mentions-legales/confidentialite   301
+
+# Pages courantes : variante .html → URL propre
+/index.html             /                    301
+/a-propos.html           /a-propos            301
+/contact.html            /contact             301
+/faq.html                /faq                 301
+/methode.html            /methode             301
+/mentions-legales.html   /mentions-legales    301
