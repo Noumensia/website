@@ -15,9 +15,8 @@
 <meta property="og:image" content="https://noumensia.com/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://noumensia.com/images/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="../fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/newsreader-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
 <link rel="icon" type="image/svg+xml" href="images/logo/noumensia-icon-color.svg">
@@ -244,7 +243,10 @@
             <p class="ws-label">Situation initiale</p>
             <a class="figure-frame fig-link" href="https://simulator.bayesialab.com/simulator/47192424779" target="_blank" rel="noopener">
               <span class="fig-hint">Ouvrir le simulateur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
-              <img src="images/ws/ws-burnout-avant.jpg" alt="WebSimulator burn-out — situation initiale : risque de burn-out 0,89, pression globale 1,78" loading="lazy">
+              <picture>
+                <source srcset="images/ws/ws-burnout-avant.webp" type="image/webp">
+                <img src="images/ws/ws-burnout-avant.jpg" alt="WebSimulator burn-out — situation initiale : risque de burn-out 0,89, pression globale 1,78" width="2400" height="939" loading="lazy">
+              </picture>
             </a>
             <figcaption>Risque de burn-out&nbsp;: <strong>0,89</strong></figcaption>
           </figure>
@@ -252,7 +254,10 @@
             <p class="ws-label">Après actions ciblées sur les ressources</p>
             <a class="figure-frame fig-link" href="https://simulator.bayesialab.com/simulator/47192424779" target="_blank" rel="noopener">
               <span class="fig-hint">Ouvrir le simulateur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
-              <img src="images/ws/ws-burnout-apres.jpg" alt="WebSimulator burn-out — après actions sur les ressources : risque 0,73, pression globale toujours 1,78" loading="lazy">
+              <picture>
+                <source srcset="images/ws/ws-burnout-apres.webp" type="image/webp">
+                <img src="images/ws/ws-burnout-apres.jpg" alt="WebSimulator burn-out — après actions sur les ressources : risque 0,73, pression globale toujours 1,78" width="2400" height="945" loading="lazy">
+              </picture>
             </a>
             <figcaption>Risque&nbsp;: <strong>0,73</strong></figcaption>
           </figure>
@@ -297,9 +302,12 @@
         <figure class="article-figure bleed reveal">
           <a class="figure-frame fig-link" href="https://simulator.bayesialab.com/simulator/47192424779" target="_blank" rel="noopener">
             <span class="fig-hint">Ouvrir le simulateur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
-            <img src="images/ws/ws-accueil.jpg"
-                 alt="Interface WebSimulator du modèle burn-out : facteurs ajustables à gauche, jauges d'indicateurs à droite avec le risque de burn-out et ses composantes — valeurs illustratives"
-                 loading="lazy">
+            <picture>
+              <source srcset="images/ws/ws-accueil.webp" type="image/webp">
+              <img src="images/ws/ws-accueil.jpg"
+                   alt="Interface WebSimulator du modèle burn-out : facteurs ajustables à gauche, jauges d'indicateurs à droite avec le risque de burn-out et ses composantes — valeurs illustratives"
+                   width="2000" height="782" loading="lazy">
+            </picture>
           </a>
           <figcaption>
             WebSimulator — modèle burn-out. Chaque modification d'un facteur recalcule

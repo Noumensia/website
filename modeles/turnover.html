@@ -15,9 +15,8 @@
 <meta property="og:image" content="https://noumensia.com/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://noumensia.com/images/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="../fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/newsreader-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
 <link rel="icon" type="image/svg+xml" href="images/logo/noumensia-icon-color.svg">
@@ -239,9 +238,12 @@
         <figure class="article-figure bleed reveal">
           <a class="figure-frame fig-link" href="https://simulator.bayesialab.com/simulator/60898933782?panel=1&openChat=expert" target="_blank" rel="noopener">
             <span class="fig-hint">Ouvrir le simulateur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
-            <img src="images/ws/ws-turnover-initial.jpg"
-                 alt="Interface WebSimulator du modèle turnover : à gauche les facteurs ajustables regroupés par thème, à droite les jauges d'indicateurs — risque de départ volontaire, qualité de vie au travail, autonomie perçue — valeurs illustratives"
-                 loading="lazy">
+            <picture>
+              <source srcset="images/ws/ws-turnover-initial.webp" type="image/webp">
+              <img src="images/ws/ws-turnover-initial.jpg"
+                   alt="Interface WebSimulator du modèle turnover : à gauche les facteurs ajustables regroupés par thème, à droite les jauges d'indicateurs — risque de départ volontaire, qualité de vie au travail, autonomie perçue — valeurs illustratives"
+                   width="2400" height="1201" loading="lazy">
+            </picture>
           </a>
           <figcaption>
             WebSimulator — modèle turnover. À gauche, les leviers&nbsp;; à droite, les
@@ -389,4 +391,3 @@
 <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8bd3e2f66b3c4bbba0b38cbcbbc972e0"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
-        

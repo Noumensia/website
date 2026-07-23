@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Méthode — Noumensia</title>
 <meta name="description" content="Comment un réseau bayésien est construit : structure, calibration, simulation — et pourquoi cette approche complète le diagnostic RH sans remplacer l'expertise humaine.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="https://noumensia.com/methode">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="fr_FR">
@@ -331,18 +330,24 @@
       <div class="ws-compare" role="group" aria-label="Comparaison de scénarios WebSimulator (données de démonstration)">
         <figure>
           <p class="ws-label">État de référence</p>
-          <img src="images/ws/ws-reference.png"
-               alt="WebSimulator — après un premier diagnostic : risque de burn-out estimé à 0,73"
-               loading="lazy">
+          <picture>
+            <source srcset="images/ws/ws-reference.webp" type="image/webp">
+            <img src="images/ws/ws-reference.png"
+                 alt="WebSimulator — après un premier diagnostic : risque de burn-out estimé à 0,73"
+                 width="1856" height="308" loading="lazy">
+          </picture>
           <figcaption>
             Après un premier diagnostic — risque de burn-out&nbsp;: <strong>0,73</strong>
           </figcaption>
         </figure>
         <figure>
           <p class="ws-label">Scénario simulé</p>
-          <img src="images/ws/ws-scenario.png"
-               alt="WebSimulator — diagnostic post-action : baisse du risque de burn-out à 0,62"
-               loading="lazy">
+          <picture>
+            <source srcset="images/ws/ws-scenario.webp" type="image/webp">
+            <img src="images/ws/ws-scenario.png"
+                 alt="WebSimulator — diagnostic post-action : baisse du risque de burn-out à 0,62"
+                 width="1257" height="205" loading="lazy">
+          </picture>
           <figcaption>
             Diagnostic post-action&nbsp;: risque <strong>0,62</strong>
           </figcaption>
@@ -437,4 +442,3 @@
 <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8bd3e2f66b3c4bbba0b38cbcbbc972e0"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
-      
