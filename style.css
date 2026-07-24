@@ -330,9 +330,7 @@ html[data-theme="light"] .brand-icon{ content:url("images/logo/noumensia-icon-co
   filter:blur(8px);
 }
 .hero-graph-img{
-  position:relative; z-index:1; width:100%; height:auto; display:block;
-  border:1px solid var(--ardoise-3); border-radius:14px;
-  box-shadow:var(--shadow-xl);
+  position:relative; z-index:1;
 }
 .hero-graph figcaption{ position:relative; z-index:1; margin-top:.85rem; }
 
@@ -412,9 +410,7 @@ figure{ margin:0; }
 }
 /* Capture WebSimulator encadrée */
 .ws-visual-img{
-  width:100%; height:auto; border-radius:8px;
-  border:1px solid var(--ardoise-3);
-  box-shadow:var(--shadow-lg);
+  width:100%; height:auto;
 }
 
 /* ============ MODÈLES : cartes "vitrine" ============ */
@@ -1135,7 +1131,6 @@ html[data-theme="light"] .model-card{ --blanc-casse:#FAF3E4; --ardoise:#221E17; 
 html[data-theme="light"] .model-shot{ background:#ded0b6; }
 /* panneaux de graphes/captures : restent sombres (inset premium) */
 html[data-theme="light"] .figure-frame{ background:#233041; border-color:#2c3948; }
-html[data-theme="light"] .hero-graph-img{ border-color:rgba(0,0,0,.14); box-shadow:var(--shadow-lg); }
 /* encadrés -> papier crème sur fond crème plus clair */
 html[data-theme="light"] .tool-link{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
 html[data-theme="light"] .tool-link:hover{ background:#F5EBD6; }
