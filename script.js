@@ -13,12 +13,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // ---- Regroupe liens, bouton thème et burger dans un conteneur commun ----
+  // (permet d'afficher le bouton thème à côté du burger sur mobile, hors du
+  // panneau de menu qui reste fermé par défaut)
+  const navLinks = document.getElementById('nav-links');
+  const navToggleBtn = document.getElementById('nav-toggle');
+  let navActions = null;
+  if (navToggleBtn && navLinks && navToggleBtn.parentElement === navLinks.parentElement) {
+    navActions = document.createElement('div');
+    navActions.className = 'nav-actions';
+    navToggleBtn.parentElement.insertBefore(navActions, navToggleBtn);
+    navActions.appendChild(navLinks);
+    navActions.appendChild(navToggleBtn);
+  }
+
   // ---- Bouton de thème (injecté dans la nav) ----
   const SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
   const MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
-  const navLinks = document.getElementById('nav-links');
   if (navLinks) {
-    const li = document.createElement('li');
+    const li = document.createElement('div');
     li.className = 'theme-toggle-li';
     const btn = document.createElement('button');
     btn.className = 'theme-toggle';
@@ -42,11 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
       setLabel();
     });
     li.appendChild(btn);
-    navLinks.appendChild(li);
+    (navActions || navLinks).appendChild(li);
   }
 
   // ---- Menu mobile ----
-  const toggle = document.getElementById('nav-toggle');
+  const toggle = navToggleBtn;
   if (toggle && navLinks) {
     toggle.addEventListener('click', () => {
       const open = navLinks.classList.toggle('is-open');

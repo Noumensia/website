@@ -261,6 +261,13 @@ html[data-theme="light"] .brand-icon{ content:url("images/logo/noumensia-icon-co
 }
 .nav-toggle:hover{ border-color:var(--bordeaux-vif); color:var(--bordeaux-vif); }
 
+/* Conteneur commun : liens + bouton thème + burger (permet au bouton thème
+   de rester visible à côté du burger sur mobile, hors du panneau replié) */
+.nav-actions{ display:flex; align-items:center; gap:1.75rem; }
+.nav-actions #nav-links{ order:1; }
+.nav-actions .theme-toggle-li{ order:2; }
+.nav-actions #nav-toggle{ order:3; }
+
 /* ============ BOUTONS ============ */
 .btn{
   font-family:var(--font-body); font-weight:600; font-size:.95rem;
@@ -1055,6 +1062,9 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
   .nav-links a{ display:block; padding:.7rem 0; border-bottom:none; }
   .nav-links .nav-cta{ margin-top:.5rem; text-align:center; }
   .nav-toggle{ display:inline-block; }
+  .nav-actions{ gap:.6rem; }
+  .nav-actions .theme-toggle-li{ order:1; }
+  .nav-actions #nav-toggle{ order:2; }
   .model-grid{ grid-template-columns:1fr; }
   .steps{ grid-template-columns:1fr; gap:1.75rem; }
   .process-grid{ grid-template-columns:1fr; gap:1.75rem; }
