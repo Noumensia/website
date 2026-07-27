@@ -35,13 +35,66 @@
       "@type": "ProfessionalService",
       "@id": "https://noumensia.com/#org",
       "name": "Noumensia",
+      "alternateName": "Noumensia — modélisation bayésienne pour la fonction RH",
       "url": "https://noumensia.com/",
       "image": "https://noumensia.com/images/og-image.png",
       "logo": "https://noumensia.com/images/logo/noumensia-icon-color.svg",
       "description": "Noumensia construit des modèles probabilistes (réseaux bayésiens) qui relient les indicateurs RH aux facteurs qui les influencent, pour comparer des scénarios d'action avant de décider.",
-      "founder": { "@type": "Person", "name": "Arthur Jouffe", "sameAs": "https://www.linkedin.com/in/arthur-jouffe" },
-      "areaServed": "FR",
+      "founder": { "@id": "https://noumensia.com/#arthur" },
+      "founders": [ { "@id": "https://noumensia.com/#arthur" } ],
+      "employee": { "@id": "https://noumensia.com/#arthur" },
+      "areaServed": { "@type": "Country", "name": "France" },
       "knowsAbout": ["Modélisation bayésienne", "Réseaux bayésiens", "Inférence causale", "Turnover", "Absentéisme", "Risques psychosociaux", "Burn-out", "People analytics", "Ressources humaines"],
+      "sameAs": ["https://www.linkedin.com/in/arthur-jouffe"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services de modélisation bayésienne pour la fonction RH",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Modélisation du turnover volontaire",
+              "description": "Réseau bayésien du turnover volontaire pour hiérarchiser les facteurs d'influence et comparer des plans d'action.",
+              "url": "https://noumensia.com/modeles/turnover",
+              "serviceType": "Modélisation probabiliste RH",
+              "provider": { "@id": "https://noumensia.com/#org" }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Modélisation des risques psychosociaux et du burn-out",
+              "description": "Réseau bayésien du risque de burn-out fondé sur les cadres JD-R, Karasek, Maslach, Siegrist.",
+              "url": "https://noumensia.com/modeles/burnout",
+              "serviceType": "Modélisation probabiliste RH",
+              "provider": { "@id": "https://noumensia.com/#org" }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Modélisation de l'absentéisme et du présentéisme",
+              "description": "Modèle probabiliste distinguant absences contraintes et évitables, intégrant la substitution absentéisme/présentéisme.",
+              "url": "https://noumensia.com/modeles/",
+              "serviceType": "Modélisation probabiliste RH",
+              "provider": { "@id": "https://noumensia.com/#org" }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://noumensia.com/#arthur",
+      "name": "Arthur Jouffe",
+      "url": "https://noumensia.com/a-propos",
+      "image": "https://noumensia.com/images/arthur-jouffe.jpg",
+      "jobTitle": "Fondateur",
+      "worksFor": { "@id": "https://noumensia.com/#org" },
+      "knowsAbout": ["Modélisation bayésienne", "Réseaux bayésiens", "Inférence causale", "People analytics"],
       "sameAs": ["https://www.linkedin.com/in/arthur-jouffe"]
     },
     {
@@ -51,6 +104,17 @@
       "url": "https://noumensia.com/",
       "inLanguage": "fr-FR",
       "publisher": { "@id": "https://noumensia.com/#org" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://noumensia.com/#webpage",
+      "url": "https://noumensia.com/",
+      "name": "Noumensia — Modélisation probabiliste pour la fonction RH",
+      "description": "Noumensia construit des modèles probabilistes qui relient vos indicateurs RH aux facteurs qui les influencent, pour comparer plusieurs pistes d'action sur une même base avant de décider.",
+      "inLanguage": "fr-FR",
+      "isPartOf": { "@id": "https://noumensia.com/#website" },
+      "about": { "@id": "https://noumensia.com/#org" },
+      "primaryImageOfPage": { "@type": "ImageObject", "url": "https://noumensia.com/images/og-image.png" }
     }
   ]
 }
