@@ -1,0 +1,24 @@
+# Notes internes non déployées
+_notes/
+
+# Documents de travail SEO (guides, plans, stratégies)
+seo/
+
+# Brouillons d'articles avant intégration HTML
+_articles/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node (si un jour tu en ajoutes)
+node_modules/
+
+# Fichier déprécié à supprimer
+tracking.js
