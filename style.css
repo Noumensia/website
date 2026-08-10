@@ -647,19 +647,34 @@ figure{ margin:0; }
   gap:1.25rem; margin-top:2rem;
 }
 .article-card{
+  position:relative;
   display:flex; flex-direction:column; gap:.6rem;
   padding:1.4rem 1.5rem; border-radius:12px;
   border:1px solid var(--ardoise-3);
   background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
   transition:border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
 }
+.article-card:has(h3 a){ cursor:pointer; }
 .article-card:hover{
-  transform:translateY(-3px); border-color:var(--bordeaux-vif);
+  transform:translateY(-3px); border-color:transparent;
   box-shadow:0 12px 34px rgba(0,0,0,.28);
 }
+/* Liseré qui se trace progressivement autour de la carte au survol (même geste que .btn--ghost) */
+.article-card::before{
+  content:""; position:absolute; inset:0; border-radius:12px; padding:1px;
+  background:conic-gradient(from -90deg, var(--bordeaux-vif) var(--lk-fill), transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  --lk-fill:0%; opacity:1; pointer-events:none;
+  transition:--lk-fill .6s cubic-bezier(.4,0,.2,1);
+}
+.article-card:hover::before{ --lk-fill:100%; }
 .article-card h3{ margin:0; font-size:1.2rem; line-height:1.3; }
 .article-card h3 a{ color:var(--blanc-casse); }
 .article-card h3 a:hover{ color:var(--bordeaux-vif); text-decoration:none; }
+/* Zone cliquable étendue à toute la carte (UX + accessibilité), même technique que .model-link */
+.article-card h3 a::after{ content:""; position:absolute; inset:0; }
 .article-card p{ margin:0; font-size:.94rem; color:var(--gris-doux); }
 .article-card__meta{
   margin-top:auto; padding-top:.6rem;
@@ -667,6 +682,7 @@ figure{ margin:0; }
   color:var(--gris-doux); opacity:.8;
 }
 .article-card--soon{ opacity:.6; }
+.article-card--soon::before{ display:none; }
 .article-card--soon:hover{ transform:none; border-color:var(--ardoise-3); box-shadow:none; }
 /* Encart de renvoi vers un modèle, à insérer dans le corps d'un article */
 .model-inline{
