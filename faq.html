@@ -57,6 +57,28 @@
   .faq-answer p:last-child { margin-bottom: 0; }
   .faq-answer a { color: var(--bordeaux-vif); text-decoration: underline; text-decoration-color: var(--ardoise-3); }
   .faq-answer a:hover { text-decoration-color: var(--bordeaux-vif); }
+  /* Marge visuelle pour l'ancrage URL (auto-scroll depuis #slug) */
+  .faq-item { scroll-margin-top: 5.5rem; }
+  /* Ancre partageable — icône chaîne SVG injectée en JS. Discrète au repos,
+     visible au hover/focus. Ne pas afficher sur les summaries qui n'en ont pas. */
+  .faq-anchor {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.5rem; height: 1.5rem; margin-left: .55rem;
+    color: var(--bordeaux-vif); text-decoration: none;
+    opacity: 0; transition: opacity .15s ease, background-color .15s ease;
+    vertical-align: middle; border-radius: 4px;
+  }
+  .faq-anchor svg { width: 12px; height: 12px; display: block; }
+  .faq-item:hover > summary .faq-anchor,
+  .faq-item > summary:focus-within .faq-anchor,
+  .faq-anchor:focus-visible { opacity: .55; }
+  .faq-anchor:hover { opacity: 1 !important; background-color: rgba(217, 138, 149, .1); }
+  .faq-anchor.copied { opacity: 1 !important; color: var(--gris-doux); }
+  .faq-anchor.copied::after {
+    content: "copié"; margin-left: .35rem;
+    font-family: var(--font-mono); font-size: .7rem; letter-spacing: .04em;
+  }
+  .faq-anchor.copied { width: auto; padding: 0 .35rem; }
 </style>
 <script type="application/ld+json">
 {
@@ -76,21 +98,25 @@
     ]
   },
   "mainEntity": [
-    { "@type": "Question", "name": "C'est de l'intelligence artificielle, donc une « boîte noire » ?", "acceptedAnswer": { "@type": "Answer", "text": "Non, dans un réseau bayésien, contrairement à de nombreux systèmes d'intelligence artificielle, vous ne voyez pas que l'entrée et la sortie : chaque facteur pris en compte par le modèle est visible, documenté, discuté et discutable. Vous pouvez explorer le modèle, examiner chaque hypothèse d'influence et la modifier. C'est l'inverse d'une boîte noire, un outil de raisonnement transparent vous permettant de comprendre comment les différentes variables interagissent et contribuent à un phénomène complexe, comme le turnover ou le burn-out, pour vous aider à structurer votre prise de décision." } },
-    { "@type": "Question", "name": "Le modèle identifie-t-il ce qui cause le turnover ou le burn-out, ou seulement des corrélations ?", "acceptedAnswer": { "@type": "Answer", "text": "C'est une distinction fondamentale. La structure du modèle encode des hypothèses d'influence issues de la littérature scientifique, pas forcément des causalités démontrées expérimentalement. Les simulations raisonnent sur des leviers probables, et chaque restitution distingue explicitement ce que les données montrent de ce qu'une action produirait." } },
+    { "@type": "Question", "name": "C'est de l'intelligence artificielle, donc une « boîte noire » ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Ce n'est pas de l'IA au sens ChatGPT ou deep learning : un réseau bayésien est un modèle probabiliste explicite, où chaque facteur, chaque relation d'influence et chaque probabilité est visible, documenté, discuté et discutable. Vous pouvez explorer le modèle, examiner chaque hypothèse et la modifier. C'est l'inverse d'une boîte noire : un outil de raisonnement transparent qui rend lisible comment les variables interagissent et contribuent à un phénomène complexe — turnover, burn-out, engagement — pour structurer votre décision plutôt que la remplacer." } },
+    { "@type": "Question", "name": "Le modèle identifie-t-il ce qui cause le turnover ou le burn-out, ou seulement des corrélations ?", "acceptedAnswer": { "@type": "Answer", "text": "Distinction fondamentale. La structure du modèle encode des hypothèses d'influence issues de la littérature scientifique, pas des causalités démontrées expérimentalement dans votre organisation. Les simulations raisonnent sur des leviers probables, et chaque restitution distingue explicitement ce que vos données montrent de ce qu'une action produirait. Un prestataire qui vous promet des effets garantis surinterprète ses propres modèles ; ici, cette limite est posée clairement — c'est une condition de l'honnêteté du résultat." } },
     { "@type": "Question", "name": "En quoi est-ce différent d'un tableau de bord ou d'un baromètre RH ?", "acceptedAnswer": { "@type": "Answer", "text": "Un tableau de bord mesure chaque indicateur séparément et constate les mouvements. Le modèle relie ces indicateurs dans un même système : il montre quels facteurs contribuent le plus, lesquels s'influencent et dans quelles proportions, puis permet de comparer des scénarios. C'est un complément de vos outils et un support pour votre expertise." } },
-    { "@type": "Question", "name": "En quoi est-ce différent d'un cabinet de conseil RH ?", "acceptedAnswer": { "@type": "Answer", "text": "Un cabinet apporte une lecture humaine et des grilles d'analyse éprouvées — une valeur que la modélisation ne remplace pas. Noumensia ajoute un livrable interactif plutôt qu'un rapport statique, accessible par des non-experts : un modèle de votre système décisionnel, navigable et quantifié, que vous pouvez interroger vous-même. Les deux approches se combinent : Noumensia travaille aussi avec des cabinets qui veulent enrichir leurs diagnostics d'une dimension quantitative." } },
-    { "@type": "Question", "name": "Est-ce scientifiquement fondé ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. La structure de chaque modèle s'appuie sur des cadres et méta-analyses publiés — turnover, présentéisme, risques psychosociaux — cités sur la page Méthode. Le formalisme bayésien lui-même est établi de longue date. Les hypothèses retenues sont documentées et ouvertes à la discussion." } },
-    { "@type": "Question", "name": "De quelle quantité de données ai-je besoin ?", "acceptedAnswer": { "@type": "Answer", "text": "Extraits SIRH, baromètres internes et enquêtes existantes suffisent généralement à démarrer. Un audit en début de projet fait l'inventaire de votre patrimoine de données. La modélisation bayésienne est justement adaptée aux situations où les données sont limitées, hétérogènes ou de qualité inégale, car elle intègre aussi l'expertise métier et les connaissances scientifiques publiées." } },
-    { "@type": "Question", "name": "Et si mes données sont incomplètes ou de qualité inégale ?", "acceptedAnswer": { "@type": "Answer", "text": "C'est une force du cadre bayésien : quand les données internes sont insuffisantes, les paramètres issus de la littérature gardent le modèle opérationnel là où un modèle statistique classique serait bloqué. La part respective de vos données et de la littérature est explicitée, jamais masquée." } },
-    { "@type": "Question", "name": "Où vont mes données ? Sont-elles protégées ?", "acceptedAnswer": { "@type": "Answer", "text": "Elles restent chez vous. Le traitement respecte les exigences du RGPD, le travail porte sur des données agrégées et anonymisées, et les échanges sont couverts par un accord de confidentialité dès la première réunion." } },
+    { "@type": "Question", "name": "En quoi est-ce différent d'un cabinet de conseil RH ?", "acceptedAnswer": { "@type": "Answer", "text": "Un cabinet apporte une lecture humaine et des grilles d'analyse éprouvées — une valeur que la modélisation ne remplace pas. Noumensia ajoute un livrable interactif plutôt qu'un rapport statique, accessible aux non-experts : votre système décisionnel rendu navigable et quantifié, que vous pouvez interroger vous-même à tout instant. Les deux approches se combinent : Noumensia travaille aussi avec des cabinets qui souhaitent enrichir leurs diagnostics d'une dimension quantitative." } },
+    { "@type": "Question", "name": "Pourquoi un réseau bayésien plutôt qu'un modèle de machine learning classique ?", "acceptedAnswer": { "@type": "Answer", "text": "Un modèle de machine learning classique (random forest, régression, réseau de neurones) apprend des corrélations dans vos données historiques pour prédire un résultat. Il est puissant quand vos données sont massives, propres et représentatives — et opaque quand il s'agit d'expliquer pourquoi. Un réseau bayésien fait l'inverse : il expose la structure d'influence, intègre la connaissance experte et scientifique là où les données manquent, et permet de simuler des interventions (« que se passe-t-il si je change X ? ») plutôt que de seulement prédire. Les deux approches se combinent, mais pour une décision RH engageante, la transparence et la capacité de raisonnement contrefactuel comptent souvent plus que la performance brute de prédiction." } },
+    { "@type": "Question", "name": "Est-ce scientifiquement fondé ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. La structure de chaque modèle s'appuie sur des cadres et méta-analyses publiés — turnover, présentéisme, risques psychosociaux, engagement — cités sur la page Méthode. Le formalisme bayésien lui-même est établi depuis Bayes (1763) et outillé pour les réseaux causaux depuis les travaux de Judea Pearl. Les hypothèses retenues sont documentées et ouvertes à la discussion." } },
+    { "@type": "Question", "name": "De quelle quantité et quelle qualité de données ai-je besoin ?", "acceptedAnswer": { "@type": "Answer", "text": "Extraits SIRH, baromètres internes et enquêtes existantes suffisent généralement à démarrer — un audit rapide en début de projet fait l'inventaire de votre patrimoine de données. La modélisation bayésienne est justement adaptée aux situations où les données sont limitées, hétérogènes ou de qualité inégale : quand vos données internes sont insuffisantes, les paramètres issus de la littérature scientifique gardent le modèle opérationnel, là où un modèle statistique classique serait bloqué. La part respective de vos données et de la littérature est explicitée, jamais masquée." } },
+    { "@type": "Question", "name": "Où vont mes données ? Sont-elles protégées ?", "acceptedAnswer": { "@type": "Answer", "text": "Elles restent chez vous. Le travail porte sur des extraits agrégés et anonymisés. Aucun transfert hors UE, aucune sous-traitance sans validation explicite de votre part. Le traitement respecte le RGPD, encadré par un accord de traitement (DPA) précisant durée, finalité, sécurité et sous-traitants éventuels, ainsi qu'un accord de confidentialité signé dès la première réunion. En fin de mission, les données brutes sont supprimées ; seul le modèle probabiliste vous est remis." } },
     { "@type": "Question", "name": "Combien de temps cela prend-il ?", "acceptedAnswer": { "@type": "Answer", "text": "Tout commence par un entretien de cadrage, sans engagement. La modélisation prend ensuite typiquement 4 à 8 semaines, selon la disponibilité des données et le périmètre retenu." } },
-    { "@type": "Question", "name": "Que reçois-je concrètement ?", "acceptedAnswer": { "@type": "Answer", "text": "Un accès privé ou public au moteur d'inférence de votre modèle, sous forme de simulateur interactif accessible via navigateur ou intégrable à vos outils internes via API. Les résultats sont commentés et la restitution est conçue pour être présentée en comité de direction ou avec le CSE." } },
-    { "@type": "Question", "name": "Faut-il des compétences techniques pour utiliser le livrable ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. L'expertise réside dans la traduction de votre question métier en modèle graphique probabiliste. Les décideurs disposent ensuite d'un outil simple et interactif, utilisable en autonomie, sans compétence en statistiques : en manipulant les variables, vous observez comment les probabilités se propagent et l'incertitude évolue." } },
+    { "@type": "Question", "name": "Que reçois-je concrètement ?", "acceptedAnswer": { "@type": "Answer", "text": "Trois choses : (1) un simulateur interactif de votre modèle, accessible via navigateur (privé ou public) ou intégrable à vos outils internes via API ; (2) la documentation complète du modèle — structure du graphe, tables de probabilité conditionnelle, sources scientifiques mobilisées, hypothèses retenues ; (3) une restitution commentée, conçue pour être présentée en comité de direction ou en CSE." } },
+    { "@type": "Question", "name": "Faut-il des compétences techniques pour utiliser le livrable ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. L'expertise réside dans la traduction de votre question métier en modèle graphique probabiliste — c'est mon travail. Une fois livré, l'outil s'utilise sans compétence en statistiques : en manipulant les variables via une interface visuelle, vous observez comment les probabilités se propagent et comment l'incertitude évolue à mesure que vous intégrez de nouvelles informations." } },
     { "@type": "Question", "name": "Et si le modèle ne donne rien d'exploitable ?", "acceptedAnswer": { "@type": "Answer", "text": "La démarche commence volontairement par un périmètre resserré, choisi pour démontrer la valeur avant d'élargir. La qualité d'un modèle dépend des données et des hypothèses retenues : cette dépendance est posée dès le cadrage, pas découverte à la fin. C'est aussi pourquoi la première étape est sans engagement." } },
-    { "@type": "Question", "name": "Comment cela se passe-t-il avec le CSE ou les représentants du personnel ?", "acceptedAnswer": { "@type": "Answer", "text": "La restitution est conçue pour être partagée, hypothèses comprises. Le travail porte sur des données agrégées, et la transparence du modèle facilite le dialogue social plutôt que de l'opacifier." } },
-    { "@type": "Question", "name": "Combien cela coûte-t-il ?", "acceptedAnswer": { "@type": "Answer", "text": "Le coût dépend du périmètre, de la complexité du sujet et de la disponibilité des données. Il se définit lors de l'entretien de cadrage, une fois le besoin précisé." } },
-    { "@type": "Question", "name": "Comment démarre-t-on ?", "acceptedAnswer": { "@type": "Answer", "text": "Par un entretien de cadrage, sans engagement, pour vérifier si l'approche est adaptée à votre situation et définir un premier périmètre. C'est aussi l'occasion de poser toutes les questions que cette page n'aurait pas couvertes." } }
+    { "@type": "Question", "name": "Comment cela se passe-t-il avec le CSE ou les représentants du personnel ?", "acceptedAnswer": { "@type": "Answer", "text": "La restitution est conçue pour être partagée avec le CSE, hypothèses comprises. Le travail porte sur des données agrégées — jamais nominatives — et la transparence intégrale du modèle en fait un support de dialogue social plutôt qu'un objet de méfiance. Une présentation dédiée aux représentants du personnel peut être intégrée au livrable final sur demande." } },
+    { "@type": "Question", "name": "Qui est derrière Noumensia ?", "acceptedAnswer": { "@type": "Answer", "text": "Arthur Jouffe, consultant indépendant. Format volontairement resserré : vous avez en face de vous la personne qui conçoit et livre le modèle, sans couche d'intermédiaires. Le parcours, l'approche et ce que Noumensia est — et n'est pas — sont détaillés sur la page À propos." } },
+    { "@type": "Question", "name": "Sur quels sujets peut-on travailler au-delà du turnover et du burn-out ?", "acceptedAnswer": { "@type": "Answer", "text": "Tout phénomène RH multi-factoriel se prête à la modélisation bayésienne : mobilité interne, absentéisme, engagement, effectivité des dispositifs de formation, égalité femmes/hommes, adhésion à un projet de transformation, attrition ciblée sur des populations critiques. Le prérequis n'est pas le sujet lui-même, mais la présence d'un enjeu de décision où plusieurs variables interagissent et où l'incertitude est réelle." } },
+    { "@type": "Question", "name": "Que se passe-t-il après la livraison du modèle ?", "acceptedAnswer": { "@type": "Answer", "text": "Le modèle vous est remis avec sa documentation ; vous pouvez l'exploiter en autonomie sans engagement de suite. Deux formules complémentaires sont proposées selon vos besoins : une session de formation à l'usage du simulateur pour vos équipes, et une mission de maintenance et de mise à jour périodique (typiquement annuelle) pour intégrer vos nouvelles données ou faire évoluer la structure du modèle." } },
+    { "@type": "Question", "name": "À qui appartient le modèle final ?", "acceptedAnswer": { "@type": "Answer", "text": "Vous recevez une licence d'usage perpétuelle et non-exclusive sur le modèle livré : droit d'utilisation illimité pour vos besoins internes, sans limite de durée, transmissible aux équipes concernées. La calibration réalisée sur vos données vous est exclusive et ne sera jamais réutilisée pour un tiers. Je conserve la propriété intellectuelle des briques méthodologiques génériques — cadres théoriques, structures-types de graphe — que je remobilise sur d'autres missions sans jamais transférer vos données ni votre modèle spécifique. Ce cadre est précisé au contrat." } },
+    { "@type": "Question", "name": "Le modèle vieillit-il ? Quand faut-il le remettre à jour ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, comme tout modèle décisionnel. Le rythme recommandé est une revue annuelle ou semestrielle selon votre secteur : intégration de vos nouvelles données, recalibration des paramètres et, si votre contexte a changé significativement (fusion, réorganisation, évolution du marché du travail, nouveaux dispositifs internes), révision ciblée de la structure du graphe. Cette revue est proposée sous forme de forfait dédié, dimensionné selon l'ampleur des évolutions à intégrer. Entre deux revues, le modèle reste pleinement exploitable en l'état — la révision n'est pas un correctif, c'est un rafraîchissement pour maintenir la finesse d'analyse." } },
+    { "@type": "Question", "name": "Combien cela coûte-t-il ?", "acceptedAnswer": { "@type": "Answer", "text": "Le chiffrage dépend du périmètre, de la complexité du sujet et de la qualité des données disponibles. À titre indicatif, une mission de cadrage et de modélisation démarre à partir de 5 000 € HT. Le chiffrage précis se définit lors de l'entretien de cadrage, qui est offert et sans engagement — l'occasion aussi de vérifier que l'approche est pertinente pour votre besoin avant tout engagement financier." } }
   ]
 }
 </script>
@@ -113,6 +139,7 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="/">Accueil</a></li>
       <li><a href="/modeles/">Modèles</a></li>
+      <li><a href="/articles/">Articles</a></li>
       <li><a href="/methode">Méthode</a></li>
       <li><a href="/faq" aria-current="page">FAQ</a></li>
       <li><a href="/a-propos">À propos</a></li>
@@ -125,13 +152,16 @@
 
   <section class="section" id="faq">
     <div class="wrap reveal">
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a><span>&rsaquo;</span>FAQ
+      </nav>
       <p class="eyebrow">Questions fréquentes</p>
       <h2>Ce que les directions RH demandent avant de se lancer</h2>
       <p class="faq-intro">
-        Les questions ci-dessous reviennent le plus souvent (rigueur de
-        la méthode, sécurité de vos données, déroulé et ce que vous
-        recevez). Si la vôtre n'y figure pas, l'entretien de cadrage est fait pour
-        ça mais vous pouvez aussi <a href="/contact">m'écrire directement</a>.
+        Les questions ci-dessous reviennent le plus souvent&nbsp;: rigueur de
+        la méthode, sécurité des données, déroulé, livrables et engagement.
+        Si la vôtre n'y figure pas, l'entretien de cadrage est fait pour ça —
+        vous pouvez aussi <a href="/contact">m'écrire directement</a>.
       </p>
 
       <!-- ====== GROUPE 1 ====== -->
@@ -139,64 +169,67 @@
         <p class="faq-group-title">La méthode et sa rigueur</p>
         <div class="faq-list">
 
-          <details class="faq-item">
+          <details class="faq-item" id="ia-boite-noire" data-nm-toggle="faq">
             <summary>C'est de l'intelligence artificielle, donc une « boîte noire » ?</summary>
             <div class="faq-answer">
               <p>
-                Non, dans un réseau bayésien, contrairement à de nombreux systèmes 
-                d'intelligence artificielle, vous ne voyez pas que l'entrée et la sortie&nbsp;: 
-                chaque facteur pris en compte par le modèle est visible, documenté, discuté et discutable.
+                Non. Ce n'est pas de l'IA au sens ChatGPT ou <em>deep learning</em>&nbsp;:
+                un réseau bayésien est un modèle probabiliste explicite, où chaque
+                facteur, chaque relation d'influence et chaque probabilité est visible,
+                documenté, discuté et discutable.
               </p>
               <p>
-                Vous pouvez explorer le modèle, examiner chaque hypothèse d'influence et la 
-                modifier. C'est l'inverse d'une boîte noire, un outil de raisonnement transparent vous
-                permettant de comprendre comment les différentes variables interagissent et contribuent 
-                à un phénomène complexe, comme le turnover ou le burn-out, pour vous aider à
-                structurer votre prise de décision.
+                Vous pouvez explorer le modèle, examiner chaque hypothèse et la modifier.
+                C'est l'inverse d'une boîte noire&nbsp;: un outil de raisonnement transparent
+                qui rend lisible comment les variables interagissent et contribuent à un
+                phénomène complexe — turnover, burn-out, engagement — pour structurer votre
+                décision plutôt que la remplacer.
               </p>
             </div>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="cause-vs-correlation" data-nm-toggle="faq">
             <summary>Le modèle identifie-t-il ce qui <em>cause</em> le turnover ou le burn-out, ou seulement des corrélations ?</summary>
             <div class="faq-answer">
               <p>
-                C'est une distinction fondamentale. La structure du modèle encode des hypothèses 
-                d'influence issues de la littérature scientifique, pas forcément des causalités 
-                démontrées expérimentalement. Les simulations raisonnent sur des leviers <em>probables</em>, 
-                et chaque restitution distingue explicitement ce que les données montrent de
-                ce qu'une action produirait.
+                Distinction fondamentale. La structure du modèle encode des hypothèses
+                d'influence issues de la littérature scientifique, pas des causalités
+                démontrées expérimentalement dans votre organisation. Les simulations
+                raisonnent sur des leviers <em>probables</em>, et chaque restitution
+                distingue explicitement ce que vos données montrent de ce qu'une action
+                produirait.
               </p>
               <p>
                 Un prestataire qui vous promet des effets garantis surinterprète ses
-                propres modèles. Ici, cette limite est posée clairement, c'est une
+                propres modèles. Ici, cette limite est posée clairement — c'est une
                 condition de l'honnêteté du résultat.
+              </p>
             </div>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="vs-tableau-de-bord" data-nm-toggle="faq">
             <summary>En quoi est-ce différent d'un tableau de bord ou d'un baromètre RH ?</summary>
             <div class="faq-answer">
               <p>
                 Un tableau de bord mesure chaque indicateur séparément et constate
                 les mouvements. Le modèle relie ces indicateurs dans un même
-                système&nbsp;: il montre quels facteurs contribuent le plus, lesquels 
-                s'influencent et dans quelles proportions, puis permet de comparer des scénarios.
-                C'est un complément de vos outils et un support pour votre expertise.
+                système&nbsp;: il montre quels facteurs contribuent le plus, lesquels
+                s'influencent et dans quelles proportions, puis permet de comparer
+                des scénarios. C'est un complément de vos outils et un support pour
+                votre expertise.
               </p>
             </div>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="vs-cabinet" data-nm-toggle="faq">
             <summary>En quoi est-ce différent d'un cabinet de conseil RH ?</summary>
             <div class="faq-answer">
               <p>
                 Un cabinet apporte une lecture humaine et des grilles d'analyse
-                éprouvées — une valeur que la modélisation ne remplace pas. Ce que
-                Noumensia ajoute c'est un livrable interactif plutôt qu'un rapport statique, 
-                conçu pour être accessible par des non-experts, un modèle qui représente vos données,
-                votre expertise, vos hypothèses, vos croyances, en somme votre système décisionnel 
-                rendu navigable et quantifié, que vous pouvez interroger vous-même à tout instant.
+                éprouvées — une valeur que la modélisation ne remplace pas. Noumensia
+                ajoute un livrable interactif plutôt qu'un rapport statique, accessible
+                aux non-experts&nbsp;: votre système décisionnel rendu navigable et
+                quantifié, que vous pouvez interroger vous-même à tout instant.
               </p>
               <p>
                 Les deux approches se combinent bien&nbsp;: Noumensia travaille
@@ -206,15 +239,40 @@
             </div>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="vs-machine-learning" data-nm-toggle="faq">
+            <summary>Pourquoi un réseau bayésien plutôt qu'un modèle de machine learning classique ?</summary>
+            <div class="faq-answer">
+              <p>
+                Un modèle de <em>machine learning</em> classique (random forest,
+                régression, réseau de neurones) apprend des corrélations dans vos
+                données historiques pour prédire un résultat. Il est puissant quand
+                vos données sont massives, propres et représentatives — et opaque
+                quand il s'agit d'expliquer <em>pourquoi</em>.
+              </p>
+              <p>
+                Un réseau bayésien fait l'inverse&nbsp;: il expose la structure
+                d'influence, intègre la connaissance experte et scientifique là où
+                les données manquent, et permet de simuler des interventions
+                (« que se passe-t-il si je change X&nbsp;? ») plutôt que de seulement
+                prédire. Les deux approches se combinent, mais pour une décision RH
+                engageante, la transparence et la capacité de raisonnement
+                contrefactuel comptent souvent plus que la performance brute
+                de prédiction.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" id="fondement-scientifique" data-nm-toggle="faq">
             <summary>Est-ce scientifiquement fondé ?</summary>
             <div class="faq-answer">
               <p>
                 Oui. La structure de chaque modèle s'appuie sur des cadres et
                 méta-analyses publiés — turnover, présentéisme, risques
-                psychosociaux — cités sur la page <a href="/methode">Méthode</a>.
-                Le formalisme bayésien lui-même est établi de longue date. Les
-                hypothèses retenues sont documentées et ouvertes à la discussion.
+                psychosociaux, engagement — cités sur la page
+                <a href="/methode">Méthode</a>. Le formalisme bayésien lui-même
+                est établi depuis Bayes (1763) et outillé pour les réseaux causaux
+                depuis les travaux de Judea Pearl. Les hypothèses retenues sont
+                documentées et ouvertes à la discussion.
               </p>
             </div>
           </details>
@@ -227,48 +285,39 @@
         <p class="faq-group-title">Vos données et leur confidentialité</p>
         <div class="faq-list">
 
-          <details class="faq-item">
-            <summary>De quelle quantité de données ai-je besoin ?</summary>
+          <details class="faq-item" id="donnees-quantite-qualite" data-nm-toggle="faq">
+            <summary>De quelle quantité et quelle qualité de données ai-je besoin ?</summary>
             <div class="faq-answer">
               <p>
-                Extraits SIRH, baromètres internes et enquêtes existantes suffisent 
-                généralement à démarrer. Vous bénéficiez d'un audit complet en 
-                début de projet afin de faire l'inventaire de votre patrimoine
-                de données et identifier ce qu'il est possible d'exploiter selon 
-                les objectifs retenus lors de la première phase de cadrage. 
-                La modélisation bayésienne, contrairement à beaucoup d'autre méthodes
-                statistiques, est justement adaptée aux situations où les données sont 
-                limitées, hétérogènes ou de qualité inégale, car elle peut également
-                intégrer l'expertise métier et les connaissances scientifiques publiées.
+                Extraits SIRH, baromètres internes et enquêtes existantes suffisent
+                généralement à démarrer — un audit rapide en début de projet fait
+                l'inventaire de votre patrimoine de données.
+              </p>
+              <p>
+                La modélisation bayésienne est justement adaptée aux situations où
+                les données sont limitées, hétérogènes ou de qualité inégale&nbsp;:
+                quand vos données internes sont insuffisantes, les paramètres issus
+                de la littérature scientifique gardent le modèle opérationnel, là où
+                un modèle statistique classique serait bloqué. La part respective de
+                vos données et de la littérature est explicitée, jamais masquée.
               </p>
             </div>
           </details>
 
-          <details class="faq-item">
-            <summary>Et si mes données sont incomplètes ou de qualité inégale ?</summary>
-            <div class="faq-answer">
-              <p>
-                C'est une force du cadre bayésien&nbsp;: quand les données internes
-                sont insuffisantes, les paramètres issus de la littérature gardent
-                le modèle opérationnel là où un modèle statistique classique serait
-                bloqué.
-              </p>
-              <p>
-                La part respective de vos données et de la littérature est
-                explicitée, jamais masquée — vous savez toujours sur quoi repose
-                chaque résultat.
-              </p>
-            </div>
-          </details>
-
-          <details class="faq-item">
+          <details class="faq-item" id="donnees-protection" data-nm-toggle="faq">
             <summary>Où vont mes données ? Sont-elles protégées ?</summary>
             <div class="faq-answer">
               <p>
-                Elles restent chez vous. Le traitement respecte les exigences du
-                RGPD, le travail porte sur des données agrégées et anonymisées, et
-                les échanges sont couverts par un accord de confidentialité dès la
-                première réunion.
+                Elles restent chez vous. Le travail porte sur des extraits agrégés
+                et anonymisés. Aucun transfert hors UE, aucune sous-traitance sans
+                validation explicite de votre part.
+              </p>
+              <p>
+                Le traitement respecte le RGPD, encadré par un accord de traitement
+                (DPA) précisant durée, finalité, sécurité et sous-traitants
+                éventuels, ainsi que par un accord de confidentialité signé dès la
+                première réunion. En fin de mission, les données brutes sont
+                supprimées&nbsp;; seul le modèle probabiliste vous est remis.
               </p>
             </div>
           </details>
@@ -281,7 +330,7 @@
         <p class="faq-group-title">Le déroulé et ce que vous recevez</p>
         <div class="faq-list">
 
-          <details class="faq-item">
+          <details class="faq-item" id="duree" data-nm-toggle="faq">
             <summary>Combien de temps cela prend-il ?</summary>
             <div class="faq-answer">
               <p>
@@ -292,39 +341,38 @@
             </div>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="livrables" data-nm-toggle="faq">
             <summary>Que reçois-je concrètement ?</summary>
             <div class="faq-answer">
-              <p>
-                Un accès privé ou public au moteur d'inférence pour votre modèle 
-                sous forme de simulateur interactif accessible via navigateur web 
-                ou intégrer à vos propres outils internes via API.
-                Les résultats sont commentés et la restitution est conçue pour être 
-                présentée en comité de direction ou avec le CSE.
-              </p>
+              <p>Trois choses&nbsp;:</p>
+              <ul>
+                <li>un <strong>simulateur interactif</strong> de votre modèle,
+                    accessible via navigateur (privé ou public) ou intégrable à
+                    vos outils internes via API&nbsp;;</li>
+                <li>la <strong>documentation complète</strong> du modèle — structure
+                    du graphe, tables de probabilité conditionnelle, sources
+                    scientifiques mobilisées, hypothèses retenues&nbsp;;</li>
+                <li>une <strong>restitution commentée</strong>, conçue pour être
+                    présentée en comité de direction ou en CSE.</li>
+              </ul>
             </div>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="competences-techniques" data-nm-toggle="faq">
             <summary>Faut-il des compétences techniques pour utiliser le livrable ?</summary>
             <div class="faq-answer">
               <p>
-                Un modèle n'a de valeur que s'il est utilisé par ceux qui
-                prennent les décisions qu'il éclaire. L'expertise réside dans la 
-                traduction de votre question métier en modèle graphique probabiliste. 
-                L'objectif est ensuite d'équiper les décideurs et les utilisateurs finaux 
-                d'un outil simple et interactif conçu pour être utilisé de manière autonome. </br>
-
-                Sans aucune compétence en statistiques, via navigateur web ou intégré à votre 
-                plateforme interne, vous pouvez mettre à jour vos croyances sur les facteurs 
-                d'influence en manipulant les différentes variables de votre modèle, vous 
-                observez ainsi comment les probabilités se propagent et l'incertitude évolue
-                au fur et à mesure que vous recevez de nouvelles informations.
+                Non. L'expertise réside dans la traduction de votre question métier
+                en modèle graphique probabiliste — c'est mon travail. Une fois livré,
+                l'outil s'utilise sans compétence en statistiques&nbsp;: en manipulant
+                les variables via une interface visuelle, vous observez comment les
+                probabilités se propagent et comment l'incertitude évolue à mesure
+                que vous intégrez de nouvelles informations.
               </p>
             </div>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="si-rien-exploitable" data-nm-toggle="faq">
             <summary>Et si le modèle ne donne rien d'exploitable ?</summary>
             <div class="faq-answer">
               <p>
@@ -337,13 +385,16 @@
             </div>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="cse" data-nm-toggle="faq">
             <summary>Comment cela se passe-t-il avec le CSE ou les représentants du personnel ?</summary>
             <div class="faq-answer">
               <p>
-                La restitution est conçue pour être partagée, hypothèses comprises.
-                Le travail porte sur des données agrégées, et la transparence du
-                modèle facilite le dialogue social plutôt que de l'opacifier.
+                La restitution est conçue pour être partagée avec le CSE, hypothèses
+                comprises. Le travail porte sur des données agrégées — jamais
+                nominatives — et la transparence intégrale du modèle en fait un
+                support de dialogue social plutôt qu'un objet de méfiance. Une
+                présentation dédiée aux représentants du personnel peut être
+                intégrée au livrable final sur demande.
               </p>
             </div>
           </details>
@@ -353,30 +404,113 @@
 
       <!-- ====== GROUPE 4 ====== -->
       <div class="faq-group">
-        <p class="faq-group-title">Légitimité, périmètre et démarrage</p>
+        <p class="faq-group-title">Périmètre, légitimité et engagement</p>
         <div class="faq-list">
 
-          <details class="faq-item">
-            <summary>Combien cela coûte-t-il ?</summary>
+          <details class="faq-item" id="qui-derriere" data-nm-toggle="faq">
+            <summary>Qui est derrière Noumensia ?</summary>
             <div class="faq-answer">
               <p>
-                Le coût dépend du périmètre, de la complexité du sujet et de la
-                disponibilité des données. Il se définit lors de l'entretien de
-                cadrage, une fois le besoin précisé.
-                <!-- Option Arthur : ajouter ici une fourchette indicative (« typiquement de X à Y k€ »)
-                     pour qualifier le pipeline en amont. À tester. -->
+                Arthur Jouffe, consultant indépendant. Format volontairement
+                resserré&nbsp;: vous avez en face de vous la personne qui conçoit
+                et livre le modèle, sans couche d'intermédiaires. Le parcours,
+                l'approche et ce que Noumensia est — et n'est pas — sont détaillés
+                sur la page <a href="/a-propos">À propos</a>.
               </p>
             </div>
           </details>
 
-          <details class="faq-item">
-            <summary>Comment démarre-t-on ?</summary>
+          <details class="faq-item" id="autres-sujets" data-nm-toggle="faq">
+            <summary>Sur quels sujets peut-on travailler au-delà du turnover et du burn-out ?</summary>
             <div class="faq-answer">
               <p>
-                Par un entretien de cadrage, sans engagement, pour vérifier si
-                l'approche est adaptée à votre situation et définir un premier
-                périmètre. C'est aussi l'occasion de poser toutes les questions que
-                cette page n'aurait pas couvertes.
+                Tout phénomène RH multi-factoriel se prête à la modélisation
+                bayésienne&nbsp;: mobilité interne, absentéisme, engagement,
+                effectivité des dispositifs de formation, égalité femmes/hommes,
+                adhésion à un projet de transformation, attrition ciblée sur des
+                populations critiques.
+              </p>
+              <p>
+                Le prérequis n'est pas le sujet lui-même, mais la présence d'un
+                enjeu de décision où plusieurs variables interagissent et où
+                l'incertitude est réelle.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" id="apres-livraison" data-nm-toggle="faq">
+            <summary>Que se passe-t-il après la livraison du modèle ?</summary>
+            <div class="faq-answer">
+              <p>
+                Le modèle vous est remis avec sa documentation&nbsp;; vous pouvez
+                l'exploiter en autonomie, sans engagement de suite. Deux formules
+                complémentaires sont proposées selon vos besoins&nbsp;:
+              </p>
+              <ul>
+                <li>une session de <strong>formation</strong> à l'usage du
+                    simulateur pour vos équipes&nbsp;;</li>
+                <li>une mission de <strong>maintenance et de mise à jour</strong>
+                    périodique (typiquement annuelle) pour intégrer vos nouvelles
+                    données ou faire évoluer la structure du modèle.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="faq-item" id="propriete" data-nm-toggle="faq">
+            <summary>À qui appartient le modèle final ?</summary>
+            <div class="faq-answer">
+              <p>
+                Vous recevez une <strong>licence d'usage perpétuelle et
+                non-exclusive</strong> sur le modèle livré&nbsp;: droit d'utilisation
+                illimité pour vos besoins internes, sans limite de durée,
+                transmissible aux équipes concernées.
+              </p>
+              <p>
+                La calibration réalisée sur vos données vous est exclusive et ne
+                sera jamais réutilisée pour un tiers. Je conserve la propriété
+                intellectuelle des briques méthodologiques génériques — cadres
+                théoriques, structures-types de graphe — que je remobilise sur
+                d'autres missions sans jamais transférer vos données ni votre modèle
+                spécifique. Ce cadre est précisé au contrat.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" id="vieillissement" data-nm-toggle="faq">
+            <summary>Le modèle vieillit-il ? Quand faut-il le remettre à jour ?</summary>
+            <div class="faq-answer">
+              <p>
+                Oui, comme tout modèle décisionnel. Le rythme recommandé est une
+                <strong>revue annuelle ou semestrielle</strong> selon votre
+                secteur&nbsp;: intégration de vos nouvelles données, recalibration
+                des paramètres et, si votre contexte a changé significativement
+                (fusion, réorganisation, évolution du marché du travail, nouveaux
+                dispositifs internes), révision ciblée de la structure du graphe.
+              </p>
+              <p>
+                Cette revue est proposée sous forme de forfait dédié, dimensionné
+                selon l'ampleur des évolutions à intégrer. Entre deux revues, le
+                modèle reste pleinement exploitable en l'état — la révision n'est
+                pas un correctif, c'est un rafraîchissement pour maintenir la
+                finesse d'analyse.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" id="cout" data-nm-toggle="faq">
+            <summary>Combien cela coûte-t-il ?</summary>
+            <div class="faq-answer">
+              <p>
+                Le chiffrage dépend du périmètre, de la complexité du sujet et de
+                la qualité des données disponibles. À titre indicatif, une mission
+                de cadrage et de modélisation démarre à partir de
+                <strong>5&nbsp;000&nbsp;€ HT</strong>.
+              </p>
+              <p>
+                Le chiffrage précis se définit lors de l'entretien de cadrage, qui
+                est offert et sans engagement — l'occasion aussi de vérifier que
+                l'approche est pertinente pour votre besoin avant tout engagement
+                financier.
               </p>
             </div>
           </details>
@@ -385,8 +519,8 @@
       </div>
 
       <div class="cta-row">
-        <a class="btn btn--primary" href="/contact">Demander un entretien de cadrage</a>
-        <a class="btn btn--ghost" href="/methode">Comprendre la méthode</a>
+        <a class="btn btn--primary" href="/contact" data-nm-click="faq-cta-cadrage">Demander un entretien de cadrage</a>
+        <a class="btn btn--ghost" href="/methode" data-nm-click="faq-cta-methode">Comprendre la méthode</a>
       </div>
 
     </div>
@@ -405,6 +539,7 @@
       <nav aria-label="Pied de page">
         <ul>
           <li><a href="/modeles/">Modèles</a></li>
+          <li><a href="/articles/">Articles</a></li>
           <li><a href="/methode">Méthode</a></li>
           <li><a href="/contact">Contact</a></li>
           <li><a href="/faq">FAQ</a></li>
@@ -429,6 +564,92 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="interactions.js" defer></script>
+<script>
+/* FAQ — ancres partageables :
+   1) injecte une petite icône chaîne dans chaque summary (visible au hover)
+   2) auto-ouverture d'une question quand l'URL contient un #slug
+   3) copie du lien dans le presse-papiers au clic sur l'icône
+   Respecte prefers-reduced-motion pour le scroll. */
+(function () {
+  var reduce = window.matchMedia
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    : false;
+
+  var ICON =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>' +
+    '<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' +
+    '</svg>';
+
+  function injectAnchors() {
+    document.querySelectorAll('.faq-item[id] > summary').forEach(function (s) {
+      if (s.querySelector('.faq-anchor')) return;
+      var id = s.parentElement.id;
+      if (!id) return;
+      var a = document.createElement('a');
+      a.className = 'faq-anchor';
+      a.href = '#' + id;
+      a.setAttribute('aria-label', 'Copier le lien vers cette question');
+      a.setAttribute('title', 'Copier le lien vers cette question');
+      a.innerHTML = ICON;
+      s.appendChild(a);
+    });
+  }
+
+  function openFromHash() {
+    var h = location.hash;
+    if (!h || h.length < 2) return;
+    var el;
+    try { el = document.querySelector(h); } catch (e) { return; }
+    if (el && el.tagName === 'DETAILS') {
+      el.open = true;
+      setTimeout(function () {
+        el.scrollIntoView({
+          behavior: reduce ? 'auto' : 'smooth',
+          block: 'start'
+        });
+      }, 60);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    injectAnchors();
+    openFromHash();
+  });
+  window.addEventListener('hashchange', openFromHash);
+
+  // Clic sur l'ancre → copie l'URL absolue + feedback visuel + n'ouvre pas le details
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('.faq-anchor');
+    if (!a) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var href = a.getAttribute('href');
+    var url = location.origin + location.pathname + href;
+    var done = function () {
+      a.classList.add('copied');
+      setTimeout(function () { a.classList.remove('copied'); }, 1600);
+      try { history.replaceState(null, '', href); } catch (err) {}
+      if (window.nmRecord) window.nmRecord('faq_share', { id: href.slice(1) });
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done, done);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = url;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (err) {}
+      document.body.removeChild(ta);
+      done();
+    }
+  });
+})();
+</script>
 <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8bd3e2f66b3c4bbba0b38cbcbbc972e0"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

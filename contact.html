@@ -59,6 +59,7 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="/">Accueil</a></li>
       <li><a href="/modeles/">Modèles</a></li>
+      <li><a href="/articles/">Articles</a></li>
       <li><a href="/methode">Méthode</a></li>
       <li><a href="/faq">FAQ</a></li>
       <li><a href="/a-propos">À propos</a></li>
@@ -72,6 +73,9 @@
   <!-- ============ INTRO ============ -->
   <section class="contact" id="contact">
     <div class="wrap reveal">
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a><span>&rsaquo;</span>Contact
+      </nav>
       <p class="eyebrow eyebrow--on-bordeaux">Prochaine étape</p>
       <h1>Parlons de ce que vous cherchez à comprendre</h1>
       <p>
@@ -92,6 +96,9 @@
         - data-fs-error   : affiché en cas d'erreur globale
         Ces deux éléments sont cachés par défaut par la librairie.
       -->
+      <!-- Renseigné par JS quand l'URL porte un paramètre ?sujet= (voir bas de page) -->
+      <p class="contact-context" id="contact-context" hidden></p>
+
       <div class="contact-card">
 
       <div data-fs-success class="form-success">
@@ -99,9 +106,11 @@
       </div>
       <div data-fs-error class="form-error-global"></div>
 
-      <form id="contact-form" class="contact-form" action="https://formspree.io/f/mojzoazo" method="POST" novalidate>
+      <form id="contact-form" class="contact-form" action="https://formspree.io/f/mojzoazo" method="POST" novalidate data-nm-submit="contact-form">
         <!-- Honeypot anti-spam -->
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <!-- Provenance : rempli par JS depuis ?sujet= — permet de savoir quelle page a déclenché la demande -->
+        <input type="hidden" name="provenance" id="provenance" value="Accès direct">
 
         <div class="form-row">
           <div class="form-group">
@@ -164,9 +173,10 @@
           href="https://cal.eu/arthur.jouffe-noumensia/30min"
           target="_blank"
           rel="noopener"
-          class="contact-alt-link">Réserver un créneau directement ↗</a>
+          class="contact-alt-link"
+          data-nm-click="contact-cal-book">Réserver un créneau directement ↗</a>
         <span class="contact-alt-sep">ou</span>
-        <a href="mailto:contact@noumensia.com" class="contact-alt-link">contact@noumensia.com</a>
+        <a href="mailto:contact@noumensia.com" class="contact-alt-link" data-nm-click="contact-mailto">contact@noumensia.com</a>
       </div>
 
       </div><!-- /.contact-card -->
@@ -351,7 +361,7 @@
         manque, et si une modélisation vaut l'investissement.
       </p>
       <div class="contact-links">
-        <a href="#contact" class="btn btn--primary">Décrire ma problématique</a>
+        <a href="#contact" class="btn btn--primary" data-nm-click="contact-cta-scroll">Décrire ma problématique</a>
       </div>
     </div>
   </section>
@@ -369,6 +379,7 @@
       <nav aria-label="Pied de page">
         <ul>
           <li><a href="/modeles/">Modèles</a></li>
+          <li><a href="/articles/">Articles</a></li>
           <li><a href="/methode">Méthode</a></li>
           <li><a href="/contact">Contact</a></li>
           <li><a href="/faq">FAQ</a></li>
@@ -392,6 +403,31 @@
   </div>
 </footer>
 <script>
+  // Contexte d'arrivée : ?sujet=turnover, ?sujet=burnout, etc.
+  // Affiche un rappel au visiteur et transmet la provenance avec le formulaire.
+  (function () {
+    var SUJETS = {
+      'turnover': { libelle: 'le modèle Turnover volontaire', href: '/modeles/turnover' },
+      'burnout':  { libelle: 'le modèle Burn-out & RPS',      href: '/modeles/burnout' },
+      'modeles':  { libelle: 'la page Modèles',                href: '/modeles/' },
+      'methode':  { libelle: 'la page Méthode',                href: '/methode' },
+      'articles': { libelle: 'les articles',                   href: '/articles/' }
+    };
+    try {
+      var cle = new URLSearchParams(location.search).get('sujet');
+      if (!cle) return;
+      var s = SUJETS[cle];
+      var champ = document.getElementById('provenance');
+      if (champ) champ.value = s ? s.libelle : cle;
+      var note = document.getElementById('contact-context');
+      if (note && s) {
+        note.innerHTML = 'Vous arrivez depuis <a href="' + s.href + '">' + s.libelle +
+          '</a>. N’hésitez pas à le mentionner ci-dessous si votre situation s’en rapproche.';
+        note.hidden = false;
+      }
+    } catch (e) {}
+  })();
+
   window.formspree = window.formspree || function () {
     (formspree.q = formspree.q || []).push(arguments);
   };
@@ -399,6 +435,7 @@
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 <script src="script.js"></script>
+<script src="interactions.js" defer></script>
 <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8bd3e2f66b3c4bbba0b38cbcbbc972e0"}'></script><!-- End Cloudflare Web Analytics -->
 
 </body>

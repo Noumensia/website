@@ -89,6 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
 
   // ---- Révélation au scroll ----
+  // Règle : tout ce qui est déjà dans la fenêtre au chargement est affiché
+  // immédiatement, sans fondu. Le contenu above-the-fold ne doit jamais
+  // dépendre d'un scroll pour devenir visible.
   const revealEls = document.querySelectorAll('.reveal');
   if (revealEls.length) {
     if (reduceMotion || !('IntersectionObserver' in window)) {
@@ -102,7 +105,58 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-      revealEls.forEach(el => io.observe(el));
+      revealEls.forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          el.classList.add('is-visible');
+        } else {
+          io.observe(el);
+        }
+      });
+    }
+  }
+
+  // ---- Dock flottant : accès permanent au graphe et au simulateur ----
+  // Construit à partir du bloc #model-access du hero : aucun HTML à dupliquer,
+  // et toute nouvelle page modèle en bénéficie automatiquement.
+  const access = document.getElementById('model-access');
+  if (access) {
+    const cards = access.querySelectorAll('.access-card');
+    if (cards.length) {
+      const ICONS = [
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.2 10.5 16M17.2 7.2 13.5 16M7 6h10"/></svg>',
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="7" r="2.3" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r="2.3" fill="currentColor" stroke="none"/><circle cx="14" cy="17" r="2.3" fill="currentColor" stroke="none"/></svg>'
+      ];
+      const LABELS = ['Le graphe', 'Le simulateur'];
+
+      const dock = document.createElement('div');
+      dock.className = 'model-dock';
+      dock.setAttribute('aria-label', 'Accès rapide au modèle');
+
+      cards.forEach((card, i) => {
+        const a = document.createElement('a');
+        a.href = card.getAttribute('href');
+        a.target = '_blank';
+        a.rel = 'noopener';
+        const nm = card.getAttribute('data-nm-click');
+        if (nm) a.setAttribute('data-nm-click', nm.replace('-hero', '-dock'));
+        a.innerHTML = ICONS[i] + '<span>' + (LABELS[i] || 'Ouvrir') + '</span>';
+        dock.appendChild(a);
+      });
+      document.body.appendChild(dock);
+
+      // Le dock apparaît une fois le bloc du hero dépassé, et s'efface quand
+      // le bloc « Explorer ce modèle » de fin d'article prend le relais.
+      const relay = document.querySelector('.explore-cta');
+      const syncDock = () => {
+        const passed = access.getBoundingClientRect().bottom < 0;
+        const relayVisible = relay
+          ? relay.getBoundingClientRect().top < window.innerHeight
+          : false;
+        dock.classList.toggle('is-shown', passed && !relayVisible);
+      };
+      window.addEventListener('scroll', syncDock, { passive: true });
+      window.addEventListener('resize', syncDock, { passive: true });
+      syncDock();
     }
   }
 

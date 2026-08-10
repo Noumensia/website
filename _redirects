@@ -13,6 +13,14 @@
 /confidentialite.html   /mentions-legales/confidentialite   301
 /confidentialite        /mentions-legales/confidentialite   301
 
+# Articles : le plan éditorial (_articles/) visait /blog/ — l'URL retenue est
+# /articles/. Ces règles couvrent les liens déjà écrits en /blog/ dans les brouillons
+# et tout partage externe qui utiliserait l'ancienne forme.
+/blog                   /articles/           301
+/blog/                  /articles/           301
+/blog/*                 /articles/:splat     301
+/articles.html          /articles/           301
+
 # Pages courantes : variante .html → URL propre
 /index.html             /                    301
 /a-propos.html           /a-propos            301
