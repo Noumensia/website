@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 440" width="920" height="440" role="img" aria-labelledby="medTitle medDesc">
+  <title id="medTitle">La charge de travail agit sur le départ par médiation, sans effet direct</title>
+  <desc id="medDesc">Chaîne causale : la charge de travail dégrade la reconnaissance perçue, qui affaiblit l'engagement, qui augmente la réceptivité aux offres externes. Combinée à une opportunité externe concrète, cette réceptivité produit le départ. Aucune flèche directe ne relie la charge de travail au départ : alléger la charge sans corriger la reconnaissance ne déplace pas le résultat.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D98A95"/>
+    </marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7E8B99"/>
+    </marker>
+    <style>
+      .n     { fill:#323D4B; stroke:#4A5766; stroke-width:1.2; rx:8; }
+      .n-out { fill:#7A1F2D; stroke:#D98A95; stroke-width:1.4; rx:8; }
+      .lbl   { font-family:"IBM Plex Sans","Segoe UI","Helvetica Neue",Arial,sans-serif;
+               font-size:14px; fill:#F2EFEA; text-anchor:middle; }
+      .edge  { stroke:#D98A95; stroke-width:1.8; fill:none; marker-end:url(#arrow); }
+      .edge-m{ stroke:#7E8B99; stroke-width:1.6; fill:none; marker-end:url(#arrowMuted); }
+      .edge-x{ stroke:#6B7683; stroke-width:1.6; fill:none; stroke-dasharray:5 5; }
+      .cap   { font-family:"IBM Plex Sans","Segoe UI","Helvetica Neue",Arial,sans-serif;
+               font-size:12.5px; fill:#8E9AA8; }
+      .cap-a { font-family:"IBM Plex Sans","Segoe UI","Helvetica Neue",Arial,sans-serif;
+               font-size:13px; fill:#D98A95; font-weight:600; }
+      .tag   { font-family:"IBM Plex Sans","Segoe UI","Helvetica Neue",Arial,sans-serif;
+               font-size:11.5px; fill:#8E9AA8; letter-spacing:.04em; text-anchor:middle; }
+    </style>
+  </defs>
+
+  <rect width="920" height="440" fill="#2A3440"/>
+
+  <!-- Bandeau de lecture -->
+  <text class="cap-a" x="26" y="38">Ce que voit une régression simple : « la charge de travail prédit le départ »</text>
+  <text class="cap"   x="26" y="60">Ce qui se passe réellement : la charge n'agit qu'à travers deux variables intermédiaires.</text>
+
+  <!-- Rangée principale -->
+  <rect class="n" x="26"  y="112" width="172" height="58"/>
+  <text class="lbl" x="112" y="136">Charge</text>
+  <text class="lbl" x="112" y="155">de travail</text>
+
+  <rect class="n" x="248" y="112" width="172" height="58"/>
+  <text class="lbl" x="334" y="136">Reconnaissance</text>
+  <text class="lbl" x="334" y="155">perçue</text>
+
+  <rect class="n" x="470" y="112" width="150" height="58"/>
+  <text class="lbl" x="545" y="146">Engagement</text>
+
+  <rect class="n" x="670" y="112" width="180" height="58"/>
+  <text class="lbl" x="760" y="136">Réceptivité aux</text>
+  <text class="lbl" x="760" y="155">offres externes</text>
+
+  <text class="tag" x="334" y="188">MÉDIATEUR</text>
+  <text class="tag" x="545" y="188">MÉDIATEUR</text>
+
+  <!-- Nœud de sortie -->
+  <rect class="n-out" x="670" y="272" width="180" height="58"/>
+  <text class="lbl" x="760" y="306" style="font-weight:600">Départ</text>
+
+  <!-- Facteur externe -->
+  <rect class="n" x="432" y="272" width="180" height="58"/>
+  <text class="lbl" x="522" y="296">Opportunité</text>
+  <text class="lbl" x="522" y="315">externe concrète</text>
+
+  <!-- Arcs de la chaîne -->
+  <line class="edge" x1="198" y1="141" x2="242" y2="141"/>
+  <line class="edge" x1="420" y1="141" x2="464" y2="141"/>
+  <line class="edge" x1="620" y1="141" x2="664" y2="141"/>
+  <line class="edge" x1="760" y1="170" x2="760" y2="266"/>
+  <line class="edge-m" x1="612" y1="301" x2="664" y2="301"/>
+
+  <!-- Absence d'effet direct : arc barré passant sous le graphe -->
+  <path class="edge-x" d="M 112 170 C 112 300, 180 386, 380 386 L 640 386 C 700 386, 730 372, 748 336"/>
+  <g transform="translate(300 386)">
+    <circle r="13" fill="#2A3440"/>
+    <line x1="-7" y1="-7" x2="7" y2="7" stroke="#C4666F" stroke-width="2.4" stroke-linecap="round"/>
+    <line x1="7" y1="-7" x2="-7" y2="7" stroke="#C4666F" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+  <rect x="316" y="377" width="112" height="18" fill="#2A3440"/>
+  <text class="cap" x="322" y="391">Aucun effet direct</text>
+
+  <!-- Conclusion -->
+  <text class="cap" x="26" y="424">Alléger la charge sans corriger la reconnaissance ne déplace pas le départ.</text>
+</svg>

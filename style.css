@@ -1227,6 +1227,7 @@ footer{ padding:2.5rem 0; border-top:1px solid var(--ardoise-3); }
   justify-content:space-between; align-items:center;
 }
 .footer-brand{ display:none; }          /* pas de logo agrandi dans le footer */
+.footer-socials{ display:flex; align-items:center; gap:.6rem; }
 footer nav ul{ list-style:none; display:flex; gap:1.25rem; flex-wrap:wrap; }
 footer nav a{ color:var(--gris-doux); font-size:.9rem; transition:color var(--t-fast); }
 footer nav a:hover{ color:var(--bordeaux-vif); }
