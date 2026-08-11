@@ -738,8 +738,30 @@ figure{ margin:0; }
 }
 .share-link svg{ width:15px; height:15px; position:relative; }
 .share-link:hover{ transform:translateY(-2px); text-decoration:none; }
+
+/* Anneau qui se trace au survol — même geste que .social-link / .fig-link, pour rester cohérent visuellement */
+.share-link::before{
+  content:""; position:absolute; inset:-1px; border-radius:8px; padding:1.6px;
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  opacity:1; pointer-events:none;
+}
+.share-link--linkedin{ color:var(--gris-doux); }
+.share-link--linkedin::before{
+  background:conic-gradient(from -90deg, #0A66C2 var(--lk-fill), transparent 0);
+  --lk-fill:0%; transition:--lk-fill .7s cubic-bezier(.4,0,.2,1);
+}
 .share-link--linkedin:hover{ color:#0A66C2; border-color:transparent; background:rgba(10,102,194,.1); }
-.share-link--copy:hover, .share-link--copy.is-copied{ color:var(--bordeaux-vif); border-color:var(--bordeaux-vif); }
+.share-link--linkedin:hover::before{ --lk-fill:100%; }
+
+.share-link--copy::before{
+  background:conic-gradient(from -90deg, var(--bordeaux-vif) var(--cp-fill), transparent 0);
+  --cp-fill:0%; transition:--cp-fill .7s cubic-bezier(.4,0,.2,1);
+}
+.share-link--copy:hover, .share-link--copy.is-copied{ color:var(--bordeaux-vif); border-color:transparent; background:rgba(217,138,149,.12); }
+.share-link--copy:hover::before, .share-link--copy.is-copied::before{ --cp-fill:100%; }
+
 .share-link--copy .copied-tip{
   position:absolute; bottom:calc(100% + 8px); left:50%;
   transform:translateX(-50%) translateY(4px);
@@ -1221,6 +1243,7 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
 /* Icône LinkedIn — la bordure se trace au survol, comme un chargement, en bleu LinkedIn */
 @property --lk-fill{ syntax:"<percentage>"; inherits:false; initial-value:0%; }
 @property --fig-fill{ syntax:"<percentage>"; inherits:false; initial-value:0%; }
+@property --cp-fill{ syntax:"<percentage>"; inherits:false; initial-value:0%; }
 .social-link{
   position:relative;
   display:inline-grid; place-items:center; width:30px; height:30px;

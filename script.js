@@ -115,6 +115,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // ---- Chiffres animés : compte de 0 jusqu'à la valeur cible à l'entrée dans le viewport ----
+  // Cible les .stat-num des articles (57, 1 800, +114 %, 21 %...). Respecte
+  // prefers-reduced-motion : dans ce cas la valeur finale du HTML reste affichée telle quelle.
+  const statEls = document.querySelectorAll('.stat-num em');
+  if (statEls.length && !reduceMotion && 'IntersectionObserver' in window) {
+    const parseStat = (text) => {
+      const m = text.trim().match(/^([+\-]?)\s*([\d\s]+)\s*(%?)$/);
+      if (!m) return null;
+      const value = parseInt(m[2].replace(/\s/g, ''), 10);
+      if (isNaN(value)) return null;
+      return { sign: m[1] || '', value, suffix: m[3] ? ' %' : '' };
+    };
+    const format = (n, parsed) => parsed.sign + n.toLocaleString('fr-FR') + parsed.suffix;
+    const animate = (el, parsed) => {
+      const duration = 1100;
+      const start = performance.now();
+      const step = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = format(Math.round(parsed.value * eased), parsed);
+        if (t < 1) requestAnimationFrame(step);
+        else el.textContent = format(parsed.value, parsed);
+      };
+      requestAnimationFrame(step);
+    };
+    statEls.forEach((el) => {
+      const parsed = parseStat(el.textContent);
+      if (!parsed) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(el, parsed);
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.6 });
+      io.observe(el);
+    });
+  }
+
   // ---- Dock flottant : accès permanent au graphe et au simulateur ----
   // Construit à partir du bloc #model-access du hero : aucun HTML à dupliquer,
   // et toute nouvelle page modèle en bénéficie automatiquement.
