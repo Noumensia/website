@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/">
+<title>Burn-out au travail : facteurs, prévention et leviers d'action — Noumensia</title>
+<meta name="description" content="Burn-out au travail : comprendre les facteurs (charge, autonomie, soutien, reconnaissance) et hiérarchiser les leviers d'action réellement accessibles en entreprise, à l'aide d'un modèle bayésien issu de la recherche (JD-R, Karasek, Maslach, Siegrist).">
+<link rel="canonical" href="https://noumensia.com/modeles/burnout">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Noumensia">
+<meta property="og:title" content="Burn-out au travail : facteurs, prévention et leviers d'action">
+<meta property="og:description" content="Connaître les causes du burn-out ne suffit pas à bien décider. Un réseau bayésien pour hiérarchiser les leviers accessibles et comparer des plans d'action.">
+<meta property="og:image" content="https://noumensia.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://noumensia.com/images/og-image.png">
+<link rel="preload" href="../fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/newsreader-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="../google-search-icon-dark.ico" sizes="any" media="(prefers-color-scheme: light)">
+<link rel="icon" href="../google-search-icon-light.ico" sizes="any" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="32x32" href="../google-search-icon-dark-32.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="32x32" href="../google-search-icon-light-32.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Burn-out : connaître les causes ne suffit pas à bien décider",
+  "description": "Un réseau bayésien du risque de burn-out pour hiérarchiser les leviers accessibles et comparer des plans d'action à budget égal.",
+  "image": "https://noumensia.com/images/og-image.png",
+  "inLanguage": "fr-FR",
+  "datePublished": "2026-07-12",
+  "dateModified": "2026-07-12",
+  "author": { "@type": "Person", "name": "Arthur Jouffe", "sameAs": "https://www.linkedin.com/in/arthur-jouffe" },
+  "publisher": { "@id": "https://noumensia.com/#org" },
+  "isPartOf": { "@id": "https://noumensia.com/#website" },
+  "mainEntityOfPage": "https://noumensia.com/modeles/burnout",
+  "about": ["Burn-out", "Risques psychosociaux", "Réseaux bayésiens"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://noumensia.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Modèles", "item": "https://noumensia.com/modeles/" },
+    { "@type": "ListItem", "position": 3, "name": "Burn-out & RPS", "item": "https://noumensia.com/modeles/burnout" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="../images/logo/noumensia-badge-cream.svg" alt="" aria-hidden="true" class="brand-icon">
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Accueil</a></li>
+      <li><a href="/modeles/" aria-current="page">Modèles</a></li>
+      <li><a href="/articles">Articles</a></li>
+      <li><a href="/methode">Méthode</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/a-propos">À propos</a></li>
+      <li><a href="/contact" class="nav-cta">Prendre contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+  <article>
+  <!-- ============ HERO ARTICLE ============ -->
+  <section class="article-hero">
+    <div class="wrap reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span><a href="/modeles/">Modèles</a><span>/</span>Burn-out &amp; RPS</p>
+      <p class="eyebrow">Modèle · Réseau bayésien</p>
+      <h1>Burn-out&nbsp;: connaître les causes ne suffit pas à bien décider</h1>
+      <p class="standfirst">
+        Les facteurs du burn-out sont documentés depuis plus de quarante ans.
+        Et pourtant, on continue de prendre des décisions inefficaces — non par
+        manque de savoir, mais parce que le levier le plus corrélé n'est pas
+        toujours le plus actionnable. Ce modèle sert à hiérarchiser les leviers
+        <em>accessibles</em>, dans un contexte donné.
+      </p>
+      <!-- Accès interactif : dans le hero, sans .reveal, pour être visible sans scroll -->
+      <div class="model-access" id="model-access">
+        <p class="model-access__label">Le modèle, tout de suite</p>
+        <div class="model-access__grid">
+          <a class="access-card" href="https://hellixmap.bayesia.com/display/1b71489e10f4d684?panel=1&amp;openChat=expert" target="_blank" rel="noopener" data-nm-click="burnout-acces-graphe-hero">
+            <span class="access-card__thumb" aria-hidden="true">
+              <img src="../images/dag/Burn-out_Risk.svg" alt="Aperçu du réseau bayésien burn-out et des variables qui le composent" width="104" height="72">
+            </span>
+            <span class="access-card__body">
+              <span class="access-card__title">Voir le réseau complet <span class="arrow" aria-hidden="true">↗</span></span>
+              <span class="access-card__desc">Les 27 variables et leurs liens, sur une carte que vous pouvez parcourir</span>
+            </span>
+          </a>
+          <a class="access-card" href="https://simulator.bayesialab.com/simulator/47192424779" target="_blank" rel="noopener" data-nm-click="burnout-acces-simulateur-hero">
+            <span class="access-card__thumb" aria-hidden="true">
+              <picture>
+                <source srcset="../images/ws/ws-burnout-avant.webp" type="image/webp">
+                <img src="../images/ws/ws-burnout-avant.jpg" alt="Aperçu du simulateur burn-out : curseurs de variables et niveau de risque" width="104" height="72">
+              </picture>
+            </span>
+            <span class="access-card__body">
+              <span class="access-card__title">Simuler un scénario <span class="arrow" aria-hidden="true">↗</span></span>
+              <span class="access-card__desc">Bougez un levier, voyez le risque de burn-out se recalculer en direct</span>
+            </span>
+          </a>
+        </div>
+        <p class="model-access__note">Nouvel onglet · accès libre · sans inscription</p>
+      </div>
+
+      <div class="article-meta">
+        <span><strong>Structure&nbsp;:</strong> 27 variables (12 observables → latentes → cible)</span>
+        <span><strong>Base&nbsp;:</strong> littérature scientifique (JD-R, Karasek, ERI, MBI, BAT)</span>
+        <span><strong>Sortie principale&nbsp;:</strong> risque de burn-out</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CORPS ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="article-body reveal">
+
+        <h2>Le problème&nbsp;: un savoir ancien, des décisions toujours difficiles</h2>
+        <p>
+          Karasek (1979) et son modèle demande-contrôle, Maslach (1981) et la mesure
+          de l'épuisement, puis des centaines de méta-analyses&nbsp;: les facteurs
+          du burn-out sont connus. Ce qui manque, ce n'est pas le savoir — c'est de
+          savoir <em>quoi en faire</em> dans un contexte contraint.
+        </p>
+        <p>
+          Car le levier le plus corrélé au risque n'est pas toujours celui sur
+          lequel on peut agir. Réduire la charge de travail est souvent le facteur
+          n°1… et parfois le moins réaliste à court terme. La vraie question n'est
+          pas «&nbsp;quelle est la cause principale&nbsp;?&nbsp;» mais «&nbsp;parmi
+          les actions à ma portée, laquelle déplace le plus le risque&nbsp;?&nbsp;»
+        </p>
+
+        <div class="callout">
+          <span class="callout-label">L'idée en une phrase</span>
+          <p>
+            Le cerveau humain identifie bien les causes, mais estime mal leurs
+            <em>effets cumulés</em>. Un réseau bayésien structure exactement ce que
+            l'intuition peine à faire&nbsp;: hiérarchiser des actions possibles sous
+            contrainte.
+          </p>
+        </div>
+
+        <h2>Le modèle&nbsp;: le burn-out comme système, pas comme somme de causes</h2>
+        <p>
+          Une forte charge de travail n'entraîne pas mécaniquement un burn-out.
+          Pas si la reconnaissance compense, pas si le soutien social est présent,
+          pas si le travail garde du sens. À l'inverse, des contraintes modérées
+          peuvent suffire quand plusieurs déséquilibres s'alignent. Le modèle
+          représente ces interactions — <strong>charge de travail</strong>,
+          <strong>autonomie décisionnelle</strong>, <strong>soutien social</strong>,
+          <strong>reconnaissance</strong>, <strong>management</strong>,
+          <strong>stresseurs périphériques</strong> — et la façon dont elles
+          convergent vers l'<strong>épuisement émotionnel</strong> puis le
+          <strong>risque de burn-out</strong>.
+        </p>
+        <p>
+          Concrètement&nbsp;: 12 facteurs <em>observables</em> par questionnaire —
+          charge, exigences émotionnelles, autonomie, soutien social, reconnaissance,
+          conflits de rôle, sécurité de l'emploi, sens du travail, équilibre de vie… —
+          alimentent des <em>variables latentes</em> (pression, ressources,
+          déséquilibre effort-récompense, tension professionnelle) puis les trois
+          dimensions du burn-out — <strong>épuisement émotionnel</strong>,
+          <strong>cynisme / dépersonnalisation</strong>, <strong>accomplissement
+          réduit</strong> — qui convergent vers le <strong>risque de burn-out</strong>.
+          Chaque nœud a au plus deux parents&nbsp;; le résultat n'est pas un score
+          unique et rigide, mais une carte des interactions.
+        </p>
+        <p>
+          Les probabilités du réseau sont <strong>établies à partir de la littérature
+          scientifique et de méta-analyses, puis calibrées par expertise</strong> —
+          elles ne sont pas apprises sur des données d'entreprise. Les ordres de
+          grandeur sont cohérents avec la recherche&nbsp;; en mission, la même
+          structure serait affinée sur vos propres données.
+        </p>
+
+        <figure class="article-figure bleed reveal">
+          <a class="figure-frame fig-link" href="https://hellixmap.bayesia.com/display/1b71489e10f4d684?panel=1&amp;openChat=expert" target="_blank" rel="noopener">
+            <span class="fig-hint">Explorer le graphe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            <img src="../images/dag/Burn-out_Risk.svg"
+                 alt="Réseau bayésien du risque de burn-out : charge de travail, autonomie décisionnelle, soutien social, reconnaissance et management reliés par des flèches à l'épuisement émotionnel, puis au risque de burn-out"
+                 loading="lazy">
+          </a>
+          <figcaption>
+            Le réseau du risque de burn-out. Version explorable, nœud par nœud&nbsp;:
+            <a href="https://hellixmap.bayesia.com/display/1b71489e10f4d684?panel=1&amp;openChat=expert" target="_blank" rel="noopener">carte interactive HellixMap ↗</a>.
+          </figcaption>
+        </figure>
+
+        <div class="callout reveal">
+          <span class="callout-label">Comment lire le graphe</span>
+          <p>
+            <strong>Les nœuds</strong> sont les facteurs (charge, autonomie, soutien,
+            reconnaissance…) et les résultats (épuisement émotionnel, risque de
+            burn-out). <strong>Les flèches</strong> se lisent «&nbsp;A influence
+            B&nbsp;»&nbsp;: une hypothèse d'influence issue de la littérature, pas une
+            preuve de causalité expérimentale.
+          </p>
+          <p>
+            L'essentiel se joue dans <strong>les chemins qui convergent</strong>.
+            Plusieurs facteurs alimentent l'épuisement émotionnel, qui alimente à son
+            tour le risque. Quand le facteur dominant est hors de portée, agir sur
+            plusieurs facteurs accessibles — même «&nbsp;secondaires&nbsp;» — permet
+            d'infléchir ce nœud central de façon utile, à défaut d'être spectaculaire.
+          </p>
+        </div>
+
+        <h2>Un exemple&nbsp;: agir sur les leviers accessibles, pas sur les plus forts</h2>
+        <p>
+          Prenons une équipe d'aides-soignants sous tension&nbsp;: charge de travail
+          élevée, fortes exigences émotionnelles, conditions dégradées. Le modèle
+          estime un risque de burn-out élevé — <strong>0,89</strong>. Problème&nbsp;:
+          les deux facteurs les plus corrélés au burn-out — la <strong>charge</strong>
+          et les <strong>exigences émotionnelles</strong> — sont justement les plus
+          difficiles à actionner. On ne recrute pas des soignants du jour au lendemain,
+          et on ne supprime pas la charge émotionnelle du soin.
+        </p>
+        <p>
+          Que reste-t-il&nbsp;? Agir sur les <em>ressources</em>, celles qui sont à
+          portée&nbsp;: autonomie décisionnelle, soutien social, reconnaissance,
+          qualité du management, sens du travail. On simule ce plan <strong>sans
+          toucher à la pression</strong> — elle reste à 1,78.
+        </p>
+
+        <div class="ws-compare ws-compare--wide reveal" role="group" aria-label="Comparaison avant / après sur le risque de burn-out (démonstration)">
+          <figure>
+            <p class="ws-label">Situation initiale</p>
+            <a class="figure-frame fig-link" href="https://simulator.bayesialab.com/simulator/47192424779" target="_blank" rel="noopener">
+              <span class="fig-hint">Ouvrir le simulateur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+              <picture>
+                <source srcset="../images/ws/ws-burnout-avant.webp" type="image/webp">
+                <img src="../images/ws/ws-burnout-avant.jpg" alt="WebSimulator burn-out — situation initiale : risque de burn-out 0,89, pression globale 1,78" width="2400" height="939" loading="lazy">
+              </picture>
+            </a>
+            <figcaption>Risque de burn-out&nbsp;: <strong>0,89</strong></figcaption>
+          </figure>
+          <figure>
+            <p class="ws-label">Après actions ciblées sur les ressources</p>
+            <a class="figure-frame fig-link" href="https://simulator.bayesialab.com/simulator/47192424779" target="_blank" rel="noopener">
+              <span class="fig-hint">Ouvrir le simulateur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+              <picture>
+                <source srcset="../images/ws/ws-burnout-apres.webp" type="image/webp">
+                <img src="../images/ws/ws-burnout-apres.jpg" alt="WebSimulator burn-out — après actions sur les ressources : risque 0,73, pression globale toujours 1,78" width="2400" height="945" loading="lazy">
+              </picture>
+            </a>
+            <figcaption>Risque&nbsp;: <strong>0,73</strong></figcaption>
+          </figure>
+        </div>
+
+        <div class="stat-band reveal" role="group" aria-label="Variables de résultat, avant et après">
+          <div class="stat">
+            <span class="stat-num">0,89&nbsp;→&nbsp;<em>0,73</em></span>
+            <span class="stat-label">Risque de burn-out — en n'agissant que sur les ressources accessibles</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">1,04&nbsp;→&nbsp;<em>1,25</em></span>
+            <span class="stat-label">Ressources organisationnelles — le levier réellement activé</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">1,78</span>
+            <span class="stat-label">Pression globale — <strong>inchangée</strong>&nbsp;: charge et exigences émotionnelles non touchées</span>
+          </div>
+        </div>
+
+        <p>
+          Des hypothèses très prudentes sur l'effet de chaque levier en ciblant
+          uniquement les ressources accessibles nous permettent d'estimer l'impact
+          d'un plan réaliste sur cette équipe. On peut ensuite tester d'autres plans, 
+          plus ambitieux, plus radicaux, ou au contraire plus conservateurs, 
+          et comparer les résultats pour prendre une décision éclairée ou
+          défendre une intuition devant un comité de direction.
+        </p>
+        <p class="visual-caption" style="text-align:left;max-width:44rem">
+          Valeurs issues d'une simulation de démonstration sur un cas illustratif.
+          Un modèle réel produirait ses propres estimations sur vos données.
+        </p>
+
+        <h2>Le simulateur&nbsp;: tout le réseau réagit, en direct</h2>
+        <p>
+          Chaque curseur déplacé recalcule instantanément l'ensemble des indicateurs —
+          risque de burn-out, épuisement émotionnel, cynisme, tension professionnelle.
+          On lit moins une valeur absolue qu'un <em>écart</em> entre deux scénarios
+          comparés sur la même base, sans compétence technique requise.
+        </p>
+
+        <figure class="article-figure bleed reveal">
+          <a class="figure-frame fig-link" href="https://simulator.bayesialab.com/simulator/47192424779" target="_blank" rel="noopener">
+            <span class="fig-hint">Ouvrir le simulateur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            <picture>
+              <source srcset="../images/ws/ws-accueil.webp" type="image/webp">
+              <img src="../images/ws/ws-accueil.jpg"
+                   alt="Interface WebSimulator du modèle burn-out : facteurs ajustables à gauche, jauges d'indicateurs à droite avec le risque de burn-out et ses composantes — valeurs illustratives"
+                   width="2000" height="782" loading="lazy">
+            </picture>
+          </a>
+          <figcaption>
+            WebSimulator — modèle burn-out. Chaque modification d'un facteur recalcule
+            instantanément tout le réseau. Valeurs illustratives, à des fins de démonstration.
+          </figcaption>
+        </figure>
+
+        <div class="callout reveal">
+          <span class="callout-label">Comment lire ces résultats</span>
+          <p>
+            On ne lit pas «&nbsp;0,73&nbsp;» comme une prédiction certaine, mais comme
+            un repère de comparaison. Ce qui compte, c'est l'<strong>écart</strong>
+            entre deux scénarios évalués sur la même base, et la manière dont il
+            s'explique par les leviers activés.
+          </p>
+          <p>
+            Un plan de prévention crée de la valeur en évitant des situations&nbsp;:
+            quand il fonctionne, «&nbsp;rien&nbsp;» ne se passe. Le simulateur donne
+            un langage pour défendre ce non-événement — le coût du statu quo, et
+            l'effet attendu d'une action, rendus visibles.
+          </p>
+        </div>
+
+        <div class="explore-cta reveal">
+          <h3>Explorer ce modèle</h3>
+          <p>
+            Graphe et simulateur construits <strong>uniquement à partir de la
+            littérature scientifique</strong>. Les valeurs affichées servent la
+            démonstration&nbsp;; un modèle sur-mesure intégrerait ensuite vos données
+            et l'expertise de vos équipes.
+          </p>
+          <div class="tool-links" style="margin:0">
+            <a class="tool-link" href="https://hellixmap.bayesia.com/display/1b71489e10f4d684?panel=1&amp;openChat=expert" target="_blank" rel="noopener">
+              <span class="tool-link__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.2 10.5 16M17.2 7.2 13.5 16M7 6h10"/></svg>
+              </span>
+              <span class="tool-link__body">
+                <span class="tool-link__title">Explorer le graphe <span class="arrow" aria-hidden="true">↗</span></span>
+                <span class="tool-link__desc">Carte des interactions — HellixMap</span>
+              </span>
+            </a>
+            <a class="tool-link" href="https://simulator.bayesialab.com/simulator/47192424779" target="_blank" rel="noopener">
+              <span class="tool-link__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="7" r="2.3" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r="2.3" fill="currentColor" stroke="none"/><circle cx="14" cy="17" r="2.3" fill="currentColor" stroke="none"/></svg>
+              </span>
+              <span class="tool-link__body">
+                <span class="tool-link__title">Ouvrir le simulateur <span class="arrow" aria-hidden="true">↗</span></span>
+                <span class="tool-link__desc">Comparer des plans d'action — WebSimulator</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <h2>Fondements scientifiques</h2>
+        <p>
+          La structure du réseau et l'orientation de chaque relation reposent sur
+          cinq cadres théoriques majeurs du burn-out et sur des méta-analyses publiées&nbsp;:
+        </p>
+        <ul class="sources">
+          <li><strong>Bakker &amp; Demerouti (2007)</strong> — modèle <em>Job Demands-Resources</em> (JD-R)&nbsp;: les exigences alimentent l'épuisement, les ressources le tamponnent.</li>
+          <li><strong>Karasek &amp; Theorell (1990)</strong> — demande-contrôle-soutien&nbsp;: l'<em>iso-strain</em> (forte demande + faible contrôle + faible soutien) est la combinaison la plus pathogène.</li>
+          <li><strong>Siegrist (1996)</strong> — déséquilibre effort-récompense (<em>ERI</em>), facteur de risque indépendant (OR&nbsp;2,5-6,0).</li>
+          <li><strong>Maslach &amp; Jackson (1981)</strong> — <em>Maslach Burnout Inventory</em>&nbsp;: séquence épuisement → cynisme → perte d'accomplissement.</li>
+          <li><strong>Schaufeli et al. (2020)</strong> — <em>Burnout Assessment Tool</em> (BAT)&nbsp;: épuisement et distance mentale forment le noyau du syndrome.</li>
+          <li><strong>Alarcon (2011)</strong> — méta-analyse&nbsp;: charge → épuisement (r&nbsp;≈&nbsp;0,50), conflits de rôle → cynisme (r&nbsp;≈&nbsp;0,38).</li>
+          <li><strong>Greenhaus &amp; Beutell (1985)</strong> — conflit travail / vie personnelle et récupération.</li>
+          <li><strong>Sonnentag</strong> — travaux sur la récupération (<em>recovery</em>) après le travail.</li>
+        </ul>
+        <p>
+          En toute transparence, ce modèle a ses limites&nbsp;: il est statique — les
+          spirales de perte de ressources (Hobfoll, théorie COR) ne sont pas
+          représentées — et il modélise des mécanismes, pas des profils démographiques.
+          La page <a href="/methode">Méthode</a> détaille la construction, le
+          paramétrage et les limites de ce type de modèle. Les
+          <a href="/articles">articles</a> reprennent chaque mécanisme séparément,
+          source par source.
+        </p>
+
+        <div class="model-cta reveal">
+          <h3>Ce réseau ressemble à votre situation&nbsp;?</h3>
+          <p>
+            Décrivez-la en quelques lignes — le phénomène que vous cherchez à
+            comprendre, les données dont vous disposez, la décision qui est en jeu.
+            Je vous dis si c'est modélisable, et si ça ne l'est pas, pourquoi.
+          </p>
+          <div class="model-cta__actions">
+            <a class="btn btn--primary" href="/contact?sujet=burnout" data-nm-click="burnout-cta-contact">Décrire ma situation</a>
+            <a class="btn btn--ghost" href="/modeles/">Voir les autres modèles</a>
+          </div>
+          <p class="model-cta__note">Réponse sous 48 h ouvrées · sans engagement · NDA possible</p>
+        </div>
+
+        <nav class="model-pager" aria-label="Navigation entre modèles">
+          <a href="/modeles/turnover">← Modèle Turnover volontaire</a>
+          <a href="/modeles/">Tous les modèles →</a>
+        </nav>
+
+      </div>
+    </div>
+  </section>
+  </article>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand" href="/">
+        <img src="../images/logo/noumensia-badge-cream.svg" alt="" aria-hidden="true">
+        <span>Noumensia</span>
+      </a>
+      <nav aria-label="Pied de page">
+        <ul>
+          <li><a href="/modeles/">Modèles</a></li>
+          <li><a href="/articles">Articles</a></li>
+          <li><a href="/methode">Méthode</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/mentions-legales">Mentions légales</a></li>
+          <li><a href="/mentions-legales/confidentialite">Confidentialité</a></li>
+        </ul>
+      </nav>
+      <div class="footer-socials">
+        <a class="social-link"
+           href="https://www.linkedin.com/in/arthur-jouffe"
+           target="_blank" rel="noopener"
+           aria-label="Profil LinkedIn d'Arthur Jouffe (nouvel onglet)"
+           title="LinkedIn — Arthur Jouffe">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.15 2.07 2.07 0 0 1 0 4.15zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0z"/></svg>
+        </a>
+        <a class="social-link social-link--noumensia"
+           href="https://www.linkedin.com/company/noumensia"
+           target="_blank" rel="noopener"
+           aria-label="Page LinkedIn Noumensia (nouvel onglet)"
+           title="LinkedIn — Page Noumensia">
+          <svg viewBox="0 0 120 120" fill="currentColor" aria-hidden="true"><path d="M 26.750,29.500 L 26.750,75.500 L 22.000,75.500 L 30.000,89.500 L 38.000,75.500 L 33.250,75.500 L 33.250,29.500 Z"/><path d="M 33.100,29.550 L 72.700,82.350 L 68.900,85.200 L 83.700,91.600 L 81.700,75.600 L 77.900,78.450 L 38.300,25.650 Z"/><path d="M 86.750,29.500 L 86.750,75.500 L 82.000,75.500 L 90.000,89.500 L 98.000,75.500 L 93.250,75.500 L 93.250,29.500 Z"/><circle cx="30.0" cy="20.0" r="7.5"/><circle cx="90.0" cy="20.0" r="7.5"/><circle cx="30.0" cy="100.0" r="7.5"/><circle cx="90.0" cy="100.0" r="7.5"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Noumensia — Modélisation bayésienne des phénomènes RH</span>
+      <span>Arthur Jouffe · <a href="mailto:contact@noumensia.com">contact@noumensia.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+<script src="../interactions.js" defer></script>
+<!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8bd3e2f66b3c4bbba0b38cbcbbc972e0"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
