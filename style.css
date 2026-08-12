@@ -1271,18 +1271,6 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
 }
 .social-link:hover::before{ --lk-fill:100%; }
 .social-link svg{ width:16px; height:16px; position:relative; }
-
-/* Badge Noumensia — même gabarit que l'icône LinkedIn, mais fond plein +
-   monogramme "N" en négatif (comme le "in" de LinkedIn), pour se distinguer
-   du profil perso au premier coup d'œil sans dépendre du survol. */
-.social-link--noumensia{
-  background:var(--bordeaux); border-color:var(--bordeaux); color:var(--blanc-casse);
-}
-.social-link--noumensia:hover{
-  background:#8f2536; border-color:#8f2536; color:var(--blanc-casse);
-}
-.social-link--noumensia::before{ content:none; }
-.social-link--noumensia svg{ width:18px; height:18px; }
 .footer-bottom{
   display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; justify-content:space-between;
   align-items:center; margin-top:1.5rem; padding-top:1.25rem;
