@@ -1270,7 +1270,19 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
   transform:translateY(-2px);
 }
 .social-link:hover::before{ --lk-fill:100%; }
-.social-link svg{ width:16px; height:16px; position:relative; }
+.social-link > svg{ width:16px; height:16px; position:relative; }
+
+/* Petit badge « page entreprise » — se pose sur l'icône LinkedIn normale,
+   inchangée, pour distinguer la page Noumensia du profil perso sans
+   toucher à la lisibilité du logo LinkedIn lui-même. */
+.social-badge{
+  position:absolute; right:-3px; bottom:-3px; z-index:1;
+  width:14px; height:14px; border-radius:50%;
+  background:var(--bordeaux); border:1.4px solid var(--ardoise);
+  display:grid; place-items:center; pointer-events:none;
+  transition:border-color var(--t-fast);
+}
+.social-badge svg{ width:9px; height:9px; }
 .footer-bottom{
   display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; justify-content:space-between;
   align-items:center; margin-top:1.5rem; padding-top:1.25rem;
