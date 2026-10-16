@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/">
+<title>Dossiers — Noumensia</title>
+<meta name="description" content="Des sujets denses modélisés en knowledge graph, réseau causal et réseau bayésien, et rendus interrogeables sans être modélisateur. Premier dossier : l'AI Act en RH.">
+<link rel="canonical" href="https://noumensia.com/dossiers">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Noumensia">
+<meta property="og:url" content="https://noumensia.com/dossiers">
+<meta property="og:title" content="Dossiers — un sujet dense, rendu explorable">
+<meta property="og:description" content="Des sujets denses modélisés en knowledge graph, réseau causal et réseau bayésien, et rendus interrogeables sans être modélisateur. Premier dossier : l'AI Act en RH.">
+<meta property="og:image" content="https://noumensia.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="google-search-icon-dark.ico" sizes="any" media="(prefers-color-scheme: light)">
+<link rel="icon" href="google-search-icon-light.ico" sizes="any" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="32x32" href="google-search-icon-dark-32.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="32x32" href="google-search-icon-light-32.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ---- Dossiers : compléments propres aux pages de dossier ---- */
+.aa-ref{ margin-top:1.5rem; font-size:.88rem; color:var(--gris-doux); max-width:var(--maxw-prose); }
+.aa-intro{ max-width:var(--maxw-prose); color:var(--gris-doux); margin:.25rem 0 2rem; }
+.aa-timeline{ list-style:none; max-width:52rem; border-left:2px solid var(--ardoise-3); margin-left:.4rem; }
+.aa-timeline li{ position:relative; padding:0 0 1.6rem 1.6rem; }
+.aa-timeline li:last-child{ padding-bottom:0; }
+.aa-timeline li::before{ content:""; position:absolute; left:-7px; top:.45rem; width:12px; height:12px;
+  border-radius:50%; background:var(--ardoise); border:2px solid var(--gris-doux); }
+.aa-timeline li.aa-past::before{ background:var(--gris-doux); }
+.aa-timeline li.aa-key::before{ background:var(--bordeaux-vif); border-color:var(--bordeaux-vif); box-shadow:var(--ring); }
+.aa-date{ font-family:var(--font-display); font-size:1.2rem; font-weight:600; margin-right:.7rem; }
+.aa-status{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--gris-doux); border:1px solid var(--ardoise-3); border-radius:999px; padding:.1rem .55rem; vertical-align:2px; }
+.aa-past .aa-status{ color:var(--blanc-casse); }
+.aa-key .aa-status{ color:var(--bordeaux-vif); border-color:var(--bordeaux-vif); }
+.aa-timeline p{ margin-top:.35rem; max-width:var(--maxw-prose); color:var(--blanc-casse); font-size:.98rem; }
+.aa-points{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-top:1.75rem; }
+.aa-points .callout{ margin:0; }
+@media (max-width:960px){ .aa-points{ grid-template-columns:1fr; } }
+.aa-lab-note{ max-width:var(--maxw-prose); font-size:.92rem; color:var(--gris-doux); margin:1.5rem 0 1rem;
+  padding-left:.9rem; border-left:2px solid var(--ardoise-3); }
+.aa-lab-note a{ color:var(--bordeaux-vif); }
+.aa-consent{ display:flex; gap:.6rem; align-items:flex-start; font-size:.9rem; margin:.25rem 0 1.25rem; cursor:pointer; }
+.aa-consent input{ margin-top:.3rem; accent-color:var(--bordeaux-vif); }
+.contact .contact-note a{ color:inherit; text-decoration:underline; }
+
+/* Ce qui est tranché / ce qui ne l'est pas */
+.aa-fog{ display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+@media (max-width:860px){ .aa-fog{ grid-template-columns:1fr; } }
+.aa-fog__col{ padding:1.4rem 1.5rem; border-radius:10px; border:1px solid var(--ardoise-3); background:rgba(255,255,255,.03); }
+.aa-fog__h{ font-family:var(--font-body); font-size:.78rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin:0 0 1rem; }
+.aa-fog__h--sure{ color:var(--blanc-casse); }
+.aa-fog__h--open{ color:var(--bordeaux-vif); }
+.aa-fog__list{ list-style:none; margin:0; padding:0; }
+.aa-fog__list li{ position:relative; padding:0 0 .95rem 1.2rem; font-size:.96rem; color:var(--gris-doux); line-height:1.55; }
+.aa-fog__list li:last-child{ padding-bottom:0; }
+.aa-fog__list li::before{ content:""; position:absolute; left:0; top:.55rem; width:7px; height:7px; border-radius:50%; background:var(--blanc-casse); }
+.aa-fog__col:last-child .aa-fog__list li::before{ background:transparent; border:1.5px solid var(--bordeaux-vif); }
+.aa-fog__list strong{ color:var(--blanc-casse); font-weight:600; }
+.aa-fog__note{ margin-top:1.25rem; font-size:.88rem; color:var(--gris-doux); }
+.aa-fog__note a{ color:var(--bordeaux-vif); }
+
+/* Trois questions, trois outils */
+.aa-steps{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; counter-reset:none; }
+@media (max-width:960px){ .aa-steps{ grid-template-columns:1fr; } }
+.aa-step{ height:100%; display:flex; flex-direction:column; gap:.6rem; padding:1.4rem 1.4rem 1.2rem; border-radius:12px;
+  border:1px solid var(--ardoise-3); background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+  color:var(--blanc-casse); text-decoration:none;
+  transition:border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base); }
+.aa-step:hover{ text-decoration:none; transform:translateY(-3px); border-color:var(--bordeaux-vif); box-shadow:0 10px 30px rgba(0,0,0,.28); }
+.aa-step__n{ width:2rem; height:2rem; border-radius:50%; display:grid; place-items:center; font-family:var(--font-mono); font-size:.9rem;
+  background:var(--bordeaux); color:#F5EEDD; }
+.aa-step__q{ font-family:var(--font-display); font-size:1.35rem; font-weight:600; line-height:1.2; }
+.aa-step__d{ font-size:.93rem; color:var(--gris-doux); line-height:1.5; flex:1; }
+.aa-step__t{ font-size:.82rem; font-weight:600; color:var(--bordeaux-vif); }
+.aa-finding{ margin-top:1.75rem; padding:1.4rem 1.5rem; border-radius:10px; border:1px solid var(--ardoise-3);
+  border-left:3px solid var(--bordeaux-vif); background:rgba(255,255,255,.035); max-width:52rem; }
+.aa-finding p{ font-size:1rem; color:var(--blanc-casse); margin:0 0 .6rem; }
+.aa-finding .aa-finding__fine{ font-size:.86rem; color:var(--gris-doux); margin:0; }
+
+/* Vue d'ensemble */
+.aa-split{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:2.5rem; align-items:center; }
+@media (max-width:960px){ .aa-split{ grid-template-columns:1fr; } }
+.aa-shot{ display:block; border-radius:12px; overflow:hidden; border:1px solid var(--ardoise-3); box-shadow:var(--shadow-md); background:#E9ECF0; }
+.aa-shot img{ display:block; width:100%; height:auto; }
+.aa-shot:hover{ border-color:var(--bordeaux-vif); }
+
+/* Sous le capot */
+.aa-layers{ list-style:none; margin:0 0 .5rem; padding:0; display:grid; gap:.6rem; max-width:52rem; counter-reset:layer; }
+.aa-layers li{ counter-increment:layer; display:grid; grid-template-columns:11rem 1fr; gap:1rem; padding:.9rem 1.1rem; border-radius:8px;
+  border:1px solid var(--ardoise-3); background:rgba(255,255,255,.025); font-size:.95rem; color:var(--gris-doux); }
+.aa-layers__k{ font-weight:600; color:var(--blanc-casse); }
+.aa-layers__k::before{ content:counter(layer) " · "; font-family:var(--font-mono); font-weight:400; color:var(--bordeaux-vif); }
+@media (max-width:640px){ .aa-layers li{ grid-template-columns:1fr; gap:.25rem; } }
+.aa-tools-4{ grid-template-columns:repeat(2,1fr); }
+@media (max-width:640px){ .aa-tools-4{ grid-template-columns:1fr; } }
+
+/* Hub des dossiers */
+.ds-card{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:0; border-radius:14px; overflow:hidden;
+  border:1px solid var(--ardoise-3); background:rgba(255,255,255,.03); color:var(--blanc-casse); text-decoration:none;
+  transition:border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base); }
+.ds-card:hover{ text-decoration:none; transform:translateY(-3px); border-color:var(--bordeaux-vif); box-shadow:0 10px 30px rgba(0,0,0,.28); }
+@media (max-width:860px){ .ds-card{ grid-template-columns:1fr; } }
+.ds-card__body{ padding:1.75rem 1.75rem 1.5rem; display:flex; flex-direction:column; gap:.75rem; }
+.ds-card__tag{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--bordeaux-vif); }
+.ds-card__title{ font-family:var(--font-display); font-size:1.7rem; font-weight:600; line-height:1.15; }
+.ds-card__desc{ color:var(--gris-doux); font-size:.98rem; line-height:1.55; }
+.ds-card__meta{ display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.25rem; }
+.ds-card__meta span{ font-size:.78rem; color:var(--gris-doux); border:1px solid var(--ardoise-3); border-radius:999px; padding:.15rem .6rem; }
+.ds-card__go{ margin-top:auto; font-weight:600; color:var(--bordeaux-vif); font-size:.92rem; }
+.ds-card__img{ background:#E9ECF0; min-height:14rem; }
+.ds-card__img img{ display:block; width:100%; height:100%; object-fit:cover; object-position:left top; }
+html[data-theme="light"] .aa-fog__col, html[data-theme="light"] .aa-step, html[data-theme="light"] .aa-finding,
+html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
+.aa-finding .callout-label{ font-family:var(--font-body); font-size:.72rem; letter-spacing:.05em; font-weight:600;
+  text-transform:uppercase; color:var(--bordeaux-vif); margin-bottom:.6rem; display:block; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://noumensia.com/dossiers#webpage",
+      "url": "https://noumensia.com/dossiers",
+      "name": "Dossiers — Noumensia",
+      "description": "Des sujets denses modélisés en knowledge graph, réseau causal et réseau bayésien, et rendus interrogeables sans être modélisateur. Premier dossier : l'AI Act en RH.",
+      "inLanguage": "fr-FR",
+      "dateModified": "2026-10-16",
+      "isPartOf": { "@id": "https://noumensia.com/#website" },
+      "about": { "@id": "https://noumensia.com/#org" },
+      "breadcrumb": { "@id": "https://noumensia.com/dossiers#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://noumensia.com/dossiers#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://noumensia.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Dossiers", "item": "https://noumensia.com/dossiers" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="images/logo/noumensia-badge-cream.svg" alt="" aria-hidden="true" class="brand-icon">
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Accueil</a></li>
+      <li><a href="/modeles/">Modèles</a></li>
+      <li><a href="/dossiers" aria-current="page">Dossiers</a></li>
+      <li><a href="/articles">Articles</a></li>
+      <li><a href="/methode">Méthode</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/a-propos">À propos</a></li>
+      <li><a href="/contact" class="nav-cta">Prendre contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section" id="dossiers">
+    <div class="wrap reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span>Dossiers</p>
+      <p class="eyebrow">Dossiers</p>
+      <h1>Un sujet dense, rendu explorable</h1>
+      <p class="lede">
+        Certains sujets se lisent mal en fiche de synthèse&nbsp;: un règlement de 113 articles,
+        un phénomène aux dizaines de causes croisées. Un dossier, c'est ce sujet modélisé avec
+        les mêmes outils que mes modèles RH, knowledge graph, réseau causal, réseau bayésien,
+        puis livré sous une forme qu'on peut interroger sans être modélisateur.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="liste">
+    <div class="wrap reveal">
+      <a class="ds-card" href="/dossiers/ai-act/" data-nm-click="dossiers-ai-act">
+        <div class="ds-card__body">
+          <span class="ds-card__tag">Disponible · mis à jour le 16 octobre 2026</span>
+          <span class="ds-card__title">L'AI&nbsp;Act en RH, sans le brouillard</span>
+          <span class="ds-card__desc">Le règlement européen sur l'IA, consolidé après l'Omnibus
+          de juillet&nbsp;2026, modélisé pour répondre à trois questions&nbsp;: mon outil RH est-il
+          concerné, que dois-je faire et pour quand, par quoi commencer.</span>
+          <span class="ds-card__meta"><span>Parcours de qualification</span><span>Registre de 73 obligations</span><span>Réseau bayésien</span><span>Knowledge graph</span></span>
+          <span class="ds-card__go">Ouvrir le dossier →</span>
+        </div>
+        <div class="ds-card__img"><img src="/images/dossiers/ai-act-cartographie.png" alt="" loading="lazy" width="1200" height="750"></div>
+      </a>
+      <p class="aa-lab-note">D'autres dossiers suivront, sur des sujets où le flou coûte cher
+      à ceux qui doivent décider.</p>
+    </div>
+  </section>
+
+  <section class="section" id="principe">
+    <div class="wrap reveal">
+      <p class="eyebrow">Le principe</p>
+      <h2>La complexité reste dans le modèle, pas dans la page</h2>
+      <div class="prose">
+        <p>Chaque dossier se lit à deux niveaux. En surface, des questions concrètes et des
+        outils qui y répondent en quelques minutes. Dessous, accessible d'un clic, tout ce qui
+        les fait tenir&nbsp;: la structure du modèle, ses sources, les hypothèses qui relèvent du
+        jugement et ce que le modèle ne sait pas faire.</p>
+        <p>C'est aussi ce que je livre en mission&nbsp;: un modèle que vos équipes peuvent
+        interroger, avec ses hypothèses écrites, plutôt qu'un rapport qui conclut à leur place.</p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="/methode">Voir la méthode</a>
+        <a class="btn btn--ghost" href="/contact">Proposer un sujet</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand" href="/">
+        <img src="images/logo/noumensia-icon-light.svg" alt="" aria-hidden="true">
+        <span>Noumensia</span>
+      </a>
+      <nav aria-label="Pied de page">
+        <ul>
+          <li><a href="/modeles/">Modèles</a></li>
+          <li><a href="/dossiers" aria-current="page">Dossiers</a></li>
+          <li><a href="/articles">Articles</a></li>
+          <li><a href="/methode">Méthode</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/mentions-legales">Mentions légales</a></li>
+          <li><a href="/mentions-legales/confidentialite">Confidentialité</a></li>
+        </ul>
+      </nav>
+      <div class="footer-socials">
+        <a class="social-link"
+           href="https://www.linkedin.com/in/arthur-jouffe"
+           target="_blank" rel="noopener"
+           aria-label="Profil LinkedIn d'Arthur Jouffe (nouvel onglet)"
+           title="LinkedIn — Arthur Jouffe">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.15 2.07 2.07 0 0 1 0 4.15zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0z"/></svg>
+        </a>
+        <a class="social-link"
+           href="https://www.linkedin.com/company/noumensia"
+           target="_blank" rel="noopener"
+           aria-label="Page LinkedIn Noumensia (nouvel onglet)"
+           title="LinkedIn — Page Noumensia">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.15 2.07 2.07 0 0 1 0 4.15zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0z"/></svg>
+          <span class="social-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M6.5 4h11v16h-11z M9 20v-4h2v4z M8.3 6.5h2.2v2.5H8.3z M11.5 6.5h2.2v2.5h-2.2z M8.3 10.5h2.2v2.5H8.3z M11.5 10.5h2.2v2.5h-2.2z"/></svg></span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Noumensia — Modélisation bayésienne des phénomènes RH</span>
+      <span>Arthur Jouffe · <a href="mailto:contact@noumensia.com">contact@noumensia.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.formspree = window.formspree || function () {
+    (formspree.q = formspree.q || []).push(arguments);
+  };
+  formspree('initForm', { formElement: '#aiact-form', formId: 'mojzoazo' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+<script src="script.js"></script>
+<script src="interactions.js" defer></script>
+<!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8bd3e2f66b3c4bbba0b38cbcbbc972e0"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

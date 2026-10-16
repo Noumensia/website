@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>AI Act : quels facteurs pèsent le plus sur le préjudice — Noumensia</title>
+<style>
+:root{
+  --ground:#E9ECF0; --surface:#FFFFFF; --surface-2:#F3F5F8;
+  --ink:#131820; --ink-2:#4E5866; --ink-3:#78828F;
+  --rule:#D0D6DE; --rule-strong:#B4BDC8;
+  --accent:#2A78D6; --accent-soft:#DCE7F5;
+  --pos:#256ABF; --neg:#C0392B; --mid:#F0EFEC;
+  --pos-soft:#DCE7F5; --neg-soft:#F8E3E0;
+  --focus:#2A78D6;
+  --shadow:0 1px 2px rgba(19,24,32,.06),0 8px 24px rgba(19,24,32,.08);
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
+  --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
+  --rule:#28313D; --rule-strong:#3A4653;
+  --accent:#5598E7; --accent-soft:#1B2C42;
+  --pos:#5598E7; --neg:#EB6A5C; --mid:#2A2F36;
+  --pos-soft:#17293F; --neg-soft:#33191A;
+  --focus:#5598E7;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
+  --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
+  --rule:#28313D; --rule-strong:#3A4653;
+  --accent:#5598E7; --accent-soft:#1B2C42;
+  --pos:#5598E7; --neg:#EB6A5C; --mid:#2A2F36;
+  --pos-soft:#17293F; --neg-soft:#33191A;
+  --focus:#5598E7;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+     font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.wrap{max-width:1680px;margin:0 auto;padding:22px 20px 30px;display:flex;flex-direction:column;gap:16px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;gap:20px 32px;
+       border-bottom:1px solid var(--rule);padding-bottom:16px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+         color:var(--ink-3);margin:0 0 6px}
+h1{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.1;margin:0;
+   letter-spacing:-.015em;text-wrap:balance}
+.sub{margin:8px 0 0;color:var(--ink-2);max-width:70ch}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+       box-shadow:var(--shadow)}
+
+/* argument de comptage */
+.count{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 40px;align-items:center;
+       padding:18px 22px}
+@media (max-width:880px){.count{grid-template-columns:1fr}}
+.count h2{font-family:var(--serif);font-size:21px;font-weight:600;margin:0 0 7px}
+.count p{margin:0 0 8px;font-size:12.5px;color:var(--ink-2);max-width:70ch;line-height:1.6}
+.count p:last-child{margin:0}
+.count b{color:var(--ink)}
+.vs{display:flex;gap:14px;align-items:stretch}
+.vsbox{background:var(--surface-2);border:1px solid var(--rule);border-radius:6px;
+       padding:13px 18px;min-width:132px;text-align:center}
+.vsbox b{display:block;font-family:var(--mono);font-size:27px;font-weight:500;line-height:1.1;
+         font-variant-numeric:tabular-nums}
+.vsbox span{display:block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;
+            color:var(--ink-3);margin-top:5px;line-height:1.3}
+.vsbox.hi{background:var(--pos-soft);border-color:var(--pos)}
+.vsbox.hi b{color:var(--pos)}
+.vsarrow{display:flex;align-items:center;font-family:var(--mono);font-size:19px;
+         color:var(--ink-3)}
+.formula{font-family:var(--mono);font-size:13px;background:var(--surface-2);
+         border:1px solid var(--rule);border-radius:5px;padding:11px 14px;margin:10px 0 4px;
+         overflow-x:auto;white-space:nowrap;color:var(--ink)}
+
+/* tornade */
+.tor{padding:18px 22px 22px}
+.torhead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;
+         margin-bottom:6px}
+.torhead h2{font-family:var(--serif);font-size:21px;font-weight:600;margin:0}
+.torhead p{margin:4px 0 0;font-size:12.5px;color:var(--ink-2);max-width:66ch}
+.torhead select{font:inherit;font-size:13px;padding:7px 10px;border-radius:4px;
+                border:1px solid var(--rule-strong);background:var(--surface-2);color:var(--ink);
+                max-width:100%}
+.base{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin:12px 0 2px}
+.base b{color:var(--ink);font-size:15px}
+#tornado{width:100%;display:block}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-2);margin-top:12px;
+        padding-top:12px;border-top:1px solid var(--rule)}
+.legend span{display:flex;gap:7px;align-items:center}
+.legend i{width:12px;height:12px;border-radius:2px;display:block}
+.busy{font-size:12px;color:var(--ink-3);font-family:var(--mono)}
+
+.netwrap{display:grid;grid-template-columns:376px minmax(0,1fr);gap:16px;align-items:stretch}
+@media (max-width:1000px){.netwrap{grid-template-columns:1fr}}
+.insp{max-height:760px;display:flex;flex-direction:column}
+.insp-scroll{overflow-y:auto;padding:16px}
+.lab{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;
+     color:var(--ink-3);margin:0 0 6px}
+.insp h3{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.25;margin:0 0 10px}
+.insp .cm{font-size:12.5px;color:var(--ink-2);line-height:1.55}
+.insp .cm b{color:var(--ink)}
+.insp .cm ul{margin:6px 0;padding-left:18px}
+.wgt{margin-top:14px}
+.wgt h4{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;
+        color:var(--ink-3);margin:0 0 6px}
+.we{display:grid;grid-template-columns:52px 1fr;gap:9px;padding:7px 0;
+    border-top:1px solid var(--rule);font-size:12px;align-items:start}
+.we .w{font-family:var(--mono);font-size:12.5px;font-weight:500;text-align:right;
+       font-variant-numeric:tabular-nums;padding-top:1px}
+.we .w.p{color:var(--pos)} .we .w.n{color:var(--neg)}
+.we button{font:inherit;font-size:12px;background:none;border:0;padding:0;cursor:pointer;
+           color:var(--ink);text-align:left;line-height:1.35;font-weight:600}
+.we button:hover{text-decoration:underline}
+.we .why{display:block;color:var(--ink-3);font-size:11.5px;margin-top:3px;line-height:1.45;
+         font-weight:400}
+table.cpt{border-collapse:collapse;width:100%;margin-top:14px;font-size:11px}
+table.cpt th{text-align:left;font-weight:600;color:var(--ink-3);font-size:10px;
+             letter-spacing:.04em;text-transform:uppercase;padding:4px 5px;
+             border-bottom:1px solid var(--rule-strong)}
+table.cpt td{padding:3px 5px;border-bottom:1px solid var(--rule);font-family:var(--mono);
+             font-size:10.5px;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+table.cpt td.pa{font-family:var(--sans);font-size:10.5px}
+table.cpt td.v{color:var(--ink);font-weight:500;text-align:right}
+.graph{position:relative;overflow:hidden;min-height:760px;border-radius:6px}
+#stage{display:block;width:100%;height:100%;cursor:grab;background:var(--surface);touch-action:none}
+#stage.dragging{cursor:grabbing}
+.tb{position:absolute;top:12px;right:12px;z-index:3;display:flex;gap:6px}
+.tbtn{font:inherit;font-size:12px;padding:5px 10px;border-radius:4px;cursor:pointer;
+      border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink-2);
+      box-shadow:var(--shadow)}
+.tbtn:hover{color:var(--ink);border-color:var(--ink-2)}
+.glegend{position:absolute;left:14px;top:12px;z-index:3;background:var(--surface);
+         border:1px solid var(--rule);border-radius:5px;padding:9px 12px;font-size:11.5px;
+         color:var(--ink-2);box-shadow:var(--shadow)}
+.glegend div{display:flex;gap:8px;align-items:center;margin-top:5px}
+.glegend i{width:22px;height:3px;border-radius:2px;display:block}
+.n-label{font-family:var(--sans);font-size:10px;font-weight:500;pointer-events:none}
+.edge{fill:none;stroke-linecap:round}
+.hint{position:absolute;left:14px;bottom:12px;font-size:11.5px;color:var(--ink-3);
+      background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:4px 9px;z-index:3}
+footer{font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:12px}
+footer code{font-family:var(--mono);font-size:11px}
+</style>
+
+
+<meta name="description" content="Réseau causal propositionnel de l'AI Act : cinquante propositions, quatre-vingt-trois effets directs signés, tables engendrées par formule. Effets totaux sur une cible au choix.">
+<link rel="canonical" href="https://noumensia.com/dossiers/ai-act/effets-causaux">
+<meta property="og:title" content="AI Act : quels facteurs pèsent le plus sur le préjudice">
+<meta property="og:description" content="Réseau causal propositionnel de l'AI Act : cinquante propositions, quatre-vingt-trois effets directs signés, tables engendrées par formule. Effets totaux sur une cible au choix.">
+<meta property="og:image" content="https://noumensia.com/images/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-400-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-600.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+html,body{overflow-x:clip}
+.nm-bar{position:relative;z-index:9999;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 18px;
+  padding:9px clamp(14px,3vw,28px);background:#1E2630;color:#F2EFEA;border-bottom:1px solid #3A4756;
+  font:500 13px/1.4 "IBM Plex Sans",-apple-system,sans-serif;letter-spacing:.01em}
+.nm-bar a{color:#F2EFEA;text-decoration:none}
+.nm-bar a:hover{color:#D98A95}
+.nm-bar a:focus-visible{outline:2px solid #D98A95;outline-offset:2px;border-radius:2px}
+.nm-bar__crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0}
+.nm-bar__brand{display:inline-flex;align-items:center;gap:8px;font-family:"Newsreader",Georgia,serif;font-size:15px;font-weight:500}
+.nm-bar__brand img{width:20px;height:20px;display:block}
+.nm-bar__sep{color:#A8B4C2}
+.nm-bar__here{color:#A8B4C2}
+.nm-bar__links{display:flex;flex-wrap:wrap;gap:4px 16px}
+.nm-bar__cta{color:#D98A95 !important}
+
+/* ---- Carrosserie : en-tête écrit pour un lecteur métier ---- */
+:root{--nm-bx:#7A2B3D;--nm-bx-soft:#F6E8EB}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nm-bx:#E59AA8;--nm-bx-soft:#36202A}}
+:root[data-theme="dark"]{--nm-bx:#E59AA8;--nm-bx-soft:#36202A}
+.nm-intro{max-width:1440px;margin:0 auto;padding:30px clamp(16px,3vw,40px) 6px;font-family:var(--sans);color:var(--ink)}
+.nm-kicker{font:500 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--nm-bx);margin:0 0 10px}
+.nm-intro h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.2vw,44px);line-height:1.08;letter-spacing:-.01em;margin:0 0 14px;max-width:24ch;color:var(--ink)}
+.nm-lede{font-size:clamp(16px,1.6vw,18px);line-height:1.55;color:var(--ink-2);max-width:68ch;margin:0 0 22px}
+.nm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 14px}
+@media (max-width:900px){.nm-grid{grid-template-columns:1fr}}
+.nm-card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow)}
+.nm-card h2{font:600 12px/1.3 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+.nm-card ul,.nm-card ol{margin:0;padding-left:1.15em}
+.nm-card li{font-size:14.5px;line-height:1.5;color:var(--ink);margin:0 0 6px}
+.nm-card p{font-size:14.5px;line-height:1.5;color:var(--ink);margin:0 0 6px}
+.nm-card--warn{border-left:3px solid var(--nm-bx)}
+.nm-meta{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:13px;color:var(--ink-3);margin:6px 0 4px}
+.nm-meta a{color:var(--nm-bx);text-decoration:none;border-bottom:1px solid currentColor}
+.nm-steps{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}
+.nm-steps a,.nm-steps span{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 var(--sans);padding:8px 12px;border-radius:999px;border:1px solid var(--rule);color:var(--ink-2);text-decoration:none;background:var(--surface)}
+.nm-steps .on{border-color:var(--nm-bx);color:var(--nm-bx);background:var(--nm-bx-soft)}
+.nm-steps b{font:600 11px/1 var(--mono)}
+.nm-next{max-width:1440px;margin:18px auto 0;padding:0 clamp(16px,3vw,40px)}
+.nm-next a{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 20px;padding:18px 20px;border-radius:10px;
+  background:var(--nm-bx-soft);border:1px solid var(--nm-bx);color:var(--ink);text-decoration:none;font-family:var(--sans)}
+.nm-next small{display:block;font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--nm-bx);margin-bottom:4px}
+.nm-next strong{font-family:var(--serif);font-size:21px;font-weight:600}
+.nm-next span.go{font-weight:600;color:var(--nm-bx)}
+.nm-capot{max-width:1440px;margin:22px auto 40px;padding:0 clamp(16px,3vw,40px);font-family:var(--sans)}
+.nm-capot>summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;padding:16px 20px;border-radius:10px;
+  border:1px dashed var(--rule-strong,var(--rule));background:var(--surface-2);color:var(--ink-2);font-size:14.5px}
+.nm-capot>summary::-webkit-details-marker{display:none}
+.nm-capot>summary b{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink)}
+.nm-capot>summary b::before{content:"▸ ";color:var(--nm-bx)}
+.nm-capot[open]>summary b::before{content:"▾ "}
+.nm-capot[open]>summary{margin-bottom:16px}
+.nm-capot .stats{margin:0 0 16px}
+@media (max-width:760px){.panel,.insp,aside{min-width:0!important;max-width:100%!important;box-sizing:border-box}
+  .panel{grid-template-columns:minmax(0,1fr)!important}
+  .panel table{display:block;overflow-x:auto}
+  .tl-track{overflow-x:auto;-webkit-overflow-scrolling:touch}}
+.wrap>.nm-intro,.wrap>.nm-next,.wrap>.nm-capot{max-width:none;margin-left:0;margin-right:0;padding-left:0;padding-right:0}
+.wrap>.nm-intro{padding-top:8px}
+@media print{.nm-bar,.nm-capot,.nm-next{display:none}}
+</style>
+</head>
+<body>
+<nav class="nm-bar" aria-label="Noumensia"><span class="nm-bar__crumbs"><a class="nm-bar__brand" href="/"><img src="/images/logo/noumensia-icon-light.svg" alt="" aria-hidden="true">Noumensia</a><span class="nm-bar__sep" aria-hidden="true">/</span><a href="/dossiers">Dossiers</a><span class="nm-bar__sep" aria-hidden="true">/</span><a href="/dossiers/ai-act/">AI Act</a><span class="nm-bar__sep" aria-hidden="true">/</span><span class="nm-bar__here">Effets directs signés</span></span><span class="nm-bar__links"><a href="/dossiers/ai-act/#outils">Les outils du dossier</a><a class="nm-bar__cta" href="/dossiers/ai-act/#question">Poser une question</a></span></nav>
+
+<div class="wrap">
+<section class="nm-intro" aria-labelledby="nm-h1"><p class="nm-kicker">Dossier AI Act · Sous le capot · Réseau bayésien</p><h1 id="nm-h1">Quels facteurs pèsent le plus sur le préjudice&nbsp;?</h1><p class="nm-lede">Le diagramme causal, quantifié. Chaque lien reçoit un poids entre −1 et +1 et le réseau calcule l'effet total de chaque facteur sur une cible au choix, à travers toutes les chaînes du réseau et pas seulement le lien direct.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>L'effet total de chaque proposition sur une cible : préjudice, amende, discrimination…</li><li>Une paramétrisation compacte : 133 paramètres lisibles au lieu de 319 lignes de table.</li><li>Chaque poids accompagné de sa justification.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Choisissez une cible dans la liste.</li><li>Lisez le classement des effets totaux.</li><li>Cliquez un nœud pour voir ses poids et leurs raisons.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Les poids sont des jugements d'expert, pas des mesures. Ce réseau a été construit sur le texte de 2024 avec le calendrier de l'Omnibus ; le <a href="/dossiers/ai-act/simulateur-sanction">simulateur de sanction</a>, plus récent, tient compte du texte consolidé.</p></div></div><p class="nm-meta"><span>Réseau bayésien · 50 propositions · 83 effets</span><a href="#capot">Comment c'est construit</a></p></section>
+
+
+
+
+<div class="panel tor">
+  <div class="torhead">
+    <div>
+      <h2>Effets totaux sur une proposition cible</h2>
+      <p>Écart de probabilité de la cible selon que chaque proposition amont est forcée vraie
+        ou fausse — tout le reste laissé à sa loi. C'est l'effet <b>total</b>, propagé par toutes
+        les chaînes du réseau, pas le poids d'un arc.</p>
+    </div>
+    <select id="target" aria-label="Proposition cible"></select>
+  </div>
+  <p class="base" id="base"></p>
+  <svg id="tornado" role="img" aria-label="Effet total de chaque proposition amont sur la cible"></svg>
+  <div class="legend">
+    <span><i style="background:var(--neg)"></i>forcer cette proposition à vraie <b>augmente</b> la probabilité de la cible</span>
+    <span><i style="background:var(--pos)"></i>la <b>réduit</b></span>
+    <span class="busy" id="busy"></span>
+  </div>
+</div>
+
+<div class="netwrap">
+  <aside class="panel insp"><div class="insp-scroll" id="insp"></div></aside>
+  <div class="panel graph">
+    <div class="tb"><button class="tbtn" id="btn-fit">Vue d'ensemble</button></div>
+    <div class="glegend">Épaisseur de l'arc = intensité de l'effet
+      <div><i style="background:var(--pos)"></i>effet positif (promoteur)</div>
+      <div><i style="background:var(--neg)"></i>effet négatif (inhibiteur)</div>
+    </div>
+    <svg id="stage" role="img" aria-label="Réseau causal propositionnel"></svg>
+    <div class="hint">Cliquer une proposition pour lire ses effets entrants, leur justification et sa table engendrée</div>
+  </div>
+</div>
+
+
+<div class="nm-next"><a href="/dossiers/ai-act/"><span><small>Retour au dossier</small><strong>Les trois outils pour un DRH</strong></span><span class="go">Continuer →</span></a></div>
+<details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>La formule noisy-OR, ses hypothèses et ce qu'elle ne sait pas représenter</span></summary>
+<div class="panel count">
+  <div>
+    <h2>Pourquoi la paramétrisation par formule</h2>
+    <p>Le diagramme « Mécanique causale » de ce dossier a produit la structure&nbsp;: 50&nbsp;concepts, 78&nbsp;relations
+      causales. Trois de ses nœuds ont cinq parents, un en a six. En tables tabulaires
+      complètes, un nœud booléen à six parents booléens demande <b>64&nbsp;lignes</b>, soit
+      64&nbsp;paramètres libres à défendre un par un. Personne ne peut faire ça honnêtement.</p>
+    <p>La formule ci-dessous engendre les 319&nbsp;lignes du réseau à partir de
+      <b>un poids par arc et une fuite par nœud</b>. Chaque paramètre a une lecture en langue
+      naturelle, donc chacun est contestable isolément.</p>
+    <div class="formula">P(X = Vrai | parents) = [ 1 − (1−b) · Π<sub>promoteurs actifs</sub> (1−wᵢ) ] · Π<sub>inhibiteurs actifs</sub> (1−|wⱼ|)</div>
+    <p><b>b</b>, la fuite&nbsp;: probabilité que X soit vrai quand aucun parent ne l'est — elle
+      absorbe les causes hors modèle. &nbsp;·&nbsp; <b>wᵢ&nbsp;&gt;&nbsp;0</b>, promoteur&nbsp;:
+      activer ce seul parent fait passer P(X) de b à b&nbsp;+&nbsp;(1−b)·wᵢ. &nbsp;·&nbsp;
+      <b>wⱼ&nbsp;&lt;&nbsp;0</b>, inhibiteur&nbsp;: activer ce seul parent multiplie P(X) par
+      (1−|wⱼ|). Famille noisy-OR à inhibiteurs, d'après Pearl (1988), <i>Probabilistic Reasoning
+      in Intelligent Systems</i>, §4.3.2, généralisée aux effets négatifs.</p>
+    <p><b>Ce que la formule ne sait pas faire.</b> Les promoteurs se composent sans interaction
+      ni effet de seuil, et les inhibiteurs sont multiplicatifs — donc le réseau est
+      <b>monotone</b>. Il ne peut pas représenter une non-monotonie du type «&nbsp;high-strain
+      contre passive job&nbsp;». Quand une telle relation compte, il faut une table tabulaire,
+      et c'est exactement ce que fait le réseau « Arbitrage de conformité ». Les deux coexistent pour cette raison.</p>
+  </div>
+  <div class="vs">
+    <div class="vsbox"><b>319</b><span>lignes de table engendrées</span></div>
+    <div class="vsarrow">←</div>
+    <div class="vsbox hi"><b>133</b><span>paramètres réellement posés</span></div>
+  </div>
+</div>
+<footer>Propositional Causal Bayesian Network — propositions booléennes, effets directs signés,
+tables engendrées par formule. Fichier BayesiaLab associé&nbsp;:
+<code>06_AI_Act_Propositional_Causal_BN.json</code>. Les propositions d'effet se lisent
+«&nbsp;au moins une fois sur l'exercice&nbsp;», pas comme des taux par décision&nbsp;: dans une
+famille noisy-OR les fuites s'accumulent le long des chaînes, ce sont donc les <b>écarts</b> qui
+portent l'information, pas les niveaux absolus.</footer>
+</details>
+</div>
+
+<script>
+const D = {"nodes":[{"id":0,"name":"ANX3","longName":"Le système relève de l'annexe III, point 4","color":"#3498DB","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":187.39999999999998,"y":70.0,"probabilityTable":[[0.15000000000000002,0.85]],"comment":"Recrutement, sélection, décisions sur la relation de travail, attribution de tâches, suivi de performance. Racine du réseau : c'est cette proposition qui rend tout le reste juridiquement opérant.<br><b>Source</b> — art. 6, §2 ; annexe III, point 4.<br><b>Fuite</b> — 0.85 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Contexte","leak":0.85,"parents":[]},{"id":1,"name":"HIST","longName":"L'entraînement utilise des historiques RH internes","color":"#3498DB","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":497.0,"y":70.0,"probabilityTable":[[0.6,0.4]],"comment":"Le système a été entraîné ou réentraîné sur les historiques de recrutement, d'évaluation ou de promotion de l'organisation.<br><b>Source</b> — considérant 67 : « des biais peuvent être inhérents à des jeux de données sous-jacents, en particulier lorsque des données historiques sont utilisées ».<br><b>Fuite</b> — 0.40 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Contexte","leak":0.4,"parents":[]},{"id":2,"name":"POP","longName":"Plus de 2 000 personnes sont concernées par an","color":"#3498DB","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":806.6,"y":70.0,"probabilityTable":[[0.8,0.2]],"comment":"Seuil de volume au-delà duquel un écart de traitement devient statistiquement établissable et le préjudice agrégé devient significatif.<br><b>Source</b> — art. 7, §2, f) : « l'ampleur potentielle […] sa capacité d'affecter plusieurs personnes » ; art. 99, §7, a).<br><b>Fuite</b> — 0.20 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Contexte","leak":0.2,"parents":[]},{"id":3,"name":"POUVOIR","longName":"Il existe un déséquilibre de pouvoir marqué","color":"#3498DB","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1116.1999999999998,"y":70.0,"probabilityTable":[[0.65,0.35],[0.26,0.74]],"comment":"La personne concernée est en position de dépendance vis-à-vis du déployeur.<br><b>Source</b> — art. 7, §2, h), qui traite explicitement ce déséquilibre comme un facteur aggravant. La relation de travail et la relation candidat-employeur en sont les archétypes.<br><b>Effets directs entrants</b><ul><li>Le système relève de l'annexe III, point 4 <b>+0.60</b></li></ul><b>Fuite</b> — 0.35 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Contexte","leak":0.35,"parents":[{"id":0,"w":0.6,"why":"[RÈGLEMENT] L'art. 7, §2, h) désigne nommément la situation de dépendance vis-à-vis du déployeur. Un usage relevant de l'annexe III.4 place par construction la personne dans cette situation : candidat face à un employeur, salarié face à son évaluateur."}]},{"id":4,"name":"REVERS","longName":"La décision est difficilement réversible","color":"#3498DB","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1425.8,"y":70.0,"probabilityTable":[[0.44999999999999996,0.55]],"comment":"Le résultat ne peut pas être corrigé après coup. Une candidature écartée est le cas limite : la personne n'apprend jamais qu'elle l'a été.<br><b>Source</b> — art. 7, §2, i).<br><b>Fuite</b> — 0.55 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Contexte","leak":0.55,"parents":[]},{"id":5,"name":"PME","longName":"Le fournisseur est une PME","color":"#3498DB","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1735.3999999999999,"y":70.0,"probabilityTable":[[0.35,0.65]],"comment":"Au sens de la recommandation 2003/361/CE.<br><b>Source</b> — art. 11, §1 (documentation simplifiée), art. 17, §2 (SGQ proportionné), art. 62, et surtout art. 99, §6 : pour les PME l'amende est plafonnée au montant le plus FAIBLE, l'inverse de la règle générale.<br><b>Fuite</b> — 0.65 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Contexte","leak":0.65,"parents":[]},{"id":6,"name":"NORME","longName":"Des normes harmonisées applicables sont disponibles","color":"#3498DB","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":2045.0,"y":70.0,"probabilityTable":[[0.85,0.15]],"comment":"Normes adoptées par les organismes européens de normalisation au titre de l'art. 40, conférant la présomption de conformité de l'art. 42.<br><b>Fuite basse (0,15)</b> — leur retard est la raison officielle du report du régime haut risque par le règlement Omnibus (UE) 2026/1744.<br><b>Fuite</b> — 0.15 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Contexte","leak":0.15,"parents":[]},{"id":7,"name":"DELAI","longName":"Le régime haut risque est déjà applicable","color":"#3498DB","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":2354.6,"y":70.0,"probabilityTable":[[0.65,0.35]],"comment":"Interrupteur temporel. Faux avant le 2 décembre 2027, vrai après — date fixée par le règlement Omnibus (UE) 2026/1744, contre le 2 août 2026 dans le texte de 2024. À poser en évidence selon le scénario examiné plutôt qu'à laisser flotter.<br><b>Attention</b> — même à Faux, les art. 5, 50 et le RGPD restent pleinement opposables.<br><b>Fuite</b> — 0.35 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Contexte","leak":0.35,"parents":[]},{"id":8,"name":"SGQ","longName":"Un système de gestion de la qualité est en place","color":"#F39C12","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":187.39999999999998,"y":242.0,"probabilityTable":[[0.7,0.3],[0.76,0.24]],"comment":"Politiques, procédures et instructions écrites couvrant conception, développement, tests, données, risques, surveillance après commercialisation et signalement d'incidents.<br><b>Source</b> — art. 17.<br><b>Effets directs entrants</b><ul><li>Le fournisseur est une PME <b>-0.20</b></li></ul><b>Fuite</b> — 0.30 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Leviers de conception","leak":0.3,"parents":[{"id":5,"w":-0.2,"why":"Art. 17, §2 : le SGQ des PME peut être mis en œuvre de façon proportionnée. Le texte reconnaît donc lui-même que le niveau atteint sera moindre."}]},{"id":9,"name":"SGR","longName":"Un système de gestion des risques est opérant","color":"#F39C12","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":497.0,"y":242.0,"probabilityTable":[[0.7,0.3],[0.35,0.65]],"comment":"Processus itératif et continu sur tout le cycle de vie : identification des risques en usage conforme et en mauvaise utilisation raisonnablement prévisible, estimation, atténuation, essais.<br><b>Source</b> — art. 9.<br><b>Effets directs entrants</b><ul><li>Un système de gestion de la qualité est en place <b>+0.50</b></li></ul><b>Fuite</b> — 0.30 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Leviers de conception","leak":0.3,"parents":[{"id":8,"w":0.5,"why":"Art. 17, §1, g) : le système de gestion des risques est une composante explicite du SGQ. Sans cadre qualité, la gestion des risques existe rarement de façon répétable."}]},{"id":10,"name":"DATA","longName":"Une gouvernance des données avec audit de biais est en place","color":"#F39C12","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":806.6,"y":242.0,"probabilityTable":[[0.75,0.25],[0.8125,0.1875],[0.375,0.625],[0.53125,0.46875]],"comment":"Pertinence, représentativité, examen des biais, propriétés statistiques adaptées aux groupes visés.<br><b>Source</b> — art. 10, §2, f) et g). L'art. 4 bis (ex-art. 10, §5) est ce qui rend le levier praticable : il autorise, sous garanties strictes, le traitement de catégories particulières de données à seule fin de détection et correction des biais.<br><b>Effets directs entrants</b><ul><li>Un système de gestion des risques est opérant <b>+0.50</b></li><li>Le fournisseur est une PME <b>-0.25</b></li></ul><b>Fuite</b> — 0.25 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Leviers de conception","leak":0.25,"parents":[{"id":9,"w":0.5,"why":"Art. 9, §2 : l'identification des risques commande l'effort de gouvernance des données, puisque le biais des jeux de données est l'un des risques à traiter."},{"id":5,"w":-0.25,"why":"Effet de capacité, pas de règle. Le règlement allège les obligations documentaires des PME (art. 11, §1) mais n'allège pas l'art. 10 : la contrainte est budgétaire."}]},{"id":11,"name":"TEST","longName":"L'effort de test et de validation est substantiel","color":"#F39C12","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1116.1999999999998,"y":242.0,"probabilityTable":[[0.7,0.3],[0.45499999999999996,0.545],[0.35,0.65],[0.22750000000000004,0.7725]],"comment":"Essais tout au long du développement et avant mise sur le marché, au regard de métriques et de seuils définis et adaptés à la destination.<br><b>Source</b> — art. 9, §6 à §8 ; art. 15.<br><b>Effets directs entrants</b><ul><li>Un système de gestion des risques est opérant <b>+0.50</b></li><li>Des normes harmonisées applicables sont disponibles <b>+0.35</b></li></ul><b>Fuite</b> — 0.30 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Leviers de conception","leak":0.3,"parents":[{"id":9,"w":0.5,"why":"Art. 9, §6 à §8 : les essais sont la phase de vérification du système de gestion des risques."},{"id":6,"w":0.35,"why":"Art. 40 et 42 : une norme harmonisée fournit les métriques et les protocoles d'essai de référence. Sans elle, il faut les concevoir, ce qui décourage l'effort."}]},{"id":12,"name":"DESIGN_CH","longName":"Le système est conçu pour rendre le contrôle humain possible","color":"#F39C12","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1425.8,"y":242.0,"probabilityTable":[[0.65,0.35]],"comment":"Interfaces permettant de comprendre les capacités et les limites, d'interpréter la sortie, de décider de ne pas l'utiliser, d'interrompre.<br><b>Source</b> — art. 14, dont le §4, b) qui impose de permettre à la personne de « rester consciente d'une éventuelle tendance à se fier automatiquement ou excessivement aux sorties ».<br><b>Fuite</b> — 0.35 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Leviers de conception","leak":0.35,"parents":[]},{"id":13,"name":"SECU","longName":"L'investissement en robustesse et cybersécurité est substantiel","color":"#F39C12","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1735.3999999999999,"y":242.0,"probabilityTable":[[0.65,0.35]],"comment":"Résilience aux erreurs, aux défaillances et aux attaques spécifiques à l'IA : empoisonnement des données, exemples adverses, extraction de modèle.<br><b>Source</b> — art. 15, §4 et §5.<br><b>Fuite</b> — 0.35 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Leviers de conception","leak":0.35,"parents":[]},{"id":14,"name":"DOC","longName":"La documentation technique est complète et à jour","color":"#F39C12","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":2045.0,"y":242.0,"probabilityTable":[[0.7,0.3],[0.76,0.24],[0.42000000000000004,0.58],[0.536,0.464],[0.31499999999999995,0.685],[0.45199999999999996,0.548],[0.18899999999999995,0.811],[0.35119999999999996,0.6488]],"comment":"Documentation de l'annexe IV établie avant la mise sur le marché et tenue à jour, capacité à prouver la conformité sur demande motivée.<br><b>Source</b> — art. 11 et annexe IV ; art. 16, k) ; art. 18.<br><b>Effets directs entrants</b><ul><li>Un système de gestion de la qualité est en place <b>+0.55</b></li><li>Des normes harmonisées applicables sont disponibles <b>+0.40</b></li><li>Le fournisseur est une PME <b>-0.20</b></li></ul><b>Fuite</b> — 0.30 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 8 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 3 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Leviers de conception","leak":0.3,"parents":[{"id":8,"w":0.55,"why":"Art. 17, §1, e) : les spécifications techniques et les moyens de preuve font partie du SGQ. Le SGQ est ce qui rend la documentation répétable plutôt qu'accidentelle."},{"id":6,"w":0.4,"why":"Art. 42 : la présomption de conformité transforme un travail de démonstration ouvert en un travail de conformité à un référentiel, beaucoup plus praticable."},{"id":5,"w":-0.2,"why":"Art. 11, §1 : régime documentaire simplifié pour les PME — un dossier conforme mais structurellement moins complet."}]},{"id":15,"name":"NOTICE","longName":"La notice expose réellement les limites du système","color":"#F39C12","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":2354.6,"y":242.0,"probabilityTable":[[0.75,0.25]],"comment":"Caractéristiques, capacités et surtout LIMITES de performance, circonstances pouvant conduire à des risques, niveaux d'exactitude par groupe de personnes.<br><b>Source</b> — art. 13. C'est le canal par lequel la connaissance du fournisseur atteint le déployeur : une notice pauvre rend le contrôle de l'art. 26 structurellement impossible.<br><b>Fuite</b> — 0.25 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Leviers de conception","leak":0.25,"parents":[]},{"id":16,"name":"BIAIS","longName":"Le biais différentiel entre groupes est élevé","color":"#35B779","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":342.20000000000005,"y":414.0,"probabilityTable":[[0.8,0.2],[0.87,0.13],[0.92,0.08],[0.948,0.052],[0.36,0.64],[0.5840000000000001,0.416],[0.744,0.256],[0.8336,0.1664]],"comment":"Écart systématique de taux de sélection ou de performance entre groupes de personnes, visible sans instrumentation statistique lourde.<br><b>Source</b> — considérant 67 ; art. 10, §2, f) et g). Revue systématique du phénomène en RH : Köchling &amp; Wehner (2020), Business Research 13(3), DOI 10.1007/s40685-020-00134-w — citée pour l'existence du phénomène, pas pour un effet chiffré.<br><b>Effets directs entrants</b><ul><li>L'entraînement utilise des historiques RH internes <b>+0.55</b></li><li>Une gouvernance des données avec audit de biais est en place <b>-0.60</b></li><li>L'effort de test et de validation est substantiel <b>-0.35</b></li></ul><b>Fuite</b> — 0.20 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 8 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 3 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Propriétés du système","leak":0.2,"parents":[{"id":1,"w":0.55,"why":"[RÈGLEMENT] Considérant 67, littéralement : les biais sont « inhérents à des jeux de données sous-jacents, en particulier lorsque des données historiques sont utilisées », et ils « perpétuent et amplifient les discriminations existantes »."},{"id":10,"w":-0.6,"why":"Effet principal du levier art. 10. Un audit divise la probabilité de biais élevé par 2,5 sans jamais l'annuler : un audit détecte ce qu'il sait mesurer, pas ce qu'il ignore."},{"id":11,"w":-0.35,"why":"Art. 9, §7 : les essais révèlent les écarts de performance avant mise sur le marché. Effet plus faible que l'audit dédié, parce que les essais visent la performance globale, pas l'écart entre groupes."}]},{"id":17,"name":"DERIVE","longName":"Le modèle dérive après sa mise en service","color":"#35B779","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":651.8000000000001,"y":414.0,"probabilityTable":[[0.65,0.35],[0.79,0.21]],"comment":"Écart croissant entre les conditions d'entraînement et les conditions d'usage.<br><b>Source</b> — art. 72 (surveillance après commercialisation) ; art. 15, §4 sur les systèmes qui continuent d'apprendre.<br><b>Effets directs entrants</b><ul><li>Un système de gestion des risques est opérant <b>-0.40</b></li></ul><b>Fuite</b> — 0.35 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Propriétés du système","leak":0.35,"parents":[{"id":9,"w":-0.4,"why":"Art. 9, §2, c) : le système de gestion des risques couvre les risques apparaissant après mise sur le marché, donc anticipe la dérive."}]},{"id":18,"name":"EXACT","longName":"L'exactitude en usage réel est satisfaisante","color":"#35B779","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":961.4,"y":414.0,"probabilityTable":[[0.65,0.35],[0.8075,0.1925],[0.35750000000000004,0.6425],[0.646625,0.353375],[0.39,0.61],[0.6645,0.3355],[0.21450000000000002,0.7855],[0.567975,0.432025]],"comment":"Distincte de l'exactitude en test : elle intègre l'écart entre la population d'entraînement et la population réellement traitée.<br><b>Source</b> — art. 15, §1 et §3.<br><b>Effets directs entrants</b><ul><li>Une gouvernance des données avec audit de biais est en place <b>+0.40</b></li><li>L'effort de test et de validation est substantiel <b>+0.45</b></li><li>Le modèle dérive après sa mise en service <b>-0.45</b></li></ul><b>Fuite</b> — 0.35 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 8 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 3 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Propriétés du système","leak":0.35,"parents":[{"id":10,"w":0.4,"why":"Art. 10 : des données pertinentes et représentatives améliorent l'exactitude sur la population réellement traitée, pas seulement sur l'échantillon de test."},{"id":11,"w":0.45,"why":"Art. 15, §1 : l'exactitude est ce que les essais mesurent et corrigent."},{"id":17,"w":-0.45,"why":"Mécanisme : la dérive est précisément la dégradation de l'exactitude dans le temps."}]},{"id":19,"name":"ROBUST","longName":"La robustesse et la cybersécurité sont satisfaisantes","color":"#35B779","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1271.0,"y":414.0,"probabilityTable":[[0.7,0.3],[0.31499999999999995,0.685]],"comment":"Résilience aux incohérences de l'environnement, aux défaillances et aux tentatives d'altération.<br><b>Source</b> — art. 15, §4 et §5.<br><b>Effets directs entrants</b><ul><li>L'investissement en robustesse et cybersécurité est substantiel <b>+0.55</b></li></ul><b>Fuite</b> — 0.30 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Propriétés du système","leak":0.3,"parents":[{"id":13,"w":0.55,"why":"Art. 15, §4 et §5 : relation directe de l'investissement à la propriété."}]},{"id":20,"name":"OPACITE","longName":"La sortie du système est opaque pour l'opérateur","color":"#35B779","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1580.6000000000001,"y":414.0,"probabilityTable":[[0.44999999999999996,0.55],[0.725,0.275]],"comment":"Absence d'éléments permettant à un humain de comprendre pourquoi le système a produit cette sortie-là.<br><b>Source</b> — contrainte indirecte par l'art. 13 (transparence envers le déployeur), l'art. 14 (interprétabilité) et l'art. 86 (droit à l'explication).<br><b>Effets directs entrants</b><ul><li>Le système est conçu pour rendre le contrôle humain possible <b>-0.50</b></li></ul><b>Fuite</b> — 0.55 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Propriétés du système","leak":0.55,"parents":[{"id":12,"w":-0.5,"why":"Art. 14, §4, c) : concevoir pour l'interprétabilité de la sortie est exactement l'inverse de l'opacité."}]},{"id":21,"name":"QUAL","longName":"La qualité intrinsèque du système est satisfaisante","color":"#35B779","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1941.8,"y":414.0,"probabilityTable":[[0.9,0.1],[0.955,0.045],[0.585,0.415],[0.81325,0.18675],[0.36,0.64],[0.712,0.288],[0.23399999999999999,0.766],[0.6553,0.3447]],"comment":"<b>Nœud de divorce</b>, absent du règlement. Il agrège exactitude, robustesse et absence de biais pour que les couches aval n'aient pas à porter ces trois parents chacune.<br><b>Effets directs entrants</b><ul><li>L'exactitude en usage réel est satisfaisante <b>+0.60</b></li><li>La robustesse et la cybersécurité sont satisfaisantes <b>+0.35</b></li><li>Le biais différentiel entre groupes est élevé <b>-0.55</b></li></ul><b>Fuite</b> — 0.10 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 8 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 3 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Propriétés du système","leak":0.1,"parents":[{"id":18,"w":0.6,"why":"Composante principale du construit agrégé."},{"id":19,"w":0.35,"why":"Composante secondaire."},{"id":16,"w":-0.55,"why":"Un système exact en moyenne mais biaisé entre groupes n'est pas de qualité satisfaisante au sens du règlement, qui vise explicitement la non-discrimination."}]},{"id":22,"name":"FORM","longName":"Les contrôleurs humains sont compétents et formés","color":"#E67E22","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":187.39999999999998,"y":586.0,"probabilityTable":[[0.65,0.35]],"comment":"Deux des trois conditions cumulatives de l'art. 26, §2.<br><b>Source</b> — art. 26, §2 ; art. 4 (maîtrise de l'IA).<br><b>Fuite</b> — 0.35 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Conditions de déploiement","leak":0.35,"parents":[]},{"id":23,"name":"AUTORITE","longName":"Les contrôleurs ont l'autorité réelle de contredire la sortie","color":"#E67E22","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":497.0,"y":586.0,"probabilityTable":[[0.78,0.22]],"comment":"Troisième condition de l'art. 26, §2, la plus souvent défaillante. « Réelle » signifie : le pouvoir existe formellement ET son exercice ne se paie pas en temps, en justification hiérarchique ou en objectif de productivité manqué.<br><b>Fuite basse (0,22)</b> — c'est l'hypothèse la plus discutable du réseau et elle est délibérée.<br><b>Fuite</b> — 0.22 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Conditions de déploiement","leak":0.22,"parents":[]},{"id":24,"name":"ENTREE","longName":"Les données d'entrée du déployeur sont pertinentes","color":"#E67E22","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":806.6,"y":586.0,"probabilityTable":[[0.55,0.45],[0.35750000000000004,0.6425]],"comment":"Référentiels de poste, historiques internes, critères de tri paramétrés localement.<br><b>Source</b> — art. 26, §4.<br><b>Effets directs entrants</b><ul><li>La notice expose réellement les limites du système <b>+0.35</b></li></ul><b>Fuite</b> — 0.45 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Conditions de déploiement","leak":0.45,"parents":[{"id":15,"w":0.35,"why":"Art. 13, §3, b) : la notice précise les exigences sur les données d'entrée. Sans elle, le déployeur ne sait pas ce qu'il doit vérifier."}]},{"id":25,"name":"PERIM","longName":"L'usage reste conforme à la destination déclarée","color":"#E67E22","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1116.1999999999998,"y":586.0,"probabilityTable":[[0.55,0.45],[0.275,0.725]],"comment":"L'écart le plus fréquent n'est pas technique mais fonctionnel : un outil conçu pour hiérarchiser utilisé pour éliminer.<br><b>Source</b> — art. 26, §1 ; art. 3, point 12. Un tel écart peut aussi requalifier le déployeur en fournisseur (art. 25, §1, c).<br><b>Effets directs entrants</b><ul><li>La notice expose réellement les limites du système <b>+0.50</b></li></ul><b>Fuite</b> — 0.45 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Conditions de déploiement","leak":0.45,"parents":[{"id":15,"w":0.5,"why":"Art. 13 et 26, §1 : le respect de la destination suppose que la destination et ses limites aient été énoncées de façon exploitable."}]},{"id":26,"name":"INFO_TRAV","longName":"Les représentants des travailleurs ont été informés avant mise en service","color":"#E67E22","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1425.8,"y":586.0,"probabilityTable":[[0.65,0.35]],"comment":"<b>Source</b> — art. 26, §7, articulé en France avec la consultation du CSE. L'art. 2, §11 réserve les dispositions nationales et conventionnelles plus favorables aux travailleurs.<br><b>Fuite</b> — 0.35 : proposition racine, sa probabilité est un prior à poser en évidence selon le cas examiné.","cls":"Conditions de déploiement","leak":0.35,"parents":[]},{"id":27,"name":"INFO_PERS","longName":"Les personnes soumises au système en sont informées","color":"#E67E22","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1735.3999999999999,"y":586.0,"probabilityTable":[[0.7,0.3],[0.385,0.615]],"comment":"<b>Source</b> — art. 26, §11. Condition pratique de l'exercice du droit à l'explication de l'art. 86 : une personne qui ignore qu'un système a été utilisé ne demandera jamais d'explication.<br><b>Effets directs entrants</b><ul><li>Les représentants des travailleurs ont été informés avant mise en service <b>+0.45</b></li></ul><b>Fuite</b> — 0.30 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Conditions de déploiement","leak":0.3,"parents":[{"id":26,"w":0.45,"why":"Une organisation qui a mené l'information collective a mis en place les canaux et les formulations nécessaires à l'information individuelle."}]},{"id":28,"name":"JOURNAUX","longName":"Les journaux sont conservés et exploitables","color":"#E67E22","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":2045.0,"y":586.0,"probabilityTable":[[0.65,0.35],[0.32499999999999996,0.675]],"comment":"<b>Source</b> — art. 12 (conception) ; art. 19 (fournisseur) ; art. 26, §6 (déployeur, au moins six mois). Condition de possibilité de toute reconstitution a posteriori.<br><b>Effets directs entrants</b><ul><li>La documentation technique est complète et à jour <b>+0.50</b></li></ul><b>Fuite</b> — 0.35 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Conditions de déploiement","leak":0.35,"parents":[{"id":14,"w":0.5,"why":"Art. 12 et 19 : la conservation exploitable des journaux relève de la même discipline documentaire."}]},{"id":29,"name":"BIAIS_AUTO","longName":"Le biais d'automatisation joue","color":"#C9A227","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":497.0,"y":758.0,"probabilityTable":[[0.44999999999999996,0.55],[0.27,0.73],[0.6699999999999999,0.33],[0.562,0.438]],"comment":"Tendance de l'opérateur à se fier automatiquement ou excessivement à la sortie du système.<br><b>Source</b> — art. 14, §4, b), qui nomme le phénomène et impose de concevoir contre lui, « en particulier pour les systèmes utilisés pour fournir des informations ou des recommandations en vue de la prise de décision par des personnes physiques ». C'est le mécanisme qui vide le contrôle humain sans qu'aucune procédure ne soit violée.<br><b>Effets directs entrants</b><ul><li>Le système est conçu pour rendre le contrôle humain possible <b>-0.40</b></li><li>La sortie du système est opaque pour l'opérateur <b>+0.40</b></li></ul><b>Fuite</b> — 0.55 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Mécanismes","leak":0.55,"parents":[{"id":12,"w":-0.4,"why":"[RÈGLEMENT] Art. 14, §4, b) : la conception doit permettre à la personne de rester consciente de sa tendance à sur-faire confiance. C'est la seule contre-mesure que le texte prévoit."},{"id":20,"w":0.4,"why":"Mécanisme : quand la sortie n'est pas interprétable, la seule conduite disponible est de la suivre."}]},{"id":30,"name":"CTRL_EFF","longName":"Le contrôle humain est effectif","color":"#C9A227","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":961.4,"y":758.0,"probabilityTable":[[0.95,0.05],[0.965,0.035],[0.9775,0.0225],[0.98425,0.01575],[0.475,0.525],[0.6325000000000001,0.3675],[0.76375,0.23625],[0.834625,0.165375],[0.5700000000000001,0.43],[0.6990000000000001,0.301],[0.8065,0.1935],[0.86455,0.13545],[0.28500000000000003,0.715],[0.49950000000000006,0.5005],[0.67825,0.32175],[0.774775,0.225225],[0.6174999999999999,0.3825],[0.7322500000000001,0.26775],[0.827875,0.172125],[0.879513,0.120487],[0.30874999999999997,0.69125],[0.516125,0.483875],[0.688938,0.311062],[0.7822560000000001,0.217744],[0.37050000000000005,0.6295],[0.55935,0.44065],[0.7167250000000001,0.283275],[0.801708,0.198292],[0.18525000000000003,0.81475],[0.42967500000000003,0.570325],[0.633363,0.366637],[0.7433540000000001,0.256646]],"comment":"« Effectif » signifie : le contrôleur a les moyens ET le pouvoir de contredire la sortie, et le fait quand c'est justifié. À distinguer du contrôle formel — une case « validé par un manager » dans un workflow n'est pas un contrôle.<br><b>Cinq parents</b> : c'est le nœud qui justifie à lui seul la paramétrisation par formule. En table tabulaire il demanderait 32 lignes ; ici, cinq poids et une fuite.<br><b>Source</b> — art. 14 ; art. 26, §2.<br><b>Effets directs entrants</b><ul><li>Le système est conçu pour rendre le contrôle humain possible <b>+0.35</b></li><li>Les contrôleurs humains sont compétents et formés <b>+0.40</b></li><li>Les contrôleurs ont l'autorité réelle de contredire la sortie <b>+0.50</b></li><li>Le biais d'automatisation joue <b>-0.55</b></li><li>Plus de 2 000 personnes sont concernées par an <b>-0.30</b></li></ul><b>Fuite</b> — 0.05 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 32 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 5 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Mécanismes","leak":0.05,"parents":[{"id":12,"w":0.35,"why":"Art. 14 : le contrôle humain doit être possible PAR CONCEPTION. Aucune procédure ne rattrape une interface qui ne le permet pas."},{"id":22,"w":0.4,"why":"Art. 26, §2 : compétences et formation, deux des trois conditions."},{"id":23,"w":0.5,"why":"Art. 26, §2 : l'autorité, troisième condition et poids le plus fort des trois. C'est elle qui distingue le contrôle effectif du contrôle formel."},{"id":29,"w":-0.55,"why":"Le biais d'automatisation est ce qui transforme un contrôle correctement outillé et mandaté en validation de pure forme."},{"id":2,"w":-0.3,"why":"[JUGEMENT — hypothèse hors texte] Au-delà de 2 000 dossiers par an, le temps d'examen par cas devient trop court pour qu'un désaccord se construise. Le règlement ne dit rien de tel ; l'arc est isolé ici pour pouvoir être contesté séparément."}]},{"id":31,"name":"ADEQ","longName":"Le système est adéquat au contexte réel d'usage","color":"#C9A227","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1425.8,"y":758.0,"probabilityTable":[[0.85,0.15],[0.38249999999999995,0.6175],[0.42500000000000004,0.575],[0.19125000000000003,0.80875]],"comment":"Écart entre la destination déclarée et l'usage effectif, combiné à l'écart entre la population d'entraînement et la population traitée.<br><b>Source</b> — art. 3, point 12 ; art. 26, §1 et §4.<br><b>Effets directs entrants</b><ul><li>Les données d'entrée du déployeur sont pertinentes <b>+0.50</b></li><li>L'usage reste conforme à la destination déclarée <b>+0.55</b></li></ul><b>Fuite</b> — 0.15 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Mécanismes","leak":0.15,"parents":[{"id":24,"w":0.5,"why":"Art. 26, §4 : pertinence et représentativité des données d'entrée."},{"id":25,"w":0.55,"why":"Art. 26, §1 : l'usage conforme à la destination est la condition première de l'adéquation."}]},{"id":32,"name":"ERREUR","longName":"Au moins une décision individuelle erronée survient","color":"#E74C3C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":342.20000000000005,"y":930.0,"probabilityTable":[[0.65,0.35],[0.7725,0.2275],[0.8075,0.1925],[0.8748750000000001,0.125125],[0.8425,0.1575],[0.897625,0.102375],[0.913375,0.086625],[0.943694,0.056306]],"comment":"Décision que l'organisation n'aurait pas prise si elle avait disposé d'une évaluation correcte.<br><b>Effets directs entrants</b><ul><li>La qualité intrinsèque du système est satisfaisante <b>-0.55</b></li><li>Le contrôle humain est effectif <b>-0.45</b></li><li>Le système est adéquat au contexte réel d'usage <b>-0.35</b></li></ul><b>Fuite</b> — 0.35 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 8 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 3 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Effets sur les personnes","leak":0.35,"parents":[{"id":21,"w":-0.55,"why":"Un système de qualité satisfaisante produit moins de décisions erronées. Effet fort mais non total : la qualité moyenne n'élimine pas les cas limites."},{"id":30,"w":-0.45,"why":"Art. 14 : la fonction même du contrôle humain est d'intercepter l'erreur avant qu'elle ne devienne décision."},{"id":31,"w":-0.35,"why":"Un système adéquat à son contexte se trompe moins sur la population qu'il traite réellement."}]},{"id":33,"name":"DISCRIM","longName":"Une discrimination indirecte est constatable","color":"#E74C3C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":651.8000000000001,"y":930.0,"probabilityTable":[[0.94,0.06],[0.961,0.039],[0.517,0.483],[0.68605,0.31395],[0.376,0.624],[0.5944,0.4056],[0.20679999999999998,0.7932],[0.48441999999999996,0.51558]],"comment":"Écart de traitement défavorable et systématique au détriment d'un groupe, statistiquement établissable. « Constatable » est le mot important : c'est le passage de l'écart latent à l'écart démontrable.<br><b>Source</b> — considérant 67 ; art. 10, §2, f) et g).<br><b>Effets directs entrants</b><ul><li>Le biais différentiel entre groupes est élevé <b>+0.60</b></li><li>Plus de 2 000 personnes sont concernées par an <b>+0.45</b></li><li>Le contrôle humain est effectif <b>-0.35</b></li></ul><b>Fuite</b> — 0.06 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 8 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 3 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Effets sur les personnes","leak":0.06,"parents":[{"id":16,"w":0.6,"why":"[RÈGLEMENT] Considérant 67 : les biais « perpétuent et amplifient les discriminations existantes ». Relation la plus directe du réseau."},{"id":2,"w":0.45,"why":"[RÈGLEMENT] Art. 7, §2, f). Mécanisme statistique : un biais élevé sur 150 candidatures ne produit pas d'écart établissable, le même biais sur 5 000 en produit un. Le volume ne crée pas la discrimination, il la rend démontrable."},{"id":30,"w":-0.35,"why":"Un contrôle effectif intercepte une partie des décisions biaisées, donc réduit l'écart agrégé. Effet plus faible que sur l'erreur individuelle : le contrôleur voit des cas, pas des distributions."}]},{"id":34,"name":"ATTEINTE","longName":"Une atteinte aux droits fondamentaux est caractérisée","color":"#E74C3C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":961.4,"y":930.0,"probabilityTable":[[0.95,0.05],[0.7125,0.2875],[0.23750000000000004,0.7625],[0.17812499999999998,0.821875]],"comment":"Dignité, non-discrimination, vie privée, protection des données, droit à un recours effectif.<br><b>Source</b> — art. 1er ; art. 27 ; art. 3, point 49, c).<br><b>Effets directs entrants</b><ul><li>Une discrimination indirecte est constatable <b>+0.75</b></li><li>Plus de 2 000 personnes sont concernées par an <b>+0.25</b></li></ul><b>Fuite</b> — 0.05 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Effets sur les personnes","leak":0.05,"parents":[{"id":33,"w":0.75,"why":"La discrimination EST une atteinte aux droits fondamentaux au sens de l'art. 1er. Poids le plus élevé du réseau, parce que la relation est quasi définitionnelle."},{"id":2,"w":0.25,"why":"Art. 7, §2, f) : l'échelle de l'atteinte compte pour sa caractérisation."}]},{"id":35,"name":"PREJUDICE","longName":"Un préjudice individuel se matérialise","color":"#E74C3C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1271.0,"y":930.0,"probabilityTable":[[0.95,0.05],[0.855,0.145],[0.7125,0.2875],[0.64125,0.35875],[0.7125,0.2875],[0.64125,0.35875],[0.534375,0.465625],[0.480938,0.519062],[0.475,0.525],[0.4275,0.5725],[0.35624999999999996,0.64375],[0.32062500000000005,0.679375],[0.35624999999999996,0.64375],[0.32062500000000005,0.679375],[0.26718699999999995,0.732813],[0.24046900000000004,0.759531],[0.38,0.62],[0.34199999999999997,0.658],[0.28500000000000003,0.715],[0.25649999999999995,0.7435],[0.28500000000000003,0.715],[0.25649999999999995,0.7435],[0.21375,0.78625],[0.19237499999999996,0.807625],[0.18999999999999995,0.81],[0.17100000000000004,0.829],[0.14249999999999996,0.8575],[0.12824999999999998,0.87175],[0.14249999999999996,0.8575],[0.12824999999999998,0.87175],[0.10687500000000005,0.893125],[0.09618700000000002,0.903813]],"comment":"Non-recrutement, non-promotion, rupture du contrat, perte de revenu, atteinte à la réputation professionnelle.<br><b>Cinq parents</b>, dont deux modérateurs de contexte pris directement dans l'art. 7, §2.<br><b>Effets directs entrants</b><ul><li>Au moins une décision individuelle erronée survient <b>+0.60</b></li><li>Une discrimination indirecte est constatable <b>+0.50</b></li><li>Il existe un déséquilibre de pouvoir marqué <b>+0.25</b></li><li>La décision est difficilement réversible <b>+0.25</b></li><li>Les personnes soumises au système en sont informées <b>+0.10</b></li></ul><b>Fuite</b> — 0.05 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 32 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 5 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Effets sur les personnes","leak":0.05,"parents":[{"id":32,"w":0.6,"why":"Chaîne directe : l'erreur se traduit en conséquence effective pour la personne."},{"id":33,"w":0.5,"why":"Voie parallèle à l'erreur individuelle : on peut subir un préjudice sans que la décision soit « erronée » dans son cas particulier."},{"id":3,"w":0.25,"why":"Art. 7, §2, h) : le déséquilibre de pouvoir aggrave le préjudice et réduit la capacité de le contester."},{"id":4,"w":0.25,"why":"Art. 7, §2, i) : l'irréversibilité transforme une erreur en préjudice durable."},{"id":27,"w":0.1,"why":"Effet faible et à contre-sens apparent : informer ne crée pas le préjudice, mais le rend visible et donc constatable. Poids délibérément petit ; il capture la visibilité, pas la causalité."}]},{"id":36,"name":"INCIDENT","longName":"Un incident grave au sens de l'article 3, point 49 est caractérisé","color":"#E74C3C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1580.6000000000001,"y":930.0,"probabilityTable":[[0.97,0.03],[0.4365,0.5635]],"comment":"Décès ou atteinte grave à la santé ; perturbation d'une infrastructure critique ; VIOLATION DES OBLIGATIONS DU DROIT DE L'UNION VISANT À PROTÉGER LES DROITS FONDAMENTAUX ; dommage grave aux biens ou à l'environnement. Le point c) est celui qui concerne la RH : un préjudice non corporel peut constituer un incident grave et déclencher l'art. 73.<br><b>Effets directs entrants</b><ul><li>Une atteinte aux droits fondamentaux est caractérisée <b>+0.55</b></li></ul><b>Fuite</b> — 0.03 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Effets sur les personnes","leak":0.03,"parents":[{"id":34,"w":0.55,"why":"[RÈGLEMENT] Art. 3, point 49, c) : la violation des obligations protégeant les droits fondamentaux EST l'une des quatre définitions de l'incident grave."}]},{"id":37,"name":"BOUCLE","longName":"Le biais est amplifié à la génération suivante","color":"#E74C3C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1941.8,"y":930.0,"probabilityTable":[[0.95,0.05],[0.6174999999999999,0.3825],[0.38,0.62],[0.247,0.753]],"comment":"Considérant 67 : « en particulier lorsque les données de sortie influencent les entrées pour les opérations futures (boucles de rétroaction) ». Le mécanisme réel est CYCLIQUE ; il est ici déroulé dans le temps — ce nœud représente l'état des données à t+1 et n'a aucun arc de retour, faute de quoi le graphe cesserait d'être un DAG.<br><b>Effets directs entrants</b><ul><li>Une discrimination indirecte est constatable <b>+0.60</b></li><li>Au moins une décision individuelle erronée survient <b>+0.35</b></li></ul><b>Fuite</b> — 0.05 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Effets sur les personnes","leak":0.05,"parents":[{"id":33,"w":0.6,"why":"Considérant 67 : les décisions prises deviennent l'historique qui entraîne la version suivante."},{"id":32,"w":0.35,"why":"Même mécanisme, par les décisions individuelles."}]},{"id":38,"name":"EXPLIC","longName":"Une demande d'explication est formée","color":"#1ABC9C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":342.20000000000005,"y":1102.0,"probabilityTable":[[0.97,0.03],[0.485,0.515],[0.5335,0.4665],[0.26675000000000004,0.73325]],"comment":"<b>Source</b> — art. 86 : droit d'obtenir du déployeur des explications claires et pertinentes sur le rôle du système dans une décision produisant des effets juridiques ou affectant significativement de façon défavorable.<br><b>Effets directs entrants</b><ul><li>Les personnes soumises au système en sont informées <b>+0.45</b></li><li>Un préjudice individuel se matérialise <b>+0.50</b></li></ul><b>Fuite</b> — 0.03 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Détection","leak":0.03,"parents":[{"id":27,"w":0.45,"why":"[RÈGLEMENT] Art. 26, §11 combiné à l'art. 86 : l'information est la condition de possibilité de la demande. Une personne qui ignore l'existence du système ne peut pas l'invoquer."},{"id":35,"w":0.5,"why":"Le préjudice est ce qui motive la démarche."}]},{"id":39,"name":"RECLAM","longName":"Une réclamation est déposée auprès de l'autorité","color":"#1ABC9C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":651.8000000000001,"y":1102.0,"probabilityTable":[[0.97,0.03],[0.5335,0.4665],[0.6305000000000001,0.3695],[0.34677500000000006,0.653225]],"comment":"<b>Source</b> — art. 85, ouvert à toute personne ayant un motif de considérer qu'il y a violation du règlement.<br><b>Effets directs entrants</b><ul><li>Un préjudice individuel se matérialise <b>+0.35</b></li><li>Une demande d'explication est formée <b>+0.45</b></li></ul><b>Fuite</b> — 0.03 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Détection","leak":0.03,"parents":[{"id":35,"w":0.35,"why":"Art. 85, voie directe."},{"id":38,"w":0.45,"why":"Une explication insatisfaisante ou refusée précède fréquemment la saisine de l'autorité."}]},{"id":40,"name":"ALERTE","longName":"Un signalement interne est effectué","color":"#1ABC9C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":961.4,"y":1102.0,"probabilityTable":[[0.95,0.05],[0.665,0.335],[0.7125,0.2875],[0.49875,0.50125]],"comment":"<b>Source</b> — art. 87 : le signalement des violations relève de la directive (UE) 2019/1937 sur la protection des lanceurs d'alerte. Canal souvent plus rapide que le contrôle externe.<br><b>Effets directs entrants</b><ul><li>Le contrôle humain est effectif <b>+0.25</b></li><li>Les représentants des travailleurs ont été informés avant mise en service <b>+0.30</b></li></ul><b>Fuite</b> — 0.05 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Détection","leak":0.05,"parents":[{"id":30,"w":0.25,"why":"Effet contre-intuitif assumé : des contrôleurs réellement compétents et mandatés sont ceux qui voient les défaillances et peuvent les signaler."},{"id":26,"w":0.3,"why":"Art. 26, §7 : l'information collective ouvre le canal du signalement en donnant aux représentants la connaissance du déploiement."}]},{"id":41,"name":"POSTMARKET","longName":"Un incident est signalé au titre des articles 72 et 73","color":"#1ABC9C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1271.0,"y":1102.0,"probabilityTable":[[0.96,0.04],[0.33599999999999997,0.664]],"comment":"Signalement dans les quinze jours, deux jours en cas d'infraction de grande ampleur, dix jours en cas de décès. Canal d'auto-révélation.<br><b>Effets directs entrants</b><ul><li>Un incident grave au sens de l'article 3, point 49 est caractérisé <b>+0.65</b></li></ul><b>Fuite</b> — 0.04 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Détection","leak":0.04,"parents":[{"id":36,"w":0.65,"why":"Art. 73 : le signalement est obligatoire dès l'incident grave caractérisé."}]},{"id":42,"name":"SAISINE","longName":"L'autorité de surveillance du marché est saisie ou se saisit","color":"#1ABC9C","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1683.8,"y":1102.0,"probabilityTable":[[0.96,0.04],[0.912,0.088],[0.43200000000000005,0.568],[0.4104,0.5896],[0.5760000000000001,0.424],[0.5472,0.4528],[0.2592,0.7408],[0.24624000000000001,0.75376],[0.48,0.52],[0.45599999999999996,0.544],[0.21599999999999997,0.784],[0.20520000000000005,0.7948],[0.28800000000000003,0.712],[0.27359999999999995,0.7264],[0.12960000000000005,0.8704],[0.12312000000000001,0.87688],[0.768,0.232],[0.7296,0.2704],[0.3456,0.6544],[0.32831999999999995,0.67168],[0.4608,0.5392],[0.43776000000000004,0.56224],[0.20736,0.79264],[0.19699199999999994,0.803008],[0.384,0.616],[0.3648,0.6352],[0.17279999999999995,0.8272],[0.16415999999999997,0.83584],[0.23040000000000005,0.7696],[0.21887999999999996,0.78112],[0.10368,0.89632],[0.09849600000000003,0.901504]],"comment":"<b>Source</b> — art. 74, avec les pouvoirs d'accès du règlement (UE) 2019/1020, y compris l'accès au code source lorsqu'il est nécessaire (§13).<br><b>Cinq parents</b>, quatre canaux de révélation plus la traçabilité.<br><b>Effets directs entrants</b><ul><li>Une demande d'explication est formée <b>+0.20</b></li><li>Une réclamation est déposée auprès de l'autorité <b>+0.50</b></li><li>Un signalement interne est effectué <b>+0.40</b></li><li>Un incident est signalé au titre des articles 72 et 73 <b>+0.55</b></li><li>Les journaux sont conservés et exploitables <b>+0.05</b></li></ul><b>Fuite</b> — 0.04 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 32 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 5 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Détection","leak":0.04,"parents":[{"id":38,"w":0.2,"why":"Voie indirecte et faible."},{"id":39,"w":0.5,"why":"Art. 85 : voie directe de saisine."},{"id":40,"w":0.4,"why":"Art. 87 et directive (UE) 2019/1937."},{"id":41,"w":0.55,"why":"Art. 73 : le signalement d'incident grave saisit l'autorité par construction."},{"id":28,"w":0.05,"why":"Poids très faible et positif : des journaux exploitables ne provoquent pas le contrôle, mais rendent l'instruction possible quand il a lieu. L'effet protecteur de la traçabilité se joue au nœud suivant, pas ici."}]},{"id":43,"name":"CONSTAT","longName":"Un constat de non-conformité est établi","color":"#8E44AD","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":342.20000000000005,"y":1274.0,"probabilityTable":[[0.98,0.02],[0.986,0.014],[0.99,0.01],[0.993,0.007],[0.29400000000000004,0.706],[0.5058,0.4942],[0.647,0.353],[0.7529,0.2471]],"comment":"<b>Source</b> — art. 79 (système présentant un risque) ; art. 83 (non-conformité formelle) ; art. 80 (contestation d'une qualification « non haut risque » retenue au titre de l'art. 6, §3).<br><b>Effets directs entrants</b><ul><li>L'autorité de surveillance du marché est saisie ou se saisit <b>+0.70</b></li><li>La documentation technique est complète et à jour <b>-0.50</b></li><li>Les journaux sont conservés et exploitables <b>-0.30</b></li></ul><b>Fuite</b> — 0.02 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 8 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 3 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Exécution et conséquences","leak":0.02,"parents":[{"id":42,"w":0.7,"why":"Sans saisine, pas de constat : c'est la relation la plus forte de la couche."},{"id":14,"w":-0.5,"why":"[RÈGLEMENT] Art. 16, k) : le fournisseur doit prouver la conformité sur demande motivée. Une conformité réelle mais non documentée est, devant l'autorité, une non-conformité — d'où un effet protecteur fort de la documentation."},{"id":28,"w":-0.3,"why":"Art. 12, 19 et 26, §6 : les journaux permettent d'établir ce qui s'est réellement passé, ce qui protège quand la conduite a été correcte."}]},{"id":44,"name":"MESURE","longName":"Une mesure corrective, un retrait ou un rappel est imposé","color":"#8E44AD","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":651.8000000000001,"y":1274.0,"probabilityTable":[[0.98,0.02],[0.392,0.608]],"comment":"<b>Source</b> — art. 79, §2 ; art. 20. Conséquence opérationnelle souvent plus lourde que l'amende : le produit s'arrête.<br><b>Effets directs entrants</b><ul><li>Un constat de non-conformité est établi <b>+0.60</b></li></ul><b>Fuite</b> — 0.02 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 2 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 1 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Exécution et conséquences","leak":0.02,"parents":[{"id":43,"w":0.6,"why":"Art. 79, §2 : le constat appelle la mesure corrective."}]},{"id":45,"name":"AMENDE","longName":"Une amende administrative est infligée","color":"#8E44AD","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":961.4,"y":1274.0,"probabilityTable":[[0.99,0.01],[0.6930000000000001,0.307],[0.9935,0.0065],[0.80045,0.19955],[0.792,0.208],[0.5544,0.4456],[0.8648,0.1352],[0.71036,0.28964],[0.34650000000000003,0.6535],[0.24255000000000004,0.75745],[0.575225,0.424775],[0.507657,0.492343],[0.2772,0.7228],[0.19404,0.80596],[0.53018,0.46982],[0.47612600000000005,0.523874]],"comment":"<b>Source</b> — art. 99. Trois plafonds : 35 M€ ou 7 % du CA mondial pour les pratiques interdites de l'art. 5 (§3) ; 15 M€ ou 3 % pour les obligations d'opérateur (§4) ; 7,5 M€ ou 1 % pour les informations inexactes (§5). Pour les PME, le montant le plus FAIBLE (§6).<br><b>Effets directs entrants</b><ul><li>Un constat de non-conformité est établi <b>+0.65</b></li><li>Plus de 2 000 personnes sont concernées par an <b>+0.20</b></li><li>Le fournisseur est une PME <b>-0.35</b></li><li>Le régime haut risque est déjà applicable <b>+0.30</b></li></ul><b>Fuite</b> — 0.01 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 16 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 4 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Exécution et conséquences","leak":0.01,"parents":[{"id":43,"w":0.65,"why":"Art. 99 : l'amende suppose le manquement constaté."},{"id":2,"w":0.2,"why":"Art. 99, §7, a) : le nombre de personnes touchées est un facteur explicite de modulation."},{"id":5,"w":-0.35,"why":"[RÈGLEMENT] Art. 99, §6 : pour les PME, c'est le montant le plus FAIBLE entre forfait et pourcentage qui s'applique — l'inverse de la règle générale. L'effet porte ici sur la probabilité d'une amende significative."},{"id":7,"w":0.3,"why":"[RÈGLEMENT] Interrupteur temporel : avant le 2 décembre 2027, le régime haut risque de l'annexe III n'est pas exigible, donc la voie de sanction principale est fermée. Les art. 5 et 50 restent ouverts, d'où un effet fort mais non total."}]},{"id":46,"name":"SOCIAL","longName":"Un conflit social éclate","color":"#8E44AD","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1271.0,"y":1274.0,"probabilityTable":[[0.94,0.06],[0.5640000000000001,0.436],[0.97,0.03],[0.782,0.218]],"comment":"Contestation collective, dégradation du climat, refus d'usage. Effet non prévu par le règlement mais réel, et déclenché davantage par le défaut d'information préalable que par la qualité technique du système.<br><b>Effets directs entrants</b><ul><li>Les représentants des travailleurs ont été informés avant mise en service <b>-0.50</b></li><li>Un préjudice individuel se matérialise <b>+0.40</b></li></ul><b>Fuite</b> — 0.06 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Exécution et conséquences","leak":0.06,"parents":[{"id":26,"w":-0.5,"why":"Art. 26, §7 : l'information préalable des représentants est la contre-mesure directe du conflit collectif. Le levier le moins coûteux du réseau."},{"id":35,"w":0.4,"why":"Un préjudice individuel connu alimente la contestation collective."}]},{"id":47,"name":"REPUT","longName":"Un dommage réputationnel se matérialise","color":"#8E44AD","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1580.6000000000001,"y":1274.0,"probabilityTable":[[0.97,0.03],[0.5820000000000001,0.418],[0.485,0.515],[0.29100000000000004,0.709]],"comment":"La base de données de l'art. 71 est publique pour l'essentiel, les rapports annuels de la Commission le sont aussi, et un contentieux RH l'est par nature.<br><b>Effets directs entrants</b><ul><li>Un constat de non-conformité est établi <b>+0.50</b></li><li>Un conflit social éclate <b>+0.40</b></li></ul><b>Fuite</b> — 0.03 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Exécution et conséquences","leak":0.03,"parents":[{"id":43,"w":0.5,"why":"Art. 71 : la base de données de l'UE est publique pour l'essentiel."},{"id":46,"w":0.4,"why":"Le conflit interne devient public."}]},{"id":48,"name":"COUT","longName":"Le coût de mise en conformité est élevé","color":"#8E44AD","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":1941.8,"y":1274.0,"probabilityTable":[[0.9,0.1],[0.72,0.28],[0.9299999999999999,0.07],[0.804,0.196],[0.585,0.415],[0.46799999999999997,0.532],[0.7095,0.2905],[0.6275999999999999,0.3724],[0.585,0.415],[0.46799999999999997,0.532],[0.7095,0.2905],[0.6275999999999999,0.3724],[0.38025,0.61975],[0.3042,0.6958],[0.566175,0.433825],[0.51294,0.48706],[0.63,0.37],[0.504,0.496],[0.741,0.259],[0.6528,0.3472],[0.4095,0.5905],[0.3276,0.6724],[0.58665,0.41335],[0.52932,0.47068],[0.4095,0.5905],[0.3276,0.6724],[0.58665,0.41335],[0.52932,0.47068],[0.26617500000000005,0.733825],[0.21294000000000002,0.78706],[0.48632299999999995,0.513677],[0.44905799999999996,0.550942],[0.54,0.46],[0.43200000000000005,0.568],[0.6779999999999999,0.322],[0.6024,0.3976],[0.351,0.649],[0.28080000000000005,0.7192],[0.5457000000000001,0.4543],[0.49656,0.50344],[0.351,0.649],[0.28080000000000005,0.7192],[0.5457000000000001,0.4543],[0.49656,0.50344],[0.22814999999999996,0.77185],[0.18252000000000002,0.81748],[0.45970500000000003,0.540295],[0.42776400000000003,0.572236],[0.378,0.622],[0.3024,0.6976],[0.5646,0.4354],[0.51168,0.48832],[0.24570000000000003,0.7543],[0.19655999999999996,0.80344],[0.47199,0.52801],[0.437592,0.562408],[0.24570000000000003,0.7543],[0.19655999999999996,0.80344],[0.47199,0.52801],[0.437592,0.562408],[0.15970499999999999,0.840295],[0.127764,0.872236],[0.411794,0.588206],[0.389435,0.610565]],"comment":"Somme des investissements amont.<br><b>Six parents</b> : le nœud le plus parenté du réseau. En table tabulaire, 64 lignes ; ici, six poids et une fuite.<br><b>Effets directs entrants</b><ul><li>Une gouvernance des données avec audit de biais est en place <b>+0.40</b></li><li>L'effort de test et de validation est substantiel <b>+0.30</b></li><li>La documentation technique est complète et à jour <b>+0.35</b></li><li>Un système de gestion de la qualité est en place <b>+0.35</b></li><li>Des normes harmonisées applicables sont disponibles <b>-0.30</b></li><li>Le fournisseur est une PME <b>+0.20</b></li></ul><b>Fuite</b> — 0.10 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 64 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 6 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Exécution et conséquences","leak":0.1,"parents":[{"id":10,"w":0.4,"why":"Poste le plus lourd des leviers."},{"id":11,"w":0.3,"why":"Effort d'essais et de validation."},{"id":14,"w":0.35,"why":"Documentation technique et traçabilité."},{"id":8,"w":0.35,"why":"Mise en place et maintien du système qualité."},{"id":6,"w":-0.3,"why":"Art. 42 : la présomption de conformité réduit le travail de démonstration à produire."},{"id":5,"w":0.2,"why":"Effet relatif : à charge égale, le coût pèse davantage sur une PME. Les allègements des art. 11, §1 et 17, §2 ne compensent pas l'absence d'économies d'échelle."}]},{"id":49,"name":"ARRET","longName":"Le système est arrêté ou reconçu","color":"#8E44AD","nodeType":"STANDARD","states":["Faux","Vrai"],"stateLongNames":["Faux","Vrai"],"x":961.4,"y":1446.0,"probabilityTable":[[0.98,0.02],[0.6859999999999999,0.314],[0.29400000000000004,0.706],[0.20579999999999998,0.7942]],"comment":"Issue terminale : suspension obligatoire dès que le déployeur identifie un risque (art. 26, §5), retrait, ou reconception. C'est ce que les leviers amont servent à éviter.<br><b>Effets directs entrants</b><ul><li>Une mesure corrective, un retrait ou un rappel est imposé <b>+0.70</b></li><li>Un dommage réputationnel se matérialise <b>+0.30</b></li></ul><b>Fuite</b> — 0.02 : probabilité que la proposition soit vraie quand aucun parent ne l'est.<br><b>Table</b> — 4 lignes engendrées par la formule noisy-OR à inhibiteurs à partir de 2 poids et d'une fuite. Aucune ligne n'a été saisie à la main.","cls":"Exécution et conséquences","leak":0.02,"parents":[{"id":44,"w":0.7,"why":"Art. 79, §2 : le retrait ou le rappel est l'arrêt."},{"id":47,"w":0.3,"why":"Voie non juridique : une organisation peut arrêter un système pour des raisons de réputation avant toute contrainte."}]}],"arcs":[{"f":0,"t":3},{"f":8,"t":9},{"f":8,"t":14},{"f":9,"t":10},{"f":9,"t":11},{"f":6,"t":11},{"f":6,"t":14},{"f":5,"t":10},{"f":5,"t":8},{"f":5,"t":14},{"f":1,"t":16},{"f":10,"t":16},{"f":11,"t":16},{"f":9,"t":17},{"f":10,"t":18},{"f":11,"t":18},{"f":17,"t":18},{"f":13,"t":19},{"f":12,"t":20},{"f":18,"t":21},{"f":19,"t":21},{"f":16,"t":21},{"f":15,"t":24},{"f":15,"t":25},{"f":14,"t":28},{"f":26,"t":27},{"f":12,"t":29},{"f":20,"t":29},{"f":12,"t":30},{"f":22,"t":30},{"f":23,"t":30},{"f":29,"t":30},{"f":2,"t":30},{"f":24,"t":31},{"f":25,"t":31},{"f":21,"t":32},{"f":30,"t":32},{"f":31,"t":32},{"f":16,"t":33},{"f":2,"t":33},{"f":30,"t":33},{"f":33,"t":34},{"f":2,"t":34},{"f":32,"t":35},{"f":33,"t":35},{"f":3,"t":35},{"f":4,"t":35},{"f":27,"t":35},{"f":34,"t":36},{"f":33,"t":37},{"f":32,"t":37},{"f":27,"t":38},{"f":35,"t":38},{"f":35,"t":39},{"f":38,"t":39},{"f":30,"t":40},{"f":26,"t":40},{"f":36,"t":41},{"f":38,"t":42},{"f":39,"t":42},{"f":40,"t":42},{"f":41,"t":42},{"f":28,"t":42},{"f":42,"t":43},{"f":14,"t":43},{"f":28,"t":43},{"f":43,"t":44},{"f":43,"t":45},{"f":2,"t":45},{"f":5,"t":45},{"f":7,"t":45},{"f":26,"t":46},{"f":35,"t":46},{"f":43,"t":47},{"f":46,"t":47},{"f":10,"t":48},{"f":11,"t":48},{"f":14,"t":48},{"f":8,"t":48},{"f":6,"t":48},{"f":5,"t":48},{"f":44,"t":49},{"f":47,"t":49}],"stats":{"nodes":50,"arcs":83,"rows":319,"params":133}};
+const NODES=D.nodes, byId=new Map(NODES.map(n=>[n.id,n]));
+const byName=new Map(NODES.map(n=>[n.name,n]));
+const ORDER=(()=>{const o=[],s=new Set();
+  const go=i=>{if(s.has(i))return;s.add(i);byId.get(i).parents.forEach(p=>go(p.id));o.push(i);};
+  NODES.forEach(n=>go(n.id));return o;})();
+const PT=new Map(NODES.map(n=>[n.id,n.probabilityTable.map(r=>r[1])]));
+
+/* PRNG déterministe : nombres aléatoires communs entre les deux bras de chaque
+   comparaison, ce qui annule l'essentiel de la variance sur l'écart. */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;
+  let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;
+  return((t^t>>>14)>>>0)/4294967296;};}
+const N=4000;
+function simulate(fixed,seed){
+  const rnd=mulberry32(seed), S=new Map();
+  for(const id of ORDER){
+    const n=byId.get(id), a=new Uint8Array(N);
+    if(fixed && fixed.id===id){a.fill(fixed.val);S.set(id,a);continue;}
+    const tab=PT.get(id), ps=n.parents;
+    if(!ps.length){const p=tab[0];for(let k=0;k<N;k++)a[k]=rnd()<p?1:0;}
+    else{
+      const arr=ps.map(p=>S.get(p.id));
+      for(let k=0;k<N;k++){
+        let idx=0;
+        for(let j=0;j<arr.length;j++) idx=idx*2+arr[j][k];
+        a[k]=rnd()<tab[idx]?1:0;
+      }
+    }
+    S.set(id,a);
+  }
+  return S;
+}
+function mean(arr){let s=0;for(let k=0;k<N;k++)s+=arr[k];return s/N;}
+
+const CIBLES=['PREJUDICE','DISCRIM','ERREUR','ATTEINTE','INCIDENT','AMENDE','CONSTAT',
+              'ARRET','SOCIAL','REPUT','SAISINE','COUT','BOUCLE','CTRL_EFF'];
+const AMONT=['SGQ','SGR','DATA','TEST','DESIGN_CH','SECU','DOC','NOTICE','FORM','AUTORITE',
+             'ENTREE','PERIM','INFO_TRAV','INFO_PERS','JOURNAUX','HIST','POP','PME','NORME',
+             'DELAI','OPACITE','BIAIS_AUTO'];
+const selT=document.getElementById('target');
+CIBLES.forEach(k=>{const n=byName.get(k);if(!n)return;
+  const o=document.createElement('option');o.value=k;o.textContent=n.longName;selT.appendChild(o);});
+selT.value='PREJUDICE';
+selT.addEventListener('change',()=>{document.getElementById('busy').textContent='calcul…';
+  setTimeout(tornado,20);});
+
+function tornado(){
+  const tk=selT.value, tid=byName.get(tk).id;
+  const base=mean(simulate(null,12345).get(tid));
+  const rows=[];
+  AMONT.forEach((k,i)=>{
+    const n=byName.get(k); if(!n||n.id===tid)return;
+    const seed=9000+i*7;
+    const pT=mean(simulate({id:n.id,val:1},seed).get(tid));
+    const pF=mean(simulate({id:n.id,val:0},seed).get(tid));
+    rows.push({k,label:n.longName,d:pT-pF,pT,pF});
+  });
+  rows.sort((a,b)=>Math.abs(b.d)-Math.abs(a.d));
+  document.getElementById('base').innerHTML='Probabilité de base de la cible, toutes '+
+    'propositions amont laissées à leur loi : <b>'+(base*100).toFixed(0)+'&nbsp;%</b>';
+  drawTornado(rows.slice(0,14));
+  document.getElementById('busy').textContent='';
+}
+function drawTornado(rows){
+  const sv=document.getElementById('tornado');
+  const W=sv.clientWidth||900, RH=27, m={t:24,r:20,b:26,l:330};
+  const H=m.t+m.b+rows.length*RH;
+  sv.setAttribute('viewBox','0 0 '+W+' '+H);
+  sv.setAttribute('height',H);
+  while(sv.firstChild)sv.removeChild(sv.firstChild);
+  const NS='http://www.w3.org/2000/svg';
+  const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);
+    return e;};
+  const mx=Math.max(0.02,...rows.map(r=>Math.abs(r.d)))*1.18;
+  const cx=m.l+(W-m.l-m.r)/2, half=(W-m.l-m.r)/2;
+  const X=v=>cx+v/mx*half;
+  for(let i=-2;i<=2;i++){
+    const v=mx*i/2;
+    sv.appendChild(el('line',{x1:X(v),x2:X(v),y1:m.t-6,y2:H-m.b+2,
+      stroke:i===0?'var(--rule-strong)':'var(--rule)','stroke-width':i===0?1.5:1}));
+    const t=el('text',{x:X(v),y:H-m.b+16,'text-anchor':'middle','font-size':10.5,
+      fill:'var(--ink-3)','font-family':'var(--mono)'});
+    t.textContent=(v>0?'+':'')+(v*100).toFixed(0)+' pts'; sv.appendChild(t);
+  }
+  rows.forEach((r,i)=>{
+    const y=m.t+i*RH, h=15;
+    const lab=el('text',{x:m.l-14,y:y+h-3,'text-anchor':'end','font-size':11.5,
+      fill:'var(--ink-2)'});
+    lab.textContent=r.label.length>52?r.label.slice(0,50)+'…':r.label;
+    sv.appendChild(lab);
+    const x0=Math.min(X(0),X(r.d)), w=Math.abs(X(r.d)-X(0));
+    sv.appendChild(el('rect',{x:x0,y:y,width:Math.max(w,1.5),height:h,rx:3,
+      fill:r.d>0?'var(--neg)':'var(--pos)'}));
+    const v=el('text',{x:r.d>0?X(r.d)+7:X(r.d)-7,y:y+h-3,
+      'text-anchor':r.d>0?'start':'end','font-size':11,
+      fill:r.d>0?'var(--neg)':'var(--pos)','font-family':'var(--mono)','font-weight':500});
+    v.textContent=(r.d>0?'+':'−')+(Math.abs(r.d)*100).toFixed(1);
+    sv.appendChild(v);
+  });
+}
+
+/* ---------------- réseau ---------------- */
+const NS='http://www.w3.org/2000/svg';
+const stage=document.getElementById('stage');
+const gRoot=document.createElementNS(NS,'g');
+const gE=document.createElementNS(NS,'g'),gN=document.createElementNS(NS,'g');
+gRoot.appendChild(gE);gRoot.appendChild(gN);stage.appendChild(gRoot);
+const NW=196,LH=12,PY=8;
+function wrapT(t,m){const w=t.split(' '),o=[];let c='';
+  for(const x of w){if((c+' '+x).trim().length>m){if(c)o.push(c);c=x;}else c=(c?c+' ':'')+x;}
+  if(c)o.push(c);return o.slice(0,3);}
+const LY={};NODES.forEach(n=>{const li=wrapT(n.longName,30);
+  LY[n.id]={x:n.x,y:n.y,w:NW,h:PY*2+li.length*LH,li};});
+function clip(b,vx,vy){const hw=b.w/2+2,hh=b.h/2+2;
+  const tx=vx?hw/Math.abs(vx):Infinity,ty=vy?hh/Math.abs(vy):Infinity;
+  const t=Math.min(tx,ty);return{x:b.x+b.w/2+vx*t,y:b.y+b.h/2+vy*t};}
+const ARCS=[];
+NODES.forEach(n=>n.parents.forEach(p=>ARCS.push({f:p.id,t:n.id,w:p.w,why:p.why})));
+const eEls=ARCS.map(a=>{
+  const A=LY[a.f],B=LY[a.t];
+  const dx=(B.x+B.w/2)-(A.x+A.w/2),dy=(B.y+B.h/2)-(A.y+A.h/2);
+  const s=clip(A,dx,dy),e=clip(B,-dx,-dy);
+  const mx2=(s.x+e.x)/2+(e.y-s.y)*0.05,my=(s.y+e.y)/2-(e.x-s.x)*0.05;
+  const p=document.createElementNS(NS,'path');
+  p.setAttribute('d','M'+s.x+','+s.y+' Q'+mx2+','+my+' '+e.x+','+e.y);
+  p.setAttribute('class','edge');
+  p.setAttribute('stroke',a.w>0?'var(--pos)':'var(--neg)');
+  p.setAttribute('opacity','0.30');
+  p.setAttribute('stroke-width',(0.6+Math.abs(a.w)*3.4).toFixed(2));
+  gE.appendChild(p);return{a,p};
+});
+const nEls={};
+NODES.forEach(n=>{
+  const l=LY[n.id];const g=document.createElementNS(NS,'g');
+  g.setAttribute('transform','translate('+l.x+','+l.y+')');g.style.cursor='pointer';
+  const r=document.createElementNS(NS,'rect');
+  r.setAttribute('width',l.w);r.setAttribute('height',l.h);r.setAttribute('rx','4');
+  r.setAttribute('fill',n.color);r.setAttribute('fill-opacity','0.14');
+  r.setAttribute('stroke',n.color);g.appendChild(r);
+  const b=document.createElementNS(NS,'rect');
+  b.setAttribute('width','3.5');b.setAttribute('height',l.h);b.setAttribute('rx','2');
+  b.setAttribute('fill',n.color);g.appendChild(b);
+  const t=document.createElementNS(NS,'text');t.setAttribute('class','n-label');
+  t.setAttribute('fill','currentColor');
+  l.li.forEach((s,i)=>{const ts=document.createElementNS(NS,'tspan');
+    ts.setAttribute('x','10');ts.setAttribute('y',PY+LH*(i+0.78));ts.textContent=s;
+    t.appendChild(ts);});
+  g.appendChild(t);
+  g.addEventListener('click',ev=>{ev.stopPropagation();inspect(n.id);});
+  gN.appendChild(g);nEls[n.id]={g,r};
+});
+let vx=0,vy=0,vk=1;
+function av(){gRoot.setAttribute('transform','translate('+vx+','+vy+') scale('+vk+')');
+  gN.querySelectorAll('.n-label').forEach(t=>t.style.display=vk>0.4?'':'none');}
+function fit(){
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  NODES.forEach(n=>{const l=LY[n.id];x0=Math.min(x0,l.x);y0=Math.min(y0,l.y);
+    x1=Math.max(x1,l.x+l.w);y1=Math.max(y1,l.y+l.h);});
+  const R=stage.getBoundingClientRect(),pad=28;
+  vk=Math.max(0.15,Math.min(Math.min((R.width-pad*2)/(x1-x0),(R.height-pad*2)/(y1-y0)),1.3));
+  vx=(R.width-(x1-x0)*vk)/2-x0*vk;vy=(R.height-(y1-y0)*vk)/2-y0*vk;av();
+}
+let dr=null;
+stage.addEventListener('pointerdown',e=>{dr={x:e.clientX,y:e.clientY,vx,vy};
+  stage.setPointerCapture(e.pointerId);stage.classList.add('dragging');});
+stage.addEventListener('pointermove',e=>{if(!dr)return;
+  vx=dr.vx+(e.clientX-dr.x);vy=dr.vy+(e.clientY-dr.y);av();});
+stage.addEventListener('pointerup',()=>{dr=null;stage.classList.remove('dragging');});
+stage.addEventListener('wheel',e=>{e.preventDefault();
+  const R=stage.getBoundingClientRect(),mx3=e.clientX-R.left,my=e.clientY-R.top;
+  const f=Math.exp(-e.deltaY*0.0016),nk=Math.max(0.15,Math.min(2.2,vk*f));
+  vx=mx3-(mx3-vx)*(nk/vk);vy=my-(my-vy)*(nk/vk);vk=nk;av();},{passive:false});
+document.getElementById('btn-fit').addEventListener('click',fit);
+
+function inspect(id){
+  const n=byId.get(id), box=document.getElementById('insp');
+  NODES.forEach(m=>{nEls[m.id].r.setAttribute('stroke-width',m.id===id?'2.4':'1');
+    const rel=m.id===id||n.parents.some(p=>p.id===m.id)||m.parents.some(p=>p.id===id);
+    nEls[m.id].g.setAttribute('opacity',rel?'1':'0.26');});
+  eEls.forEach(({a,p})=>p.setAttribute('opacity',(a.f===id||a.t===id)?'0.95':'0.07'));
+  let h='<p class="lab">'+n.cls+'</p><h3>'+n.longName+'</h3>';
+  h+='<div class="cm">'+n.comment+'</div>';
+  if(n.parents.length){
+    h+='<div class="wgt"><h4>Effets directs entrants</h4>';
+    [...n.parents].sort((a,b)=>Math.abs(b.w)-Math.abs(a.w)).forEach(p=>{
+      const src=byId.get(p.id);
+      h+='<div class="we"><span class="w '+(p.w>0?'p':'n')+'">'+
+         (p.w>0?'+':'−')+Math.abs(p.w).toFixed(2).replace('.',',')+'</span>'+
+         '<span><button data-go="'+p.id+'">'+src.longName+'</button>'+
+         '<span class="why">'+p.why+'</span></span></div>';
+    });
+    h+='</div>';
+    const ps=n.parents;
+    h+='<table class="cpt"><thead><tr>'+
+       ps.map(p=>'<th>'+byId.get(p.id).longName.slice(0,13)+'…</th>').join('')+
+       '<th style="text-align:right">P(Vrai)</th></tr></thead><tbody>';
+    const nb=1<<ps.length;
+    for(let i=0;i<nb;i++){
+      let cells='';
+      for(let j=0;j<ps.length;j++){
+        const bit=(i>>(ps.length-1-j))&1;
+        cells+='<td class="pa" style="color:'+(bit?'var(--ink)':'var(--ink-3)')+'">'+
+               (bit?'Vrai':'Faux')+'</td>';
+      }
+      h+='<tr>'+cells+'<td class="v">'+
+         n.probabilityTable[i][1].toFixed(3).replace('.',',')+'</td></tr>';
+    }
+    h+='</tbody></table>';
+  }else{
+    h+='<div class="wgt"><h4>Proposition racine</h4><div class="we">'+
+       '<span class="w">'+n.leak.toFixed(2).replace('.',',')+'</span>'+
+       '<span>Fuite — probabilité a priori, à poser en évidence selon le cas examiné.</span>'+
+       '</div></div>';
+  }
+  box.innerHTML=h; box.scrollTop=0;
+  box.querySelectorAll('[data-go]').forEach(b=>
+    b.addEventListener('click',()=>inspect(+b.dataset.go)));
+}
+inspect(byName.get('CTRL_EFF').id);
+requestAnimationFrame(()=>{fit();tornado();});
+window.addEventListener('resize',()=>{fit();drawTornado.last&&0;});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,933 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style><title>AI Act : les obligations, une par une — Noumensia</title>
+<meta name="description" content="Les obligations de l'AI Act découpées une par une et filtrées sur votre profil : qui, quand, quel article, quelle preuve attendue, quelle question de contrôle. Plan d'action exportable.">
+<link rel="canonical" href="https://noumensia.com/dossiers/ai-act/registre-obligations">
+<meta property="og:title" content="AI Act : les obligations, une par une">
+<meta property="og:description" content="Les obligations de l'AI Act découpées une par une et filtrées sur votre profil : qui, quand, quel article, quelle preuve attendue, quelle question de contrôle. Plan d'action exportable.">
+<meta property="og:image" content="https://noumensia.com/images/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-400-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-600.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+html,body{overflow-x:clip}
+.nm-bar{position:relative;z-index:9999;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 18px;
+  padding:9px clamp(14px,3vw,28px);background:#1E2630;color:#F2EFEA;border-bottom:1px solid #3A4756;
+  font:500 13px/1.4 "IBM Plex Sans",-apple-system,sans-serif;letter-spacing:.01em}
+.nm-bar a{color:#F2EFEA;text-decoration:none}
+.nm-bar a:hover{color:#D98A95}
+.nm-bar a:focus-visible{outline:2px solid #D98A95;outline-offset:2px;border-radius:2px}
+.nm-bar__crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0}
+.nm-bar__brand{display:inline-flex;align-items:center;gap:8px;font-family:"Newsreader",Georgia,serif;font-size:15px;font-weight:500}
+.nm-bar__brand img{width:20px;height:20px;display:block}
+.nm-bar__sep{color:#A8B4C2}
+.nm-bar__here{color:#A8B4C2}
+.nm-bar__links{display:flex;flex-wrap:wrap;gap:4px 16px}
+.nm-bar__cta{color:#D98A95 !important}
+
+/* ---- Carrosserie : en-tête écrit pour un lecteur métier ---- */
+:root{--nm-bx:#7A2B3D;--nm-bx-soft:#F6E8EB}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nm-bx:#E59AA8;--nm-bx-soft:#36202A}}
+:root[data-theme="dark"]{--nm-bx:#E59AA8;--nm-bx-soft:#36202A}
+.nm-intro{max-width:1440px;margin:0 auto;padding:30px clamp(16px,3vw,40px) 6px;font-family:var(--sans);color:var(--ink)}
+.nm-kicker{font:500 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--nm-bx);margin:0 0 10px}
+.nm-intro h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.2vw,44px);line-height:1.08;letter-spacing:-.01em;margin:0 0 14px;max-width:24ch;color:var(--ink)}
+.nm-lede{font-size:clamp(16px,1.6vw,18px);line-height:1.55;color:var(--ink-2);max-width:68ch;margin:0 0 22px}
+.nm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 14px}
+@media (max-width:900px){.nm-grid{grid-template-columns:1fr}}
+.nm-card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow)}
+.nm-card h2{font:600 12px/1.3 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+.nm-card ul,.nm-card ol{margin:0;padding-left:1.15em}
+.nm-card li{font-size:14.5px;line-height:1.5;color:var(--ink);margin:0 0 6px}
+.nm-card p{font-size:14.5px;line-height:1.5;color:var(--ink);margin:0 0 6px}
+.nm-card--warn{border-left:3px solid var(--nm-bx)}
+.nm-meta{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:13px;color:var(--ink-3);margin:6px 0 4px}
+.nm-meta a{color:var(--nm-bx);text-decoration:none;border-bottom:1px solid currentColor}
+.nm-steps{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}
+.nm-steps a,.nm-steps span{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 var(--sans);padding:8px 12px;border-radius:999px;border:1px solid var(--rule);color:var(--ink-2);text-decoration:none;background:var(--surface)}
+.nm-steps .on{border-color:var(--nm-bx);color:var(--nm-bx);background:var(--nm-bx-soft)}
+.nm-steps b{font:600 11px/1 var(--mono)}
+.nm-next{max-width:1440px;margin:18px auto 0;padding:0 clamp(16px,3vw,40px)}
+.nm-next a{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 20px;padding:18px 20px;border-radius:10px;
+  background:var(--nm-bx-soft);border:1px solid var(--nm-bx);color:var(--ink);text-decoration:none;font-family:var(--sans)}
+.nm-next small{display:block;font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--nm-bx);margin-bottom:4px}
+.nm-next strong{font-family:var(--serif);font-size:21px;font-weight:600}
+.nm-next span.go{font-weight:600;color:var(--nm-bx)}
+.nm-capot{max-width:1440px;margin:22px auto 40px;padding:0 clamp(16px,3vw,40px);font-family:var(--sans)}
+.nm-capot>summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;padding:16px 20px;border-radius:10px;
+  border:1px dashed var(--rule-strong,var(--rule));background:var(--surface-2);color:var(--ink-2);font-size:14.5px}
+.nm-capot>summary::-webkit-details-marker{display:none}
+.nm-capot>summary b{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink)}
+.nm-capot>summary b::before{content:"▸ ";color:var(--nm-bx)}
+.nm-capot[open]>summary b::before{content:"▾ "}
+.nm-capot[open]>summary{margin-bottom:16px}
+.nm-capot .stats{margin:0 0 16px}
+@media (max-width:760px){.panel,.insp,aside{min-width:0!important;max-width:100%!important;box-sizing:border-box}
+  .panel{grid-template-columns:minmax(0,1fr)!important}
+  .panel table{display:block;overflow-x:auto}
+  .tl-track{overflow-x:auto;-webkit-overflow-scrolling:touch}}
+.wrap>.nm-intro,.wrap>.nm-next,.wrap>.nm-capot{max-width:none;margin-left:0;margin-right:0;padding-left:0;padding-right:0}
+.wrap>.nm-intro{padding-top:8px}
+@media print{.nm-bar,.nm-capot,.nm-next{display:none}}
+</style>
+
+<style>
+:root{
+  --ground:#E9ECF0; --surface:#FFFFFF; --surface-2:#F3F5F8;
+  --ink:#131820; --ink-2:#4E5866; --ink-3:#78828F;
+  --rule:#D0D6DE; --rule-strong:#B4BDC8;
+  --accent:#2A78D6; --accent-soft:#DCE7F5;
+  --alt:#EB6834; --alt-soft:#FBE6DC;
+  --regl:#256ABF; --jug:#9C5E00; --scen:#6B3FA0; --ok:#00730A;
+  --regl-bg:#DCE7F5; --jug-bg:#FBF0DC; --scen-bg:#EDE4F6; --ok-bg:#DDEEDD;
+  --danger:#B3261E; --danger-bg:#F7DEDC;
+  --focus:#2A78D6;
+  --shadow:0 1px 2px rgba(19,24,32,.06),0 8px 24px rgba(19,24,32,.08);
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
+  --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
+  --rule:#28313D; --rule-strong:#3A4653;
+  --accent:#5598E7; --accent-soft:#1B2C42;
+  --alt:#F08A5D; --alt-soft:#33211A;
+  --regl:#86B6EF; --jug:#E0A143; --scen:#B187E8; --ok:#4FB56A;
+  --regl-bg:#16283C; --jug-bg:#2E2415; --scen-bg:#241C33; --ok-bg:#15291A;
+  --danger:#F2A9A2; --danger-bg:#371917;
+  --focus:#5598E7;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
+  --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
+  --rule:#28313D; --rule-strong:#3A4653;
+  --accent:#5598E7; --accent-soft:#1B2C42;
+  --alt:#F08A5D; --alt-soft:#33211A;
+  --regl:#86B6EF; --jug:#E0A143; --scen:#B187E8; --ok:#4FB56A;
+  --regl-bg:#16283C; --jug-bg:#2E2415; --scen-bg:#241C33; --ok-bg:#15291A;
+  --danger:#F2A9A2; --danger-bg:#371917;
+  --focus:#5598E7;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+     font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.wrap{max-width:1380px;margin:0 auto;padding:22px 20px 40px;display:flex;
+      flex-direction:column;gap:16px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;gap:20px 32px;
+       border-bottom:1px solid var(--rule);padding-bottom:16px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+         color:var(--ink-3);margin:0 0 6px}
+h1{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.1;margin:0;
+   letter-spacing:-.015em;text-wrap:balance}
+.sub{margin:8px 0 0;color:var(--ink-2);max-width:74ch}
+.stats{display:flex;gap:22px;margin-left:auto;flex-wrap:wrap}
+.stat b{display:block;font-family:var(--mono);font-size:20px;font-weight:500;
+        font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+       box-shadow:var(--shadow)}
+h2.sec{font-family:var(--serif);font-size:21px;font-weight:600;margin:0 0 4px}
+p.d{margin:0 0 14px;font-size:12.5px;color:var(--ink-2);max-width:78ch}
+p.d b{color:var(--ink)}
+
+.warn{border-left:3px solid var(--jug);padding:16px 20px;font-size:12.5px;color:var(--ink-2)}
+.warn h2{font-family:var(--sans);font-size:12px;letter-spacing:.07em;text-transform:uppercase;
+         font-weight:700;color:var(--ink);margin:0 0 8px}
+.warn p{margin:0 0 9px}.warn p:last-child{margin:0}
+.warncols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));gap:6px 40px}
+.warncols>div>p:last-child{margin:0}
+.warn b{color:var(--ink)}
+blockquote{margin:0 0 10px;padding:8px 0 8px 14px;border-left:2px solid var(--rule-strong);
+           font-family:var(--serif);font-size:14px;color:var(--ink);font-style:italic}
+blockquote cite{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;
+                letter-spacing:.05em;color:var(--ink-3);margin-top:5px;text-transform:uppercase}
+
+.pad{padding:18px 20px 20px}
+.lab{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;
+     color:var(--ink-3);margin:0 0 9px}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{font:inherit;font-size:12.5px;padding:5px 11px;border-radius:100px;cursor:pointer;
+      border:1px solid var(--rule-strong);background:var(--surface-2);color:var(--ink-2);
+      transition:background .12s,color .12s,border-color .12s}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;
+                           font-weight:600}
+.chip.small{font-size:11.5px;padding:4px 9px}
+.profgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:18px 26px}
+.hint{font-size:11.5px;color:var(--ink-3);margin:8px 0 0;line-height:1.45}
+
+.gap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px}
+@media (max-width:980px){.gap{grid-template-columns:1fr}}
+.meter{margin:2px 0 14px}
+.meter .bar{display:flex;height:26px;border-radius:4px;overflow:hidden;gap:2px;
+            background:var(--surface-2)}
+.meter .bar i{display:block;height:26px;transition:width .18s}
+.meter .leg{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-2);
+            margin-top:9px}
+.meter .leg span{display:flex;gap:6px;align-items:center}
+.meter .leg i{width:11px;height:11px;border-radius:2px;display:block;flex:none}
+.meter .leg b{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink);
+              font-weight:500}
+.big{font-family:var(--mono);font-size:30px;font-weight:500;font-variant-numeric:tabular-nums;
+     line-height:1.1;margin:0}
+.bigsub{font-size:11.5px;color:var(--ink-3);margin:3px 0 0}
+
+.plan{border-top:1px solid var(--rule);margin-top:14px;padding-top:12px}
+.plangrp{margin-bottom:14px}
+.plangrp h3{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;
+            color:var(--ink-3);font-weight:500;margin:0 0 6px;display:flex;gap:8px;
+            align-items:baseline}
+.plangrp h3 em{font-style:normal;color:var(--ink-2);text-transform:none;letter-spacing:0;
+               font-family:var(--sans);font-size:11.5px}
+.pi{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+    padding:5px 0;border-top:1px solid var(--rule);font-size:12.5px}
+.pi .n{font-family:var(--mono);font-size:11px;color:var(--ink-3);text-align:right;
+       font-variant-numeric:tabular-nums}
+.pi .t small{display:block;color:var(--ink-3);font-size:11px;margin-top:1px}
+.pi .x{font-family:var(--mono);font-size:11.5px;font-variant-numeric:tabular-nums;
+       color:var(--ink-2);white-space:nowrap}
+.pal{display:grid;grid-template-columns:1fr 54px;gap:8px 12px;align-items:center;
+     padding:5px 0;border-top:1px solid var(--rule);font-size:12px}
+.pal .pn{line-height:1.3}
+.pal .pn small{display:block;color:var(--ink-3);font-size:11px}
+.pal .pv{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums;
+         text-align:right;color:var(--ink-2)}
+.pal .pb{grid-column:1/-1;height:5px;border-radius:2px;background:var(--surface-2);overflow:hidden}
+.pal .pb i{display:block;height:5px}
+.empty{font-size:12.5px;color:var(--ink-3);padding:14px 0;font-style:italic}
+
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.tools input[type=search]{font:inherit;font-size:12.5px;padding:6px 10px;border-radius:4px;
+     border:1px solid var(--rule-strong);background:var(--surface-2);color:var(--ink);
+     min-width:210px;flex:1 1 210px}
+.tools select{font:inherit;font-size:12.5px;padding:6px 8px;border-radius:4px;
+     border:1px solid var(--rule-strong);background:var(--surface-2);color:var(--ink)}
+.btn{font:inherit;font-size:12px;padding:6px 12px;border-radius:4px;cursor:pointer;
+     border:1px solid var(--rule-strong);background:var(--surface-2);color:var(--ink-2)}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.ob{border-top:1px solid var(--rule);padding:11px 0}
+.ob:first-of-type{border-top:none}
+.obhead{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}
+.obt{font-size:13.5px;font-weight:600;line-height:1.35;cursor:pointer;margin:0;
+     display:flex;gap:8px;align-items:baseline}
+.obt .car{color:var(--ink-3);font-size:10px;flex:none;transform:translateY(-1px)}
+.obmeta{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
+.tg{font-family:var(--mono);font-size:10px;letter-spacing:.04em;padding:2px 7px;
+    border-radius:3px;font-weight:500;white-space:nowrap}
+.tg.art{background:var(--regl-bg);color:var(--regl)}
+.tg.ech{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--rule)}
+.tg.s35{background:var(--danger-bg);color:var(--danger)}
+.tg.s15{background:var(--jug-bg);color:var(--jug)}
+.tg.s75{background:var(--scen-bg);color:var(--scen)}
+.tg.snon{background:var(--surface-2);color:var(--ink-3);border:1px solid var(--rule)}
+.tg.exp{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--rule-strong)}
+.stset{display:flex;gap:0;flex:none;border:1px solid var(--rule-strong);border-radius:4px;
+       overflow:hidden}
+.stset button{font:inherit;font-size:11px;padding:4px 9px;cursor:pointer;border:none;
+              background:var(--surface-2);color:var(--ink-3);border-left:1px solid var(--rule)}
+.stset button:first-child{border-left:none}
+.stset button:hover{color:var(--ink)}
+.stset button[aria-pressed="true"]{color:#fff;font-weight:600}
+.stset button.v-ok[aria-pressed="true"]{background:var(--ok)}
+.stset button.v-part[aria-pressed="true"]{background:var(--jug)}
+.stset button.v-no[aria-pressed="true"]{background:var(--danger)}
+.stset button.v-na[aria-pressed="true"]{background:var(--ink-3)}
+.obbody{display:none;margin-top:10px;padding:12px 14px;background:var(--surface-2);
+        border-radius:5px;font-size:12.5px;color:var(--ink-2);line-height:1.55}
+.ob.open .obbody{display:block}
+.obbody dl{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:0}
+.obbody dt{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+           color:var(--ink-3);padding-top:2px}
+.obbody dd{margin:0;max-width:110ch}
+.obbody .q{color:var(--ink);font-weight:600}
+.ob[data-st="ok"]{background:linear-gradient(90deg,var(--ok-bg) 0 3px,transparent 3px)}
+.ob[data-st="no"]{background:linear-gradient(90deg,var(--danger-bg) 0 3px,transparent 3px)}
+.ob[data-st="part"]{background:linear-gradient(90deg,var(--jug-bg) 0 3px,transparent 3px)}
+.ob[data-st="na"]{opacity:.55}
+
+.fx{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:12px 22px}
+.fxi{border-top:1px solid var(--rule);padding:10px 0}
+.fxi .fh{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.fxi .fn{font-size:12.5px;font-weight:600;line-height:1.35}
+.fxi .bv{font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--accent-soft);
+         padding:2px 6px;border-radius:3px;white-space:nowrap;flex:none}
+.fxi .fe{font-size:11.5px;color:var(--ink-3);margin-top:5px;line-height:1.45}
+.fxi .yn{display:flex;gap:0;border:1px solid var(--rule-strong);border-radius:4px;
+         overflow:hidden;margin-top:7px;width:max-content}
+.fxi .yn button{font:inherit;font-size:11px;padding:3px 12px;cursor:pointer;border:none;
+                background:var(--surface-2);color:var(--ink-3);border-left:1px solid var(--rule)}
+.fxi .yn button:first-child{border-left:none}
+.fxi .yn button[aria-pressed="true"]{background:var(--accent);color:#fff;font-weight:600}
+
+pre.out{font-family:var(--mono);font-size:11.5px;line-height:1.6;background:var(--surface-2);
+        border:1px solid var(--rule);border-radius:5px;padding:13px 15px;overflow:auto;
+        max-height:380px;margin:12px 0 0;color:var(--ink-2);white-space:pre-wrap}
+.anx{margin-top:11px;padding-top:10px;border-top:1px dashed var(--rule-strong)}
+.anx>button{font:inherit;font-size:11.5px;padding:4px 10px;border-radius:4px;cursor:pointer;
+     border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink-2)}
+.anx>button:hover{border-color:var(--accent);color:var(--accent)}
+.anxlist{display:none;margin:10px 0 0;padding:0;list-style:none}
+.anx.open .anxlist{display:block}
+.anxlist li{padding:6px 0 6px 22px;border-top:1px solid var(--rule);font-size:12px;
+            position:relative;line-height:1.45}
+.anxlist li::before{content:"\2610";position:absolute;left:2px;top:6px;color:var(--ink-3);
+                    font-size:13px}
+.anxlist li b{color:var(--ink);font-weight:600}
+.anxlist li small{display:block;color:var(--ink-3);font-size:11px;margin-top:2px}
+.crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr));
+      gap:12px 22px}
+.criti{border-top:1px solid var(--rule);padding:10px 0}
+.criti .ch{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.criti .cn{font-size:12.5px;font-weight:600;line-height:1.35}
+.criti .bv{font-family:var(--mono);font-size:10.5px;color:var(--accent);
+           background:var(--accent-soft);padding:2px 6px;border-radius:3px;white-space:nowrap;
+           flex:none}
+.criti .cs{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+           padding:2px 6px;border-radius:3px;margin-top:6px;display:inline-block}
+.criti .cs.agg{background:var(--danger-bg);color:var(--danger)}
+.criti .cs.att{background:var(--ok-bg);color:var(--ok)}
+.criti .ct{font-size:11.5px;color:var(--ink-3);margin-top:6px;line-height:1.5}
+.method{padding:18px 20px 20px;font-size:12.5px;color:var(--ink-2)}
+.method h2{font-family:var(--serif);font-size:21px;font-weight:600;margin:0 0 10px;color:var(--ink)}
+.method h3{font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;
+           color:var(--ink);margin:16px 0 6px}
+.method p{margin:0 0 9px}.method b{color:var(--ink)}
+.methcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:0 40px}
+.methcols>div>h3:first-child{margin-top:0}
+.method code{font-family:var(--mono);font-size:11.5px;background:var(--surface-2);
+             padding:1px 5px;border-radius:3px}
+.method ul{margin:0 0 9px;padding-left:20px}
+.method li{margin-bottom:4px}
+footer{font-size:11.5px;color:var(--ink-3);padding-top:6px;line-height:1.6}
+.tblwrap{overflow-x:auto}
+</style>
+
+<nav class="nm-bar" aria-label="Noumensia"><span class="nm-bar__crumbs"><a class="nm-bar__brand" href="/"><img src="/images/logo/noumensia-icon-light.svg" alt="" aria-hidden="true">Noumensia</a><span class="nm-bar__sep" aria-hidden="true">/</span><a href="/dossiers">Dossiers</a><span class="nm-bar__sep" aria-hidden="true">/</span><a href="/dossiers/ai-act/">AI Act</a><span class="nm-bar__sep" aria-hidden="true">/</span><span class="nm-bar__here">Que dois-je faire ?</span></span><span class="nm-bar__links"><a href="/dossiers/ai-act/#outils">Les outils du dossier</a><a class="nm-bar__cta" href="/dossiers/ai-act/#question">Poser une question</a></span></nav>
+<div class="wrap">
+
+<section class="nm-intro" aria-labelledby="nm-h1"><p class="nm-kicker">Dossier AI Act · Outil 2 sur 3</p><ol class="nm-steps" aria-label="Les trois outils du dossier"><li><a href="/dossiers/ai-act/parcours-qualification"><b>1</b>Mon outil est-il concerné ?</a></li><li><a href="/dossiers/ai-act/registre-obligations" class="on" aria-current="page"><b>2</b>Que dois-je faire ?</a></li><li><a href="/dossiers/ai-act/simulateur-sanction"><b>3</b>Par quoi commencer ?</a></li></ol><h1 id="nm-h1">Que devez-vous faire, et pour quand&nbsp;?</h1><p class="nm-lede">Le règlement contient des dizaines d'obligations dispersées sur 113 articles et 13 annexes. Elles sont ici découpées une par une. Indiquez votre rôle et les usages concernés, le registre ne garde que ce qui vous regarde et le classe par échéance.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>La liste des obligations qui vous concernent, avec l'article et la date d'application.</li><li>Pour chacune, la preuve attendue et la question qu'un contrôleur poserait.</li><li>Un plan d'action à exporter, et vos réponses transmises au simulateur.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Cochez vos rôles et les régimes de vos outils (le parcours vous les donne).</li><li>Dépliez une obligation, marquez-la couverte si elle l'est déjà.</li><li>Exportez le plan, puis ouvrez vos réponses dans le simulateur.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Le score d'exposition sert à trier, pas à prédire : c'est le palier de sanction multiplié par deux jugements d'expert (criticité, détectabilité), expliqués pour chaque obligation.</p></div></div><p class="nm-meta"><span>10 à 20 minutes · 73 obligations · texte consolidé au 27/07/2026</span><a href="#capot">Comment c'est construit</a></p></section>
+
+
+
+
+<section class="panel pad">
+  <h2 class="sec">1. Profil de l'organisation</h2>
+  <p class="d">Le registre se filtre sur ce profil. Un opérateur peut cumuler plusieurs rôles —
+  c'est même le cas le plus fréquent : un éditeur RH est fournisseur de son produit et déployeur
+  de ses propres outils internes. L'article 25 requalifie en <b>fournisseur</b> quiconque
+  rebadge, modifie substantiellement ou détourne la destination d'un système.</p>
+  <div class="profgrid">
+    <div>
+      <p class="lab">Rôles endossés</p>
+      <div class="chips" id="c-roles"></div>
+    </div>
+    <div>
+      <p class="lab">Régimes applicables aux systèmes utilisés</p>
+      <div class="chips" id="c-reg"></div>
+      <p class="hint" id="h-reg"></p>
+    </div>
+  </div>
+</section>
+
+<section class="panel pad">
+  <h2 class="sec">2. Analyse d'écart</h2>
+  <p class="d">Chaque obligation reçoit un <b>score d'exposition</b> ordinal :
+  poids du palier de sanction × criticité × détectabilité par l'autorité. Le score sert à
+  <b>ordonner</b> un plan d'action, pas à prédire une amende — c'est une échelle de priorité,
+  sans unité et sans interprétation probabiliste.</p>
+  <div class="gap">
+    <div>
+      <div class="meter">
+        <div class="bar" id="m-bar"></div>
+        <div class="leg" id="m-leg"></div>
+      </div>
+      <div style="display:flex;gap:30px;flex-wrap:wrap;margin-top:16px">
+        <div><p class="big" id="k-open">—</p><p class="bigsub">obligations non couvertes</p></div>
+        <div><p class="big" id="k-expo">—</p><p class="bigsub">points d'exposition ouverts</p></div>
+        <div><p class="big" id="k-due">—</p><p class="bigsub">déjà exigibles aujourd'hui</p></div>
+      </div>
+      <div class="bypal">
+        <p class="lab" style="margin:18px 0 8px">Exposition ouverte par palier de sanction</p>
+        <div id="pal"></div>
+      </div>
+      <p class="hint" style="margin-top:14px">En octobre 2026, l'essentiel du régime haut
+      risque n'est pas encore exigible : l'annexe&nbsp;III bascule le
+      <b>2&nbsp;décembre 2027</b> et l'annexe&nbsp;I le <b>2&nbsp;août 2028</b>, après report par
+      le règlement Omnibus. Les interdictions de l'article&nbsp;5, la maîtrise de l'IA de
+      l'article&nbsp;4 et la transparence de l'article&nbsp;50 le sont <em>déjà</em>. C'est là
+      que se trouve le risque immédiat.</p>
+    </div>
+    <div>
+      <p class="lab">Plan d'action — obligations ouvertes, par échéance puis par exposition</p>
+      <div class="plan" id="plan"></div>
+      <button class="btn" id="b-export" style="margin-top:10px">Exporter le plan en Markdown</button>
+      <pre class="out" id="out-plan" hidden></pre>
+    </div>
+  </div>
+</section>
+
+<section class="panel pad">
+  <h2 class="sec">3. Registre de contrôle</h2>
+  <p class="d">Une ligne par obligation. Déplier une ligne donne la question de contrôle à poser
+  en audit, le livrable attendu et les notes de lecture. Les statuts sont conservés en mémoire de
+  page : ils disparaissent au rechargement, utilisez l'export Markdown pour les garder.</p>
+  <div class="tools">
+    <input type="search" id="q" placeholder="Rechercher un article, un mot…" aria-label="Rechercher">
+    <select id="f-ech" aria-label="Filtrer par échéance"><option value="">Toutes échéances</option></select>
+    <select id="f-sanct" aria-label="Filtrer par palier"><option value="">Tous paliers</option></select>
+    <button class="btn" id="f-open" aria-pressed="false">Non couvertes seulement</button>
+    <button class="btn" id="b-all">Tout déplier</button>
+    <span style="margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--ink-3)"
+          id="cnt"></span>
+  </div>
+  <div id="reg"></div>
+</section>
+
+<section class="panel pad">
+  <h2 class="sec">4. Ce qui décide du montant — article 99, §7</h2>
+  <p class="d">Dix critères, a) à j). <b>Dix, pas onze</b> : le règlement ne compte pas de
+  critère d'adhésion à un code de conduite — celle-ci ne peut jouer que par le point e),
+  « toute autre circonstance aggravante ou atténuante ». Le paragraphe s'applique
+  « pour décider <em>s'il y a lieu</em> d'imposer une amende <b>et</b> pour décider du
+  montant » : l'amende n'est pas automatique sur constat, c'est une décision, et ces dix
+  critères en sont la méthode. Le nom en bleu est celui de la variable correspondante dans le
+  réseau de risque quantifié.</p>
+  <div class="crit" id="crit"></div>
+</section>
+
+<section class="panel pad">
+  <h2 class="sec">5. Passerelle vers la simulation du risque</h2>
+  <p class="d">Ces dix facteurs ne sont pas des obligations : ce sont les <b>variables d'entrée</b>
+  des réseaux bayésiens quantifiés de la série. Le nom affiché en bleu est le nom exact de la
+  variable dans le réseau — renseignez-les ici, reportez le bloc d'observations dans BayesiaLab
+  ou WebSimulator, et c'est là, et seulement là, que se calcule un taux.</p>
+  <div class="fx" id="fx"></div>
+  <button class="btn" id="b-ev" style="margin-top:14px">Générer le jeu d'observations</button>
+  <pre class="out" id="out-ev" hidden></pre>
+</section>
+
+
+
+</div>
+
+<div class="nm-next"><a href="/dossiers/ai-act/simulateur-sanction"><span><small>Outil 3 sur 3</small><strong>Par quoi commencer pour réduire votre exposition ?</strong></span><span class="go">Continuer →</span></a></div>
+<details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>Pourquoi une obligation par fiche, ce qui est lu dans le texte et ce qui est jugement</span></summary>
+<div class="nm-capot-stats"><div class="stats">
+    <div class="stat"><b id="s-obl">—</b><span>obligations</span></div>
+    <div class="stat"><b id="s-node">—</b><span>nœuds</span></div>
+    <div class="stat"><b id="s-arc">—</b><span>arcs</span></div>
+    <div class="stat"><b id="s-preuve">—</b><span>livrables</span></div>
+  </div></div>
+<section class="panel warn">
+  <h2>Pourquoi une obligation par fiche, et ce qu'un graphe ne peut pas faire</h2>
+  <div class="warncols">
+  <div>
+  <blockquote>« Elle n'est pas capable de préparer un plan d'action exhaustif pour répondre à
+  toutes les obligations de l'AI Act. »<cite>Retour de test, Graph RAG sur la version 1</cite></blockquote>
+  <p><b>Le diagnostic est structurel, pas un défaut de réglage.</b> Dans la version 1,
+  « Obligations du fournisseur (art. 16) » était <em>un</em> nœud dont la description énumérait
+  douze obligations en prose. Un Graph RAG récupère des nœuds, pas des phrases à l'intérieur des
+  nœuds. Il ne peut pas énumérer ce qui n'est pas énuméré. Aucun réglage du modèle n'y change
+  rien.</p>
+  <p><b>La correction : atomiser.</b> Une obligation = un nœud. Chaque nœud porte toujours les
+  mêmes champs — qui, déclencheur, article, échéance, preuve attendue, question de contrôle,
+  palier de sanction, criticité, détectabilité. Un nœud récupéré seul suffit à répondre pour son
+  item. La redondance entre nœuds, qui serait du bruit dans une carte conceptuelle, est ici une
+  qualité. « Prépare le plan d'action d'un employeur déployant un système de l'annexe III.4 »
+  devient une traversée, et l'exhaustivité vient du graphe plutôt que du modèle.</p>
+  </div>
+  <div>
+  <blockquote>« Si on arrive à simuler le taux de risque de sanction, ça va être un produit bien
+  attirant. »<cite>Retour de test, suite</cite></blockquote>
+  <p><b>Un knowledge graph ne peut pas produire un taux</b>, quel que soit le RAG posé dessus :
+  un graphe qualitatif n'a pas de probabilités, il n'y a rien à propager. Ce que ce graphe
+  produit est une <b>analyse d'écart scorée</b> — les obligations non couvertes, triées par
+  palier de sanction, criticité et détectabilité. C'est un ordre de priorité, pas une
+  probabilité, et la page ci-dessous n'écrit jamais de pourcentage.</p>
+  <p>Le taux, lui, se calcule dans les réseau bayésien de ce dossier, le simulateur de sanction, dont le fichier s'ouvre dans BayesiaLab et WebSimulator. Les dix
+  nœuds « facteur de risque » de ce graphe portent le <b>nom exact</b> des variables d'entrée de
+  ces réseaux. Un audit mené ici alimente donc directement la simulation : c'est l'articulation
+  des deux outils qui fait l'outil de contrôle, pas l'un des deux. La section
+  « Passerelle vers la simulation » produit le jeu d'observations à reporter.</p>
+  </div>
+  </div>
+</section>
+<section class="panel method">
+  <h2>Méthode et statut des informations</h2>
+
+  <div class="methcols">
+  <div>
+  <h3>Ce qui est lu dans le texte</h3>
+  <p>Les intitulés d'obligation, les références d'article, les paliers de sanction de
+  l'article&nbsp;99 et les dates d'application de l'article&nbsp;113 sont lus article par article
+  dans le règlement (UE) 2024/1689 tel que publié au JOUE. Les huit pratiques interdites
+  reprennent l'article&nbsp;5, §1, a) à h).</p>
+
+  <h3>Ce qui provient du règlement modificatif</h3>
+  <p>Les mentions <b>⚠</b> signalent ce qui vient du règlement (UE) 2026/1744, dit
+  « Omnibus IA », entré en vigueur le 27 juillet 2026 : report du régime de l'annexe&nbsp;III au
+  2 décembre 2027, de l'annexe&nbsp;I au 2 août 2028, des bacs à sable au 2 août 2027 ; extension
+  de l'article&nbsp;5 ; assouplissement de l'article&nbsp;4. L'article&nbsp;50 n'est pas reporté et
+  s'applique depuis le 2 août 2026. Ils ont été vérifiés sur la version consolidée publiée par EUR-Lex au 27 juillet 2026.</p>
+
+  <h3>Ce qui est un jugement d'expert</h3>
+  <p>La <b>criticité</b> (1 à 5) et la <b>détectabilité par l'autorité</b> (faible / moyenne /
+  élevée) ne sont pas dans le texte. Ce sont des appréciations, portées avec un biais assumé vers
+  les usages RH, et chaque nœud du graphe le dit explicitement. Elles doivent être rediscutées
+  pour un autre secteur. Le score d'exposition qui en découle —
+  <code>palier × criticité × détectabilité</code>, de 1 à 75 — hérite de cette subjectivité :
+  c'est un outil de tri, et il ne doit jamais être présenté comme une mesure de risque.</p>
+
+  </div>
+  <div>
+  <h3>Ce que le registre ne couvre pas</h3>
+  <ul>
+    <li>Les obligations pesant sur les <b>États membres</b> et les autorités (chapitres VI et VII)
+    hors de ce qui crée un devoir pour un opérateur.</li>
+    <li>Les obligations des <b>organismes notifiés</b> (section 4 du chapitre III).</li>
+    <li>Les procédures d'évaluation des <b>organismes notifiés</b> eux-mêmes (annexes VI et
+    VII), au-delà de savoir laquelle s'applique.</li>
+    <li>Les <b>droits nationaux plus favorables</b> réservés par l'article 2, §11 — en France,
+    l'articulation avec la consultation du CSE, qui peut anticiper l'échéance européenne.</li>
+  </ul>
+
+  <h3>Ce que la version 3 a ajouté</h3>
+  <p>Les annexes n'étaient d'abord que nommées — « documentation technique (annexe IV) » était
+  un nœud unique, exactement le défaut que l'atomisation corrigeait ailleurs. Les annexes
+  <b>IV, V, XI, XII et XIII</b> sont désormais éclatées item par item et rattachées au livrable
+  qu'elles composent : déplier une obligation en donne la checklist. S'y ajoutent les
+  <b>huit domaines de l'annexe III</b> avec leurs sous-points, les <b>dix critères de
+  l'article 99, §7</b>, les <b>droits des personnes</b> (art. 26 §11, 50, 85, 86) pour
+  interroger le graphe par les droits et non seulement par les devoirs, et la <b>chaîne de
+  surveillance</b> des articles 74 et 79 à 83 — sans laquelle le graphe disait ce qu'il faut
+  faire, mais pas ce qui arrive quand on ne l'a pas fait.</p>
+
+  <h3>Limites de la passerelle</h3>
+  <p>Le nom des variables est identique de part et d'autre, mais l'appariement reste une
+  convention de nommage : rien ne le contrôle automatiquement. Si les réseaux quantifiés évoluent,
+  l'appariement doit être revérifié. Et les probabilités de ces réseaux sont elles-mêmes des
+  jugements d'expert calibrés sur le texte, non des fréquences observées — aucune série de
+  sanctions AI Act n'existe encore, le régime haut risque n'étant pas applicable.</p>
+  </div>
+  </div>
+
+  <footer>Source primaire : règlement (UE) 2024/1689 du 13 juin 2024 (JOUE L, 12.7.2024).
+  Calendrier consolidé par le règlement (UE) 2026/1744. Graphe :
+  <span id="f-n">—</span> nœuds, <span id="f-a">—</span> arcs, 8 classes sémantiques.
+  Format JSON Knowledge Graph Bayesia, importable dans Hellixmap.</footer>
+</section>
+</details>
+<script>
+const DATA = {"registre": [{"key": "O_P_SUBLIM", "titre": "Ne pas déployer de techniques subliminales ou manipulatrices altérant le comportement", "roles": ["RO_FOURN", "RO_DEPLOY"], "regimes": ["R_INTERDIT"], "art": "art. 5, §1, a)", "ech": "E_2025_02", "preuves": ["P_CARTO"], "question": "Un système utilisé dans l'organisation cherche-t-il à influencer une décision par des moyens situés sous le seuil de conscience de la personne, ou par une présentation délibérément trompeuse ?", "sanct": "S_35", "crit": 3, "detect": "faible — suppose un signalement ou une plainte", "notes": "Trois conditions cumulatives : technique subliminale ou manipulatrice, altération substantielle du comportement, préjudice important causé ou raisonnablement susceptible de l'être. Un simple « nudge » d'interface ne suffit pas à qualifier.", "detect_score": 1, "sanct_poids": 5, "expo": 15}, {"key": "O_P_VULNER", "titre": "Ne pas exploiter les vulnérabilités liées à l'âge, au handicap ou à la situation sociale", "roles": ["RO_FOURN", "RO_DEPLOY"], "regimes": ["R_INTERDIT"], "art": "art. 5, §1, b)", "ech": "E_2025_02", "preuves": ["P_CARTO"], "question": "Un système cible-t-il, dans son paramétrage ou ses effets, des personnes en raison de leur âge, d'un handicap ou d'une situation sociale ou économique particulière, d'une manière qui altère substantiellement leur comportement ?", "sanct": "S_35", "crit": 3, "detect": "faible — suppose un signalement ou une plainte", "notes": "En RH, le risque se loge dans le ciblage publicitaire des offres d'emploi plus que dans les outils de sélection eux-mêmes.", "detect_score": 1, "sanct_poids": 5, "expo": 15}, {"key": "O_P_NOTATION", "titre": "Ne pas procéder à la notation sociale de personnes physiques", "roles": ["RO_FOURN", "RO_DEPLOY"], "regimes": ["R_INTERDIT"], "art": "art. 5, §1, c)", "ech": "E_2025_02", "preuves": ["P_CARTO"], "question": "Un score de comportement ou de personnalité est-il calculé sur une période, puis utilisé dans un contexte DISSOCIÉ de celui où les données ont été collectées, ou de façon disproportionnée au comportement observé ?", "sanct": "S_35", "crit": 4, "detect": "moyenne — visible dans l'architecture du système", "notes": "C'est l'interdiction la plus proche des pratiques RH réelles. Un score interne agrégeant comportement, ponctualité et activité sur les outils collaboratifs, réutilisé pour décider d'une promotion, entre dans la zone grise du point i). Le critère discriminant est la DISSOCIATION des contextes.", "detect_score": 2, "sanct_poids": 5, "expo": 40}, {"key": "O_P_PREDICTION", "titre": "Ne pas prédire le risque d'infraction pénale sur le seul profilage", "roles": ["RO_FOURN", "RO_DEPLOY"], "regimes": ["R_INTERDIT"], "art": "art. 5, §1, d)", "ech": "E_2025_02", "preuves": ["P_CARTO"], "question": "Un système évalue-t-il la probabilité qu'une personne commette une infraction à partir de son seul profil ou de ses traits de personnalité ?", "sanct": "S_35", "crit": 2, "detect": "faible — suppose un signalement ou une plainte", "notes": "L'interdiction ne couvre pas les systèmes qui étayent une évaluation humaine déjà fondée sur des faits objectifs et vérifiables. En entreprise, concerne surtout les outils de détection de fraude interne fondés sur le profil plutôt que sur les faits.", "detect_score": 1, "sanct_poids": 5, "expo": 10}, {"key": "O_P_MOISSON", "titre": "Ne pas constituer de base de reconnaissance faciale par moissonnage non ciblé", "roles": ["RO_FOURN", "RO_DEPLOY"], "regimes": ["R_INTERDIT"], "art": "art. 5, §1, e)", "ech": "E_2025_02", "preuves": ["P_CARTO"], "question": "L'organisation utilise-t-elle un outil dont la base faciale provient d'une collecte non ciblée d'images sur internet ou en vidéosurveillance ?", "sanct": "S_35", "crit": 2, "detect": "moyenne — visible dans l'architecture du système", "notes": "Vise les fournisseurs de type Clearview. Le déployeur qui utilise un tel outil est couvert par « l'utilisation » et engage sa propre responsabilité.", "detect_score": 2, "sanct_poids": 5, "expo": 20}, {"key": "O_P_EMOTION", "titre": "Ne pas inférer les émotions sur le lieu de travail", "roles": ["RO_FOURN", "RO_DEPLOY", "RO_EMPL"], "regimes": ["R_INTERDIT"], "art": "art. 5, §1, f)", "ech": "E_2025_02", "preuves": ["P_CARTO"], "question": "Un outil d'entretien vidéo, de visioconférence, de centre d'appels ou d'analyse vocale produit-il un indicateur d'émotion, d'engagement, d'enthousiasme, de stress ou de sincérité ?", "sanct": "S_35", "crit": 5, "detect": "élevée — détectable à la lecture de la notice du fournisseur", "notes": "L'INTERDICTION LA PLUS DIRECTEMENT OPPOSABLE À UNE DIRECTION RH, et la plus souvent ignorée. Elle vise l'inférence d'émotions, pas la détection d'expressions physiques apparentes (considérant 18). Deux exceptions seulement : raisons médicales ou de sécurité. « Amélioration de l'expérience candidat » n'en est pas une. Distinguer de l'art. 50, §3 qui n'impose qu'une information : hors travail et enseignement, l'inférence émotionnelle est permise sous condition d'information ; au travail, elle est interdite.", "detect_score": 3, "sanct_poids": 5, "expo": 75}, {"key": "O_P_BIOCAT", "titre": "Ne pas catégoriser biométriquement sur des attributs sensibles", "roles": ["RO_FOURN", "RO_DEPLOY"], "regimes": ["R_INTERDIT"], "art": "art. 5, §1, g)", "ech": "E_2025_02", "preuves": ["P_CARTO"], "question": "Un système déduit-il, à partir de données biométriques, la race, les opinions politiques, l'affiliation syndicale, les convictions religieuses ou philosophiques, la vie ou l'orientation sexuelle d'une personne ?", "sanct": "S_35", "crit": 4, "detect": "moyenne — visible dans l'architecture du système", "notes": "L'interdiction ne couvre pas l'étiquetage ou le filtrage d'ensembles de données biométriques acquis légalement. En RH, le risque est indirect : un outil d'analyse faciale « de diversité » tombe sous le coup de ce point.", "detect_score": 2, "sanct_poids": 5, "expo": 40}, {"key": "O_P_RBI", "titre": "Ne pas utiliser l'identification biométrique à distance en temps réel à des fins répressives", "roles": ["RO_DEPLOY"], "regimes": ["R_INTERDIT"], "art": "art. 5, §1, h)", "ech": "E_2025_02", "preuves": ["P_CARTO"], "question": "L'organisation opère-t-elle une identification biométrique à distance en temps réel dans un espace accessible au public à des fins répressives ?", "sanct": "S_35", "crit": 1, "detect": "élevée — détectable à la lecture de la notice du fournisseur", "notes": "Ne concerne que les autorités répressives et leurs prestataires. Sans objet pour un employeur privé, mais figure au registre pour la complétude de l'article 5. ⚠ Le règlement (UE) 2026/1744 ajoute deux pratiques à l'art. 5 — génération de contenus intimes non consentis et de CSAM — avec transition jusqu'au 2 décembre 2026, hors texte de 2024.", "detect_score": 3, "sanct_poids": 5, "expo": 15}, {"key": "O_MAITRISE", "titre": "Favoriser le développement de la maîtrise de l'IA du personnel", "roles": ["RO_FOURN", "RO_DEPLOY"], "regimes": ["R_MIN", "R_HR3", "R_HR1", "R_TRANSP"], "art": "art. 4", "ech": "E_2025_02", "preuves": [], "question": "Les personnes qui opèrent ou supervisent le système ont-elles reçu une formation documentée, adaptée à leurs connaissances techniques et au contexte d'usage ?", "sanct": "S_NON", "crit": 2, "detect": "faible", "notes": "Seule obligation qui s'applique quel que soit le régime, y compris en risque minimal. ⚠ Le règlement (UE) 2026/1744 a assoupli la formulation : « favoriser le développement » de cette maîtrise, là où le texte de 2024 visait un « niveau suffisant ». Aucune amende directe à l'art. 99, mais opposable en contentieux et facteur aggravant au titre de l'art. 99, §7, g).", "detect_score": 1, "sanct_poids": 1, "expo": 2}, {"key": "O_F_SGR", "titre": "Établir et maintenir un système de gestion des risques", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 9", "ech": "E_2027_12", "preuves": ["P_SGR"], "question": "Le dossier de gestion des risques couvre-t-il l'usage conforme ET la mauvaise utilisation raisonnablement prévisible, et a-t-il été mis à jour depuis la dernière version du système ?", "sanct": "S_15", "crit": 5, "detect": "moyenne", "notes": "Processus ITÉRATIF ET CONTINU sur tout le cycle de vie, pas un document produit une fois. C'est le levier amont : il conditionne la détection des autres défauts avant mise sur le marché.", "detect_score": 2, "sanct_poids": 4, "expo": 40}, {"key": "O_F_DATA", "titre": "Gouverner les données d'entraînement, de validation et de test", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 10", "ech": "E_2027_12", "preuves": ["P_DATA"], "question": "Les jeux de données ont-ils fait l'objet d'un examen documenté des biais susceptibles d'induire une discrimination, avec des métriques par groupe de personnes visées ?", "sanct": "S_15", "crit": 5, "detect": "moyenne", "notes": "Jeux pertinents, suffisamment représentatifs, exempts d'erreurs et complets « dans toute la mesure du possible ». L'art. 4 bis (ex-art. 10, §5) autorise, sous garanties strictes, le traitement de catégories particulières de données à seule fin de détection et correction des biais — sans cette base, mesurer un biais serait souvent illicite au regard du RGPD.", "detect_score": 2, "sanct_poids": 4, "expo": 40}, {"key": "O_F_DOCTECH", "titre": "Établir et tenir à jour la documentation technique", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 11 et annexe IV", "ech": "E_2027_12", "preuves": ["P_DOCTECH"], "question": "La documentation technique est-elle complète au regard de l'annexe IV et postérieure à la dernière modification du système ?", "sanct": "S_15", "crit": 5, "detect": "élevée", "notes": "Établie AVANT la mise sur le marché. Régime simplifié pour les PME. C'est la pièce maîtresse en cas de contrôle : art. 16, k), le fournisseur doit prouver la conformité sur demande motivée.", "detect_score": 3, "sanct_poids": 4, "expo": 60}, {"key": "O_F_JOURNAUX", "titre": "Concevoir le système pour l'enregistrement automatique des journaux", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 12", "ech": "E_2027_12", "preuves": ["P_JOURNAUX"], "question": "Le système produit-il automatiquement des journaux permettant d'identifier les situations de risque et les modifications substantielles ?", "sanct": "S_15", "crit": 4, "detect": "moyenne", "notes": "Obligation de CONCEPTION, distincte de l'obligation de conservation des art. 19 et 26, §6.", "detect_score": 2, "sanct_poids": 4, "expo": 32}, {"key": "O_F_NOTICE", "titre": "Rédiger une notice exposant les capacités ET les limites du système", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 13", "ech": "E_2027_12", "preuves": ["P_NOTICE"], "question": "La notice indique-t-elle les niveaux d'exactitude PAR GROUPE DE PERSONNES et les circonstances pouvant conduire à des risques ?", "sanct": "S_15", "crit": 5, "detect": "élevée", "notes": "Article sous-estimé. C'est lui qui alimente en pratique l'art. 26 (obligations du déployeur) et l'art. 86 (droit à l'explication). Une notice pauvre expose le fournisseur ET rend le déployeur non conforme.", "detect_score": 3, "sanct_poids": 4, "expo": 60}, {"key": "O_F_CTRL", "titre": "Concevoir le système pour rendre le contrôle humain possible", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 14", "ech": "E_2027_12", "preuves": ["P_DOCTECH"], "question": "L'interface permet-elle à une personne de comprendre les limites du système, d'interpréter la sortie, de décider de ne pas l'utiliser et d'interrompre le système ?", "sanct": "S_15", "crit": 5, "detect": "moyenne", "notes": "Le §4, b) impose explicitement de permettre à la personne de « rester consciente d'une éventuelle tendance à se fier automatiquement ou excessivement aux sorties » — le règlement nomme donc lui-même le biais d'automatisation. Le contrôle humain doit être possible PAR CONCEPTION, pas seulement organisé par procédure.", "detect_score": 2, "sanct_poids": 4, "expo": 40}, {"key": "O_F_ROBUST", "titre": "Atteindre un niveau approprié d'exactitude, de robustesse et de cybersécurité", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 15", "ech": "E_2027_12", "preuves": ["P_DOCTECH"], "question": "Les niveaux d'exactitude et les métriques sont-ils déclarés dans la notice, et le système résiste-t-il aux attaques spécifiques à l'IA ?", "sanct": "S_15", "crit": 4, "detect": "faible", "notes": "Résilience aux erreurs, défaillances, et attaques spécifiques : empoisonnement des données, exemples adverses, extraction de modèle.", "detect_score": 1, "sanct_poids": 4, "expo": 16}, {"key": "O_F_IDENT", "titre": "Indiquer son nom, sa raison sociale ou sa marque et son adresse de contact", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 16, b)", "ech": "E_2027_12", "preuves": [], "question": "Le nom et l'adresse du fournisseur figurent-ils sur le système, son emballage ou sa documentation ?", "sanct": "S_15", "crit": 1, "detect": "élevée", "notes": "Obligation formelle, facile à satisfaire et facile à contrôler. Son manquement relève de l'art. 83 (non-conformité formelle).", "detect_score": 3, "sanct_poids": 4, "expo": 12}, {"key": "O_F_SGQ", "titre": "Mettre en place un système de gestion de la qualité", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 16, c) et art. 17", "ech": "E_2027_12", "preuves": ["P_SGQ"], "question": "Existe-t-il des politiques et procédures ÉCRITES couvrant les onze aspects de l'art. 17, §1 ?", "sanct": "S_15", "crit": 4, "detect": "élevée", "notes": "Régime proportionné pour les PME (§2). C'est le levier organisationnel qui rend les autres obligations répétables plutôt qu'accidentelles.", "detect_score": 3, "sanct_poids": 4, "expo": 48}, {"key": "O_F_CONSERV", "titre": "Conserver la documentation pendant dix ans", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 16, d) et art. 18", "ech": "E_2027_12", "preuves": ["P_DOCTECH", "P_SGQ", "P_DECL"], "question": "La documentation technique, celle du SGQ, les décisions des organismes notifiés et la déclaration UE sont-elles conservées et accessibles pendant dix ans après la mise sur le marché ?", "sanct": "S_15", "crit": 3, "detect": "élevée", "notes": "Chaque État membre détermine les conditions de conservation en cas de faillite ou de cessation d'activité du fournisseur (art. 18, §2).", "detect_score": 3, "sanct_poids": 4, "expo": 36}, {"key": "O_F_TENUE_JOURNAUX", "titre": "Assurer la tenue des journaux pendant au moins six mois", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 16, e) et art. 19", "ech": "E_2027_12", "preuves": ["P_JOURNAUX"], "question": "Les journaux sous le contrôle du fournisseur sont-ils conservés pendant une période adaptée à la destination, d'au moins six mois ?", "sanct": "S_15", "crit": 3, "detect": "moyenne", "notes": "Durée minimale, pas maximale : elle doit être « adaptée à la destination », ce qui peut imposer davantage.", "detect_score": 2, "sanct_poids": 4, "expo": 24}, {"key": "O_F_EVAL", "titre": "Soumettre le système à la procédure d'évaluation de la conformité", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 16, f) et art. 43", "ech": "E_2027_12", "preuves": ["P_EVAL"], "question": "L'évaluation de la conformité a-t-elle été réalisée AVANT la mise sur le marché, et refaite après la dernière modification substantielle ?", "sanct": "S_15", "crit": 5, "detect": "élevée", "notes": "Pour l'annexe III points 2 à 8 — donc toute la RH — contrôle interne selon l'annexe VI, sans organisme notifié. Conséquence pratique : la qualité de la conformité repose entièrement sur la discipline documentaire, et le contrôle est ex post.", "detect_score": 3, "sanct_poids": 4, "expo": 60}, {"key": "O_F_DECL", "titre": "Établir la déclaration UE de conformité", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 16, g) et art. 47", "ech": "E_2027_12", "preuves": ["P_DECL"], "question": "Une déclaration UE de conformité écrite existe-t-elle pour chaque système, tenue à disposition des autorités pendant dix ans ?", "sanct": "S_15", "crit": 3, "detect": "élevée", "notes": "Le fournisseur y assume expressément la responsabilité du respect des exigences.", "detect_score": 3, "sanct_poids": 4, "expo": 36}, {"key": "O_F_CE", "titre": "Apposer le marquage CE", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 16, h) et art. 48", "ech": "E_2027_12", "preuves": ["P_CE"], "question": "Le marquage CE est-il apposé de façon visible, lisible et indélébile, suivi le cas échéant du numéro de l'organisme notifié ?", "sanct": "S_15", "crit": 2, "detect": "élevée", "notes": "Marquage électronique admis pour les systèmes purement numériques.", "detect_score": 3, "sanct_poids": 4, "expo": 24}, {"key": "O_F_ENREG", "titre": "S'enregistrer et enregistrer le système dans la base de données de l'UE", "roles": ["RO_FOURN"], "regimes": ["R_HR3"], "art": "art. 16, i) et art. 49, §1", "ech": "E_2027_12", "preuves": ["P_ENREG"], "question": "Le fournisseur et le système sont-ils enregistrés dans la base de données de l'UE AVANT mise sur le marché ?", "sanct": "S_15", "crit": 4, "detect": "élevée", "notes": "Exception : l'annexe III, point 2 (infrastructures critiques) est enregistrée au niveau national (art. 49, §5). Les annexes III points 1, 6 et 7 le sont dans une section sécurisée non publique (art. 49, §4). La base est PUBLIQUE pour le reste — ce qui en fait un outil de veille concurrentielle autant que de conformité.", "detect_score": 3, "sanct_poids": 4, "expo": 48}, {"key": "O_F_CORRECTIF", "titre": "Prendre immédiatement les mesures correctives et informer la chaîne", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 16, j) et art. 20", "ech": "E_2027_12", "preuves": [], "question": "Existe-t-il une procédure de rappel, retrait ou désactivation, et une liste à jour des distributeurs, déployeurs, mandataires et importateurs à informer ?", "sanct": "S_15", "crit": 4, "detect": "faible", "notes": "L'art. 20, §2 impose en outre, dès que le fournisseur prend conscience d'un risque au sens de l'art. 79, §1, de rechercher immédiatement les causes EN COLLABORATION avec le déployeur et d'informer les autorités de surveillance du marché.", "detect_score": 1, "sanct_poids": 4, "expo": 16}, {"key": "O_F_PREUVE", "titre": "Démontrer la conformité sur demande motivée d'une autorité", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 16, k) et art. 21", "ech": "E_2027_12", "preuves": ["P_DOCTECH", "P_JOURNAUX"], "question": "L'organisation peut-elle produire, sous quinze jours et dans une langue officielle indiquée par l'autorité, l'ensemble des pièces démontrant la conformité, y compris l'accès aux journaux ?", "sanct": "S_15", "crit": 5, "detect": "élevée", "notes": "OBLIGATION PIVOT. Une conformité réelle mais non documentée est, devant l'autorité, une non-conformité. C'est elle qui donne leur valeur défensive à toutes les autres pièces.", "detect_score": 3, "sanct_poids": 4, "expo": 60}, {"key": "O_F_ACCESS", "titre": "Assurer la conformité aux exigences d'accessibilité", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 16, l)", "ech": "E_2027_12", "preuves": [], "question": "Le système respecte-t-il les exigences d'accessibilité des directives (UE) 2016/2102 et (UE) 2019/882 ?", "sanct": "S_15", "crit": 2, "detect": "moyenne", "notes": "Obligation fréquemment oubliée dans les plans de conformité, alors qu'elle renvoie à deux directives ayant leur propre régime de contrôle.", "detect_score": 2, "sanct_poids": 4, "expo": 16}, {"key": "O_F_MANDATAIRE", "titre": "Désigner un mandataire établi dans l'Union", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 22, §1", "ech": "E_2027_12", "preuves": ["P_MANDAT"], "question": "Le fournisseur établi hors de l'Union a-t-il désigné, PAR MANDAT ÉCRIT, un mandataire établi dans l'Union avant toute mise à disposition sur le marché ?", "sanct": "S_15", "crit": 4, "detect": "élevée", "notes": "S'applique uniquement aux fournisseurs établis dans des pays tiers. Condition préalable à toute mise à disposition sur le marché de l'Union.", "detect_score": 3, "sanct_poids": 4, "expo": 48}, {"key": "O_F_POSTMARKET", "titre": "Établir et opérer un système de surveillance après commercialisation", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 72", "ech": "E_2027_12", "preuves": ["P_PLAN_POST"], "question": "Un plan de surveillance après commercialisation existe-t-il, fait-il partie de la documentation technique, et les données collectées sont-elles effectivement analysées ?", "sanct": "S_15", "crit": 4, "detect": "moyenne", "notes": "Système proportionné à la nature des technologies et aux risques. Le plan fait PARTIE de la documentation technique, il n'est pas un document séparé.", "detect_score": 2, "sanct_poids": 4, "expo": 32}, {"key": "O_F_INCIDENT", "titre": "Signaler les incidents graves aux autorités de surveillance du marché", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 73", "ech": "E_2027_12", "preuves": ["P_INCIDENT"], "question": "Existe-t-il une procédure de qualification et de signalement d'incident grave respectant le délai de quinze jours, ramené à deux jours en cas d'infraction de grande ampleur, dix jours en cas de décès ?", "sanct": "S_15", "crit": 5, "detect": "moyenne", "notes": "⚠ POINT CLÉ POUR LA RH : l'art. 3, point 49, c) retient comme incident grave « la violation des obligations au titre du droit de l'Union visant à protéger les droits fondamentaux ». Un préjudice NON CORPOREL — une discrimination constatée — peut donc déclencher l'obligation de signalement.", "detect_score": 2, "sanct_poids": 4, "expo": 40}, {"key": "O_F_DEROG_DOC", "titre": "Documenter l'évaluation de dérogation et s'enregistrer malgré tout", "roles": ["RO_FOURN"], "regimes": ["R_DEROG"], "art": "art. 6, §4 et art. 49, §2", "ech": "E_2027_12", "preuves": ["P_DEROG_DOC", "P_ENREG"], "question": "L'évaluation établissant que le système n'est pas à haut risque est-elle documentée, antérieure à la mise sur le marché, et le système est-il enregistré dans la base de l'UE ?", "sanct": "S_15", "crit": 4, "detect": "élevée", "notes": "Le piège de la dérogation. Beaucoup d'organisations concluent qu'elles sont hors du régime haut risque et en déduisent qu'elles n'ont rien à faire. Faux : l'obligation documentaire et l'enregistrement subsistent, et l'art. 80 permet à une autorité de contester la qualification et d'imposer le régime complet.", "detect_score": 3, "sanct_poids": 4, "expo": 48}, {"key": "O_F_ACCORD_TIERS", "titre": "Conclure un accord écrit avec les tiers fournisseurs de composants", "roles": ["RO_FOURN"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 25, §4", "ech": "E_2027_12", "preuves": [], "question": "Les contrats avec les fournisseurs d'outils, services, composants ou processus intégrés au système précisent-ils les informations, capacités et accès techniques nécessaires à la conformité ?", "sanct": "S_15", "crit": 3, "detect": "moyenne", "notes": "Ne s'applique pas aux tiers qui rendent accessibles au public des outils sous licence libre et ouverte, autres que des modèles à usage général. Le Bureau de l'IA peut publier des clauses types volontaires.", "detect_score": 2, "sanct_poids": 4, "expo": 24}, {"key": "O_D_CONFORME", "titre": "Utiliser le système conformément à la notice d'utilisation", "roles": ["RO_DEPLOY"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 26, §1", "ech": "E_2027_12", "preuves": ["P_NOTICE"], "question": "Des mesures techniques et organisationnelles appropriées garantissent-elles un usage conforme à la notice, et cet usage est-il tracé ?", "sanct": "S_15", "crit": 5, "detect": "moyenne", "notes": "Si la notice est insuffisante pour permettre un usage conforme, c'est un signal : l'art. 13 n'a pas été respecté par le fournisseur, et le déployeur a intérêt à le documenter.", "detect_score": 2, "sanct_poids": 4, "expo": 40}, {"key": "O_D_CTRL", "titre": "Confier le contrôle humain à des personnes compétentes, formées et dotées d'autorité", "roles": ["RO_DEPLOY"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 26, §2", "ech": "E_2027_12", "preuves": ["P_FORMATION"], "question": "Les personnes chargées du contrôle humain sont-elles nommément désignées, formées, ET titulaires d'une délégation écrite leur permettant d'écarter la sortie du système ?", "sanct": "S_15", "crit": 5, "detect": "faible", "notes": "TROIS CONDITIONS CUMULATIVES : compétences, formation, AUTORITÉ — plus le soutien nécessaire. C'est la troisième qui manque presque toujours. Un contrôle humain confié à quelqu'un qui n'a pas le pouvoir de contredire la sortie ne satisfait pas à l'article. Point de contrôle le plus souvent défaillant en pratique, et le plus difficile à détecter de l'extérieur.", "detect_score": 1, "sanct_poids": 4, "expo": 20}, {"key": "O_D_ENTREE", "titre": "Assurer la pertinence et la représentativité des données d'entrée", "roles": ["RO_DEPLOY"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 26, §4", "ech": "E_2027_12", "preuves": [], "question": "Les données d'entrée sous le contrôle du déployeur — référentiels de poste, historiques internes, critères de tri paramétrés localement — sont-elles pertinentes et suffisamment représentatives au regard de la destination ?", "sanct": "S_15", "crit": 4, "detect": "faible", "notes": "Ne s'applique que « pour autant que le déployeur exerce un contrôle sur les données d'entrée ». En RH, il l'exerce presque toujours.", "detect_score": 1, "sanct_poids": 4, "expo": 16}, {"key": "O_D_SURVEILLER", "titre": "Surveiller le fonctionnement et suspendre l'usage en cas de risque", "roles": ["RO_DEPLOY"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 26, §5", "ech": "E_2027_12", "preuves": [], "question": "Existe-t-il une surveillance documentée du fonctionnement, et une procédure de SUSPENSION immédiate avec information du fournisseur et de l'autorité en cas de risque au sens de l'art. 79, §1 ?", "sanct": "S_15", "crit": 5, "detect": "moyenne", "notes": "L'obligation de suspendre est ferme, pas une faculté. Les établissements financiers déjà soumis aux exigences de gouvernance interne du droit des services financiers sont réputés y satisfaire.", "detect_score": 2, "sanct_poids": 4, "expo": 40}, {"key": "O_D_JOURNAUX", "titre": "Conserver les journaux pendant au moins six mois", "roles": ["RO_DEPLOY"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 26, §6", "ech": "E_2027_12", "preuves": ["P_JOURNAUX"], "question": "Les journaux générés automatiquement et se trouvant sous le contrôle du déployeur sont-ils conservés au moins six mois et exploitables ?", "sanct": "S_15", "crit": 4, "detect": "élevée", "notes": "Durée MINIMALE, à adapter à la destination. Sauf disposition contraire, en particulier en droit de la protection des données — d'où un arbitrage à documenter avec le DPO.", "detect_score": 3, "sanct_poids": 4, "expo": 48}, {"key": "O_D_INFO_TRAV", "titre": "Informer les représentants des travailleurs et les travailleurs concernés", "roles": ["RO_EMPL"], "regimes": ["R_HR3"], "art": "art. 26, §7", "ech": "E_2027_12", "preuves": ["P_PV_CSE"], "question": "Les représentants des travailleurs et les travailleurs concernés ont-ils été informés AVANT la mise en service, avec une trace datée ?", "sanct": "S_15", "crit": 5, "detect": "élevée", "notes": "Obligation propre à l'employeur déployeur. Information fournie selon les règles et pratiques nationales — en France, articulation avec l'information-consultation du CSE. L'art. 2, §11 réserve expressément les dispositions nationales et conventionnelles PLUS FAVORABLES aux travailleurs : le règlement fixe un plancher, pas un plafond.", "detect_score": 3, "sanct_poids": 4, "expo": 60}, {"key": "O_D_ENREG_PUB", "titre": "S'enregistrer dans la base de données de l'UE (déployeurs publics)", "roles": ["RO_DEPLOY"], "regimes": ["R_HR3"], "art": "art. 26, §8 et art. 49, §3", "ech": "E_2027_12", "preuves": ["P_ENREG"], "question": "Le déployeur, s'il est une autorité publique ou un organisme de l'Union, s'est-il enregistré et a-t-il enregistré son utilisation du système ?", "sanct": "S_15", "crit": 3, "detect": "élevée", "notes": "S'applique aux autorités publiques, institutions, organes et organismes de l'Union, et aux personnes agissant en leur nom. Corollaire : si le déployeur public constate que le système n'est pas enregistré par son fournisseur, il NE DOIT PAS l'utiliser et informe le fournisseur ou le distributeur.", "detect_score": 3, "sanct_poids": 4, "expo": 36}, {"key": "O_D_AIPD", "titre": "Utiliser les informations de l'article 13 pour l'analyse d'impact RGPD", "roles": ["RO_DEPLOY"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 26, §9", "ech": "E_2027_12", "preuves": [], "question": "L'analyse d'impact relative à la protection des données, quand elle est requise, s'appuie-t-elle sur les informations fournies par le fournisseur au titre de l'art. 13 ?", "sanct": "S_15", "crit": 3, "detect": "moyenne", "notes": "Articulation explicite avec l'art. 35 du RGPD et l'art. 27 de la directive (UE) 2016/680. Ne crée pas une nouvelle AIPD : impose d'alimenter celle qui existe.", "detect_score": 2, "sanct_poids": 4, "expo": 24}, {"key": "O_D_INFO_PERS", "titre": "Informer les personnes soumises au système", "roles": ["RO_DEPLOY", "RO_EMPL"], "regimes": ["R_HR3"], "art": "art. 26, §11", "ech": "E_2027_12", "preuves": ["P_NOTIF_PERS"], "question": "Les personnes faisant l'objet de décisions prises ou facilitées par le système sont-elles informées qu'elles y sont soumises, au moment utile ?", "sanct": "S_15", "crit": 5, "detect": "élevée", "notes": "Vise directement le candidat trié par un ATS et le salarié évalué. Sans préjudice de l'art. 50. Pour les usages répressifs, c'est l'art. 13 de la directive (UE) 2016/680 qui s'applique.\nEffet second à anticiper : informer augmente mécaniquement la probabilité de demandes d'explication au titre de l'art. 86. Ne pas informer reste un manquement sanctionné.", "detect_score": 3, "sanct_poids": 4, "expo": 60}, {"key": "O_D_COOP", "titre": "Coopérer avec les autorités compétentes", "roles": ["RO_DEPLOY"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 26, §12", "ech": "E_2027_12", "preuves": [], "question": "Un point de contact est-il identifié pour répondre aux mesures prises par les autorités à l'égard du système ?", "sanct": "S_15", "crit": 2, "detect": "élevée", "notes": "", "detect_score": 3, "sanct_poids": 4, "expo": 24}, {"key": "O_D_AIDF", "titre": "Conduire une analyse d'impact sur les droits fondamentaux", "roles": ["RO_DEPLOY"], "regimes": ["R_HR3"], "art": "art. 27", "ech": "E_2027_12", "preuves": ["P_AIDF"], "question": "Le déployeur relève-t-il de l'une des trois catégories de l'art. 27, §1 — organisme de droit public, entité privée fournissant des services publics, déployeur des points 5, b) ou c) de l'annexe III — et si oui, l'AIDF a-t-elle été conduite AVANT le déploiement et notifiée à l'autorité de surveillance du marché ?", "sanct": "S_15", "crit": 5, "detect": "élevée", "notes": "⚠ PIÈGE DE LECTURE LE PLUS FRÉQUENT. Un employeur PRIVÉ déployant un outil RH de l'annexe III.4 n'est PAS soumis à l'AIDF. Il reste soumis à l'art. 26 et, le cas échéant, à l'analyse d'impact du RGPD. L'annexe III, point 2 en est également dispensée.\nL'obligation vaut pour la PREMIÈRE utilisation ; le déployeur peut ensuite s'appuyer sur des analyses antérieures dans des cas similaires, à condition de les mettre à jour si un élément a changé.", "detect_score": 3, "sanct_poids": 4, "expo": 60}, {"key": "O_D_EXPLIC", "titre": "Répondre aux demandes d'explication des décisions individuelles", "roles": ["RO_DEPLOY", "RO_EMPL"], "regimes": ["R_HR3"], "art": "art. 86", "ech": "E_2027_12", "preuves": ["P_EXPLIC"], "question": "Existe-t-il une procédure permettant de fournir, dans un délai raisonnable, des explications claires et pertinentes sur le rôle du système dans une décision défavorable ?", "sanct": "S_NON", "crit": 4, "detect": "élevée", "notes": "Droit ouvert à toute personne faisant l'objet d'une décision prise sur la base des sorties d'un système de l'annexe III (hors point 2) et produisant des effets juridiques ou l'affectant significativement de façon défavorable. Un rejet de candidature ou un refus de promotion entrent dans ce champ.\nPas de palier d'amende propre à l'art. 99, mais l'incapacité à répondre est un élément à charge dans tout contentieux prud'homal ou de non-discrimination.", "detect_score": 3, "sanct_poids": 1, "expo": 12}, {"key": "O_D_INCIDENT", "titre": "Signaler les incidents graves au fournisseur puis aux autorités", "roles": ["RO_DEPLOY"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 26, §5 et art. 73", "ech": "E_2027_12", "preuves": ["P_INCIDENT"], "question": "En cas d'incident grave, le fournisseur est-il informé IMMÉDIATEMENT, puis l'importateur ou le distributeur, puis l'autorité de surveillance du marché ?", "sanct": "S_15", "crit": 4, "detect": "moyenne", "notes": "Ordre imposé par le texte. Si le déployeur ne parvient pas à joindre le fournisseur, l'art. 73 s'applique mutatis mutandis — c'est-à-dire que le déployeur assume le signalement direct.", "detect_score": 2, "sanct_poids": 4, "expo": 32}, {"key": "O_T_INTERACT", "titre": "Informer la personne qu'elle interagit avec un système d'IA", "roles": ["RO_FOURN"], "regimes": ["R_TRANSP"], "art": "art. 50, §1", "ech": "E_2026_08", "preuves": [], "question": "Une personne normalement informée et raisonnablement attentive comprend-elle, dès la première interaction, qu'elle s'adresse à une IA ?", "sanct": "S_15", "crit": 4, "detect": "élevée", "notes": "DÉJÀ EXIGIBLE depuis le 2 août 2026 — l'art. 50 n'a pas été reporté par le règlement Omnibus. Exception si le caractère artificiel est manifeste compte tenu des circonstances.", "detect_score": 3, "sanct_poids": 4, "expo": 48}, {"key": "O_T_MARQUAGE", "titre": "Marquer les contenus de synthèse dans un format lisible par machine", "roles": ["RO_FOURN"], "regimes": ["R_TRANSP"], "art": "art. 50, §2", "ech": "E_2026_08", "preuves": ["P_MARQUAGE"], "question": "Les sorties audio, image, vidéo ou texte générées par le système sont-elles marquées dans un format lisible par machine et identifiables comme générées par IA ?", "sanct": "S_15", "crit": 4, "detect": "moyenne", "notes": "DÉJÀ EXIGIBLE. Ne s'applique pas aux fonctions d'assistance à la mise en forme standard qui ne modifient pas substantiellement les données d'entrée du déployeur ni leur sémantique. ⚠ Le règlement Omnibus a accordé un délai au 2 décembre 2026 aux systèmes mis sur le marché avant le 2 août 2026.", "detect_score": 2, "sanct_poids": 4, "expo": 32}, {"key": "O_T_EMOTION", "titre": "Informer les personnes exposées à un système de reconnaissance des émotions", "roles": ["RO_DEPLOY"], "regimes": ["R_TRANSP"], "art": "art. 50, §3", "ech": "E_2026_08", "preuves": [], "question": "Les personnes exposées sont-elles informées du fonctionnement du système, et les données traitées conformément au RGPD ?", "sanct": "S_15", "crit": 3, "detect": "élevée", "notes": "⚠ À LIRE AVEC L'ART. 5, §1, f). Sur le lieu de travail et en formation, la reconnaissance des émotions est INTERDITE, pas simplement soumise à information. L'art. 50, §3 ne concerne donc en RH que les cas relevant des exceptions médicales ou de sécurité.", "detect_score": 3, "sanct_poids": 4, "expo": 36}, {"key": "O_T_DEEPFAKE", "titre": "Indiquer que le contenu est un hypertrucage généré ou manipulé par IA", "roles": ["RO_DEPLOY"], "regimes": ["R_TRANSP"], "art": "art. 50, §4", "ech": "E_2026_08", "preuves": [], "question": "Les images, audio ou vidéos constituant des hypertrucages sont-elles signalées comme générées ou manipulées par IA ?", "sanct": "S_15", "crit": 3, "detect": "élevée", "notes": "DÉJÀ EXIGIBLE. Régime allégé pour les œuvres manifestement artistiques, créatives, satiriques ou fictionnelles : divulgation appropriée n'entravant pas la jouissance de l'œuvre.", "detect_score": 3, "sanct_poids": 4, "expo": 36}, {"key": "O_T_TEXTE", "titre": "Indiquer qu'un texte d'intérêt public a été généré ou manipulé par IA", "roles": ["RO_DEPLOY"], "regimes": ["R_TRANSP"], "art": "art. 50, §4, alinéa 2", "ech": "E_2026_08", "preuves": [], "question": "Les textes publiés dans le but d'informer le public sur des questions d'intérêt public sont-ils signalés comme générés par IA ?", "sanct": "S_15", "crit": 2, "detect": "élevée", "notes": "Exonération lorsque le contenu a fait l'objet d'un examen humain ou d'un contrôle éditorial et qu'une personne assume la responsabilité éditoriale de la publication.", "detect_score": 3, "sanct_poids": 4, "expo": 24}, {"key": "O_T_CLARTE", "titre": "Fournir l'information de manière claire au plus tard à la première interaction", "roles": ["RO_FOURN", "RO_DEPLOY"], "regimes": ["R_TRANSP"], "art": "art. 50, §5", "ech": "E_2026_08", "preuves": [], "question": "L'information est-elle fournie de manière claire et reconnaissable au plus tard au moment de la première interaction ou exposition, et conforme aux exigences d'accessibilité ?", "sanct": "S_15", "crit": 2, "detect": "élevée", "notes": "Obligation de FORME qui conditionne la validité des quatre précédentes.", "detect_score": 3, "sanct_poids": 4, "expo": 24}, {"key": "O_I_VERIF", "titre": "Vérifier la conformité du système avant sa mise sur le marché", "roles": ["RO_IMPORT"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 23, §1", "ech": "E_2027_12", "preuves": [], "question": "L'importateur a-t-il vérifié les quatre points de l'art. 23, §1 — évaluation de la conformité réalisée, documentation technique établie, marquage CE et déclaration UE et notice présents, mandataire désigné ?", "sanct": "S_15", "crit": 4, "detect": "élevée", "notes": "", "detect_score": 3, "sanct_poids": 4, "expo": 48}, {"key": "O_I_BLOQUER", "titre": "Ne pas mettre sur le marché un système non conforme et alerter", "roles": ["RO_IMPORT"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 23, §2", "ech": "E_2027_12", "preuves": [], "question": "En cas de raisons suffisantes de suspecter une non-conformité ou une falsification, la mise sur le marché est-elle suspendue jusqu'à mise en conformité, et le fournisseur, les mandataires et les autorités de surveillance sont-ils informés ?", "sanct": "S_15", "crit": 4, "detect": "moyenne", "notes": "", "detect_score": 2, "sanct_poids": 4, "expo": 32}, {"key": "O_I_IDENT", "titre": "Indiquer son nom et son adresse de contact", "roles": ["RO_IMPORT"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 23, §3", "ech": "E_2027_12", "preuves": [], "question": "Le nom, la raison sociale ou la marque et l'adresse de l'importateur figurent-ils sur le système, son emballage ou sa documentation ?", "sanct": "S_15", "crit": 1, "detect": "élevée", "notes": "", "detect_score": 3, "sanct_poids": 4, "expo": 12}, {"key": "O_I_STOCKAGE", "titre": "Préserver la conformité pendant le stockage et le transport", "roles": ["RO_IMPORT"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 23, §4", "ech": "E_2027_12", "preuves": [], "question": "Les conditions de stockage et de transport sous la responsabilité de l'importateur préservent-elles la conformité du système aux exigences de la section 2 ?", "sanct": "S_15", "crit": 1, "detect": "faible", "notes": "", "detect_score": 1, "sanct_poids": 4, "expo": 4}, {"key": "O_I_CONSERV", "titre": "Conserver certificat, notice et déclaration UE pendant dix ans", "roles": ["RO_IMPORT"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 23, §5", "ech": "E_2027_12", "preuves": ["P_DECL", "P_NOTICE"], "question": "Une copie du certificat de l'organisme notifié le cas échéant, de la notice et de la déclaration UE est-elle conservée pendant dix ans ?", "sanct": "S_15", "crit": 2, "detect": "élevée", "notes": "", "detect_score": 3, "sanct_poids": 4, "expo": 24}, {"key": "O_I_FOURNIR", "titre": "Communiquer les informations aux autorités et coopérer", "roles": ["RO_IMPORT"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 23, §6 et §7", "ech": "E_2027_12", "preuves": [], "question": "L'importateur peut-il communiquer, dans une langue aisément compréhensible, les documents démontrant la conformité, et veille-t-il à ce que la documentation technique puisse être mise à disposition ?", "sanct": "S_15", "crit": 3, "detect": "élevée", "notes": "", "detect_score": 3, "sanct_poids": 4, "expo": 36}, {"key": "O_X_VERIF", "titre": "Vérifier marquage, déclaration, notice et obligations amont", "roles": ["RO_DISTRIB"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 24, §1", "ech": "E_2027_12", "preuves": [], "question": "Le distributeur a-t-il vérifié le marquage CE, la copie de la déclaration UE, la notice, et le respect par le fournisseur et l'importateur des art. 16, b) et c) et 23, §3 ?", "sanct": "S_15", "crit": 3, "detect": "élevée", "notes": "", "detect_score": 3, "sanct_poids": 4, "expo": 36}, {"key": "O_X_BLOQUER", "titre": "Ne pas mettre à disposition un système non conforme", "roles": ["RO_DISTRIB"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 24, §2", "ech": "E_2027_12", "preuves": [], "question": "En cas de raisons de considérer une non-conformité, la mise à disposition est-elle suspendue jusqu'à mise en conformité ?", "sanct": "S_15", "crit": 3, "detect": "moyenne", "notes": "", "detect_score": 2, "sanct_poids": 4, "expo": 24}, {"key": "O_X_CORRECTIF", "titre": "Prendre les mesures correctives, retirer ou rappeler", "roles": ["RO_DISTRIB"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 24, §4", "ech": "E_2027_12", "preuves": [], "question": "Le distributeur dispose-t-il d'une procédure de retrait ou de rappel, et informe-t-il le fournisseur, l'importateur et les autorités ?", "sanct": "S_15", "crit": 3, "detect": "moyenne", "notes": "", "detect_score": 2, "sanct_poids": 4, "expo": 24}, {"key": "O_M_VERIF", "titre": "Vérifier la déclaration UE et la documentation technique", "roles": ["RO_MANDAT"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 22, §3, a)", "ech": "E_2027_12", "preuves": ["P_DECL", "P_DOCTECH"], "question": "Le mandataire a-t-il vérifié que la déclaration UE et la documentation technique ont été établies et qu'une procédure appropriée d'évaluation de la conformité a été suivie ?", "sanct": "S_15", "crit": 4, "detect": "élevée", "notes": "", "detect_score": 3, "sanct_poids": 4, "expo": 48}, {"key": "O_M_TENIR", "titre": "Tenir les coordonnées et documents à disposition pendant dix ans", "roles": ["RO_MANDAT"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 22, §3, b)", "ech": "E_2027_12", "preuves": ["P_DECL", "P_DOCTECH", "P_MANDAT"], "question": "Les coordonnées du fournisseur, la déclaration UE, la documentation technique et le cas échéant le certificat sont-ils tenus à disposition pendant dix ans ?", "sanct": "S_15", "crit": 3, "detect": "élevée", "notes": "", "detect_score": 3, "sanct_poids": 4, "expo": 36}, {"key": "O_M_FIN", "titre": "Mettre fin au mandat si le fournisseur agit contrairement au règlement", "roles": ["RO_MANDAT"], "regimes": ["R_HR3", "R_HR1"], "art": "art. 22, §4", "ech": "E_2027_12", "preuves": [], "question": "Le mandataire a-t-il la capacité et la procédure pour mettre fin au mandat et en informer IMMÉDIATEMENT l'autorité de surveillance du marché et l'organisme notifié ?", "sanct": "S_15", "crit": 3, "detect": "faible", "notes": "Obligation singulière : le règlement impose au mandataire de se retourner contre son mandant. À prévoir dans le mandat lui-même, faute de quoi elle est inapplicable.", "detect_score": 1, "sanct_poids": 4, "expo": 12}, {"key": "O_U_DOC", "titre": "Élaborer et tenir à jour la documentation technique du modèle", "roles": ["RO_FOURN_IAUG"], "regimes": ["R_IAUG"], "art": "art. 53, §1, a) et annexe XI", "ech": "E_2025_08", "preuves": ["P_ANNEXE_XI"], "question": "La documentation du modèle, incluant le processus d'entraînement et d'essai et les résultats d'évaluation, est-elle disponible pour le Bureau de l'IA sur demande ?", "sanct": "S_IAUG", "crit": 4, "detect": "moyenne", "notes": "DÉJÀ EXIGIBLE depuis le 2 août 2025. Allègement pour les modèles sous licence libre et ouverte, sauf risque systémique.", "detect_score": 2, "sanct_poids": 4, "expo": 32}, {"key": "O_U_AVAL", "titre": "Fournir les informations aux fournisseurs en aval", "roles": ["RO_FOURN_IAUG"], "regimes": ["R_IAUG"], "art": "art. 53, §1, b) et annexe XII", "ech": "E_2025_08", "preuves": ["P_ANNEXE_XII"], "question": "Les informations permettant aux intégrateurs de comprendre les capacités et limites du modèle et de respecter leurs propres obligations sont-elles fournies ?", "sanct": "S_IAUG", "crit": 4, "detect": "élevée", "notes": "DÉJÀ EXIGIBLE. C'est la clause pivot de la chaîne de valeur : sans ces informations, un fournisseur en aval ne peut satisfaire aux art. 11, 13 et 15.", "detect_score": 3, "sanct_poids": 4, "expo": 48}, {"key": "O_U_COPYRIGHT", "titre": "Mettre en place une politique de respect du droit d'auteur", "roles": ["RO_FOURN_IAUG"], "regimes": ["R_IAUG"], "art": "art. 53, §1, c)", "ech": "E_2025_08", "preuves": ["P_COPYRIGHT"], "question": "Une politique documentée de respect du droit d'auteur de l'Union, incluant le respect de l'opt-out de la directive (UE) 2019/790, existe-t-elle ?", "sanct": "S_IAUG", "crit": 3, "detect": "moyenne", "notes": "DÉJÀ EXIGIBLE. S'applique même aux modèles sous licence libre et ouverte.", "detect_score": 2, "sanct_poids": 4, "expo": 24}, {"key": "O_U_RESUME", "titre": "Publier un résumé suffisamment détaillé des contenus d'entraînement", "roles": ["RO_FOURN_IAUG"], "regimes": ["R_IAUG"], "art": "art. 53, §1, d)", "ech": "E_2025_08", "preuves": ["P_RESUME"], "question": "Un résumé public des contenus utilisés pour l'entraînement, selon le modèle du Bureau de l'IA, est-il disponible ?", "sanct": "S_IAUG", "crit": 3, "detect": "élevée", "notes": "DÉJÀ EXIGIBLE. S'applique même aux modèles sous licence libre et ouverte. Obligation de PUBLICATION, donc vérifiable par n'importe qui.", "detect_score": 3, "sanct_poids": 4, "expo": 36}, {"key": "O_U_NOTIF", "titre": "Notifier la Commission dans les deux semaines du franchissement du seuil", "roles": ["RO_FOURN_IAUG"], "regimes": ["R_IAUG_SYST"], "art": "art. 52, §1", "ech": "E_2025_08", "preuves": [], "question": "La Commission a-t-elle été informée dans les deux semaines suivant le franchissement du seuil de 10²⁵ FLOP ou le moment où il a été établi qu'il serait atteint ?", "sanct": "S_IAUG", "crit": 5, "detect": "élevée", "notes": "Délai très court et couperet. Le fournisseur peut présenter, avec sa notification, des arguments étayés démontrant que le modèle ne présente pas de risque systémique malgré le seuil (art. 52, §2).", "detect_score": 3, "sanct_poids": 4, "expo": 60}, {"key": "O_U_MANDAT", "titre": "Désigner un mandataire dans l'Union", "roles": ["RO_FOURN_IAUG"], "regimes": ["R_IAUG"], "art": "art. 54", "ech": "E_2025_08", "preuves": ["P_MANDAT"], "question": "Le fournisseur de modèle établi hors de l'Union a-t-il désigné un mandataire établi dans l'Union par mandat écrit ?", "sanct": "S_IAUG", "crit": 4, "detect": "élevée", "notes": "DÉJÀ EXIGIBLE.", "detect_score": 3, "sanct_poids": 4, "expo": 48}, {"key": "O_S_REDTEAM", "titre": "Évaluer le modèle par essais contradictoires documentés", "roles": ["RO_FOURN_IAUG"], "regimes": ["R_IAUG_SYST"], "art": "art. 55, §1, a)", "ech": "E_2025_08", "preuves": ["P_REDTEAM"], "question": "Des essais contradictoires ont-ils été réalisés selon des protocoles reflétant l'état de la technique, et sont-ils documentés ?", "sanct": "S_IAUG", "crit": 5, "detect": "moyenne", "notes": "DÉJÀ EXIGIBLE.", "detect_score": 2, "sanct_poids": 4, "expo": 40}, {"key": "O_S_MITIG", "titre": "Évaluer et atténuer les risques systémiques au niveau de l'Union", "roles": ["RO_FOURN_IAUG"], "regimes": ["R_IAUG_SYST"], "art": "art. 55, §1, b)", "ech": "E_2025_08", "preuves": [], "question": "Les risques systémiques éventuels, y compris leurs origines, découlant du développement, de la mise sur le marché ou de l'utilisation du modèle, sont-ils évalués et atténués ?", "sanct": "S_IAUG", "crit": 5, "detect": "faible", "notes": "DÉJÀ EXIGIBLE.", "detect_score": 1, "sanct_poids": 4, "expo": 20}, {"key": "O_S_INCIDENT", "titre": "Signaler les incidents graves au Bureau de l'IA", "roles": ["RO_FOURN_IAUG"], "regimes": ["R_IAUG_SYST"], "art": "art. 55, §1, c)", "ech": "E_2025_08", "preuves": ["P_INCIDENT"], "question": "Les incidents graves et les mesures correctives sont-ils suivis, documentés et communiqués sans retard injustifié au Bureau de l'IA ?", "sanct": "S_IAUG", "crit": 5, "detect": "moyenne", "notes": "DÉJÀ EXIGIBLE.", "detect_score": 2, "sanct_poids": 4, "expo": 40}, {"key": "O_S_CYBER", "titre": "Assurer la cybersécurité du modèle et de son infrastructure physique", "roles": ["RO_FOURN_IAUG"], "regimes": ["R_IAUG_SYST"], "art": "art. 55, §1, d)", "ech": "E_2025_08", "preuves": [], "question": "Un niveau approprié de protection en cybersécurité couvre-t-il le modèle ET son infrastructure physique ?", "sanct": "S_IAUG", "crit": 4, "detect": "faible", "notes": "DÉJÀ EXIGIBLE.", "detect_score": 1, "sanct_poids": 4, "expo": 16}], "roles": [{"key": "RO_FOURN", "label": "Rôle — fournisseur", "desc": "Art. 3, point 3. Personne qui développe ou fait développer un système d'IA ou un modèle à usage général et le met sur le marché ou en service sous son propre nom ou sa marque, à titre onéreux OU GRATUIT. La gratuité n'exonère pas.\nPorte l'essentiel des obligations du règlement."}, {"key": "RO_DEPLOY", "label": "Rôle — déployeur", "desc": "Art. 3, point 4. Personne utilisant un système d'IA sous sa propre autorité, hors activité personnelle non professionnelle. Appelé « utilisateur » dans les versions de travail du règlement — ne pas confondre avec la personne concernée."}, {"key": "RO_EMPL", "label": "Rôle — employeur déployeur", "desc": "Déployeur qui met en service ou utilise un système d'IA à haut risque sur le lieu de travail. Statut spécifique : il supporte, en plus de l'art. 26, les obligations d'information des représentants des travailleurs (§7) et des personnes soumises au système (§11).\nL'art. 2, §11 réserve expressément les dispositions nationales et conventionnelles plus favorables aux travailleurs — en France, articulation avec la consultation du CSE."}, {"key": "RO_IMPORT", "label": "Rôle — importateur", "desc": "Art. 3, point 6. Personne établie dans l'Union qui met sur le marché un système portant le nom ou la marque d'une personne établie dans un pays tiers."}, {"key": "RO_DISTRIB", "label": "Rôle — distributeur", "desc": "Art. 3, point 7. Maillon de la chaîne d'approvisionnement autre que le fournisseur ou l'importateur, qui met un système à disposition sur le marché de l'Union."}, {"key": "RO_MANDAT", "label": "Rôle — mandataire", "desc": "Art. 3, point 5 et art. 22, §1. Personne établie dans l'Union mandatée PAR ÉCRIT par un fournisseur de pays tiers. Sa désignation est OBLIGATOIRE avant toute mise à disposition sur le marché de l'Union par un fournisseur hors UE."}, {"key": "RO_FOURN_IAUG", "label": "Rôle — fournisseur de modèle d'IA à usage général", "desc": "Art. 3, point 3 appliqué aux modèles. Supervision exclusive du Bureau de l'IA (art. 88), sanctions infligées par la Commission (art. 101), pas par les autorités nationales."}, {"key": "RO_FOURN_AVAL", "label": "Rôle — fournisseur en aval", "desc": "Art. 3, point 68. Fournisseur d'un système d'IA intégrant un modèle d'IA, que ce modèle soit développé en interne ou fourni par un tiers. Bénéficiaire des informations de l'art. 53, §1, b) et de l'annexe XII."}, {"key": "RO_PERSONNE", "label": "Rôle — personne concernée", "desc": "Art. 2, §1, g). Personne physique située dans l'Union affectée par un système d'IA. N'a pas d'obligations, mais des droits : information (art. 26, §11 et art. 50), explication (art. 86), réclamation (art. 85)."}], "regimes": [{"key": "R_MIN", "label": "Régime — risque minimal", "desc": "Aucune obligation contraignante, hors l'art. 4 (maîtrise de l'IA) qui s'applique à tout fournisseur et déployeur. Les codes de conduite volontaires de l'art. 95 restent ouverts.\nC'est statistiquement le cas le plus fréquent : le règlement ne régule pas « l'IA », il régule des usages."}, {"key": "R_INTERDIT", "label": "Régime — pratique interdite", "desc": "Art. 5. Interdiction absolue, applicable depuis le 2 février 2025. Ni évaluation de conformité, ni mesure d'atténuation, ni consentement des personnes ne la lèvent. La seule voie est de reconcevoir la fonctionnalité pour qu'elle sorte du champ de l'interdiction.\nSanction : palier le plus élevé du règlement."}, {"key": "R_HR1", "label": "Régime — haut risque par la voie produit (annexe I)", "desc": "Art. 6, §1. Régime haut risque intégré à la conformité produit existante. L'évaluation de la conformité suit la procédure sectorielle (art. 43, §3) et le fabricant du produit est réputé fournisseur du système d'IA (art. 25, §3).\n⚠ Application repoussée au 2 août 2028 par le règlement (UE) 2026/1744 — le texte de 2024 prévoyait le 2 août 2027."}, {"key": "R_HR3", "label": "Régime — haut risque par la voie domaine (annexe III)", "desc": "Art. 6, §2. Régime complet du chapitre III : exigences des art. 8 à 15, obligations de l'art. 16 pour le fournisseur et de l'art. 26 pour le déployeur. Évaluation de la conformité par contrôle interne (annexe VI), sans organisme notifié, sauf pour la biométrie de l'annexe III, point 1.\n⚠ Application repoussée au 2 décembre 2027 par le règlement (UE) 2026/1744 — le texte de 2024 prévoyait le 2 août 2026."}, {"key": "R_DEROG", "label": "Régime — non haut risque par dérogation, mais documenté et enregistré", "desc": "Art. 6, §3 et §4, et art. 49, §2. Le système échappe au régime haut risque MAIS le fournisseur doit documenter son évaluation AVANT la mise sur le marché, s'enregistrer et enregistrer le système dans la base de données de l'UE, et produire la documentation à la demande.\nUne autorité peut contester cette qualification au titre de l'art. 80 et imposer le régime complet. C'est une dérogation sous condition documentaire, pas une exonération."}, {"key": "R_TRANSP", "label": "Régime — obligations de transparence (art. 50)", "desc": "Art. 50. Régime AUTONOME ET CUMULABLE avec le haut risque (art. 50, §6) : un système à haut risque qui dialogue avec des candidats doit satisfaire aux deux.\nApplicable depuis le 2 août 2026 — non reporté par le règlement Omnibus. C'est donc le seul régime de ce graphe qui soit d'ores et déjà pleinement exigible."}, {"key": "R_IAUG", "label": "Régime — modèle d'IA à usage général", "desc": "Art. 53 et 54. Applicable depuis le 2 août 2025. Allègements substantiels pour les modèles sous licence libre et ouverte, sauf risque systémique. Supervision exclusive du Bureau de l'IA (art. 88)."}, {"key": "R_IAUG_SYST", "label": "Régime — modèle à usage général présentant un risque systémique", "desc": "Art. 51 et 55. En sus de l'art. 53. Applicable depuis le 2 août 2025. Les codes de bonne pratique de l'art. 56 valent moyen de démonstration jusqu'à publication d'une norme harmonisée."}], "echeances": [{"key": "E_2025_02", "label": "Échéance — 2 février 2025", "desc": "Art. 113, a). Chapitres I et II : définitions, maîtrise de l'IA (art. 4) et interdictions (art. 5). DÉJÀ APPLICABLE."}, {"key": "E_2025_08", "label": "Échéance — 2 août 2025", "desc": "Art. 113, b). Chapitre V (modèles à usage général), chapitre VII (gouvernance), chapitre XII (sanctions, sauf art. 101), section 4 du chapitre III (organismes notifiés), art. 78. DÉJÀ APPLICABLE."}, {"key": "E_2026_08", "label": "Échéance — 2 août 2026", "desc": "Art. 113, alinéa 2. Application générale du règlement, dont l'art. 50 (transparence) et l'art. 101. DÉJÀ APPLICABLE. Date NON reportée par le règlement Omnibus."}, {"key": "E_2027_08", "label": "Échéance — 2 août 2027", "desc": "⚠ Établissement des bacs à sable réglementaires de l'art. 57, repoussé d'un an par le règlement (UE) 2026/1744."}, {"key": "E_2027_12", "label": "Échéance — 2 décembre 2027", "desc": "⚠ Régime haut risque de l'annexe III, dont l'emploi et la gestion de la main-d'œuvre. Reporté par le règlement (UE) 2026/1744 ; le texte de 2024 prévoyait le 2 août 2026. C'est l'échéance de référence pour tout projet RH."}, {"key": "E_2028_08", "label": "Échéance — 2 août 2028", "desc": "⚠ Régime haut risque de l'annexe I, systèmes intégrés à des produits réglementés. Reporté par le règlement (UE) 2026/1744 ; le texte de 2024 prévoyait le 2 août 2027."}], "sanctions": [{"key": "S_35", "label": "Sanction — jusqu'à 35 M€ ou 7 % du chiffre d'affaires mondial", "desc": "Art. 99, §3. Sanctionne le non-respect de l'interdiction des pratiques de l'art. 5. Le montant le PLUS ÉLEVÉ est retenu — sauf pour les PME, pour lesquelles l'art. 99, §6 retient le plus FAIBLE.\nPalier le plus élevé du règlement."}, {"key": "S_15", "label": "Sanction — jusqu'à 15 M€ ou 3 % du chiffre d'affaires mondial", "desc": "Art. 99, §4. Sanctionne les obligations des fournisseurs (art. 16), mandataires (art. 22), importateurs (art. 23), distributeurs (art. 24), déployeurs (art. 26), les exigences applicables aux organismes notifiés, et les obligations de transparence de l'art. 50.\nC'est le palier qui couvre la quasi-totalité des manquements d'un déployeur RH."}, {"key": "S_75", "label": "Sanction — jusqu'à 7,5 M€ ou 1 % du chiffre d'affaires mondial", "desc": "Art. 99, §5. Sanctionne la fourniture d'informations inexactes, incomplètes ou trompeuses aux organismes notifiés ou aux autorités nationales compétentes en réponse à une demande."}, {"key": "S_IAUG", "label": "Sanction — jusqu'à 15 M€ ou 3 % du CA mondial, infligée par la Commission", "desc": "Art. 101. Applicable aux fournisseurs de modèles d'IA à usage général en cas de violation intentionnelle ou par négligence, de non-communication de documents ou de refus de se soumettre à une évaluation. Infligée par la COMMISSION, pas par les autorités nationales."}, {"key": "S_NON", "label": "Sanction — aucune amende directe prévue à l'article 99", "desc": "L'obligation n'est pas rattachée à un palier de l'art. 99. Elle reste opposable : en contentieux civil ou prud'homal, devant l'autorité au titre des art. 79 à 83 (mesures correctives, retrait, rappel), et comme facteur aggravant au titre de l'art. 99, §7."}], "preuves": [{"key": "P_SGR", "label": "Livrable — dossier de gestion des risques", "desc": "Art. 9. Document vivant : identification et analyse des risques connus et raisonnablement prévisibles en usage conforme ET en mauvaise utilisation raisonnablement prévisible, estimation, mesures d'atténuation adoptées, résultats d'essais. Attention explicite aux personnes vulnérables et aux mineurs (§9)."}, {"key": "P_DATA", "label": "Livrable — fiche de gouvernance des données et rapport d'audit de biais", "desc": "Art. 10. Provenance et portée des jeux d'entraînement, de validation et de test ; examen des biais susceptibles d'induire une discrimination ; propriétés statistiques par groupe de personnes visées ; mesures correctives.\nL'art. 4 bis (ex-art. 10, §5) est ce qui rend l'audit praticable : il autorise, sous garanties strictes, le traitement de catégories particulières de données à SEULE FIN de détection et correction des biais."}, {"key": "P_DOCTECH", "label": "Livrable — documentation technique (annexe IV)", "desc": "Art. 11 et annexe IV. Établie AVANT la mise sur le marché et tenue à jour : description générale et destination, éléments de conception, architecture, ressources de calcul, jeux de données, métriques de performance par groupe, mesures de contrôle humain, gestion des risques. Régime simplifié pour les PME (art. 11, §1)."}, {"key": "P_JOURNAUX", "label": "Livrable — journaux conservés et exploitables", "desc": "Art. 12 (conception), art. 19 (conservation par le fournisseur, au moins six mois), art. 26, §6 (conservation par le déployeur, au moins six mois). Condition de possibilité de toute reconstitution a posteriori : sans journaux, ni l'organisation ni l'autorité ne peuvent établir ce qui s'est passé."}, {"key": "P_NOTICE", "label": "Livrable — notice d'utilisation", "desc": "Art. 13. Caractéristiques, capacités et surtout LIMITES de performance ; circonstances pouvant conduire à des risques ; niveaux d'exactitude PAR GROUPE DE PERSONNES ; mesures de contrôle humain à mettre en œuvre.\nC'est le document par lequel la connaissance du fournisseur atteint le déployeur. Une notice pauvre rend le contrôle de l'art. 26 structurellement impossible — et c'est opposable au fournisseur."}, {"key": "P_FORMATION", "label": "Livrable — preuve de compétence, de formation et de mandat des contrôleurs", "desc": "Art. 26, §2, et art. 4. Trois éléments cumulatifs à documenter : les compétences des personnes désignées, la formation reçue, et surtout le MANDAT — une délégation écrite établissant que le contrôleur peut écarter la sortie du système sans avoir à s'en justifier devant un objectif de productivité.\nC'est le troisième élément qui manque presque toujours en audit."}, {"key": "P_SGQ", "label": "Livrable — manuel du système de gestion de la qualité", "desc": "Art. 17. Politiques, procédures et instructions écrites : stratégie de conformité, conception, développement, tests, spécifications techniques, gouvernance des données, gestion des risques, surveillance après commercialisation, signalement d'incidents, communication avec les autorités. Régime proportionné pour les PME (§2)."}, {"key": "P_EVAL", "label": "Livrable — rapport d'évaluation de la conformité", "desc": "Art. 43. Pour l'annexe III points 2 à 8 — donc pour tous les usages RH — contrôle interne selon l'annexe VI, SANS organisme notifié. Organisme notifié requis pour la biométrie (annexe III, point 1) quand les normes harmonisées ne sont pas appliquées, et pour les produits de l'annexe I. À refaire en cas de modification substantielle (§4)."}, {"key": "P_DECL", "label": "Livrable — déclaration UE de conformité", "desc": "Art. 47. Rédigée par écrit pour chaque système d'IA à haut risque, tenue à disposition des autorités pendant DIX ANS. Le fournisseur y assume la responsabilité du respect des exigences."}, {"key": "P_CE", "label": "Livrable — marquage CE apposé", "desc": "Art. 48. De façon visible, lisible et indélébile sur le système, son emballage ou sa documentation. Marquage électronique admis pour les systèmes purement numériques. Suivi du numéro d'identification de l'organisme notifié quand il intervient."}, {"key": "P_ENREG", "label": "Livrable — enregistrement dans la base de données de l'UE", "desc": "Art. 49 et 71. Enregistrement du fournisseur et du système AVANT mise sur le marché. Base gérée par la Commission, PUBLIQUE pour l'essentiel — avec une section sécurisée non publique pour les annexes III points 1, 6 et 7."}, {"key": "P_DEROG_DOC", "label": "Livrable — documentation de l'évaluation de dérogation", "desc": "Art. 6, §4. Le fournisseur qui considère qu'un système de l'annexe III n'est pas à haut risque documente son évaluation AVANT la mise sur le marché et la fournit aux autorités sur demande. Il s'enregistre néanmoins au titre de l'art. 49, §2."}, {"key": "P_AIDF", "label": "Livrable — analyse d'impact sur les droits fondamentaux", "desc": "Art. 27. Contenu imposé : description des processus d'usage, période et fréquence, catégories de personnes concernées, risques spécifiques de préjudice, mise en œuvre du contrôle humain, mesures en cas de matérialisation des risques et mécanismes de plainte internes. Résultats notifiés à l'autorité de surveillance du marché (§3).\n⚠ PIÈGE DE LECTURE : un employeur PRIVÉ déployant un outil RH de l'annexe III.4 n'y est PAS soumis. L'art. 27, §1 vise les organismes de droit public, les entités privées fournissant des services publics, et les déployeurs des points 5, b) et c) de l'annexe III."}, {"key": "P_PV_CSE", "label": "Livrable — preuve d'information des représentants des travailleurs", "desc": "Art. 26, §7. Information des représentants des travailleurs ET des travailleurs concernés AVANT la mise en service ou l'utilisation sur le lieu de travail. Fournie selon les règles et pratiques nationales — en France, articulation avec l'information-consultation du CSE. L'art. 2, §11 réserve les dispositions plus favorables aux travailleurs."}, {"key": "P_NOTIF_PERS", "label": "Livrable — mention d'information des personnes concernées", "desc": "Art. 26, §11. Le déployeur d'un système de l'annexe III qui prend ou facilite des décisions concernant des personnes physiques les informe qu'elles y sont soumises. Vise le candidat trié par un ATS et le salarié évalué. Condition pratique de l'exercice du droit à l'explication de l'art. 86."}, {"key": "P_EXPLIC", "label": "Livrable — procédure de réponse aux demandes d'explication", "desc": "Art. 86. Le déployeur doit pouvoir fournir des explications claires et pertinentes sur le RÔLE DU SYSTÈME dans la procédure décisionnelle et sur les principaux éléments de la décision prise. Concerne toute décision produisant des effets juridiques ou affectant significativement de façon défavorable — un rejet de candidature ou un refus de promotion entrent dans ce champ."}, {"key": "P_PLAN_POST", "label": "Livrable — plan de surveillance après commercialisation", "desc": "Art. 72. Système documenté et proportionné de collecte et d'analyse des données d'expérience d'utilisation, sur la base d'un plan faisant PARTIE de la documentation technique."}, {"key": "P_INCIDENT", "label": "Livrable — registre et notifications d'incidents graves", "desc": "Art. 73 et art. 3, point 49. Incident grave = décès ou atteinte grave à la santé ; perturbation grave et irréversible d'une infrastructure critique ; VIOLATION DES OBLIGATIONS DU DROIT DE L'UNION VISANT À PROTÉGER LES DROITS FONDAMENTAUX ; dommage grave aux biens ou à l'environnement.\nLe troisième point est celui qui concerne la RH : un préjudice non corporel peut constituer un incident grave. Délai : quinze jours ; deux jours en cas d'infraction de grande ampleur, dix jours en cas de décès."}, {"key": "P_MANDAT", "label": "Livrable — mandat écrit du mandataire", "desc": "Art. 22. Mandat écrit conférant au mandataire les tâches de l'art. 22, §3. Copie fournie aux autorités de surveillance du marché à leur demande, dans une langue officielle de l'Union indiquée par l'autorité."}, {"key": "P_MARQUAGE", "label": "Livrable — marquage machine des contenus générés", "desc": "Art. 50, §2. Marquage dans un format LISIBLE PAR MACHINE et identifiable comme généré ou manipulé par une IA. Les solutions techniques doivent être aussi efficaces, interopérables, solides et fiables que la technologie le permet."}, {"key": "P_ANNEXE_XI", "label": "Livrable — documentation du modèle à usage général (annexe XI)", "desc": "Art. 53, §1, a) et annexe XI. Processus d'entraînement et d'essai, résultats d'évaluation, à fournir sur demande au Bureau de l'IA et aux autorités nationales compétentes."}, {"key": "P_ANNEXE_XII", "label": "Livrable — informations aux fournisseurs en aval (annexe XII)", "desc": "Art. 53, §1, b) et annexe XII. Informations et documentation permettant aux fournisseurs qui intègrent le modèle d'en comprendre les capacités et les limites et de respecter leurs propres obligations."}, {"key": "P_COPYRIGHT", "label": "Livrable — politique de respect du droit d'auteur", "desc": "Art. 53, §1, c). Politique visant à se conformer au droit de l'Union sur le droit d'auteur, notamment à l'opt-out de la directive (UE) 2019/790."}, {"key": "P_RESUME", "label": "Livrable — résumé détaillé des contenus d'entraînement", "desc": "Art. 53, §1, d). Résumé suffisamment détaillé du contenu utilisé pour l'entraînement, selon un modèle fourni par le Bureau de l'IA, rendu public."}, {"key": "P_REDTEAM", "label": "Livrable — rapport d'essais contradictoires", "desc": "Art. 55, §1, a). Évaluation du modèle sur la base de protocoles et d'outils normalisés reflétant l'état de la technique, incluant la réalisation et la DOCUMENTATION d'essais contradictoires en vue d'identifier et d'atténuer les risques systémiques."}, {"key": "P_CARTO", "label": "Livrable — cartographie des usages et attestation d'absence de pratique interdite", "desc": "Pas de livrable nommé par le règlement : les interdictions de l'art. 5 sont des abstentions, elles ne se « documentent » pas positivement. Mais devant une autorité, seule une cartographie datée des systèmes déployés, de leurs finalités et des données inférées permet de démontrer l'abstention. À défaut, la charge repose sur la parole de l'organisation."}], "conditions": [{"key": "C_DEDUIT", "label": "Le système déduit la manière de générer ses sorties", "desc": "Art. 3, point 1. Critère discriminant de la définition d'un système d'IA : le système DÉDUIT, à partir des entrées, la manière de générer ses sorties. Un moteur de règles entièrement spécifié par un humain, une régression à coefficients fixés a priori, un tableur de scoring pondéré à la main n'entrent pas dans la définition. Le considérant 12 exclut explicitement « les systèmes fondés sur les règles définies uniquement par des personnes physiques ».\nSi NON : le règlement ne s'applique pas. Le RGPD, dont son art. 22 sur les décisions automatisées, et le droit du travail continuent de s'appliquer intégralement."}, {"key": "C_UNION", "label": "Le système ou ses sorties se rattachent à l'Union", "desc": "Art. 2, §1. Trois rattachements alternatifs : mise sur le marché ou en service dans l'Union par un fournisseur où qu'il soit établi ; déployeur établi dans l'Union ; fournisseur ou déployeur de pays tiers dont les SORTIES sont utilisées dans l'Union. Ce dernier point donne au règlement une portée extraterritoriale par l'effet : un score produit hors UE mais lu par un recruteur français suffit au rattachement."}, {"key": "C_EXCLU", "label": "Une exclusion de l'article 2 s'applique", "desc": "Art. 2, §3 à §12. Sécurité nationale, défense et usages militaires ; recherche et développement scientifiques ; activités de recherche, essai et développement AVANT mise sur le marché — mais PAS les essais en conditions réelles ; usage strictement personnel non professionnel ; licence libre et ouverte, SAUF si le système est à haut risque ou relève des art. 5 ou 50.\nDeux exclusions sur-interprétées en pratique : la R&D tombe dès la mise sur le marché, et l'open source tombe dès la qualification haut risque."}, {"key": "C_ART5", "label": "La pratique figure à l'article 5", "desc": "Art. 5, §1. Huit pratiques interdites : a) techniques subliminales ou manipulatrices ; b) exploitation de vulnérabilités liées à l'âge, au handicap, à la situation sociale ou économique ; c) notation sociale ; d) prédiction individuelle d'infraction sur le seul profilage ; e) moissonnage non ciblé d'images faciales ; f) reconnaissance des émotions au travail et en formation ; g) catégorisation biométrique sur attributs sensibles ; h) identification biométrique à distance en temps réel à des fins répressives.\n⚠ Le règlement (UE) 2026/1744 y ajoute la génération de contenus intimes non consentis et de CSAM, avec période transitoire jusqu'au 2 décembre 2026 — hors texte de 2024."}, {"key": "C_ANX1", "label": "Composant de sécurité d'un produit de l'annexe I soumis à évaluation tierce", "desc": "Art. 6, §1. DEUX CONDITIONS CUMULATIVES : a) le système est un composant de sécurité d'un produit couvert par la législation d'harmonisation de l'annexe I — machines, jouets, ascenseurs, équipements sous pression, dispositifs médicaux, véhicules, aviation, ferroviaire — ou constitue lui-même un tel produit ; b) ce produit est soumis à une évaluation de conformité par un TIERS."}, {"key": "C_ANX3", "label": "Le système relève d'un domaine de l'annexe III", "desc": "Art. 6, §2. Huit domaines : 1) biométrie ; 2) infrastructures critiques ; 3) éducation et formation professionnelle ; 4) emploi et gestion de la main-d'œuvre ; 5) accès aux services essentiels ; 6) répression ; 7) migration, asile et frontières ; 8) justice et processus démocratiques."}, {"key": "C_ANX3_4", "label": "Le système relève de l'annexe III, point 4 — emploi et main-d'œuvre", "desc": "Annexe III, point 4. Deux sous-rubriques.\na) RECRUTEMENT ET SÉLECTION : publication d'offres d'emploi ciblées, analyse et filtrage des candidatures, évaluation des candidats.\nb) RELATION DE TRAVAIL : décisions influant sur les conditions des relations professionnelles, la promotion, le licenciement ; attribution de tâches sur la base du comportement individuel, de traits de personnalité ou de caractéristiques personnelles ; suivi et évaluation des performances et du comportement.\nPérimètre très large : il couvre autant les ATS que les outils d'évaluation, de scoring et de pilotage de la performance."}, {"key": "C_DEROG63", "label": "Une des quatre conditions de l'article 6, §3 est remplie", "desc": "Art. 6, §3. Le système n'est pas à haut risque s'il ne présente pas de risque important, ce qui est établi quand il : a) accomplit une tâche procédurale étroite ; b) améliore le résultat d'une activité humaine préalablement réalisée ; c) détecte des constantes de décision ou des écarts sans se substituer à l'évaluation humaine ni l'influencer sans examen approprié ; d) exécute une tâche préparatoire.\nLecture stricte : « aide à la décision » n'est pas en soi une dérogation. Et le fournisseur qui invoque la dérogation doit documenter son évaluation ET s'enregistrer quand même."}, {"key": "C_INTERACT", "label": "Le système interagit directement avec des personnes physiques", "desc": "Art. 50, §1. Chatbots de présélection, assistants d'entretien, agents conversationnels internes. Exception : lorsque l'interaction avec une IA est manifeste pour une personne normalement informée et raisonnablement attentive."}, {"key": "C_SYNTH", "label": "Le système génère du contenu de synthèse", "desc": "Art. 50, §2. Audio, image, vidéo ou texte générés ou manipulés par IA. En RH : rédaction d'offres d'emploi, comptes rendus d'entretien, synthèses d'évaluation. Exception : fonction d'assistance à la mise en forme standard ne modifiant pas substantiellement les données d'entrée."}, {"key": "C_DEEPFAKE", "label": "Le système produit des hypertrucages", "desc": "Art. 50, §4 et art. 3, point 60. Image, audio ou vidéo présentant une ressemblance avec des personnes, objets, lieux ou événements existants et pouvant être perçus à tort comme authentiques."}, {"key": "C_IAUG", "label": "Un modèle d'IA à usage général est mis sur le marché", "desc": "Art. 3, point 63. Modèle présentant une généralité significative, capable d'exécuter de manière compétente un large éventail de tâches distinctes et intégrable en aval. Exclut les modèles utilisés uniquement pour la recherche, le développement ou le prototypage avant mise sur le marché."}, {"key": "C_FLOP", "label": "Le modèle dépasse 10²⁵ FLOP ou est désigné par la Commission", "desc": "Art. 51. Présomption de capacités à fort impact au-delà de 10²⁵ opérations en virgule flottante cumulées d'entraînement (§2), ou désignation par la Commission au vu des critères de l'annexe XIII (§1, b). Le fournisseur peut contester la présomption par arguments étayés (art. 52, §2)."}, {"key": "C_REQUALIF", "label": "Rebadge, modification substantielle ou changement de destination", "desc": "Art. 25, §1. Trois cas font basculer un distributeur, importateur, déployeur ou tiers dans le rôle de FOURNISSEUR, avec l'intégralité des obligations de l'art. 16 : a) commercialisation sous son propre nom ou sa marque ; b) modification substantielle d'un système à haut risque ; c) changement de destination d'un système — y compris à usage général — qui le rend à haut risque. Le fournisseur initial cesse alors de l'être (§2)."}], "annexes": {"P_DOCTECH": [{"key": "A4_1a", "label": "Annexe IV, 1. a) destination, nom du fournisseur et version du système", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n1. a) destination, nom du fournisseur et version du système\nFaisant apparaître la relation aux versions précédentes.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_1b", "label": "Annexe IV, 1. b) interactions avec du matériel ou des logiciels tiers", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n1. b) interactions avec du matériel ou des logiciels tiers\nY compris avec d'autres systèmes d'IA qui ne font pas partie du système lui-même.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_1c", "label": "Annexe IV, 1. c) versions des logiciels ou micrologiciels et exigences de mise à jour", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n1. c) versions des logiciels ou micrologiciels et exigences de mise à jour\nPas de précision supplémentaire dans le texte.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_1d", "label": "Annexe IV, 1. d) formes sous lesquelles le système est mis sur le marché", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n1. d) formes sous lesquelles le système est mis sur le marché\nPacks logiciels intégrés dans du matériel, téléchargements, API.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_1e", "label": "Annexe IV, 1. e) description du matériel sur lequel le système est destiné à s'exécuter", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n1. e) description du matériel sur lequel le système est destiné à s'exécuter\nPas de précision supplémentaire dans le texte.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_1f", "label": "Annexe IV, 1. f) photographies ou illustrations lorsque le système est un composant de produit", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n1. f) photographies ou illustrations lorsque le système est un composant de produit\nCaractéristiques externes, marquage et disposition interne du produit.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_1g", "label": "Annexe IV, 1. g) description de base de l'interface utilisateur fournie au déployeur", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n1. g) description de base de l'interface utilisateur fournie au déployeur\nPas de précision supplémentaire dans le texte.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_1h", "label": "Annexe IV, 1. h) notice d'utilisation à l'intention du déployeur", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n1. h) notice d'utilisation à l'intention du déployeur\nLe cas échéant.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_2a", "label": "Annexe IV, 2. a) méthodes et étapes suivies pour le développement", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n2. a) méthodes et étapes suivies pour le développement\nY compris le recours à des systèmes ou outils PRÉ-ENTRAÎNÉS fournis par des tiers et la manière dont ils ont été utilisés, intégrés ou modifiés. C'est le point qui oblige à documenter la dépendance à un modèle de fondation.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_2b", "label": "Annexe IV, 2. b) spécifications de conception", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n2. b) spécifications de conception\nLogique générale du système et des algorithmes ; principaux choix de conception avec leur raisonnement et leurs hypothèses, y compris quant aux PERSONNES OU GROUPES à l'égard desquels le système est destiné à être utilisé ; principaux choix de classification ; ce que le système est conçu pour OPTIMISER et la pertinence des paramètres ; description des sorties attendues et de leur qualité ; décisions relatives aux compromis adoptés pour se conformer aux exigences du chapitre III, section 2.\nL'item le plus lourd de l'annexe, et celui qui résiste le plus à l'externalisation : personne d'autre que le concepteur ne sait ce que le système optimise.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_2c", "label": "Annexe IV, 2. c) architecture du système et ressources informatiques", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n2. c) architecture du système et ressources informatiques\nManière dont les composants logiciels s'utilisent, s'alimentent et s'intègrent ; ressources utilisées pour développer, entraîner, mettre à l'essai et valider.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_2d", "label": "Annexe IV, 2. d) exigences relatives aux données et fiches de jeux de données", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n2. d) exigences relatives aux données et fiches de jeux de données\nMéthodes et techniques d'entraînement, jeux de données utilisés, description générale, PROVENANCE, portée et principales caractéristiques ; manière dont les données ont été obtenues et sélectionnées ; procédures d'étiquetage ; méthodes de nettoyage, dont la détection des valeurs aberrantes.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_2e", "label": "Annexe IV, 2. e) évaluation des mesures de contrôle humain nécessaires", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n2. e) évaluation des mesures de contrôle humain nécessaires\nConformément à l'art. 14, y compris l'évaluation des mesures techniques nécessaires pour faciliter l'interprétation des sorties par les déployeurs (art. 13, §3, d).\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_2f", "label": "Annexe IV, 2. f) modifications prédéterminées du système et de ses performances", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n2. f) modifications prédéterminées du système et de ses performances\nLe cas échéant, avec les solutions techniques adoptées pour garantir que la conformité aux exigences du chapitre III, section 2 continue d'être assurée. C'est ce qui permet qu'un système apprenant reste conforme sans nouvelle évaluation.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_2g", "label": "Annexe IV, 2. g) procédures de validation et d'essai", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n2. g) procédures de validation et d'essai\nDonnées de validation et d'essai et leurs caractéristiques ; indicateurs d'exactitude, de robustesse et de respect des autres exigences ; ÉVENTUELLES INCIDENCES DISCRIMINATOIRES ; journaux de test et rapports de test DATÉS ET SIGNÉS par les personnes responsables.\nL'exigence de datation et de signature est explicite : un rapport de test non signé ne satisfait pas l'item.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_2h", "label": "Annexe IV, 2. h) mesures de cybersécurité prises", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n2. h) mesures de cybersécurité prises\nPas de précision supplémentaire dans le texte.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_3", "label": "Annexe IV, 3. surveillance, fonctionnement et contrôle du système", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n3. surveillance, fonctionnement et contrôle du système\nCapacités et limites sur le plan de la performance, y compris le degré d'exactitude POUR DES PERSONNES OU GROUPES SPÉCIFIQUES à l'égard desquels le système est destiné à être utilisé, et le niveau global d'exactitude prévu ; résultats non intentionnels et sources de risques prévisibles pour la santé, la sécurité, les droits fondamentaux et EN TERMES DE DISCRIMINATION ; mesures de contrôle humain de l'art. 14 ; spécifications des données d'entrée.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_4", "label": "Annexe IV, 4. adéquation des indicateurs de performance au système", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n4. adéquation des indicateurs de performance au système\nDescription de l'adéquation, pas seulement des indicateurs. Il faut justifier le choix de la métrique, pas seulement la reporter.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_5", "label": "Annexe IV, 5. description détaillée du système de gestion des risques", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n5. description détaillée du système de gestion des risques\nConformément à l'art. 9.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_6", "label": "Annexe IV, 6. modifications pertinentes apportées au système tout au long de son cycle de vie", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n6. modifications pertinentes apportées au système tout au long de son cycle de vie\nLe dossier est vivant : il est faux de le considérer clos à la mise sur le marché.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_7", "label": "Annexe IV, 7. liste des normes harmonisées appliquées", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n7. liste des normes harmonisées appliquées\nEn totalité ou en partie, dont les références ont été publiées au JOUE. À défaut de norme harmonisée, une DESCRIPTION DÉTAILLÉE des solutions adoptées pour satisfaire aux exigences du chapitre III, section 2, avec la liste des autres normes et spécifications techniques appliquées.\n⚠ C'est le point qui pèse aujourd'hui : les normes harmonisées ne sont pas publiées, donc la branche « description détaillée » est la seule praticable.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_8", "label": "Annexe IV, 8. copie de la déclaration UE de conformité", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n8. copie de la déclaration UE de conformité\nVisée à l'art. 47.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}, {"key": "A4_9", "label": "Annexe IV, 9. système d'évaluation des performances après commercialisation", "desc": "ITEM DE L'ANNEXE IV — contenu minimal de la documentation technique (art. 11, §1).\n9. système d'évaluation des performances après commercialisation\nConformément à l'art. 72, y compris le plan de surveillance après commercialisation visé à l'art. 72, §3.\nLe texte dit « contient AU MOINS les informations ci-après, SELON LE SYSTÈME D'IA CONCERNÉ » : la liste est un plancher, et chaque item s'apprécie au regard du système. Un item sans objet doit être justifié comme tel, pas omis."}], "P_DECL": [{"key": "A5_1", "label": "Annexe V, 1. nom et type du système, et référence permettant son identification", "desc": "ITEM DE L'ANNEXE V — contenu de la déclaration UE de conformité (art. 47).\n1. nom et type du système, et référence permettant son identification\nToute référence supplémentaire non équivoque permettant l'identification et la traçabilité.\nLa déclaration est établie PAR ÉCRIT, tenue à la disposition des autorités pendant DIX ANS et traduite dans une langue aisément compréhensible par les autorités des États membres concernés."}, {"key": "A5_2", "label": "Annexe V, 2. nom et adresse du fournisseur ou de son mandataire", "desc": "ITEM DE L'ANNEXE V — contenu de la déclaration UE de conformité (art. 47).\n2. nom et adresse du fournisseur ou de son mandataire\nPas de précision supplémentaire.\nLa déclaration est établie PAR ÉCRIT, tenue à la disposition des autorités pendant DIX ANS et traduite dans une langue aisément compréhensible par les autorités des États membres concernés."}, {"key": "A5_3", "label": "Annexe V, 3. attestation que la déclaration est établie sous la seule responsabilité du fournisseur", "desc": "ITEM DE L'ANNEXE V — contenu de la déclaration UE de conformité (art. 47).\n3. attestation que la déclaration est établie sous la seule responsabilité du fournisseur\nAucun tiers ne peut l'endosser.\nLa déclaration est établie PAR ÉCRIT, tenue à la disposition des autorités pendant DIX ANS et traduite dans une langue aisément compréhensible par les autorités des États membres concernés."}, {"key": "A5_4", "label": "Annexe V, 4. déclaration que le système respecte le règlement", "desc": "ITEM DE L'ANNEXE V — contenu de la déclaration UE de conformité (art. 47).\n4. déclaration que le système respecte le règlement\nEt, le cas échéant, toute autre législation de l'Union prévoyant une déclaration UE.\nLa déclaration est établie PAR ÉCRIT, tenue à la disposition des autorités pendant DIX ANS et traduite dans une langue aisément compréhensible par les autorités des États membres concernés."}, {"key": "A5_5", "label": "Annexe V, 5. déclaration de conformité au RGPD lorsque des données personnelles sont traitées", "desc": "ITEM DE L'ANNEXE V — contenu de la déclaration UE de conformité (art. 47).\n5. déclaration de conformité au RGPD lorsque des données personnelles sont traitées\nConformité aux règlements (UE) 2016/679 et (UE) 2018/1725 et à la directive (UE) 2016/680. En RH, ce point est presque toujours dû.\nLa déclaration est établie PAR ÉCRIT, tenue à la disposition des autorités pendant DIX ANS et traduite dans une langue aisément compréhensible par les autorités des États membres concernés."}, {"key": "A5_6", "label": "Annexe V, 6. références aux normes harmonisées ou spécifications communes utilisées", "desc": "ITEM DE L'ANNEXE V — contenu de la déclaration UE de conformité (art. 47).\n6. références aux normes harmonisées ou spécifications communes utilisées\nPas de précision supplémentaire.\nLa déclaration est établie PAR ÉCRIT, tenue à la disposition des autorités pendant DIX ANS et traduite dans une langue aisément compréhensible par les autorités des États membres concernés."}, {"key": "A5_7", "label": "Annexe V, 7. nom et numéro de l'organisme notifié, procédure suivie et référence du certificat", "desc": "ITEM DE L'ANNEXE V — contenu de la déclaration UE de conformité (art. 47).\n7. nom et numéro de l'organisme notifié, procédure suivie et référence du certificat\nLe cas échéant. Sans objet pour les points 2 à 8 de l'annexe III, qui relèvent du contrôle interne de l'annexe VI (art. 43, §2).\nLa déclaration est établie PAR ÉCRIT, tenue à la disposition des autorités pendant DIX ANS et traduite dans une langue aisément compréhensible par les autorités des États membres concernés."}, {"key": "A5_8", "label": "Annexe V, 8. lieu, date, nom et fonction du signataire", "desc": "ITEM DE L'ANNEXE V — contenu de la déclaration UE de conformité (art. 47).\n8. lieu, date, nom et fonction du signataire\nEt la mention de la personne pour le compte de laquelle il signe.\nLa déclaration est établie PAR ÉCRIT, tenue à la disposition des autorités pendant DIX ANS et traduite dans une langue aisément compréhensible par les autorités des États membres concernés."}], "P_ANNEXE_XI": [{"key": "A11_1a", "label": "Annexe XI, section 1, 1. a) tâches du modèle et systèmes dans lesquels il peut être intégré", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 1. a) tâches du modèle et systèmes dans lesquels il peut être intégré\nType et nature des systèmes d'IA.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_1b", "label": "Annexe XI, section 1, 1. b) politiques d'utilisation acceptable", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 1. b) politiques d'utilisation acceptable\nPas de précision supplémentaire.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_1c", "label": "Annexe XI, section 1, 1. c) date de publication et méthodes de distribution", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 1. c) date de publication et méthodes de distribution\nPas de précision supplémentaire.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_1d", "label": "Annexe XI, section 1, 1. d) architecture et nombre de paramètres", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 1. d) architecture et nombre de paramètres\nPas de précision supplémentaire.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_1e", "label": "Annexe XI, section 1, 1. e) modalités et format des entrées et des sorties", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 1. e) modalités et format des entrées et des sorties\nTexte, image, etc.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_1f", "label": "Annexe XI, section 1, 1. f) licence", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 1. f) licence\nPas de précision supplémentaire.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_2a", "label": "Annexe XI, section 1, 2. a) moyens techniques nécessaires à l'intégration", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 2. a) moyens techniques nécessaires à l'intégration\nNotice d'utilisation, infrastructure, outils.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_2b", "label": "Annexe XI, section 1, 2. b) spécifications de conception du modèle et de l'entraînement", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 2. b) spécifications de conception du modèle et de l'entraînement\nMéthodes et techniques d'entraînement, principaux choix de conception avec leur raisonnement et leurs hypothèses, ce que le modèle est conçu pour optimiser.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_2c", "label": "Annexe XI, section 1, 2. c) données d'entraînement, d'essai et de validation", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 2. c) données d'entraînement, d'essai et de validation\nType et provenance des données, méthodes d'organisation — nettoyage, filtrage — nombre de points de données, portée et principales caractéristiques, manière dont elles ont été obtenues et sélectionnées, mesures visant à détecter l'inadéquation des sources et MÉTHODES PERMETTANT DE DÉTECTER LES BIAIS IDENTIFIABLES.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_2d", "label": "Annexe XI, section 1, 2. d) ressources informatiques utilisées pour l'entraînement", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 2. d) ressources informatiques utilisées pour l'entraînement\nNombre d'opérations en virgule flottante, temps d'entraînement. C'est cette donnée qui détermine le franchissement du seuil de 10²⁵ FLOP de l'art. 51, §2.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_2e", "label": "Annexe XI, section 1, 2. e) consommation d'énergie connue ou estimée", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 1, 2. e) consommation d'énergie connue ou estimée\nLorsqu'elle est inconnue, elle peut être estimée à partir des ressources informatiques utilisées — le texte le prévoit expressément.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_S2_1", "label": "Annexe XI, section 2, 1. stratégies d'évaluation et résultats", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 2, 1. stratégies d'évaluation et résultats\nRISQUE SYSTÉMIQUE UNIQUEMENT. Sur la base des protocoles et outils d'évaluation publics disponibles ou d'autres méthodes. Comprennent des critères, des indicateurs et les méthodes d'évaluation pour l'identification des limites.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_S2_2", "label": "Annexe XI, section 2, 2. essais contradictoires internes ou externes", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 2, 2. essais contradictoires internes ou externes\nRISQUE SYSTÉMIQUE UNIQUEMENT. Méthode de l'équipe rouge, adaptations de modèles, alignement et réglage fin. Le cas échéant.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}, {"key": "A11_S2_3", "label": "Annexe XI, section 2, 3. architecture du système", "desc": "ITEM DE L'ANNEXE XI — documentation technique du modèle à usage général (art. 53, §1, a).\nsection 2, 3. architecture du système\nRISQUE SYSTÉMIQUE UNIQUEMENT. Manière dont les composants logiciels s'utilisent, s'alimentent et s'intègrent. Le cas échéant.\nLe texte dit « au moins les informations ci-après, EN FONCTION DE LA TAILLE ET DU PROFIL DE RISQUE DU MODÈLE » : l'exigence est proportionnée, ce qui n'autorise pas l'omission mais la modulation du détail."}], "P_ANNEXE_XII": [{"key": "A12_1a", "label": "Annexe XII, 1. a) tâches du modèle et systèmes dans lesquels il peut être intégré", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n1. a) tâches du modèle et systèmes dans lesquels il peut être intégré\nPas de précision supplémentaire.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}, {"key": "A12_1b", "label": "Annexe XII, 1. b) politiques d'utilisation acceptable", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n1. b) politiques d'utilisation acceptable\nPas de précision supplémentaire.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}, {"key": "A12_1c", "label": "Annexe XII, 1. c) date de publication et méthodes de distribution", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n1. c) date de publication et méthodes de distribution\nPas de précision supplémentaire.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}, {"key": "A12_1d", "label": "Annexe XII, 1. d) interactions avec du matériel ou des logiciels externes au modèle", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n1. d) interactions avec du matériel ou des logiciels externes au modèle\nPas de précision supplémentaire.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}, {"key": "A12_1e", "label": "Annexe XII, 1. e) versions des logiciels pertinents liés à l'utilisation du modèle", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n1. e) versions des logiciels pertinents liés à l'utilisation du modèle\nPas de précision supplémentaire.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}, {"key": "A12_1f", "label": "Annexe XII, 1. f) architecture et nombre de paramètres", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n1. f) architecture et nombre de paramètres\nPas de précision supplémentaire.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}, {"key": "A12_1g", "label": "Annexe XII, 1. g) modalités et format des entrées et des sorties", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n1. g) modalités et format des entrées et des sorties\nPas de précision supplémentaire.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}, {"key": "A12_1h", "label": "Annexe XII, 1. h) licence pour le modèle", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n1. h) licence pour le modèle\nPas de précision supplémentaire.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}, {"key": "A12_2a", "label": "Annexe XII, 2. a) moyens techniques nécessaires à l'intégration", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n2. a) moyens techniques nécessaires à l'intégration\nNotice d'utilisation, infrastructure, outils.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}, {"key": "A12_2b", "label": "Annexe XII, 2. b) modalités, format et TAILLE MAXIMALE des entrées et des sorties", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n2. b) modalités, format et TAILLE MAXIMALE des entrées et des sorties\nTaille de la fenêtre de contexte notamment. Item absent de l'annexe XI : il n'existe que dans l'information due au fournisseur en aval, parce que c'est lui qui en a besoin pour concevoir son système.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}, {"key": "A12_2c", "label": "Annexe XII, 2. c) données d'entraînement, d'essai et de validation", "desc": "ITEM DE L'ANNEXE XII — information due aux fournisseurs EN AVAL qui intègrent le modèle dans leur système (art. 53, §1, b).\n2. c) données d'entraînement, d'essai et de validation\nType et provenance des données et méthodes d'organisation. Notablement PLUS COURT que l'item correspondant de l'annexe XI : l'aval reçoit moins que ce que le fournisseur doit tenir à disposition du Bureau de l'IA.\nC'est le pendant de l'annexe XI tourné vers l'aval : ce que l'intégrateur est en droit d'exiger de son fournisseur de modèle. À citer dans un contrat d'intégration."}]}, "criteres": [{"key": "K99_a", "label": "Critère art. 99 §7, a) nature, gravité et durée de la violation et de ses conséquences", "desc": "CRITÈRE DE MODULATION DE L'AMENDE — art. 99, §7.\nTexte : a) nature, gravité et durée de la violation et de ses conséquences\nCompte tenu de la finalité du système et, le cas échéant, du NOMBRE DE PERSONNES TOUCHÉES et du NIVEAU DE DOMMAGE qu'elles ont subi.\nSens : aggravant.\nLecture : Premier critère cité et le plus lourd. En RH, le nombre de personnes touchées est mécaniquement élevé dès qu'un filtrage automatisé est en place.\nVariable correspondante dans le réseau de risque quantifié (simulateur de sanction) : « MOD_GRAVITE ». Ce nom est identique de part et d'autre : ce que le registre dit de regarder, le réseau dit ce que cela change sur le montant.\nPortée : le §7 s'applique « POUR DÉCIDER S'IL Y A LIEU d'imposer une amende ET pour décider du montant ». L'amende n'est donc pas automatique sur constat — c'est une décision, et ces dix critères en sont la méthode."}, {"key": "K99_b", "label": "Critère art. 99 §7, b) amendes déjà imposées par d'autres autorités de surveillance du marché", "desc": "CRITÈRE DE MODULATION DE L'AMENDE — art. 99, §7.\nTexte : b) amendes déjà imposées par d'autres autorités de surveillance du marché\nAu même opérateur, POUR LA MÊME VIOLATION.\nSens : aggravant.\nLecture : Vise la double sanction au sein du dispositif de surveillance du marché.\nVariable correspondante dans le réseau de risque quantifié (simulateur de sanction) : « ANTERIEUR ». Ce nom est identique de part et d'autre : ce que le registre dit de regarder, le réseau dit ce que cela change sur le montant.\nPortée : le §7 s'applique « POUR DÉCIDER S'IL Y A LIEU d'imposer une amende ET pour décider du montant ». L'amende n'est donc pas automatique sur constat — c'est une décision, et ces dix critères en sont la méthode."}, {"key": "K99_c", "label": "Critère art. 99 §7, c) amendes déjà imposées par d'autres autorités pour d'autres dispositions", "desc": "CRITÈRE DE MODULATION DE L'AMENDE — art. 99, §7.\nTexte : c) amendes déjà imposées par d'autres autorités pour d'autres dispositions\nAu même opérateur, pour des violations d'AUTRES dispositions du droit de l'Union ou national, lorsque ces violations résultent de la MÊME ACTIVITÉ OU OMISSION.\nSens : aggravant.\nLecture : C'est par ce point qu'une sanction RGPD antérieure portant sur le même traitement entre dans l'appréciation. Le lien à faire est celui de l'activité, pas celui du texte.\nVariable correspondante dans le réseau de risque quantifié (simulateur de sanction) : « ANTERIEUR ». Ce nom est identique de part et d'autre : ce que le registre dit de regarder, le réseau dit ce que cela change sur le montant.\nPortée : le §7 s'applique « POUR DÉCIDER S'IL Y A LIEU d'imposer une amende ET pour décider du montant ». L'amende n'est donc pas automatique sur constat — c'est une décision, et ces dix critères en sont la méthode."}, {"key": "K99_d", "label": "Critère art. 99 §7, d) taille, chiffre d'affaires annuel et part de marché de l'opérateur", "desc": "CRITÈRE DE MODULATION DE L'AMENDE — art. 99, §7.\nTexte : d) taille, chiffre d'affaires annuel et part de marché de l'opérateur\nSens : aggravant.\nLecture : À lire avec l'art. 99, §6 : pour les PME, l'amende retient le montant le plus FAIBLE entre le forfait et le pourcentage — l'inverse de la règle générale du §3.\nVariable correspondante dans le réseau de risque quantifié (simulateur de sanction) : « CA_ELEVE ». Ce nom est identique de part et d'autre : ce que le registre dit de regarder, le réseau dit ce que cela change sur le montant.\nPortée : le §7 s'applique « POUR DÉCIDER S'IL Y A LIEU d'imposer une amende ET pour décider du montant ». L'amende n'est donc pas automatique sur constat — c'est une décision, et ces dix critères en sont la méthode."}, {"key": "K99_e", "label": "Critère art. 99 §7, e) toute autre circonstance aggravante ou atténuante", "desc": "CRITÈRE DE MODULATION DE L'AMENDE — art. 99, §7.\nTexte : e) toute autre circonstance aggravante ou atténuante\nTelle que les AVANTAGES FINANCIERS OBTENUS ou les PERTES ÉVITÉES, directement ou indirectement, du fait de la violation.\nSens : aggravant.\nLecture : Clause ouverte. C'est le seul point par lequel l'adhésion à un code de conduite de l'art. 95 peut jouer : elle n'est pas un critère nommé.\nVariable correspondante dans le réseau de risque quantifié (simulateur de sanction) : « MOD_AVANTAGE ». Ce nom est identique de part et d'autre : ce que le registre dit de regarder, le réseau dit ce que cela change sur le montant.\nPortée : le §7 s'applique « POUR DÉCIDER S'IL Y A LIEU d'imposer une amende ET pour décider du montant ». L'amende n'est donc pas automatique sur constat — c'est une décision, et ces dix critères en sont la méthode."}, {"key": "K99_f", "label": "Critère art. 99 §7, f) degré de coopération avec les autorités nationales compétentes", "desc": "CRITÈRE DE MODULATION DE L'AMENDE — art. 99, §7.\nTexte : f) degré de coopération avec les autorités nationales compétentes\nEn vue de REMÉDIER à la violation et d'en ATTÉNUER les éventuels effets négatifs.\nSens : atténuant.\nLecture : Attention : coopérer en fournissant des informations inexactes, incomplètes ou trompeuses constitue un manquement distinct, sanctionné jusqu'à 7,5 M€ ou 1 % par l'art. 99, §5.\nVariable correspondante dans le réseau de risque quantifié (simulateur de sanction) : « M_COOP ». Ce nom est identique de part et d'autre : ce que le registre dit de regarder, le réseau dit ce que cela change sur le montant.\nPortée : le §7 s'applique « POUR DÉCIDER S'IL Y A LIEU d'imposer une amende ET pour décider du montant ». L'amende n'est donc pas automatique sur constat — c'est une décision, et ces dix critères en sont la méthode."}, {"key": "K99_g", "label": "Critère art. 99 §7, g) degré de responsabilité compte tenu des mesures mises en œuvre", "desc": "CRITÈRE DE MODULATION DE L'AMENDE — art. 99, §7.\nTexte : g) degré de responsabilité compte tenu des mesures mises en œuvre\nMesures TECHNIQUES ET ORGANISATIONNELLES mises en œuvre par l'opérateur.\nSens : atténuant.\nLecture : C'est la raison pour laquelle un dispositif de conformité imparfait vaut mieux que rien : il réduit le montant même lorsqu'il n'a pas empêché le manquement.\nVariable correspondante dans le réseau de risque quantifié (simulateur de sanction) : « MOD_RESP ». Ce nom est identique de part et d'autre : ce que le registre dit de regarder, le réseau dit ce que cela change sur le montant.\nPortée : le §7 s'applique « POUR DÉCIDER S'IL Y A LIEU d'imposer une amende ET pour décider du montant ». L'amende n'est donc pas automatique sur constat — c'est une décision, et ces dix critères en sont la méthode."}, {"key": "K99_h", "label": "Critère art. 99 §7, h) manière dont les autorités ont eu connaissance de la violation", "desc": "CRITÈRE DE MODULATION DE L'AMENDE — art. 99, §7.\nTexte : h) manière dont les autorités ont eu connaissance de la violation\nNotamment SI, ET DANS QUELLE MESURE, l'opérateur a notifié la violation.\nSens : atténuant.\nLecture : Le seul critère du §7 qui récompense explicitement un comportement antérieur au constat. Il fait de l'auto-signalement un choix stratégique et non seulement moral.\nVariable correspondante dans le réseau de risque quantifié (simulateur de sanction) : « M_AUTOSIGNAL ». Ce nom est identique de part et d'autre : ce que le registre dit de regarder, le réseau dit ce que cela change sur le montant.\nPortée : le §7 s'applique « POUR DÉCIDER S'IL Y A LIEU d'imposer une amende ET pour décider du montant ». L'amende n'est donc pas automatique sur constat — c'est une décision, et ces dix critères en sont la méthode."}, {"key": "K99_i", "label": "Critère art. 99 §7, i) caractère délibéré ou négligent de la violation", "desc": "CRITÈRE DE MODULATION DE L'AMENDE — art. 99, §7.\nTexte : i) caractère délibéré ou négligent de la violation\nSens : aggravant.\nLecture : Distinction classique en droit de la sanction administrative : elle ne change pas la qualification, elle pèse sur le montant.\nVariable correspondante dans le réseau de risque quantifié (simulateur de sanction) : « MOD_INTENT ». Ce nom est identique de part et d'autre : ce que le registre dit de regarder, le réseau dit ce que cela change sur le montant.\nPortée : le §7 s'applique « POUR DÉCIDER S'IL Y A LIEU d'imposer une amende ET pour décider du montant ». L'amende n'est donc pas automatique sur constat — c'est une décision, et ces dix critères en sont la méthode."}, {"key": "K99_j", "label": "Critère art. 99 §7, j) mesures prises pour atténuer le préjudice subi par les personnes concernées", "desc": "CRITÈRE DE MODULATION DE L'AMENDE — art. 99, §7.\nTexte : j) mesures prises pour atténuer le préjudice subi par les personnes concernées\nSens : atténuant.\nLecture : En RH : réexamen des candidatures écartées, reprise des évaluations, réparation. Agit aussi sur le critère a), qui vise la violation ET SES CONSÉQUENCES.\nVariable correspondante dans le réseau de risque quantifié (simulateur de sanction) : « M_ATTENUE ». Ce nom est identique de part et d'autre : ce que le registre dit de regarder, le réseau dit ce que cela change sur le montant.\nPortée : le §7 s'applique « POUR DÉCIDER S'IL Y A LIEU d'imposer une amende ET pour décider du montant ». L'amende n'est donc pas automatique sur constat — c'est une décision, et ces dix critères en sont la méthode."}], "facteurs": [{"key": "FR_PROFILAGE", "label": "Facteur de risque — le système profile des personnes physiques", "etablir": "Comment l'établir : le système évalue des aspects personnels — rendement au travail, fiabilité, comportement, traits de personnalité — au sens de l'art. 4, point 4 du RGPD.", "effet": "Effet : neutralise la dérogation de l'art. 6, §3. En RH, le filtrage de candidatures, l'évaluation de candidats et le suivi de performance individuelle en relèvent presque toujours. C'est le facteur qui ferme l'échappatoire.", "bnvar": "Profilage"}, {"key": "FR_EMO", "label": "Facteur de risque — inférence émotionnelle sur le lieu de travail", "etablir": "Comment l'établir : le système déduit des émotions ou des intentions à partir de signaux biométriques — voix, visage, posture, rythme de frappe.", "effet": "Effet : bascule de régime, pas d'intensité. Fait passer du palier 15 M€ / 3 % au palier 35 M€ / 7 %, et aucune mesure d'atténuation ne rattrape une interdiction.", "bnvar": "Emotion"}, {"key": "FR_VOLUME", "label": "Facteur de risque — volume annuel de personnes concernées", "etablir": "Comment l'établir : nombre de personnes physiques dont une décision est prise ou facilitée par le système sur un exercice. Seuil de bascule retenu dans les réseaux quantifiés : 2 000.", "effet": "Effet double. Art. 7, §2, f) et art. 99, §7, a) : l'ampleur du préjudice et le nombre de personnes touchées modulent la sanction. Et mécaniquement, un biais ne devient statistiquement démontrable qu'au-delà d'un certain volume.", "bnvar": "Volume"}, {"key": "FR_HIST", "label": "Facteur de risque — entraînement sur des historiques RH internes", "etablir": "Comment l'établir : le système a été entraîné ou réentraîné sur les historiques de recrutement, d'évaluation ou de promotion de l'organisation.", "effet": "Effet : première cause de biais différentiel. Considérant 67 : les biais sont « inhérents à des jeux de données sous-jacents, en particulier lorsque des données historiques sont utilisées » et ils « perpétuent et amplifient les discriminations existantes ».", "bnvar": "Hist_RH"}, {"key": "FR_ORIGINE", "label": "Facteur de risque — degré de paramétrage par le déployeur", "etablir": "Comment l'établir : trois états — éditeur tiers utilisé tel quel, éditeur tiers fortement paramétré, développement interne.", "effet": "Effet : détermine le rôle juridique. L'art. 25, §1, b) et c) requalifie en FOURNISSEUR quiconque modifie substantiellement le système ou en change la destination. Risque contractuel majeur pour un intégrateur ou un cabinet de conseil.", "bnvar": "Origine"}, {"key": "FR_AUTORITE", "label": "Facteur de risque — autorité réelle des contrôleurs humains", "etablir": "Comment l'établir : le contrôleur dispose-t-il formellement du pouvoir d'écarter la sortie du système, et ce pouvoir s'exerce-t-il sans coût pour lui en temps, en justification hiérarchique ou en objectif manqué ?", "effet": "Effet : c'est la troisième condition de l'art. 26, §2 — compétence, formation, AUTORITÉ — et celle qui manque presque toujours. Sans elle, le contrôle humain est formel, pas effectif.", "bnvar": "Inv_Ctrl"}, {"key": "FR_DOC", "label": "Facteur de risque — complétude du dossier de conformité", "etablir": "Comment l'établir : l'organisation peut-elle produire, sur demande motivée et sous quinze jours, la documentation technique, les journaux et le rapport d'évaluation de la conformité ?", "effet": "Effet : ne réduit pas le risque de préjudice, réduit fortement le risque de CONSTAT. Art. 16, k) : une conformité réelle mais non documentée est, devant l'autorité, une non-conformité.", "bnvar": "Inv_Doc"}, {"key": "FR_INFO", "label": "Facteur de risque — information préalable des travailleurs et des personnes", "etablir": "Comment l'établir : les représentants du personnel ont-ils été informés avant la mise en service, et les personnes soumises au système le sont-elles ?", "effet": "Effet à double sens, et il faut l'assumer : informer AUGMENTE la probabilité de réclamation (une personne qui ignore le système ne demandera jamais d'explication au titre de l'art. 86) mais réduit fortement le risque de conflit collectif — et ne pas informer est un manquement en soi.", "bnvar": "Inv_Info"}, {"key": "FR_PME", "label": "Facteur de risque — statut de PME", "etablir": "Comment l'établir : au sens de la recommandation 2003/361/CE.", "effet": "Effet inversé par rapport à l'intuition. Art. 99, §6 : pour les PME, l'amende est plafonnée au montant le plus FAIBLE entre le forfait et le pourcentage — l'inverse de la règle générale. S'y ajoutent les allègements des art. 11, §1, 17, §2 et 62.", "bnvar": "Taille"}, {"key": "FR_NORME", "label": "Facteur de risque — absence de normes harmonisées applicables", "etablir": "Comment l'établir : existe-t-il une norme harmonisée publiée au JOUE couvrant les exigences visées ?", "effet": "Effet : sans norme, pas de présomption de conformité (art. 42), donc charge de démonstration entière sur le fournisseur. ⚠ Leur retard est la raison officielle du report du régime haut risque par le règlement Omnibus.", "bnvar": "CTX_NORME"}], "question": "Quelles obligations de l'AI Act s'appliquent à un opérateur donné, comment les prouver, à quelle échéance, et sous quel palier de sanction ?", "n_nodes": 266, "n_arcs": 625};
+
+const $ = s => document.querySelector(s);
+const el = (t, c, x) => { const n = document.createElement(t); if (c) n.className = c;
+  if (x !== undefined) n.textContent = x; return n; };
+
+const ROLE = Object.fromEntries(DATA.roles.map(r => [r.key, r]));
+const REG  = Object.fromEntries(DATA.regimes.map(r => [r.key, r]));
+const ECH  = Object.fromEntries(DATA.echeances.map(r => [r.key, r]));
+const SAN  = Object.fromEntries(DATA.sanctions.map(r => [r.key, r]));
+const PRV  = Object.fromEntries(DATA.preuves.map(r => [r.key, r]));
+const OBL  = DATA.registre;
+
+// Échéances déjà passées au 14/09/2026. Codé en dur et daté : la page n'invente
+// pas une date « aujourd'hui » qui rendrait sa lecture dépendante de l'horloge.
+const DUE = new Set(["E_2025_02", "E_2025_08", "E_2026_08"]);
+const ECH_ORDRE = ["E_2025_02","E_2025_08","E_2026_08","E_2027_08","E_2027_12","E_2028_08"];
+const SAN_CLS = {S_35:"s35", S_15:"s15", S_IAUG:"s15", S_75:"s75", S_NON:"snon"};
+const SAN_COURT = {S_35:"35 M€ / 7 %", S_15:"15 M€ / 3 %", S_IAUG:"15 M€ / 3 % — Commission",
+                   S_75:"7,5 M€ / 1 %", S_NON:"pas d'amende directe"};
+const ST_LBL = {ok:"Conforme", part:"Partiel", no:"Non couvert", na:"Sans objet"};
+
+const state = {
+  roles: new Set(["RO_DEPLOY", "RO_EMPL"]),
+  regs:  new Set(["R_INTERDIT", "R_HR3", "R_TRANSP", "R_MIN"]),
+  st: {},            // key -> ok|part|no|na
+  fx: {},            // facteur -> true|false
+  q: "", ech: "", sanct: "", openOnly: false, allOpen: false,
+};
+OBL.forEach(o => state.st[o.key] = "no");
+
+/* ---------- profil ---------- */
+function chips(host, items, set, after) {
+  host.textContent = "";
+  items.forEach(it => {
+    const b = el("button", "chip", it.label.replace(/^(Rôle|Régime) — /, ""));
+    b.type = "button";
+    b.setAttribute("aria-pressed", set.has(it.key));
+    b.title = it.desc.split("\n")[0].slice(0, 230);
+    b.onclick = () => { set.has(it.key) ? set.delete(it.key) : set.add(it.key);
+      b.setAttribute("aria-pressed", set.has(it.key)); after(); };
+    host.appendChild(b);
+  });
+}
+
+/* ---------- sélection ---------- */
+const inScope = o =>
+  o.roles.some(r => state.roles.has(r)) && o.regimes.some(g => state.regs.has(g));
+
+function scoped() { return OBL.filter(inScope); }
+
+/* ---------- analyse d'écart ---------- */
+function gap() {
+  const s = scoped();
+  const acc = {ok:0, part:0, no:0, na:0};
+  s.forEach(o => acc[state.st[o.key]] += o.expo);
+  const tot = acc.ok + acc.part + acc.no + acc.na || 1;
+
+  const bar = $("#m-bar"); bar.textContent = "";
+  const segs = [["ok","var(--ok)","couvert"], ["part","var(--jug)","partiel"],
+                ["no","var(--danger)","ouvert"], ["na","var(--ink-3)","sans objet"]];
+  const leg = $("#m-leg"); leg.textContent = "";
+  segs.forEach(([k, col, lbl]) => {
+    if (acc[k] > 0) { const i = el("i"); i.style.background = col;
+      i.style.width = (100 * acc[k] / tot) + "%"; bar.appendChild(i); }
+    const sp = el("span"); const sw = el("i"); sw.style.background = col;
+    sp.appendChild(sw); sp.appendChild(el("span", null, lbl + " "));
+    const b = el("b", null, acc[k] + " pts"); sp.appendChild(b); leg.appendChild(sp);
+  });
+
+  const open = s.filter(o => state.st[o.key] === "no" || state.st[o.key] === "part");
+
+  // Répartition de l'exposition ouverte par palier. La barre est relative au
+  // palier le plus chargé, pas au total : elle compare des paliers entre eux.
+  const ph = $("#pal"); ph.textContent = "";
+  const PAL_COL = {S_35:"var(--danger)", S_15:"var(--jug)", S_IAUG:"var(--scen)",
+                   S_75:"var(--scen)", S_NON:"var(--ink-3)"};
+  const par = {};
+  open.forEach(o => { par[o.sanct] = (par[o.sanct] || 0) + o.expo; });
+  const mx = Math.max(1, ...Object.values(par));
+  ["S_35","S_15","S_IAUG","S_75","S_NON"].forEach(k => {
+    if (!par[k]) return;
+    const n = open.filter(o => o.sanct === k).length;
+    const row = el("div", "pal");
+    const nm = el("div", "pn");
+    nm.appendChild(el("span", null, SAN_COURT[k]));
+    nm.appendChild(el("small", null, n + (n > 1 ? " obligations ouvertes" : " obligation ouverte")));
+    row.appendChild(nm);
+    row.appendChild(el("div", "pv", par[k] + " pts"));
+    const bb = el("div", "pb"); const bi = el("i");
+    bi.style.background = PAL_COL[k]; bi.style.width = (100 * par[k] / mx) + "%";
+    bb.appendChild(bi); row.appendChild(bb);
+    ph.appendChild(row);
+  });
+  if (!open.length) ph.appendChild(el("p", "empty", "Rien d'ouvert sur ce profil."));
+
+  $("#k-open").textContent = open.length;
+  $("#k-expo").textContent = acc.no + acc.part;
+  $("#k-due").textContent = open.filter(o => DUE.has(o.ech)).length;
+
+  const host = $("#plan"); host.textContent = "";
+  if (!open.length) {
+    host.appendChild(el("p", "empty",
+      s.length ? "Aucune obligation ouverte sur ce profil."
+               : "Aucune obligation ne correspond à ce profil — vérifiez les rôles et les régimes."));
+    return;
+  }
+  ECH_ORDRE.forEach(e => {
+    const g = open.filter(o => o.ech === e).sort((a, b) => b.expo - a.expo);
+    if (!g.length) return;
+    const box = el("div", "plangrp");
+    const h = el("h3");
+    h.appendChild(el("span", null, ECH[e].label.replace("Échéance — ", "")));
+    h.appendChild(el("em", null, DUE.has(e) ? "déjà exigible" : "à préparer"));
+    box.appendChild(h);
+    g.forEach((o, i) => {
+      const r = el("div", "pi");
+      r.appendChild(el("div", "n", String(i + 1)));
+      const t = el("div", "t"); t.appendChild(document.createTextNode(o.titre));
+      t.appendChild(el("small", null, o.art + " · " + SAN_COURT[o.sanct]));
+      r.appendChild(t);
+      r.appendChild(el("div", "x", o.expo + " pts"));
+      box.appendChild(r);
+    });
+    host.appendChild(box);
+  });
+}
+
+/* ---------- registre ---------- */
+function matches(o) {
+  if (!inScope(o)) return false;
+  if (state.ech && o.ech !== state.ech) return false;
+  if (state.sanct && o.sanct !== state.sanct) return false;
+  if (state.openOnly && !(state.st[o.key] === "no" || state.st[o.key] === "part")) return false;
+  if (state.q) {
+    const h = (o.titre + " " + o.art + " " + o.question + " " + o.notes).toLowerCase();
+    if (!h.includes(state.q)) return false;
+  }
+  return true;
+}
+
+function registre() {
+  const host = $("#reg"); host.textContent = "";
+  const list = OBL.filter(matches)
+    .sort((a, b) => ECH_ORDRE.indexOf(a.ech) - ECH_ORDRE.indexOf(b.ech) || b.expo - a.expo);
+  $("#cnt").textContent = list.length + " / " + scoped().length + " obligations du profil";
+  if (!list.length) { host.appendChild(el("p", "empty", "Aucune obligation ne correspond.")); return; }
+
+  list.forEach(o => {
+    const box = el("div", "ob"); box.dataset.st = state.st[o.key];
+    if (state.allOpen) box.classList.add("open");
+
+    const head = el("div", "obhead");
+    const left = el("div");
+    const t = el("h3", "obt");
+    const car = el("span", "car", "▸"); t.appendChild(car);
+    t.appendChild(el("span", null, o.titre));
+    t.onclick = () => { box.classList.toggle("open");
+      car.textContent = box.classList.contains("open") ? "▾" : "▸"; };
+    if (state.allOpen) car.textContent = "▾";
+    left.appendChild(t);
+
+    const m = el("div", "obmeta");
+    m.appendChild(el("span", "tg art", o.art));
+    m.appendChild(el("span", "tg ech", ECH[o.ech].label.replace("Échéance — ", "")
+                    + (DUE.has(o.ech) ? " · exigible" : "")));
+    m.appendChild(el("span", "tg " + SAN_CLS[o.sanct], SAN_COURT[o.sanct]));
+    m.appendChild(el("span", "tg exp", o.expo + " pts"));
+    left.appendChild(m);
+    head.appendChild(left);
+
+    const set = el("div", "stset");
+    ["ok", "part", "no", "na"].forEach(k => {
+      const b = el("button", "v-" + k, ST_LBL[k]); b.type = "button";
+      b.setAttribute("aria-pressed", state.st[o.key] === k);
+      b.onclick = () => { state.st[o.key] = k; registre(); gap(); };
+      set.appendChild(b);
+    });
+    head.appendChild(set);
+    box.appendChild(head);
+
+    const body = el("div", "obbody");
+    const dl = el("dl");
+    const add = (k, v, cls) => { dl.appendChild(el("dt", null, k));
+      dl.appendChild(el("dd", cls || null, v)); };
+    add("Contrôle", o.question, "q");
+    add("Qui", o.roles.map(r => ROLE[r].label.replace("Rôle — ", "")).join(" ; "));
+    add("Déclencheur", o.regimes.map(g => REG[g].label.replace("Régime — ", "")).join(" ou "));
+    add("Preuve", o.preuves.length
+        ? o.preuves.map(p => PRV[p].label.replace("Livrable — ", "")).join(" ; ")
+        : "aucun livrable formel — se prouve par les procédures et les traces d'exécution");
+    add("Sanction", SAN[o.sanct].label.replace("Sanction — ", ""));
+    add("Criticité", o.crit + " sur 5 — jugement d'expert");
+    add("Détection", o.detect + " — jugement d'expert");
+    if (o.notes) add("Notes", o.notes);
+    body.appendChild(dl);
+    // Les livrables dont le contenu est fixé par une annexe portent leur
+    // checklist : c'est la réponse à « que dois-je réellement produire ».
+    o.preuves.forEach(p => {
+      const items = (DATA.annexes || {})[p];
+      if (!items || !items.length) return;
+      const a = el("div", "anx");
+      const bt = el("button", null, "Contenu exigé — " + items.length + " items : "
+        + PRV[p].label.replace("Livrable — ", ""));
+      bt.type = "button";
+      bt.onclick = () => a.classList.toggle("open");
+      a.appendChild(bt);
+      // La description d'un item est un enregistrement : ligne 0 l'en-tête de
+      // classe, ligne 1 l'intitulé, ligne 2 la précision de fond, ligne 3 la
+      // clause de portée — identique pour toute l'annexe, donc affichée UNE
+      // fois sous le bouton plutôt que répétée sur chaque item.
+      const L0 = items[0].desc.split("\n");
+      if (L0.length > 3) {
+        const cl = el("p", null, L0.slice(3).join(" "));
+        cl.style.cssText = "margin:8px 0 0;font-size:11px;color:var(--ink-3);line-height:1.45";
+        a.appendChild(cl);
+      }
+      const ul = el("ul", "anxlist");
+      items.forEach(it => {
+        const li = el("li");
+        li.appendChild(el("b", null, it.label));
+        const d = (it.desc.split("\n")[2] || "").trim();
+        if (d && !d.startsWith("Pas de précision")) li.appendChild(el("small", null, d));
+        ul.appendChild(li);
+      });
+      a.appendChild(ul);
+      body.appendChild(a);
+    });
+    box.appendChild(body);
+    host.appendChild(box);
+  });
+}
+
+/* ---------- export ---------- */
+function markdown() {
+  const s = scoped();
+  const open = s.filter(o => state.st[o.key] === "no" || state.st[o.key] === "part");
+  const L = [];
+  L.push("# Plan d'action AI Act");
+  L.push("");
+  L.push("Profil : " + [...state.roles].map(r => ROLE[r].label.replace("Rôle — ", "")).join(", ")
+         + " — régimes : " + [...state.regs].map(g => REG[g].label.replace("Régime — ", "")).join(", "));
+  L.push("");
+  L.push(open.length + " obligations ouvertes sur " + s.length + " applicables. "
+         + "Score d'exposition ouvert : "
+         + open.reduce((a, o) => a + o.expo, 0) + " points (échelle ordinale de tri, "
+         + "pas une probabilité).");
+  L.push("");
+  ECH_ORDRE.forEach(e => {
+    const g = open.filter(o => o.ech === e).sort((a, b) => b.expo - a.expo);
+    if (!g.length) return;
+    L.push("## " + ECH[e].label.replace("Échéance — ", "")
+           + (DUE.has(e) ? " — déjà exigible" : " — à préparer"));
+    L.push("");
+    g.forEach(o => {
+      L.push("### " + o.titre);
+      L.push("- Article : " + o.art);
+      L.push("- Statut déclaré : " + ST_LBL[state.st[o.key]]);
+      L.push("- Qui : " + o.roles.map(r => ROLE[r].label.replace("Rôle — ", "")).join(" ; "));
+      L.push("- Question de contrôle : " + o.question);
+      L.push("- Preuve attendue : " + (o.preuves.length
+             ? o.preuves.map(p => PRV[p].label.replace("Livrable — ", "")).join(" ; ")
+             : "aucun livrable formel"));
+      L.push("- Palier de sanction : " + SAN[o.sanct].label.replace("Sanction — ", ""));
+      L.push("- Exposition : " + o.expo + " pts (criticité " + o.crit
+             + "/5, détectabilité " + o.detect.split(" —")[0] + ")");
+      if (o.notes) L.push("- Notes : " + o.notes);
+      L.push("");
+    });
+  });
+  L.push("---");
+  L.push("Source : règlement (UE) 2024/1689, calendrier consolidé par le règlement (UE) 2026/1744.");
+  L.push("Criticité et détectabilité : jugements d'expert. Le score d'exposition ordonne un plan "
+         + "d'action ; il ne mesure pas un risque.");
+  return L.join("\n");
+}
+
+function evidence() {
+  const L = [];
+  L.push("# Observations à reporter dans le réseau bayésien quantifié");
+  L.push("# À coller dans le simulateur de sanction : noumensia.com/dossiers/ai-act/simulateur-sanction");
+  L.push("# Les noms de variables ci-dessous sont ceux du réseau.");
+  L.push("");
+  DATA.facteurs.forEach(f => {
+    const v = state.fx[f.key];
+    L.push((v === undefined ? "# non renseigné : " : "") + f.bnvar + " = "
+           + (v === undefined ? "?" : (v ? "True" : "False")));
+  });
+  L.push("");
+  const nr = DATA.facteurs.filter(f => state.fx[f.key] === undefined).length;
+  L.push("# " + (DATA.facteurs.length - nr) + " variables sur " + DATA.facteurs.length
+         + " renseignées.");
+  L.push("# Rappel : c'est le réseau qui calcule un taux de risque de sanction. Ce graphe");
+  L.push("# fournit les observations et l'analyse d'écart, il ne produit pas de probabilité.");
+  return L.join("\n");
+}
+
+/* ---------- critères de modulation de l'art. 99 §7 ---------- */
+function criteres() {
+  const host = $("#crit"); host.textContent = "";
+  (DATA.criteres || []).forEach(c => {
+    // La description du nœud est un enregistrement structuré : on en extrait
+    // les lignes nommées plutôt que de la reverser telle quelle dans la page.
+    const L = c.desc.split("\n");
+    const get = p => { const l = L.find(x => x.startsWith(p));
+      return l ? l.slice(p.length).trim() : ""; };
+    const box = el("div", "criti");
+    const h = el("div", "ch");
+    h.appendChild(el("div", "cn", c.label.replace("Critère art. 99 §7, ", "")));
+    const bv = get("Variable correspondante dans le réseau de risque quantifié (simulateur de sanction) : «");
+    const nom = bv.split("»")[0].trim();
+    if (nom) h.appendChild(el("code", "bv", nom));
+    box.appendChild(h);
+    const sens = get("Sens :").replace(".", "");
+    if (sens) box.appendChild(
+      el("span", "cs " + (sens.indexOf("aggravant") >= 0 ? "agg" : "att"), sens));
+    const lec = get("Lecture :");
+    if (lec) box.appendChild(el("div", "ct", lec));
+    host.appendChild(box);
+  });
+}
+
+/* ---------- facteurs ---------- */
+function facteurs() {
+  const host = $("#fx"); host.textContent = "";
+  DATA.facteurs.forEach(f => {
+    const box = el("div", "fxi");
+    const h = el("div", "fh");
+    h.appendChild(el("div", "fn", f.label.replace("Facteur de risque — ", "")));
+    h.appendChild(el("code", "bv", f.bnvar));
+    box.appendChild(h);
+    box.appendChild(el("div", "fe", f.etablir.replace(/^Comment l'établir : /, "")));
+    const yn = el("div", "yn");
+    [["Oui", true], ["Non", false]].forEach(([lbl, v]) => {
+      const b = el("button", null, lbl); b.type = "button";
+      b.setAttribute("aria-pressed", state.fx[f.key] === v);
+      b.onclick = () => { state.fx[f.key] = state.fx[f.key] === v ? undefined : v; facteurs(); };
+      yn.appendChild(b);
+    });
+    box.appendChild(yn);
+    host.appendChild(box);
+  });
+}
+
+/* ---------- init ---------- */
+function regHint() {
+  const n = scoped().length;
+  $("#h-reg").textContent = n + " obligations correspondent à ce profil sur "
+    + OBL.length + " au registre.";
+}
+function refresh() { regHint(); gap(); registre(); }
+
+chips($("#c-roles"), DATA.roles.filter(r => r.key !== "RO_PERSONNE"), state.roles, refresh);
+chips($("#c-reg"), DATA.regimes, state.regs, refresh);
+
+const fe = $("#f-ech");
+ECH_ORDRE.forEach(e => { const o = el("option", null,
+  ECH[e].label.replace("Échéance — ", "")); o.value = e; fe.appendChild(o); });
+fe.onchange = () => { state.ech = fe.value; registre(); };
+
+const fs = $("#f-sanct");
+DATA.sanctions.forEach(s => { const o = el("option", null, SAN_COURT[s.key]); o.value = s.key;
+  fs.appendChild(o); });
+fs.onchange = () => { state.sanct = fs.value; registre(); };
+
+$("#q").oninput = e => { state.q = e.target.value.trim().toLowerCase(); registre(); };
+$("#f-open").onclick = e => { state.openOnly = !state.openOnly;
+  e.target.setAttribute("aria-pressed", state.openOnly);
+  e.target.classList.toggle("on", state.openOnly); registre(); };
+$("#b-all").onclick = e => { state.allOpen = !state.allOpen;
+  e.target.textContent = state.allOpen ? "Tout replier" : "Tout déplier"; registre(); };
+
+$("#b-export").onclick = () => { const p = $("#out-plan");
+  p.textContent = markdown(); p.hidden = false; p.scrollIntoView({block:"nearest"}); };
+$("#b-ev").onclick = () => { const p = $("#out-ev");
+  p.textContent = evidence(); p.hidden = false; p.scrollIntoView({block:"nearest"}); };
+
+$("#s-obl").textContent = OBL.length;
+$("#s-node").textContent = DATA.n_nodes;
+$("#s-arc").textContent = DATA.n_arcs;
+$("#s-preuve").textContent = DATA.preuves.length;
+$("#f-n").textContent = DATA.n_nodes;
+$("#f-a").textContent = DATA.n_arcs;
+
+criteres();
+facteurs();
+refresh();
+</script>
+<script>
+(function(){
+  var b=document.getElementById("b-ev"); if(!b||typeof evidence!=="function") return;
+  var a=document.createElement("a");
+  a.className="btn"; a.style.marginLeft="10px"; a.style.textDecoration="none";
+  a.textContent="Ouvrir ces réponses dans le simulateur →";
+  a.href="/dossiers/ai-act/simulateur-sanction";
+  a.addEventListener("click",function(e){ a.href="/dossiers/ai-act/simulateur-sanction#obs="+encodeURIComponent(evidence()); });
+  b.insertAdjacentElement("afterend",a);
+})();
+</script>
+</body></html>
