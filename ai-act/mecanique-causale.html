@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Mécanique causale de l'AI Act — Noumensia</title>
+<style>
+:root{
+  --ground:#E9ECF0; --surface:#FFFFFF; --surface-2:#F3F5F8;
+  --ink:#131820; --ink-2:#4E5866; --ink-3:#78828F;
+  --rule:#D0D6DE; --rule-strong:#B4BDC8;
+  --accent:#0B4F9E; --accent-soft:#DCE7F5;
+  --cause:#0B6E8F; --cause-soft:#DCEDF4;
+  --effet:#B0341F; --effet-soft:#FAE6E1;
+  --focus:#0B4F9E;
+  --shadow:0 1px 2px rgba(19,24,32,.06),0 8px 24px rgba(19,24,32,.08);
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
+  --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
+  --rule:#28313D; --rule-strong:#3A4653;
+  --accent:#71A8F0; --accent-soft:#1B2C42;
+  --cause:#5FC2E0; --cause-soft:#12303A;
+  --effet:#F0796A; --effet-soft:#361B16;
+  --focus:#71A8F0;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
+  --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
+  --rule:#28313D; --rule-strong:#3A4653;
+  --accent:#71A8F0; --accent-soft:#1B2C42;
+  --cause:#5FC2E0; --cause-soft:#12303A;
+  --effet:#F0796A; --effet-soft:#361B16;
+  --focus:#71A8F0;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+     font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.wrap{max-width:1680px;margin:0 auto;padding:22px 20px 28px;display:flex;flex-direction:column;gap:16px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;gap:20px 32px;
+       border-bottom:1px solid var(--rule);padding-bottom:16px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+         color:var(--ink-3);margin:0 0 6px}
+h1{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.1;margin:0;
+   letter-spacing:-.015em;text-wrap:balance}
+.sub{margin:8px 0 0;color:var(--ink-2);max-width:70ch}
+.stats{display:flex;gap:26px;margin-left:auto;flex-wrap:wrap}
+.stat b{display:block;font-family:var(--mono);font-size:21px;font-weight:500;
+        font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+
+.split{display:grid;grid-template-columns:352px minmax(0,1fr);gap:16px;align-items:stretch}
+@media (max-width:1000px){.split{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+       box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:0}
+.rail{max-height:800px}
+.rail-scroll{overflow-y:auto;padding:16px}
+.sec-title{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+           color:var(--ink-3);margin:18px 0 8px}
+.sec-title:first-child{margin-top:0}
+.legend{display:flex;flex-direction:column;gap:7px;font-size:12.5px;color:var(--ink-2)}
+.legend div{display:flex;gap:9px;align-items:flex-start}
+.sw{width:12px;height:12px;border-radius:3px;flex:none;margin-top:3px;border:1.5px solid}
+.sw.c{background:var(--cause-soft);border-color:var(--cause)}
+.sw.e{background:var(--effet-soft);border-color:var(--effet)}
+.sw.s{background:var(--accent-soft);border-color:var(--accent)}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.pbtn{font:inherit;font-size:12px;padding:5px 10px;border-radius:4px;cursor:pointer;
+      border:1px solid var(--rule-strong);background:var(--surface-2);color:var(--ink-2)}
+.pbtn:hover{border-color:var(--ink-2);color:var(--ink)}
+.lay{margin:0;padding:0;list-style:none}
+.lay-g{margin-bottom:11px}
+.lay-g h4{margin:0 0 4px;font-size:11.5px;font-weight:700;color:var(--ink-2);
+          display:flex;gap:7px;align-items:center}
+.lay-g h4 .d{width:9px;height:9px;border-radius:2px;flex:none}
+.lay button{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;
+            padding:3px 8px 3px 16px;border:0;background:none;color:var(--ink-2);cursor:pointer;
+            border-radius:4px;line-height:1.35}
+.lay button:hover{background:var(--surface-2);color:var(--ink)}
+.lay button.on{background:var(--accent-soft);color:var(--ink);font-weight:600}
+
+.detail .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+                text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+.detail h3{font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.2;margin:0 0 10px;
+           text-wrap:balance}
+.detail .body{font-size:13px;color:var(--ink-2);line-height:1.55}
+.counts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);
+        border:1px solid var(--rule);border-radius:5px;overflow:hidden;margin:14px 0 4px}
+.cnt{background:var(--surface);padding:9px 11px}
+.cnt span{display:block;font-size:10px;letter-spacing:.07em;text-transform:uppercase;
+          color:var(--ink-3)}
+.cnt b{font-family:var(--mono);font-size:17px;font-weight:500}
+.cnt.c b{color:var(--cause)} .cnt.e b{color:var(--effet)}
+.rel-group{margin-top:14px}
+.rel-group h5{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;
+              margin:0 0 5px}
+.rel-group.c h5{color:var(--cause)} .rel-group.e h5{color:var(--effet)}
+.rel{display:flex;gap:8px;align-items:flex-start;font-size:12px;padding:4px 0;
+     border-top:1px solid var(--rule)}
+.rel .verb{font-family:var(--mono);font-size:10px;color:var(--ink-3);flex:none;width:96px;
+           line-height:1.4;padding-top:1px}
+.rel button{font:inherit;font-size:12px;background:none;border:0;padding:0;cursor:pointer;
+            color:var(--accent);text-align:left;line-height:1.4}
+.rel button:hover{text-decoration:underline}
+
+.graphwrap{position:relative;overflow:hidden;min-height:800px;border-radius:6px}
+#stage{display:block;width:100%;height:100%;cursor:grab;background:var(--surface);touch-action:none}
+#stage.dragging{cursor:grabbing}
+.toolbar{position:absolute;top:12px;right:12px;display:flex;gap:6px;z-index:3}
+.tbtn{font:inherit;font-size:12px;padding:5px 10px;border-radius:4px;cursor:pointer;
+      border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink-2);
+      box-shadow:var(--shadow)}
+.tbtn:hover{color:var(--ink);border-color:var(--ink-2)}
+.hint{position:absolute;left:14px;bottom:12px;font-size:11.5px;color:var(--ink-3);
+      background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:4px 9px;z-index:3}
+.n-label{font-family:var(--sans);font-size:10.5px;font-weight:500;pointer-events:none}
+.edge{fill:none;stroke-linecap:round}
+.elab{font-family:var(--mono);font-size:9px;pointer-events:none}
+.lay-cap{font-family:var(--sans);font-size:26px;font-weight:700}
+
+.note{font-size:12px;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule);
+      border-left:3px solid var(--accent);border-radius:5px;padding:12px 16px;box-shadow:var(--shadow)}
+.note b{color:var(--ink)}
+footer{font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:12px}
+footer code{font-family:var(--mono);font-size:11px}
+</style>
+
+
+<meta name="description" content="Ce qui mène un déploiement d'IA en RH au préjudice, à la non-conformité puis à la sanction : diagramme causal lu dans le texte.">
+<link rel="canonical" href="https://noumensia.com/ai-act/mecanique-causale">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-400-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-600.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+.nm-bar{position:relative;z-index:9999;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 18px;
+  padding:9px clamp(14px,3vw,28px);background:#1E2630;color:#F2EFEA;border-bottom:1px solid #3A4756;
+  font:500 13px/1.4 "IBM Plex Sans",-apple-system,sans-serif;letter-spacing:.01em}
+.nm-bar a{color:#F2EFEA;text-decoration:none}
+.nm-bar a:hover{color:#D98A95}
+.nm-bar a:focus-visible{outline:2px solid #D98A95;outline-offset:2px;border-radius:2px}
+.nm-bar__crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0}
+.nm-bar__brand{display:inline-flex;align-items:center;gap:8px;font-family:"Newsreader",Georgia,serif;font-size:15px;font-weight:500}
+.nm-bar__brand img{width:20px;height:20px;display:block}
+.nm-bar__sep{color:#A8B4C2}
+.nm-bar__here{color:#A8B4C2}
+.nm-bar__links{display:flex;flex-wrap:wrap;gap:4px 16px}
+.nm-bar__cta{color:#D98A95 !important}
+@media print{.nm-bar{display:none}}
+</style>
+</head>
+<body>
+<nav class="nm-bar" aria-label="Noumensia"><span class="nm-bar__crumbs"><a class="nm-bar__brand" href="/"><img src="/images/logo/noumensia-icon-light.svg" alt="" aria-hidden="true">Noumensia</a><span class="nm-bar__sep" aria-hidden="true">/</span><a href="/ai-act/">Comprendre l'AI Act</a><span class="nm-bar__sep" aria-hidden="true">/</span><span class="nm-bar__here">Mécanique causale</span></span><span class="nm-bar__links"><a href="/ai-act/#outils">Tous les outils</a><a class="nm-bar__cta" href="/ai-act/#question">Poser une question</a></span></nav>
+
+<div class="wrap">
+<header>
+  <div>
+    <p class="eyebrow">Règlement (UE) 2024/1689 · diagramme causal non quantifié</p>
+    <h1>Mécanique causale de l'AI&nbsp;Act</h1>
+    <p class="sub">Non plus la structure du texte ni la procédure, mais ce qui cause quoi&nbsp;:
+      qu'est-ce qui fait qu'un déploiement d'IA en gestion des ressources humaines produit un
+      préjudice, se révèle non conforme, et finit sanctionné. Cliquez un concept pour remonter
+      toutes ses causes et descendre tous ses effets.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="st-n">0</b><span>concepts</span></div>
+    <div class="stat"><b id="st-a">0</b><span>relations causales</span></div>
+    <div class="stat"><b>9</b><span>couches</span></div>
+  </div>
+</header>
+
+<div class="split">
+  <aside class="panel rail">
+    <div class="rail-scroll">
+      <div id="detail" class="detail" hidden></div>
+      <div id="browse">
+        <p class="sec-title">Lecture</p>
+        <div class="legend">
+          <div><span class="sw s"></span><span>Le concept sélectionné.</span></div>
+          <div><span class="sw c"></span><span>Ses <b style="color:var(--cause)">causes</b> —
+            tout ce qui, en amont, contribue à le produire.</span></div>
+          <div><span class="sw e"></span><span>Ses <b style="color:var(--effet)">effets</b> —
+            tout ce qu'il produit en aval.</span></div>
+        </div>
+        <p class="sec-title">Remonter les causes de…</p>
+        <div class="presets" id="presets"></div>
+        <p class="sec-title">Concepts par couche</p>
+        <div class="lay" id="lay"></div>
+      </div>
+    </div>
+  </aside>
+  <div class="panel graphwrap">
+    <div class="toolbar">
+      <button class="tbtn" id="btn-fit">Vue d'ensemble</button>
+      <button class="tbtn" id="btn-reset">Désélectionner</button>
+    </div>
+    <svg id="stage" role="img" aria-label="Diagramme causal de la conformité à l'AI Act"></svg>
+    <div class="hint">Glisser pour déplacer · molette pour zoomer · les libellés apparaissent en zoomant</div>
+  </div>
+</div>
+
+<p class="note"><b>Une boucle déroulée dans le temps.</b> Le considérant&nbsp;67 décrit un mécanisme
+cyclique&nbsp;: les biais produisent des décisions, ces décisions deviennent l'historique qui
+entraîne la version suivante, «&nbsp;en particulier lorsque les données de sortie influencent les
+entrées pour les opérations futures (boucles de rétroaction)&nbsp;». Un graphe acyclique ne peut pas
+représenter une boucle. Elle est donc déroulée&nbsp;: les effets de la génération&nbsp;t alimentent
+le nœud terminal «&nbsp;Amplification du biais à la génération suivante&nbsp;», sans arc de retour.
+C'est un choix de modélisation assumé, pas un oubli — sans lui, le graphe ne pourrait plus être
+quantifié en réseau bayésien.</p>
+
+<p class="note" style="border-left-color:var(--effet)"><b>Trois nœuds à surveiller avant
+quantification.</b> «&nbsp;Préjudice pour la personne&nbsp;», «&nbsp;Probabilité de détection&nbsp;»
+et «&nbsp;Coût de mise en conformité&nbsp;» ont chacun cinq parents. Une table de probabilité à cinq
+parents binaires compte 32&nbsp;lignes&nbsp;: c'est le seuil au-delà duquel les paramètres cessent
+d'être défendables un par un. Les artefacts&nbsp;5 à&nbsp;7 les traiteront par divorce — une
+variable latente intermédiaire nommée sémantiquement — ou par une paramétrisation par formule.</p>
+
+<footer>Causal Semantic Diagram — fondation structurelle des réseaux quantifiés. Fichier BayesiaLab
+associé&nbsp;: <code>03_AI_Act_Causal_Semantic_Diagram.json</code>. Sources citées nœud par nœud
+dans les définitions.</footer>
+</div>
+
+<script>
+const DATA = {"nodes":[{"id":"0","label":"Usage relevant de l'annexe III, point 4","nodeCategory":"STANDARD","shortDescription":"Usage relevant de l'annexe III, point 4","longDescription":"Le système sert au recrutement, à la sélection, aux décisions sur la relation de travail, à l'attribution de tâches ou au suivi de performance. Variable de contexte qui déclenche tout le régime haut risque (art. 6, §2). Racine causale du diagramme : sans elle, la plupart des chaînes ci-dessous restent sans effet juridique.","position":{"x":190,"y":70},"color":"#3498DB","classes":["Contexte et modérateurs"],"nodeTypeDescriptionId":"1000000001"},{"id":"1","label":"Données RH historiques utilisées pour l'entraînement","nodeCategory":"STANDARD","shortDescription":"Données RH historiques utilisées pour l'entraînement","longDescription":"Considérant 67 : « des biais peuvent être inhérents à des jeux de données sous-jacents, en particulier lorsque des données historiques sont utilisées ». En RH, les historiques de recrutement, d'évaluation et de promotion encodent les décisions passées de l'organisation, y compris leurs asymétries.","position":{"x":465,"y":70},"color":"#3498DB","classes":["Contexte et modérateurs"],"nodeTypeDescriptionId":"1000000001"},{"id":"2","label":"Taille de la population concernée","nodeCategory":"STANDARD","shortDescription":"Taille de la population concernée","longDescription":"Art. 7, §2, f) : « l'ampleur potentielle d'un tel préjudice, notamment son intensité et sa capacité d'affecter plusieurs personnes ». Modérateur de gravité : un même taux d'erreur produit un préjudice agrégé proportionnel au volume de candidatures ou de salariés traités.","position":{"x":740,"y":70},"color":"#3498DB","classes":["Contexte et modérateurs"],"nodeTypeDescriptionId":"1000000001"},{"id":"3","label":"Déséquilibre de pouvoir avec la personne concernée","nodeCategory":"STANDARD","shortDescription":"Déséquilibre de pouvoir avec la personne concernée","longDescription":"Art. 7, §2, h) : « la mesure dans laquelle il existe un déséquilibre de pouvoir, ou les personnes se trouvent dans une situation vulnérable par rapport au déployeur ». La relation de travail et la relation candidat-employeur en sont les archétypes : le règlement les traite explicitement comme aggravantes.","position":{"x":1015,"y":70},"color":"#3498DB","classes":["Contexte et modérateurs"],"nodeTypeDescriptionId":"1000000001"},{"id":"4","label":"Réversibilité de la décision","nodeCategory":"STANDARD","shortDescription":"Réversibilité de la décision","longDescription":"Art. 7, §2, i) : les résultats ayant une incidence négative sur les droits fondamentaux « ne devraient pas être considérés comme facilement corrigibles ou réversibles ». Un rejet de candidature n'est pas rattrapable : la personne n'est jamais informée de son existence.","position":{"x":1290,"y":70},"color":"#3498DB","classes":["Contexte et modérateurs"],"nodeTypeDescriptionId":"1000000001"},{"id":"5","label":"Statut de PME du fournisseur","nodeCategory":"STANDARD","shortDescription":"Statut de PME du fournisseur","longDescription":"Art. 11, §1 (documentation simplifiée), art. 17, §2 (SGQ proportionné), art. 62 (accès prioritaire aux bacs à sable), art. 99, §6 (plafond d'amende au montant le plus FAIBLE). Module à la fois la capacité d'investissement et l'exposition financière.","position":{"x":1565,"y":70},"color":"#3498DB","classes":["Contexte et modérateurs"],"nodeTypeDescriptionId":"1000000001"},{"id":"6","label":"Disponibilité de normes harmonisées","nodeCategory":"STANDARD","shortDescription":"Disponibilité de normes harmonisées","longDescription":"Art. 40 et 42. Leur absence prive le fournisseur de la présomption de conformité et l'oblige à démontrer autrement l'adéquation de ses choix. Le retard des travaux CEN-CENELEC est la raison officielle du report du régime haut risque par le règlement Omnibus (UE) 2026/1744. ⚠ Cette dernière information est extérieure au PDF de 2024.","position":{"x":1840,"y":70},"color":"#3498DB","classes":["Contexte et modérateurs"],"nodeTypeDescriptionId":"1000000001"},{"id":"7","label":"Échéance d'application au 2 décembre 2027","nodeCategory":"STANDARD","shortDescription":"Échéance d'application au 2 décembre 2027","longDescription":"Date d'entrée en application du régime haut risque de l'annexe III après report par le règlement Omnibus. Modérateur temporel : avant cette date, les chaînes « détection → exécution » du diagramme ne produisent pas d'amende au titre du haut risque, mais les art. 5, 50 et le RGPD restent pleinement opposables. ⚠ Hors PDF de 2024.","position":{"x":2115,"y":70},"color":"#3498DB","classes":["Contexte et modérateurs"],"nodeTypeDescriptionId":"1000000001"},{"id":"8","label":"Maturité du système de gestion des risques","nodeCategory":"STANDARD","shortDescription":"Maturité du système de gestion des risques","longDescription":"Art. 9. Processus itératif et continu : identification des risques en usage conforme ET en mauvaise utilisation raisonnablement prévisible, estimation, mesures d'atténuation, essais. Levier amont : il conditionne la détection des autres défauts avant mise sur le marché.","position":{"x":140,"y":238},"color":"#F39C12","classes":["Leviers de conception — fournisseur"],"nodeTypeDescriptionId":"1000000001"},{"id":"9","label":"Investissement en gouvernance des données","nodeCategory":"STANDARD","shortDescription":"Investissement en gouvernance des données","longDescription":"Art. 10. Pertinence, représentativité, exhaustivité « dans toute la mesure du possible », examen des biais, propriétés statistiques adaptées aux groupes visés. Le §5 autorise, sous garanties, le traitement de catégories particulières de données à seule fin de détection et correction des biais — sans cette faculté, mesurer un biais serait souvent illicite.","position":{"x":415,"y":238},"color":"#F39C12","classes":["Leviers de conception — fournisseur"],"nodeTypeDescriptionId":"1000000001"},{"id":"10","label":"Effort de test et de validation","nodeCategory":"STANDARD","shortDescription":"Effort de test et de validation","longDescription":"Art. 9, §6 à §8 et art. 15. Essais tout au long du développement et avant mise sur le marché, au regard de métriques et de seuils probabilistes définis et adaptés à la destination.","position":{"x":690,"y":238},"color":"#F39C12","classes":["Leviers de conception — fournisseur"],"nodeTypeDescriptionId":"1000000001"},{"id":"11","label":"Conception permettant le contrôle humain","nodeCategory":"STANDARD","shortDescription":"Conception permettant le contrôle humain","longDescription":"Art. 14. Interfaces homme-machine appropriées permettant de comprendre les capacités et les limites, d'interpréter la sortie, de décider de ne pas l'utiliser, d'interrompre. Le §4, b) impose explicitement de permettre à la personne de « rester consciente d'une éventuelle tendance à se fier automatiquement ou excessivement aux sorties ».","position":{"x":965,"y":238},"color":"#F39C12","classes":["Leviers de conception — fournisseur"],"nodeTypeDescriptionId":"1000000001"},{"id":"12","label":"Investissement en robustesse et cybersécurité","nodeCategory":"STANDARD","shortDescription":"Investissement en robustesse et cybersécurité","longDescription":"Art. 15. Exactitude, robustesse et cybersécurité constantes sur le cycle de vie ; résilience aux erreurs, défaillances et attaques spécifiques à l'IA — empoisonnement des données, exemples adverses, extraction de modèle.","position":{"x":1240,"y":238},"color":"#F39C12","classes":["Leviers de conception — fournisseur"],"nodeTypeDescriptionId":"1000000001"},{"id":"13","label":"Complétude de la documentation technique","nodeCategory":"STANDARD","shortDescription":"Complétude de la documentation technique","longDescription":"Art. 11 et annexe IV. Levier à double effet : elle conditionne la démontrabilité de la conformité, et elle est la seule preuve disponible en cas de contrôle. Une conformité réelle mais non documentée est, devant l'autorité, une non-conformité.","position":{"x":1515,"y":238},"color":"#F39C12","classes":["Leviers de conception — fournisseur"],"nodeTypeDescriptionId":"1000000001"},{"id":"14","label":"Qualité de la notice d'utilisation","nodeCategory":"STANDARD","shortDescription":"Qualité de la notice d'utilisation","longDescription":"Art. 13. Caractéristiques, capacités et surtout LIMITES de performance, circonstances pouvant conduire à des risques, niveaux d'exactitude par groupe de personnes. C'est le canal par lequel la connaissance du fournisseur atteint le déployeur : une notice pauvre rend le contrôle humain de l'art. 26 structurellement impossible.","position":{"x":1790,"y":238},"color":"#F39C12","classes":["Leviers de conception — fournisseur"],"nodeTypeDescriptionId":"1000000001"},{"id":"15","label":"Système de gestion de la qualité","nodeCategory":"STANDARD","shortDescription":"Système de gestion de la qualité","longDescription":"Art. 17. Politiques et procédures écrites couvrant conception, développement, tests, données, risques, surveillance après commercialisation et signalement d'incidents. Levier organisationnel qui rend les autres leviers répétables plutôt qu'accidentels.","position":{"x":2065,"y":238},"color":"#F39C12","classes":["Leviers de conception — fournisseur"],"nodeTypeDescriptionId":"1000000001"},{"id":"16","label":"Biais différentiel entre groupes","nodeCategory":"STANDARD","shortDescription":"Biais différentiel entre groupes","longDescription":"Écart systématique de performance ou de sélection entre groupes de personnes. Considérant 67 : les biais « ont tendance à se renforcer progressivement et ainsi à perpétuer et à amplifier les discriminations existantes, en particulier pour les personnes appartenant à certains groupes vulnérables ». Revue systématique du phénomène en contexte RH : Köchling & Wehner (2020), Business Research 13(3).","position":{"x":290,"y":406},"color":"#35B779","classes":["Propriétés du système"],"nodeTypeDescriptionId":"1000000001"},{"id":"17","label":"Exactitude en usage réel","nodeCategory":"STANDARD","shortDescription":"Exactitude en usage réel","longDescription":"Art. 15, §1 et §3. Distincte de l'exactitude en test : elle intègre l'écart entre la population d'entraînement et la population réellement traitée. Les niveaux d'exactitude doivent être déclarés dans la notice.","position":{"x":590,"y":406},"color":"#35B779","classes":["Propriétés du système"],"nodeTypeDescriptionId":"1000000001"},{"id":"18","label":"Robustesse aux erreurs, défaillances et attaques","nodeCategory":"STANDARD","shortDescription":"Robustesse aux erreurs, défaillances et attaques","longDescription":"Art. 15, §4 et §5. Résilience aux incohérences de l'environnement, aux défaillances, et aux tentatives d'altération des données d'entraînement, des entrées ou du modèle.","position":{"x":890,"y":406},"color":"#35B779","classes":["Propriétés du système"],"nodeTypeDescriptionId":"1000000001"},{"id":"19","label":"Opacité de la sortie","nodeCategory":"STANDARD","shortDescription":"Opacité de la sortie","longDescription":"Absence d'éléments permettant à un humain de comprendre pourquoi le système a produit cette sortie-là. Le règlement ne l'interdit pas mais la contraint indirectement : art. 13 (transparence envers le déployeur), art. 14 (interprétabilité de la sortie), art. 86 (droit à l'explication de la personne).","position":{"x":1190,"y":406},"color":"#35B779","classes":["Propriétés du système"],"nodeTypeDescriptionId":"1000000001"},{"id":"20","label":"Dérive du modèle après mise en service","nodeCategory":"STANDARD","shortDescription":"Dérive du modèle après mise en service","longDescription":"Écart croissant entre les conditions d'entraînement et les conditions d'usage. Traité par l'art. 72 (surveillance après commercialisation) et l'art. 15, §4 sur les systèmes qui continuent d'apprendre — dont les boucles de rétroaction doivent être traitées par des mesures d'atténuation appropriées.","position":{"x":1490,"y":406},"color":"#35B779","classes":["Propriétés du système"],"nodeTypeDescriptionId":"1000000001"},{"id":"21","label":"Qualité intrinsèque du système","nodeCategory":"STANDARD","shortDescription":"Qualité intrinsèque du système","longDescription":"Nœud de divorce, au sens des réseaux bayésiens : il agrège exactitude, robustesse et absence de biais en un construit unique, pour éviter que les couches aval aient chacune trois parents et pour rendre les tables de probabilité maîtrisables lors de la quantification (artefacts 5 à 7). Ce n'est pas une notion du règlement.","position":{"x":1815,"y":406},"color":"#35B779","classes":["Propriétés du système"],"nodeTypeDescriptionId":"1000000001"},{"id":"22","label":"Coût de mise en conformité","nodeCategory":"STANDARD","shortDescription":"Coût de mise en conformité","longDescription":"Somme des investissements des couches amont : gouvernance des données, tests, documentation, SGQ, évaluation de la conformité, enregistrement, surveillance. Modéré par le statut PME (régimes simplifiés des art. 11, §1 et 17, §2) et par l'existence de normes harmonisées, qui transforment un travail de démonstration en travail de conformité à un référentiel.","position":{"x":2165,"y":406},"color":"#7F8C8D","classes":["Exécution et conséquences"],"nodeTypeDescriptionId":"1000000001"},{"id":"23","label":"Formation et compétence des contrôleurs humains","nodeCategory":"STANDARD","shortDescription":"Formation et compétence des contrôleurs humains","longDescription":"Art. 26, §2. Le déployeur confie le contrôle humain à des personnes disposant des compétences, de la formation et de l'autorité nécessaires, ainsi que du soutien nécessaire. Se combine avec l'art. 4 sur la maîtrise de l'IA.","position":{"x":165,"y":574},"color":"#E67E22","classes":["Conditions de déploiement — déployeur"],"nodeTypeDescriptionId":"1000000001"},{"id":"24","label":"Autorité réelle du contrôleur sur la décision","nodeCategory":"STANDARD","shortDescription":"Autorité réelle du contrôleur sur la décision","longDescription":"Art. 26, §2, troisième condition, la plus souvent défaillante en pratique. Un contrôleur formé mais dépourvu du pouvoir de contredire la sortie du système — parce que la contredire coûte du temps, se justifie devant sa hiérarchie ou contrarie un objectif de productivité — ne satisfait pas à l'article.","position":{"x":440,"y":574},"color":"#E67E22","classes":["Conditions de déploiement — déployeur"],"nodeTypeDescriptionId":"1000000001"},{"id":"25","label":"Pertinence des données d'entrée fournies par le déployeur","nodeCategory":"STANDARD","shortDescription":"Pertinence des données d'entrée fournies par le déployeur","longDescription":"Art. 26, §4. Le déployeur veille à ce que les données d'entrée sous son contrôle soient pertinentes et suffisamment représentatives au regard de la destination. En RH : référentiels de poste, historiques internes, critères de tri paramétrés localement.","position":{"x":715,"y":574},"color":"#E67E22","classes":["Conditions de déploiement — déployeur"],"nodeTypeDescriptionId":"1000000001"},{"id":"26","label":"Usage conforme à la destination déclarée","nodeCategory":"STANDARD","shortDescription":"Usage conforme à la destination déclarée","longDescription":"Art. 26, §1 et art. 3, 12). L'écart le plus fréquent n'est pas technique mais fonctionnel : un outil conçu pour hiérarchiser des candidatures utilisé pour éliminer automatiquement, un outil d'aide à l'évaluation utilisé pour justifier une rupture. Un tel écart peut aussi requalifier le déployeur en fournisseur (art. 25, §1, c).","position":{"x":990,"y":574},"color":"#E67E22","classes":["Conditions de déploiement — déployeur"],"nodeTypeDescriptionId":"1000000001"},{"id":"27","label":"Information des représentants et des travailleurs","nodeCategory":"STANDARD","shortDescription":"Information des représentants et des travailleurs","longDescription":"Art. 26, §7, avant mise en service sur le lieu de travail, selon les règles et pratiques nationales — en France, articulation avec la consultation du CSE. L'art. 2, §11 réserve expressément les dispositions nationales et conventionnelles plus favorables.","position":{"x":1265,"y":574},"color":"#E67E22","classes":["Conditions de déploiement — déployeur"],"nodeTypeDescriptionId":"1000000001"},{"id":"28","label":"Information des personnes soumises au système","nodeCategory":"STANDARD","shortDescription":"Information des personnes soumises au système","longDescription":"Art. 26, §11. Condition pratique de l'exercice du droit à l'explication de l'art. 86 : une personne qui ignore qu'un système a été utilisé ne demandera jamais d'explication.","position":{"x":1540,"y":574},"color":"#E67E22","classes":["Conditions de déploiement — déployeur"],"nodeTypeDescriptionId":"1000000001"},{"id":"29","label":"Conservation et exploitation des journaux","nodeCategory":"STANDARD","shortDescription":"Conservation et exploitation des journaux","longDescription":"Art. 26, §6 (au moins six mois) et art. 12. Condition de possibilité de toute reconstitution a posteriori : sans journaux, ni l'organisation ni l'autorité ne peuvent établir ce qui s'est passé.","position":{"x":1815,"y":574},"color":"#E67E22","classes":["Conditions de déploiement — déployeur"],"nodeTypeDescriptionId":"1000000001"},{"id":"30","label":"Biais d'automatisation","nodeCategory":"STANDARD","shortDescription":"Biais d'automatisation","longDescription":"Tendance de l'opérateur humain à se fier automatiquement ou excessivement à la sortie du système. Le règlement la nomme expressément à l'art. 14, §4, b) et impose de concevoir le système pour que la personne en reste consciente — « en particulier pour les systèmes d'IA à haut risque utilisés pour fournir des informations ou des recommandations en vue de la prise de décision par des personnes physiques ». C'est le mécanisme qui vide le contrôle humain de sa substance sans qu'aucune procédure ne soit formellement violée.","position":{"x":340,"y":742},"color":"#FDE725","classes":["Mécanismes intermédiaires"],"nodeTypeDescriptionId":"1000000001"},{"id":"31","label":"Contrôle humain effectif","nodeCategory":"STANDARD","shortDescription":"Contrôle humain effectif","longDescription":"Nœud de divorce agrégeant la conception (art. 14), la compétence et la formation (art. 26, §2), l'autorité réelle du contrôleur, et le biais d'automatisation. « Effectif » signifie ici : la personne a les moyens ET le pouvoir de contredire la sortie, et le fait quand c'est justifié. Distinguer du contrôle humain formel — une case « validé par un manager » dans un workflow n'est pas un contrôle effectif.","position":{"x":890,"y":742},"color":"#FDE725","classes":["Mécanismes intermédiaires"],"nodeTypeDescriptionId":"1000000001"},{"id":"32","label":"Adéquation entre le système et le contexte réel d'usage","nodeCategory":"STANDARD","shortDescription":"Adéquation entre le système et le contexte réel d'usage","longDescription":"Écart entre la destination déclarée par le fournisseur (art. 3, 12) et l'usage effectif, combiné à l'écart entre la population d'entraînement et la population traitée. Agrège la pertinence des données d'entrée et le respect du périmètre d'usage.","position":{"x":1440,"y":742},"color":"#FDE725","classes":["Mécanismes intermédiaires"],"nodeTypeDescriptionId":"1000000001"},{"id":"33","label":"Décision individuelle erronée","nodeCategory":"STANDARD","shortDescription":"Décision individuelle erronée","longDescription":"Sortie du système conduisant à une décision que l'organisation n'aurait pas prise si elle avait disposé d'une évaluation correcte : rejet d'une candidature pertinente, évaluation de performance fausse, affectation inadaptée.","position":{"x":315,"y":910},"color":"#E74C3C","classes":["Effets sur les personnes"],"nodeTypeDescriptionId":"1000000001"},{"id":"34","label":"Discrimination indirecte","nodeCategory":"STANDARD","shortDescription":"Discrimination indirecte","longDescription":"Traitement défavorable systématique d'un groupe, sans intention et souvent sans variable sensible dans le modèle, par le jeu de variables corrélées. Considérant 67 : les biais « perpétuent et amplifient les discriminations existantes ». Relève simultanément du règlement (art. 10, §2, f et g) et du droit de la non-discrimination, qui a ses propres sanctions.","position":{"x":615,"y":910},"color":"#E74C3C","classes":["Effets sur les personnes"],"nodeTypeDescriptionId":"1000000001"},{"id":"35","label":"Atteinte aux droits fondamentaux","nodeCategory":"STANDARD","shortDescription":"Atteinte aux droits fondamentaux","longDescription":"Art. 1er et considérant 1er : dignité, non-discrimination, vie privée, protection des données, droit à un recours effectif. C'est la catégorie que vise l'art. 27 (analyse d'impact) et que l'art. 3, 49, c) retient comme critère d'incident grave.","position":{"x":915,"y":910},"color":"#E74C3C","classes":["Effets sur les personnes"],"nodeTypeDescriptionId":"1000000001"},{"id":"36","label":"Préjudice pour la personne concernée","nodeCategory":"STANDARD","shortDescription":"Préjudice pour la personne concernée","longDescription":"Matérialisation individuelle : non-recrutement, non-promotion, rupture du contrat, perte de revenu, atteinte à la réputation professionnelle. Modéré par la réversibilité de la décision et par le déséquilibre de pouvoir (art. 7, §2, h et i).","position":{"x":1215,"y":910},"color":"#E74C3C","classes":["Effets sur les personnes"],"nodeTypeDescriptionId":"1000000001"},{"id":"37","label":"Incident grave au sens de l'article 3, point 49","nodeCategory":"STANDARD","shortDescription":"Incident grave au sens de l'article 3, point 49","longDescription":"Décès ou atteinte grave à la santé ; perturbation grave et irréversible d'une infrastructure critique ; VIOLATION DES OBLIGATIONS DU DROIT DE L'UNION VISANT À PROTÉGER LES DROITS FONDAMENTAUX ; dommage grave aux biens ou à l'environnement. Le point c) est celui qui concerne la RH : un préjudice non corporel peut constituer un incident grave et déclencher l'art. 73.","position":{"x":1515,"y":910},"color":"#E74C3C","classes":["Effets sur les personnes"],"nodeTypeDescriptionId":"1000000001"},{"id":"38","label":"Amplification du biais à la génération suivante","nodeCategory":"STANDARD","shortDescription":"Amplification du biais à la génération suivante","longDescription":"Considérant 67 : « en particulier lorsque les données de sortie influencent les entrées pour les opérations futures (boucles de rétroaction) ». Les décisions prises avec le système deviennent l'historique qui entraîne la version suivante. Le mécanisme réel est CYCLIQUE ; il est ici déroulé dans le temps — les effets de la génération t alimentent ce nœud terminal, qui représente l'état des données à t+1. Aucun arc de retour n'est tracé, faute de quoi le graphe cesserait d'être un DAG et ne pourrait plus être quantifié.","position":{"x":1840,"y":910},"color":"#E74C3C","classes":["Effets sur les personnes"],"nodeTypeDescriptionId":"1000000001"},{"id":"39","label":"Demande d'explication par la personne concernée","nodeCategory":"STANDARD","shortDescription":"Demande d'explication par la personne concernée","longDescription":"Art. 86. Droit d'obtenir du déployeur des explications claires et pertinentes sur le rôle du système dans une décision produisant des effets juridiques ou affectant significativement de façon défavorable. Premier canal de révélation dans un contexte RH.","position":{"x":240,"y":1078},"color":"#1ABC9C","classes":["Détection"],"nodeTypeDescriptionId":"1000000001"},{"id":"40","label":"Réclamation auprès de l'autorité de surveillance","nodeCategory":"STANDARD","shortDescription":"Réclamation auprès de l'autorité de surveillance","longDescription":"Art. 85. Ouverte à toute personne ayant un motif de considérer qu'il y a violation du règlement. Sans préjudice des autres recours administratifs ou juridictionnels.","position":{"x":540,"y":1078},"color":"#1ABC9C","classes":["Détection"],"nodeTypeDescriptionId":"1000000001"},{"id":"41","label":"Signalement interne et lanceurs d'alerte","nodeCategory":"STANDARD","shortDescription":"Signalement interne et lanceurs d'alerte","longDescription":"Art. 87 : le signalement des violations du règlement relève de la directive (UE) 2019/1937. Canal souvent plus rapide que le contrôle externe, en particulier quand les contrôleurs humains constatent l'écart entre le contrôle formel et le contrôle réel.","position":{"x":840,"y":1078},"color":"#1ABC9C","classes":["Détection"],"nodeTypeDescriptionId":"1000000001"},{"id":"42","label":"Surveillance après commercialisation et signalement d'incident","nodeCategory":"STANDARD","shortDescription":"Surveillance après commercialisation et signalement d'incident","longDescription":"Art. 72 (système documenté de collecte et d'analyse des données d'usage) et art. 73 (signalement d'incident grave sous quinze jours, deux jours en cas d'infraction de grande ampleur ou de décès). Canal d'auto-révélation.","position":{"x":1140,"y":1078},"color":"#1ABC9C","classes":["Détection"],"nodeTypeDescriptionId":"1000000001"},{"id":"43","label":"Probabilité de détection par l'autorité","nodeCategory":"STANDARD","shortDescription":"Probabilité de détection par l'autorité","longDescription":"Nœud de divorce agrégeant les canaux de révélation, modéré par les pouvoirs d'accès de l'art. 74 — y compris l'accès au code source lorsqu'il est nécessaire (§13) — et par l'existence de journaux exploitables. Sans journaux, la détection existe mais la démonstration est fragile pour les deux parties.","position":{"x":1440,"y":1078},"color":"#1ABC9C","classes":["Détection"],"nodeTypeDescriptionId":"1000000001"},{"id":"44","label":"Défiance des salariés et conflit social","nodeCategory":"STANDARD","shortDescription":"Défiance des salariés et conflit social","longDescription":"Effet organisationnel distinct du contentieux : contestation collective, dégradation du climat, refus d'usage. Déclenché plus par le défaut d'information préalable (art. 26, §7) que par la qualité technique du système. C'est le canal par lequel un déploiement techniquement conforme peut néanmoins échouer.","position":{"x":1740,"y":1078},"color":"#7F8C8D","classes":["Exécution et conséquences"],"nodeTypeDescriptionId":"1000000001"},{"id":"45","label":"Constat de non-conformité","nodeCategory":"STANDARD","shortDescription":"Constat de non-conformité","longDescription":"Art. 79 à 83. L'autorité de surveillance du marché évalue le système, constate le cas échéant la non-conformité et exige des mesures correctives. L'art. 80 permet de contester la qualification « non haut risque » retenue par un fournisseur au titre de l'art. 6, §3.","position":{"x":390,"y":1246},"color":"#8E44AD","classes":["Exécution et conséquences"],"nodeTypeDescriptionId":"1000000001"},{"id":"46","label":"Mesure corrective, retrait ou rappel","nodeCategory":"STANDARD","shortDescription":"Mesure corrective, retrait ou rappel","longDescription":"Art. 79, §2 et art. 20. Retrait du marché, rappel, mise en conformité dans un délai imparti. Conséquence opérationnelle souvent plus lourde que l'amende pour un éditeur : le produit s'arrête.","position":{"x":840,"y":1246},"color":"#8E44AD","classes":["Exécution et conséquences"],"nodeTypeDescriptionId":"1000000001"},{"id":"47","label":"Amende administrative","nodeCategory":"STANDARD","shortDescription":"Amende administrative","longDescription":"Art. 99. Trois plafonds : 35 M€ ou 7 % du CA mondial pour les pratiques interdites de l'art. 5 (§3) ; 15 M€ ou 3 % pour les obligations des opérateurs et l'art. 50 (§4) ; 7,5 M€ ou 1 % pour les informations inexactes (§5). Le §7 liste les facteurs de modulation : gravité, nombre de personnes touchées, taille de l'opérateur, degré de coopération, caractère intentionnel ou négligent, mesures d'atténuation prises. Pour les PME, le montant le plus FAIBLE s'applique (§6).","position":{"x":1290,"y":1246},"color":"#8E44AD","classes":["Exécution et conséquences"],"nodeTypeDescriptionId":"1000000001"},{"id":"48","label":"Dommage réputationnel","nodeCategory":"STANDARD","shortDescription":"Dommage réputationnel","longDescription":"Effet non prévu par le règlement mais réel : la base de données de l'UE (art. 71) est publique pour l'essentiel, les rapports annuels de la Commission (art. 5, §7) le sont aussi, et un contentieux RH est par nature public. Souvent le poste de coût dominant devant l'amende pour une organisation de taille moyenne.","position":{"x":1740,"y":1246},"color":"#7F8C8D","classes":["Exécution et conséquences"],"nodeTypeDescriptionId":"1000000001"},{"id":"49","label":"Arrêt ou reconception du système","nodeCategory":"STANDARD","shortDescription":"Arrêt ou reconception du système","longDescription":"Issue terminale : suspension de l'usage (art. 26, §5, obligatoire quand le déployeur identifie un risque), retrait, ou reconception. Point de bouclage économique : c'est ce que les leviers de la couche 1 servent à éviter.","position":{"x":940,"y":1414},"color":"#7F8C8D","classes":["Exécution et conséquences"],"nodeTypeDescriptionId":"1000000001"}],"arcs":[{"thickness":1.0,"sourceNodeId":"5","targetNodeId":"9","description":"limite la capacité d'investissement en (art. 11, §1)","color":null},{"thickness":1.0,"sourceNodeId":"5","targetNodeId":"15","description":"allège le régime de (art. 17, §2)","color":null},{"thickness":1.5,"sourceNodeId":"6","targetNodeId":"13","description":"structure et allège la (art. 40 et 42)","color":null},{"thickness":1.0,"sourceNodeId":"6","targetNodeId":"10","description":"fournit les métriques de référence pour l'","color":null},{"thickness":2.0,"sourceNodeId":"1","targetNodeId":"16","description":"introduit un (considérant 67)","color":null},{"thickness":1.5,"sourceNodeId":"0","targetNodeId":"3","description":"implique un","color":null},{"thickness":2.0,"sourceNodeId":"9","targetNodeId":"16","description":"réduit le (art. 10, §2, f et g)","color":null},{"thickness":1.5,"sourceNodeId":"9","targetNodeId":"17","description":"améliore l'","color":null},{"thickness":1.5,"sourceNodeId":"10","targetNodeId":"17","description":"améliore l' (art. 15, §1)","color":null},{"thickness":1.5,"sourceNodeId":"10","targetNodeId":"16","description":"révèle le","color":null},{"thickness":2.0,"sourceNodeId":"12","targetNodeId":"18","description":"améliore la (art. 15, §4)","color":null},{"thickness":1.5,"sourceNodeId":"8","targetNodeId":"10","description":"commande l'effort de (art. 9, §6)","color":null},{"thickness":1.5,"sourceNodeId":"8","targetNodeId":"9","description":"commande l'effort de (art. 9, §2)","color":null},{"thickness":1.0,"sourceNodeId":"15","targetNodeId":"13","description":"rend répétable la (art. 17, §1, e)","color":null},{"thickness":1.0,"sourceNodeId":"15","targetNodeId":"8","description":"encadre le (art. 17, §1, g)","color":null},{"thickness":1.5,"sourceNodeId":"11","targetNodeId":"19","description":"réduit l' (art. 14, §4, c)","color":null},{"thickness":2.0,"sourceNodeId":"16","targetNodeId":"21","description":"dégrade la","color":null},{"thickness":2.0,"sourceNodeId":"17","targetNodeId":"21","description":"détermine la","color":null},{"thickness":1.5,"sourceNodeId":"18","targetNodeId":"21","description":"détermine la","color":null},{"thickness":1.5,"sourceNodeId":"9","targetNodeId":"22","description":"alourdit le","color":null},{"thickness":1.0,"sourceNodeId":"10","targetNodeId":"22","description":"alourdit le","color":null},{"thickness":1.0,"sourceNodeId":"13","targetNodeId":"22","description":"alourdit le","color":null},{"thickness":1.5,"sourceNodeId":"15","targetNodeId":"22","description":"alourdit le","color":null},{"thickness":1.0,"sourceNodeId":"5","targetNodeId":"22","description":"rend plus lourd, relativement, le","color":null},{"thickness":2.0,"sourceNodeId":"14","targetNodeId":"26","description":"conditionne le respect du (art. 13 et 26, §1)","color":null},{"thickness":1.5,"sourceNodeId":"14","targetNodeId":"23","description":"alimente la (art. 13, §3, b)","color":null},{"thickness":1.0,"sourceNodeId":"14","targetNodeId":"25","description":"précise les exigences de","color":null},{"thickness":2.0,"sourceNodeId":"11","targetNodeId":"30","description":"atténue le (art. 14, §4, b)","color":null},{"thickness":2.0,"sourceNodeId":"11","targetNodeId":"31","description":"rend possible le (art. 14)","color":null},{"thickness":1.5,"sourceNodeId":"19","targetNodeId":"30","description":"aggrave le","color":null},{"thickness":1.5,"sourceNodeId":"20","targetNodeId":"17","description":"dégrade dans le temps l'","color":null},{"thickness":1.0,"sourceNodeId":"8","targetNodeId":"20","description":"anticipe la (art. 9, §2, c)","color":null},{"thickness":2.0,"sourceNodeId":"23","targetNodeId":"31","description":"conditionne le (art. 26, §2)","color":null},{"thickness":2.0,"sourceNodeId":"24","targetNodeId":"31","description":"conditionne le (art. 26, §2)","color":null},{"thickness":2.0,"sourceNodeId":"30","targetNodeId":"31","description":"vide de sa substance le","color":null},{"thickness":2.0,"sourceNodeId":"25","targetNodeId":"32","description":"détermine l' (art. 26, §4)","color":null},{"thickness":2.0,"sourceNodeId":"26","targetNodeId":"32","description":"détermine l' (art. 26, §1)","color":null},{"thickness":2.0,"sourceNodeId":"21","targetNodeId":"33","description":"réduit la","color":null},{"thickness":2.0,"sourceNodeId":"31","targetNodeId":"33","description":"intercepte la","color":null},{"thickness":1.5,"sourceNodeId":"32","targetNodeId":"33","description":"réduit la","color":null},{"thickness":2.0,"sourceNodeId":"16","targetNodeId":"34","description":"produit une (considérant 67)","color":null},{"thickness":1.5,"sourceNodeId":"31","targetNodeId":"34","description":"peut intercepter la","color":null},{"thickness":2.0,"sourceNodeId":"33","targetNodeId":"36","description":"cause un","color":null},{"thickness":2.0,"sourceNodeId":"34","targetNodeId":"35","description":"constitue une","color":null},{"thickness":2.0,"sourceNodeId":"34","targetNodeId":"36","description":"cause un","color":null},{"thickness":1.5,"sourceNodeId":"3","targetNodeId":"36","description":"aggrave le (art. 7, §2, h)","color":null},{"thickness":1.5,"sourceNodeId":"4","targetNodeId":"36","description":"module la persistance du (art. 7, §2, i)","color":null},{"thickness":1.5,"sourceNodeId":"2","targetNodeId":"35","description":"amplifie l'échelle de l' (art. 7, §2, f)","color":null},{"thickness":2.0,"sourceNodeId":"35","targetNodeId":"37","description":"peut constituer un (art. 3, 49, c)","color":null},{"thickness":1.0,"sourceNodeId":"28","targetNodeId":"36","description":"n'empêche pas mais rend visible le","color":null},{"thickness":2.0,"sourceNodeId":"34","targetNodeId":"38","description":"alimente, via les décisions prises, l'","color":null},{"thickness":1.5,"sourceNodeId":"33","targetNodeId":"38","description":"alimente, via les décisions prises, l'","color":null},{"thickness":2.0,"sourceNodeId":"28","targetNodeId":"39","description":"rend possible la (art. 26, §11 et 86)","color":null},{"thickness":2.0,"sourceNodeId":"36","targetNodeId":"39","description":"motive la","color":null},{"thickness":1.5,"sourceNodeId":"36","targetNodeId":"40","description":"motive la (art. 85)","color":null},{"thickness":1.5,"sourceNodeId":"39","targetNodeId":"40","description":"précède souvent la","color":null},{"thickness":2.0,"sourceNodeId":"37","targetNodeId":"42","description":"déclenche le signalement au titre de la (art. 73)","color":null},{"thickness":1.0,"sourceNodeId":"31","targetNodeId":"41","description":"rend visible aux contrôleurs, donc favorise le","color":null},{"thickness":1.0,"sourceNodeId":"27","targetNodeId":"41","description":"ouvre le canal du (art. 26, §7)","color":null},{"thickness":1.5,"sourceNodeId":"39","targetNodeId":"43","description":"augmente la","color":null},{"thickness":1.5,"sourceNodeId":"40","targetNodeId":"43","description":"augmente la","color":null},{"thickness":1.5,"sourceNodeId":"41","targetNodeId":"43","description":"augmente la","color":null},{"thickness":1.5,"sourceNodeId":"42","targetNodeId":"43","description":"augmente la","color":null},{"thickness":1.5,"sourceNodeId":"29","targetNodeId":"43","description":"rend démontrable ce que révèle la (art. 26, §6)","color":null},{"thickness":2.0,"sourceNodeId":"27","targetNodeId":"44","description":"prévient la (art. 26, §7)","color":null},{"thickness":1.5,"sourceNodeId":"36","targetNodeId":"44","description":"alimente la","color":null},{"thickness":2.0,"sourceNodeId":"43","targetNodeId":"45","description":"conditionne le","color":null},{"thickness":2.0,"sourceNodeId":"13","targetNodeId":"45","description":"réduit le risque de (art. 11 et 16, k)","color":null},{"thickness":1.0,"sourceNodeId":"29","targetNodeId":"45","description":"réduit le risque de","color":null},{"thickness":2.0,"sourceNodeId":"45","targetNodeId":"46","description":"entraîne une (art. 79, §2)","color":null},{"thickness":2.0,"sourceNodeId":"45","targetNodeId":"47","description":"entraîne une (art. 99)","color":null},{"thickness":1.5,"sourceNodeId":"5","targetNodeId":"47","description":"plafonne l' (art. 99, §6)","color":null},{"thickness":1.5,"sourceNodeId":"2","targetNodeId":"47","description":"aggrave l' (art. 99, §7, a)","color":null},{"thickness":1.5,"sourceNodeId":"7","targetNodeId":"47","description":"diffère l'exigibilité de l'","color":null},{"thickness":1.5,"sourceNodeId":"45","targetNodeId":"48","description":"produit un","color":null},{"thickness":1.0,"sourceNodeId":"44","targetNodeId":"48","description":"alimente le","color":null},{"thickness":2.0,"sourceNodeId":"46","targetNodeId":"49","description":"impose l'","color":null},{"thickness":1.0,"sourceNodeId":"48","targetNodeId":"49","description":"peut précipiter l'","color":null}],"meta":{"0":{"layer":0,"cls":"Contexte et modérateurs"},"1":{"layer":0,"cls":"Contexte et modérateurs"},"2":{"layer":0,"cls":"Contexte et modérateurs"},"3":{"layer":0,"cls":"Contexte et modérateurs"},"4":{"layer":0,"cls":"Contexte et modérateurs"},"5":{"layer":0,"cls":"Contexte et modérateurs"},"6":{"layer":0,"cls":"Contexte et modérateurs"},"7":{"layer":0,"cls":"Contexte et modérateurs"},"8":{"layer":1,"cls":"Leviers de conception — fournisseur"},"9":{"layer":1,"cls":"Leviers de conception — fournisseur"},"10":{"layer":1,"cls":"Leviers de conception — fournisseur"},"11":{"layer":1,"cls":"Leviers de conception — fournisseur"},"12":{"layer":1,"cls":"Leviers de conception — fournisseur"},"13":{"layer":1,"cls":"Leviers de conception — fournisseur"},"14":{"layer":1,"cls":"Leviers de conception — fournisseur"},"15":{"layer":1,"cls":"Leviers de conception — fournisseur"},"16":{"layer":2,"cls":"Propriétés du système"},"17":{"layer":2,"cls":"Propriétés du système"},"18":{"layer":2,"cls":"Propriétés du système"},"19":{"layer":2,"cls":"Propriétés du système"},"20":{"layer":2,"cls":"Propriétés du système"},"21":{"layer":2,"cls":"Propriétés du système"},"22":{"layer":2,"cls":"Exécution et conséquences"},"23":{"layer":3,"cls":"Conditions de déploiement — déployeur"},"24":{"layer":3,"cls":"Conditions de déploiement — déployeur"},"25":{"layer":3,"cls":"Conditions de déploiement — déployeur"},"26":{"layer":3,"cls":"Conditions de déploiement — déployeur"},"27":{"layer":3,"cls":"Conditions de déploiement — déployeur"},"28":{"layer":3,"cls":"Conditions de déploiement — déployeur"},"29":{"layer":3,"cls":"Conditions de déploiement — déployeur"},"30":{"layer":4,"cls":"Mécanismes intermédiaires"},"31":{"layer":4,"cls":"Mécanismes intermédiaires"},"32":{"layer":4,"cls":"Mécanismes intermédiaires"},"33":{"layer":5,"cls":"Effets sur les personnes"},"34":{"layer":5,"cls":"Effets sur les personnes"},"35":{"layer":5,"cls":"Effets sur les personnes"},"36":{"layer":5,"cls":"Effets sur les personnes"},"37":{"layer":5,"cls":"Effets sur les personnes"},"38":{"layer":5,"cls":"Effets sur les personnes"},"39":{"layer":6,"cls":"Détection"},"40":{"layer":6,"cls":"Détection"},"41":{"layer":6,"cls":"Détection"},"42":{"layer":6,"cls":"Détection"},"43":{"layer":6,"cls":"Détection"},"44":{"layer":6,"cls":"Exécution et conséquences"},"45":{"layer":7,"cls":"Exécution et conséquences"},"46":{"layer":7,"cls":"Exécution et conséquences"},"47":{"layer":7,"cls":"Exécution et conséquences"},"48":{"layer":7,"cls":"Exécution et conséquences"},"49":{"layer":8,"cls":"Exécution et conséquences"}},"order":["CTX_ANX3","CTX_HIST","CTX_POP","CTX_POUVOIR","CTX_REVERS","CTX_PME","CTX_NORME","CTX_DELAI","LEV_SGR","LEV_DATA","LEV_TEST","LEV_DESIGN_CH","LEV_SECU","LEV_DOC","LEV_NOTICE","LEV_SGQ","SYS_BIAIS","SYS_EXACT","SYS_ROBUST","SYS_OPACITE","SYS_DERIVE","SYS_QUAL","ORG_COUT","DEP_FORM","DEP_AUTORITE","DEP_ENTREE","DEP_PERIM","DEP_INFO_TRAV","DEP_INFO_PERS","DEP_JOURNAUX","MEC_BIAIS_AUTO","MEC_CTRL_EFF","MEC_ADEQ","EFF_ERREUR","EFF_DISCRIM","EFF_ATTEINTE","EFF_PREJUDICE","EFF_INCIDENT","BOUCLE","DET_EXPLIC","DET_RECLAM","DET_ALERTE","DET_POSTMARKET","DET_PROBA","ORG_SOCIAL","EXE_CONSTAT","EXE_MESURE","EXE_AMENDE","ORG_REPUT","ORG_ARRET"],"layers":["Contexte et modérateurs","Leviers de conception","Propriétés du système","Conditions de déploiement","Mécanismes","Effets sur les personnes","Détection","Exécution","Conséquences pour l'organisation"],"classes":["Contexte et modérateurs","Leviers de conception — fournisseur","Propriétés du système","Conditions de déploiement — déployeur","Mécanismes intermédiaires","Effets sur les personnes","Détection","Exécution et conséquences"],"question":"Qu'est-ce qui, causalement, fait qu'un déploiement d'IA en gestion des ressources humaines produit un préjudice, se révèle non conforme, et finit sanctionné ?"};
+const nodes=DATA.nodes, arcs=DATA.arcs;
+const byId=new Map(nodes.map(n=>[n.id,n]));
+const byKey={}; DATA.order.forEach((k,i)=>byKey[k]=nodes[i]);
+const outA=new Map(), inA=new Map();
+nodes.forEach(n=>{outA.set(n.id,[]);inA.set(n.id,[]);});
+arcs.forEach(a=>{outA.get(a.sourceNodeId).push(a);inA.get(a.targetNodeId).push(a);});
+document.getElementById('st-n').textContent=nodes.length;
+document.getElementById('st-a').textContent=arcs.length;
+
+const CLS_COLOR={};
+nodes.forEach(n=>{CLS_COLOR[n.classes[0]]=n.color;});
+const CLASSES=DATA.classes;
+
+/* ---------- ancêtres / descendants ---------- */
+function walk(id,map){
+  const seen=new Set(), st=[id];
+  while(st.length){const u=st.pop();
+    (map.get(u)||[]).forEach(a=>{const v=(map===outA)?a.targetNodeId:a.sourceNodeId;
+      if(!seen.has(v)){seen.add(v);st.push(v);}});}
+  return seen;
+}
+
+/* ---------- svg ---------- */
+const NS='http://www.w3.org/2000/svg';
+const stage=document.getElementById('stage');
+const gRoot=document.createElementNS(NS,'g');
+const gCap=document.createElementNS(NS,'g'),gE=document.createElementNS(NS,'g'),
+      gN=document.createElementNS(NS,'g');
+gRoot.appendChild(gCap);gRoot.appendChild(gE);gRoot.appendChild(gN);stage.appendChild(gRoot);
+const NW=192,LH=12.5,PY=9;
+function wrapT(t,m){const w=t.split(' '),o=[];let c='';
+  for(const x of w){if((c+' '+x).trim().length>m){if(c)o.push(c);c=x;}else c=(c?c+' ':'')+x;}
+  if(c)o.push(c);return o.slice(0,3);}
+const GUT=300;
+const L={};
+nodes.forEach(n=>{const li=wrapT(n.label,27);
+  L[n.id]={x:GUT+n.position.x,y:n.position.y,w:NW,h:PY*2+li.length*LH,li};});
+DATA.layers.forEach((p,i)=>{
+  const y=70+i*168;
+  const t=document.createElementNS(NS,'text');
+  t.setAttribute('class','lay-cap');t.setAttribute('x',GUT-40);
+  t.setAttribute('text-anchor','end');t.setAttribute('fill','currentColor');
+  t.setAttribute('opacity','0.40');
+  wrapT(p,18).forEach((ln,j)=>{const ts=document.createElementNS(NS,'tspan');
+    ts.setAttribute('x',GUT-40);ts.setAttribute('y',y+14+j*29);ts.textContent=ln;t.appendChild(ts);});
+  gCap.appendChild(t);
+  const ln=document.createElementNS(NS,'line');
+  ln.setAttribute('x1',GUT-24);ln.setAttribute('x2',GUT-24);
+  ln.setAttribute('y1',y-8);ln.setAttribute('y2',y+46);
+  ln.setAttribute('stroke','currentColor');ln.setAttribute('opacity','0.16');
+  ln.setAttribute('stroke-width','2');gCap.appendChild(ln);
+});
+function clip(b,vx,vy){const hw=b.w/2+2,hh=b.h/2+2;
+  const tx=vx?hw/Math.abs(vx):Infinity,ty=vy?hh/Math.abs(vy):Infinity;
+  const t=Math.min(tx,ty);return{x:b.x+b.w/2+vx*t,y:b.y+b.h/2+vy*t};}
+const eEls=[];
+arcs.forEach(a=>{
+  const A=L[a.sourceNodeId],B=L[a.targetNodeId];
+  const dx=(B.x+B.w/2)-(A.x+A.w/2), dy=(B.y+B.h/2)-(A.y+A.h/2);
+  const s=clip(A,dx,dy), e=clip(B,-dx,-dy);
+  const mx=(s.x+e.x)/2+(e.y-s.y)*0.05, my=(s.y+e.y)/2-(e.x-s.x)*0.05;
+  const p=document.createElementNS(NS,'path');
+  p.setAttribute('d','M'+s.x+','+s.y+' Q'+mx+','+my+' '+e.x+','+e.y);
+  p.setAttribute('class','edge');p.setAttribute('stroke','currentColor');
+  p.setAttribute('opacity','0.19');
+  p.setAttribute('stroke-width',(0.9+(a.thickness||1)*0.5).toFixed(2));
+  gE.appendChild(p);
+  const lab=document.createElementNS(NS,'text');
+  lab.setAttribute('class','elab');lab.setAttribute('x',mx);lab.setAttribute('y',my-3);
+  lab.setAttribute('text-anchor','middle');lab.setAttribute('fill','currentColor');
+  lab.setAttribute('opacity','0');lab.textContent=a.description;
+  gE.appendChild(lab);
+  eEls.push({a,p,lab});
+});
+const nEls={};
+nodes.forEach(n=>{
+  const l=L[n.id];const g=document.createElementNS(NS,'g');
+  g.setAttribute('transform','translate('+l.x+','+l.y+')');g.style.cursor='pointer';
+  const r=document.createElementNS(NS,'rect');
+  r.setAttribute('width',l.w);r.setAttribute('height',l.h);r.setAttribute('rx','4');
+  r.setAttribute('fill',n.color);r.setAttribute('fill-opacity','0.14');
+  r.setAttribute('stroke',n.color);g.appendChild(r);
+  const b=document.createElementNS(NS,'rect');
+  b.setAttribute('width','3.5');b.setAttribute('height',l.h);b.setAttribute('rx','2');
+  b.setAttribute('fill',n.color);g.appendChild(b);
+  const t=document.createElementNS(NS,'text');t.setAttribute('class','n-label');
+  t.setAttribute('fill','currentColor');
+  l.li.forEach((s,i)=>{const ts=document.createElementNS(NS,'tspan');
+    ts.setAttribute('x','10');ts.setAttribute('y',PY+LH*(i+0.75));ts.textContent=s;t.appendChild(ts);});
+  g.appendChild(t);
+  g.addEventListener('click',ev=>{ev.stopPropagation();select(n.id);});
+  gN.appendChild(g);nEls[n.id]={g,r};
+});
+
+let vx=0,vy=0,vk=1;
+function av(){gRoot.setAttribute('transform','translate('+vx+','+vy+') scale('+vk+')');
+  gN.querySelectorAll('.n-label').forEach(t=>t.style.display=vk>0.44?'':'none');}
+function fit(){
+  let x0=0,y0=40,x1=-1e9,y1=-1e9;
+  nodes.forEach(n=>{const l=L[n.id];x1=Math.max(x1,l.x+l.w);y1=Math.max(y1,l.y+l.h);});
+  const R=stage.getBoundingClientRect(),pad=28;
+  const kw=(R.width-pad*2)/(x1-x0), kh=(R.height-pad*2)/(y1-y0);
+  vk=Math.max(0.14,Math.min(Math.min(kw,kh),1.3));
+  vx=(R.width-(x1-x0)*vk)/2-x0*vk;
+  vy=(R.height-(y1-y0)*vk)/2-y0*vk; av();
+}
+let dr=null;
+stage.addEventListener('pointerdown',e=>{dr={x:e.clientX,y:e.clientY,vx,vy};
+  stage.setPointerCapture(e.pointerId);stage.classList.add('dragging');});
+stage.addEventListener('pointermove',e=>{if(!dr)return;
+  vx=dr.vx+(e.clientX-dr.x);vy=dr.vy+(e.clientY-dr.y);av();});
+stage.addEventListener('pointerup',()=>{dr=null;stage.classList.remove('dragging');});
+stage.addEventListener('wheel',e=>{e.preventDefault();
+  const R=stage.getBoundingClientRect(),mx=e.clientX-R.left,my=e.clientY-R.top;
+  const f=Math.exp(-e.deltaY*0.0016),nk=Math.max(0.14,Math.min(2.4,vk*f));
+  vx=mx-(mx-vx)*(nk/vk);vy=my-(my-vy)*(nk/vk);vk=nk;av();},{passive:false});
+stage.addEventListener('click',()=>select(null));
+
+/* ---------- sélection : causes / effets ---------- */
+let sel=null, anc=new Set(), des=new Set();
+const CAUSE=getComputedStyle(document.documentElement).getPropertyValue('--cause').trim();
+const EFFET=getComputedStyle(document.documentElement).getPropertyValue('--effet').trim();
+function paint(){
+  nodes.forEach(n=>{
+    const e=nEls[n.id];
+    if(!sel){e.g.setAttribute('opacity','1');e.r.setAttribute('stroke-width','1');
+             e.r.setAttribute('stroke',n.color);e.r.setAttribute('fill',n.color);
+             e.r.setAttribute('fill-opacity','0.14');return;}
+    const isSel=n.id===sel, isA=anc.has(n.id), isD=des.has(n.id);
+    e.g.setAttribute('opacity', isSel||isA||isD ? '1':'0.14');
+    e.r.setAttribute('stroke', isSel?'var(--accent)':isA?'var(--cause)':isD?'var(--effet)':n.color);
+    e.r.setAttribute('fill', isSel?'var(--accent)':isA?'var(--cause)':isD?'var(--effet)':n.color);
+    e.r.setAttribute('fill-opacity', isSel?'0.30':(isA||isD)?'0.20':'0.14');
+    e.r.setAttribute('stroke-width', isSel?'2.4':(isA||isD)?'1.6':'1');
+  });
+  eEls.forEach(({a,p,lab})=>{
+    if(!sel){p.setAttribute('opacity','0.19');p.setAttribute('stroke','currentColor');
+             lab.setAttribute('opacity','0');return;}
+    const S=a.sourceNodeId,T=a.targetNodeId;
+    const upstream = (anc.has(S)||S===sel) && (anc.has(T)||T===sel);
+    const downstream = (des.has(S)||S===sel) && (des.has(T)||T===sel);
+    const on = upstream||downstream;
+    p.setAttribute('opacity', on?'0.85':'0.04');
+    p.setAttribute('stroke', upstream?'var(--cause)':downstream?'var(--effet)':'currentColor');
+    const direct = S===sel||T===sel;
+    lab.setAttribute('opacity', direct&&vk>0.4?'0.9':'0');
+  });
+}
+function select(id){
+  sel=id;
+  anc = id?walk(id,inA):new Set();
+  des = id?walk(id,outA):new Set();
+  paint(); renderDetail(); syncIdx();
+}
+
+/* ---------- rail ---------- */
+const detail=document.getElementById('detail'), browse=document.getElementById('browse');
+function relRow(verb,otherId){
+  const d=document.createElement('div');d.className='rel';
+  const v=document.createElement('span');v.className='verb';v.textContent=verb;
+  const b=document.createElement('button');b.textContent=byId.get(otherId).label;
+  b.addEventListener('click',()=>select(otherId));
+  d.appendChild(v);d.appendChild(b);return d;
+}
+function renderDetail(){
+  if(!sel){detail.hidden=true;browse.hidden=false;detail.innerHTML='';return;}
+  const n=byId.get(sel);detail.hidden=false;browse.hidden=true;detail.innerHTML='';
+  const back=document.createElement('button');back.className='pbtn';back.textContent='← Toutes les couches';
+  back.style.marginBottom='12px';back.addEventListener('click',()=>select(null));
+  detail.appendChild(back);
+  const k=document.createElement('p');k.className='kicker';k.textContent=n.classes[0];
+  detail.appendChild(k);
+  const h=document.createElement('h3');h.textContent=n.label;detail.appendChild(h);
+  const b=document.createElement('div');b.className='body';b.textContent=n.longDescription;
+  detail.appendChild(b);
+  const c=document.createElement('div');c.className='counts';
+  c.innerHTML='<div class="cnt c"><span>Causes en amont</span><b>'+anc.size+'</b></div>'+
+              '<div class="cnt e"><span>Effets en aval</span><b>'+des.size+'</b></div>';
+  detail.appendChild(c);
+  const ins=inA.get(sel)||[], outs=outA.get(sel)||[];
+  if(ins.length){const g=document.createElement('div');g.className='rel-group c';
+    g.innerHTML='<h5>Causes directes</h5>';
+    ins.forEach(a=>g.appendChild(relRow(a.description,a.sourceNodeId)));detail.appendChild(g);}
+  if(outs.length){const g=document.createElement('div');g.className='rel-group e';
+    g.innerHTML='<h5>Effets directs</h5>';
+    outs.forEach(a=>g.appendChild(relRow(a.description,a.targetNodeId)));detail.appendChild(g);}
+}
+const PRESETS=[['EXE_AMENDE','Amende'],['EFF_PREJUDICE','Préjudice'],
+               ['EFF_DISCRIM','Discrimination'],['MEC_CTRL_EFF','Contrôle humain effectif'],
+               ['ORG_ARRET',"Arrêt du système"]];
+const pbox=document.getElementById('presets');
+PRESETS.forEach(([k,lbl])=>{
+  const b=document.createElement('button');b.className='pbtn';b.textContent=lbl;
+  b.addEventListener('click',()=>select(byKey[k].id));pbox.appendChild(b);
+});
+const layBox=document.getElementById('lay'); const idxBtns=new Map();
+CLASSES.forEach(c=>{
+  const grp=nodes.filter(n=>n.classes[0]===c); if(!grp.length)return;
+  const d=document.createElement('div');d.className='lay-g';
+  d.innerHTML='<h4><span class="d" style="background:'+CLS_COLOR[c]+'"></span>'+c+'</h4>';
+  grp.forEach(n=>{const b=document.createElement('button');b.textContent=n.label;
+    b.addEventListener('click',()=>select(n.id));idxBtns.set(n.id,b);d.appendChild(b);});
+  layBox.appendChild(d);
+});
+function syncIdx(){idxBtns.forEach((b,id)=>b.classList.toggle('on',id===sel));}
+document.getElementById('btn-fit').addEventListener('click',fit);
+document.getElementById('btn-reset').addEventListener('click',()=>select(null));
+paint();
+requestAnimationFrame(fit);
+window.addEventListener('resize',fit);
+</script>
+
+</body>
+</html>

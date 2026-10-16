@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Parcours de qualification AI Act — Noumensia</title>
+<style>
+:root{
+  --ground:#E9ECF0; --surface:#FFFFFF; --surface-2:#F3F5F8;
+  --ink:#131820; --ink-2:#4E5866; --ink-3:#78828F;
+  --rule:#D0D6DE; --rule-strong:#B4BDC8;
+  --accent:#0B4F9E; --accent-soft:#DCE7F5;
+  --stop:#AE2216; --stop-soft:#FBE9E7;
+  --hr:#9C5E00; --hr-soft:#FBF0DC;
+  --light:#87680A; --light-soft:#FAF4DD;
+  --ok:#2F6B24; --ok-soft:#E8F4E4;
+  --neut:#6E7887; --neut-soft:#EFF1F4;
+  --rh:#0E7A6B; --rh-soft:#DFF3EF;
+  --role:#6B3FA0;
+  --focus:#0B4F9E;
+  --shadow:0 1px 2px rgba(19,24,32,.06),0 8px 24px rgba(19,24,32,.08);
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
+  --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
+  --rule:#28313D; --rule-strong:#3A4653;
+  --accent:#71A8F0; --accent-soft:#1B2C42;
+  --stop:#EB6A5C; --stop-soft:#33191A;
+  --hr:#E0A143; --hr-soft:#302516;
+  --light:#D6BC4A; --light-soft:#2C2916;
+  --ok:#7CC96A; --ok-soft:#1A2A18;
+  --neut:#8B94A2; --neut-soft:#1E242C;
+  --rh:#45BFAC; --rh-soft:#132B27;
+  --role:#B187E8;
+  --focus:#71A8F0;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
+  --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
+  --rule:#28313D; --rule-strong:#3A4653;
+  --accent:#71A8F0; --accent-soft:#1B2C42;
+  --stop:#EB6A5C; --stop-soft:#33191A;
+  --hr:#E0A143; --hr-soft:#302516;
+  --light:#D6BC4A; --light-soft:#2C2916;
+  --ok:#7CC96A; --ok-soft:#1A2A18;
+  --neut:#8B94A2; --neut-soft:#1E242C;
+  --rh:#45BFAC; --rh-soft:#132B27;
+  --role:#B187E8;
+  --focus:#71A8F0;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+     font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.wrap{max-width:1500px;margin:0 auto;padding:22px 20px 30px;display:flex;flex-direction:column;gap:16px}
+
+header{display:flex;flex-wrap:wrap;align-items:flex-end;gap:18px 32px;
+       border-bottom:1px solid var(--rule);padding-bottom:16px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+         color:var(--ink-3);margin:0 0 6px}
+h1{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.1;margin:0;
+   letter-spacing:-.015em;text-wrap:balance}
+.sub{margin:8px 0 0;color:var(--ink-2);max-width:66ch}
+
+/* stepper */
+.stepper{display:flex;gap:0;flex-wrap:wrap;background:var(--surface);border:1px solid var(--rule);
+         border-radius:6px;padding:12px 16px;box-shadow:var(--shadow)}
+.step{flex:1 1 130px;min-width:120px;padding:0 12px 0 0;position:relative;opacity:.42}
+.step.done,.step.now{opacity:1}
+.step .num{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-3);
+           display:block}
+.step .nm{font-size:11.5px;font-weight:600;line-height:1.3;display:block;margin-top:1px}
+.step .bar{height:3px;border-radius:2px;background:var(--rule);margin-bottom:7px}
+.step.done .bar{background:var(--accent)}
+.step.now .bar{background:var(--hr)}
+.step.now .nm{color:var(--hr)}
+
+.split{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.split{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+       box-shadow:var(--shadow)}
+
+/* question card */
+.card{padding:24px 26px 22px}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;
+     text-transform:uppercase;padding:3px 8px;border-radius:3px;background:var(--surface-2);
+     color:var(--ink-2);border:1px solid var(--rule);margin-bottom:12px}
+.card h2{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.2;margin:0 0 14px;
+         text-wrap:balance}
+.card .why{font-size:13.5px;color:var(--ink-2);line-height:1.6;max-width:68ch}
+.card .why b{color:var(--ink)}
+.answers{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{font:inherit;font-size:14px;font-weight:600;padding:10px 22px;border-radius:5px;cursor:pointer;
+     border:1px solid var(--rule-strong);background:var(--surface-2);color:var(--ink)}
+.btn:hover{border-color:var(--ink-2)}
+.btn.yes{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.yes:hover{filter:brightness(1.08)}
+.btn.ghost{font-weight:500;font-size:13px;padding:7px 14px}
+.opts{display:flex;flex-direction:column;gap:8px;margin-top:20px}
+.opt{display:flex;gap:11px;align-items:flex-start;padding:11px 14px;border-radius:5px;
+     border:1px solid var(--rule-strong);background:var(--surface-2);cursor:pointer;
+     font:inherit;text-align:left;color:var(--ink);width:100%}
+.opt:hover{border-color:var(--ink-2)}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt b{display:block;font-size:14px}
+.opt span{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.45;margin-top:2px}
+.opt .box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--rule-strong);flex:none;
+          margin-top:2px;display:grid;place-items:center;font-size:11px;color:#fff}
+.opt.sel .box{background:var(--accent);border-color:var(--accent)}
+
+/* trail */
+.trail{padding:16px 18px}
+.trail h3{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+          color:var(--ink-3);margin:0 0 10px}
+.trail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.trail li{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;padding:5px 0;
+          border-top:1px solid var(--rule)}
+.trail li:first-child{border-top:0}
+.trail .ans{font-family:var(--mono);font-size:10.5px;font-weight:500;padding:1px 6px;border-radius:3px;
+            flex:none;margin-top:1px}
+.ans.oui{background:var(--accent-soft);color:var(--accent)}
+.ans.non{background:var(--neut-soft);color:var(--ink-2)}
+.trail button{font:inherit;font-size:12.5px;background:none;border:0;padding:0;text-align:left;
+              color:var(--ink-2);cursor:pointer;line-height:1.4}
+.trail button:hover{color:var(--ink);text-decoration:underline}
+.trail .empty{color:var(--ink-3);font-size:12.5px}
+
+/* result */
+.result{padding:24px 26px 26px}
+.verdict{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-radius:6px;
+         border:1px solid;margin-bottom:20px}
+.verdict .ico{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1;flex:none}
+.verdict h2{font-family:var(--serif);font-size:24px;font-weight:600;margin:0 0 5px;line-height:1.15}
+.verdict p{margin:0;font-size:13px;line-height:1.55}
+.v-stop{background:var(--stop-soft);border-color:var(--stop);color:var(--stop)}
+.v-hr{background:var(--hr-soft);border-color:var(--hr);color:var(--hr)}
+.v-light{background:var(--light-soft);border-color:var(--light);color:var(--light)}
+.v-neut{background:var(--neut-soft);border-color:var(--rule-strong);color:var(--ink-2)}
+.verdict h2,.verdict p{color:inherit}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;
+       background:var(--rule);border:1px solid var(--rule);border-radius:5px;overflow:hidden;
+       margin-bottom:22px}
+.fact{background:var(--surface);padding:12px 14px}
+.fact span{display:block;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;
+           color:var(--ink-3);margin-bottom:3px}
+.fact b{font-size:13.5px;font-weight:600;line-height:1.35;display:block}
+.fact b.mono{font-family:var(--mono);font-size:13px;font-weight:500}
+.result h3{font-size:12px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;
+           color:var(--ink-2);margin:24px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
+.chk{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--rule)}
+.chk:last-child{border-bottom:0}
+.chk input{margin:3px 0 0;width:15px;height:15px;flex:none;accent-color:var(--accent)}
+.chk .txt b{display:block;font-size:13.5px;font-weight:600;line-height:1.35}
+.chk .txt p{margin:3px 0 0;font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.chk.done .txt b{color:var(--ink-3);text-decoration:line-through}
+.chk.flag{background:var(--rh-soft);margin:0 -10px;padding:10px;border-radius:4px}
+.result .foot{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* flowchart */
+.fcwrap{position:relative;overflow:hidden;height:600px;border-radius:6px}
+#stage{display:block;width:100%;height:100%;cursor:grab;background:var(--surface);touch-action:none}
+#stage.dragging{cursor:grabbing}
+.fchead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+        padding:14px 18px 12px;border-bottom:1px solid var(--rule)}
+.fchead h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+           color:var(--ink-2);margin:0}
+.fchead .tools{display:flex;gap:6px}
+.n-label{font-family:var(--sans);font-size:10px;font-weight:500;pointer-events:none}
+.edge{fill:none;stroke-linecap:round}
+.elab{font-family:var(--mono);font-size:9px;pointer-events:none}
+.phase-cap{font-family:var(--sans);font-size:17px;font-weight:700;letter-spacing:.02em}
+.hint{position:absolute;left:14px;bottom:12px;font-size:11.5px;color:var(--ink-3);
+      background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:4px 9px;
+      pointer-events:none}
+.note{font-size:12px;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule);
+      border-left:3px solid var(--stop);border-radius:5px;padding:12px 16px;box-shadow:var(--shadow)}
+.note b{color:var(--ink)}
+footer{font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:12px}
+footer code{font-family:var(--mono);font-size:11px}
+</style>
+
+
+<meta name="description" content="Questionnaire pas à pas : votre système relève-t-il de l'AI Act, sous quel régime, quelles obligations, quelle échéance. Chaque question cite l'article qui la fonde.">
+<link rel="canonical" href="https://noumensia.com/ai-act/parcours-qualification">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-400-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-600.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+.nm-bar{position:relative;z-index:9999;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 18px;
+  padding:9px clamp(14px,3vw,28px);background:#1E2630;color:#F2EFEA;border-bottom:1px solid #3A4756;
+  font:500 13px/1.4 "IBM Plex Sans",-apple-system,sans-serif;letter-spacing:.01em}
+.nm-bar a{color:#F2EFEA;text-decoration:none}
+.nm-bar a:hover{color:#D98A95}
+.nm-bar a:focus-visible{outline:2px solid #D98A95;outline-offset:2px;border-radius:2px}
+.nm-bar__crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0}
+.nm-bar__brand{display:inline-flex;align-items:center;gap:8px;font-family:"Newsreader",Georgia,serif;font-size:15px;font-weight:500}
+.nm-bar__brand img{width:20px;height:20px;display:block}
+.nm-bar__sep{color:#A8B4C2}
+.nm-bar__here{color:#A8B4C2}
+.nm-bar__links{display:flex;flex-wrap:wrap;gap:4px 16px}
+.nm-bar__cta{color:#D98A95 !important}
+@media print{.nm-bar{display:none}}
+</style>
+</head>
+<body>
+<nav class="nm-bar" aria-label="Noumensia"><span class="nm-bar__crumbs"><a class="nm-bar__brand" href="/"><img src="/images/logo/noumensia-icon-light.svg" alt="" aria-hidden="true">Noumensia</a><span class="nm-bar__sep" aria-hidden="true">/</span><a href="/ai-act/">Comprendre l'AI Act</a><span class="nm-bar__sep" aria-hidden="true">/</span><span class="nm-bar__here">Parcours de qualification</span></span><span class="nm-bar__links"><a href="/ai-act/#outils">Tous les outils</a><a class="nm-bar__cta" href="/ai-act/#question">Poser une question</a></span></nav>
+
+<div class="wrap">
+<header>
+  <div>
+    <p class="eyebrow">Règlement (UE) 2024/1689 · consolidé par (UE) 2026/1744</p>
+    <h1>Parcours de qualification AI&nbsp;Act</h1>
+    <p class="sub">Répondez aux questions&nbsp;: le parcours détermine le régime applicable à votre
+      système, votre rôle dans la chaîne de valeur, la liste d'obligations qui en découle et
+      l'échéance. Chaque question cite l'article qui la fonde.</p>
+  </div>
+</header>
+
+<div class="stepper" id="stepper"></div>
+
+<div class="split">
+  <div class="panel" id="main"></div>
+  <aside class="panel trail">
+    <h3>Chemin parcouru</h3>
+    <ol id="trail"><li class="empty">Aucune réponse pour l'instant.</li></ol>
+  </aside>
+</div>
+
+<div class="panel">
+  <div class="fchead">
+    <h2>Flowchart complet — 68 étapes, 9 phases</h2>
+    <div class="tools">
+      <button class="btn ghost" id="fc-fit">Vue d'ensemble</button>
+      <button class="btn ghost" id="fc-path">Suivre mon chemin</button>
+    </div>
+  </div>
+  <div class="fcwrap">
+    <svg id="stage" role="img" aria-label="Flowchart de qualification de l'AI Act"></svg>
+    <div class="hint">Glisser pour déplacer · molette pour zoomer · le chemin parcouru est mis en évidence</div>
+  </div>
+</div>
+
+<p class="note"><b>Source et limites.</b> Parcours construit sur le texte intégral du règlement (UE)
+2024/1689 (JO&nbsp;L du 12/07/2024), consolidé avec le règlement modificatif (UE) 2026/1744
+(«&nbsp;Omnibus IA&nbsp;», en vigueur le 27/07/2026) pour le calendrier et l'article&nbsp;5 — cette
+seconde source est extérieure au PDF de 2024 et signalée par ⚠. Outil de lecture et de cadrage, pas
+un avis juridique&nbsp;: la qualification réelle dépend de la destination du système au sens de
+l'article&nbsp;3, point&nbsp;12, et les lignes directrices de la Commission prévues à
+l'article&nbsp;6, §5 restent déterminantes.</p>
+
+<footer>Semantic Flowchart — séquence et dépendances. Fichier BayesiaLab associé&nbsp;:
+<code>02_AI_Act_Semantic_Flowchart.json</code>. Les cases cochées sont mémorisées dans ce navigateur uniquement.</footer>
+</div>
+
+<script>
+const DATA = {"nodes": [{"id": "0", "label": "Un traitement automatisé est envisagé", "nodeCategory": "STANDARD", "shortDescription": "Un traitement automatisé est envisagé", "longDescription": "Point d'entrée du parcours. La question n'est jamais « est-ce de l'IA ? » au sens marketing, mais « le système répond-il à la définition de l'article 3, point 1) ? ».", "position": {"x": 60, "y": 60}, "color": "#3498DB", "classes": ["Champ d'application"], "nodeTypeDescriptionId": "1000000001"}, {"id": "1", "label": "Le système déduit-il la manière de générer ses sorties ?", "nodeCategory": "STANDARD", "shortDescription": "Le système déduit-il la manière de générer ses sorties ?", "longDescription": "Art. 3, 1). Un système d'IA est un système automatisé qui, pour des objectifs explicites ou implicites, DÉDUIT à partir des entrées reçues la manière de générer des sorties — prédictions, contenu, recommandations, décisions. La capacité d'inférence est le critère discriminant : un moteur de règles entièrement spécifié par un humain, une régression figée dont les coefficients sont fixés a priori, un tableur de scoring pondéré à la main n'entrent pas dans la définition. Le considérant 12 exclut explicitement « les systèmes fondés sur les règles définies uniquement par des personnes physiques pour exécuter automatiquement des opérations ».", "position": {"x": 60, "y": 168}, "color": "#E67E22", "classes": ["Champ d'application"], "nodeTypeDescriptionId": "1000000001"}, {"id": "2", "label": "Le système ou ses sorties touchent-ils l'Union ?", "nodeCategory": "STANDARD", "shortDescription": "Le système ou ses sorties touchent-ils l'Union ?", "longDescription": "Art. 2, §1. Trois rattachements alternatifs : mise sur le marché ou en service dans l'Union par un fournisseur, où qu'il soit établi ; déployeur établi dans l'Union ; fournisseur ou déployeur de pays tiers dont les SORTIES sont utilisées dans l'Union. Ce dernier point donne au règlement une portée extraterritoriale par l'effet.", "position": {"x": 60, "y": 276}, "color": "#E67E22", "classes": ["Champ d'application"], "nodeTypeDescriptionId": "1000000001"}, {"id": "3", "label": "Une exclusion de l'article 2 s'applique-t-elle ?", "nodeCategory": "STANDARD", "shortDescription": "Une exclusion de l'article 2 s'applique-t-elle ?", "longDescription": "Art. 2, §3 à §12. Sont hors champ : la sécurité nationale, la défense et les usages militaires (§3) ; la coopération répressive internationale sous garanties (§4) ; la recherche et le développement scientifiques (§6) ; les activités de recherche, essai et développement AVANT mise sur le marché — mais pas les essais en conditions réelles (§8) ; l'usage strictement personnel non professionnel (§10) ; les systèmes sous licence libre et ouverte, SAUF s'ils sont à haut risque ou relèvent des art. 5 ou 50 (§12).", "position": {"x": 60, "y": 384}, "color": "#E67E22", "classes": ["Champ d'application"], "nodeTypeDescriptionId": "1000000001"}, {"id": "4", "label": "Hors définition — logiciel classique", "nodeCategory": "STANDARD", "shortDescription": "Hors définition — logiciel classique", "longDescription": "Le système ne déduit pas : il exécute des règles entièrement spécifiées. Le règlement ne s'applique pas. Attention toutefois : le RGPD, la directive machines, le droit du travail et l'article 22 du RGPD sur les décisions automatisées continuent de s'appliquer intégralement.", "position": {"x": 60, "y": 492}, "color": "#95A5A6", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "5", "label": "Hors champ territorial", "nodeCategory": "STANDARD", "shortDescription": "Hors champ territorial", "longDescription": "Aucun des trois rattachements de l'art. 2, §1 n'est établi. Vigilance : dès que les sorties du système sont utilisées dans l'Union — un score produit hors UE mais lu par un recruteur français, par exemple — le rattachement est acquis.", "position": {"x": 60, "y": 600}, "color": "#95A5A6", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "6", "label": "Hors champ par exclusion", "nodeCategory": "STANDARD", "shortDescription": "Hors champ par exclusion", "longDescription": "Une exclusion de l'art. 2 s'applique. Deux exclusions sont fréquemment sur-interprétées : l'exclusion R&D tombe dès la mise sur le marché ou les essais en conditions réelles ; l'exclusion « licence libre et ouverte » tombe dès que le système est à haut risque ou relève des art. 5 ou 50.", "position": {"x": 60, "y": 708}, "color": "#95A5A6", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "7", "label": "Les huit interdictions de l'article 5", "nodeCategory": "STANDARD", "shortDescription": "Les huit interdictions de l'article 5", "longDescription": "a) techniques subliminales ou délibérément manipulatrices ; b) exploitation de vulnérabilités dues à l'âge, au handicap ou à la situation sociale ou économique ; c) notation sociale ; d) prédiction individuelle d'infraction sur le seul profilage ; e) moissonnage non ciblé d'images faciales ; f) reconnaissance des émotions au travail et en formation ; g) catégorisation biométrique sur attributs sensibles ; h) identification biométrique à distance en temps réel à des fins répressives. Le règlement Omnibus (UE) 2026/1744 y ajoute la génération de contenus intimes non consentis et de CSAM. ⚠ Ce dernier point est hors PDF 2024.", "position": {"x": 390, "y": 60}, "color": "#3498DB", "classes": ["Pratiques interdites"], "nodeTypeDescriptionId": "1000000001"}, {"id": "8", "label": "Le système infère-t-il des émotions au travail ou en formation ?", "nodeCategory": "STANDARD", "shortDescription": "Le système infère-t-il des émotions au travail ou en formation ?", "longDescription": "Art. 5, §1, f). Interdiction — pas « haut risque », interdiction. Vise l'analyse émotionnelle en entretien de recrutement, en visioconférence, en centre d'appels, en formation. Deux exceptions seulement : raisons médicales ou de sécurité. La frontière avec un outil d'évaluation de la performance est mince : dès qu'un indicateur prétend mesurer l'engagement, le stress, la motivation ou l'attention à partir de signaux biométriques (voix, visage, posture), on est dans le champ de l'interdiction.", "position": {"x": 390, "y": 168}, "color": "#E67E22", "classes": ["Pratiques interdites"], "nodeTypeDescriptionId": "1000000001"}, {"id": "9", "label": "Produit-il une note sociale réutilisée hors de son contexte ?", "nodeCategory": "STANDARD", "shortDescription": "Produit-il une note sociale réutilisée hors de son contexte ?", "longDescription": "Art. 5, §1, c). Interdit l'évaluation de personnes sur leur comportement social ou des caractéristiques personnelles connues, déduites ou prédites, quand la note conduit à un traitement défavorable dans un contexte DISSOCIÉ de celui de la collecte, ou injustifié / disproportionné. Un score de fiabilité construit sur des données de navigation puis utilisé pour trier des candidats en est l'illustration typique.", "position": {"x": 390, "y": 276}, "color": "#E67E22", "classes": ["Pratiques interdites"], "nodeTypeDescriptionId": "1000000001"}, {"id": "10", "label": "Le système relève-t-il d'une autre interdiction de l'article 5 ?", "nodeCategory": "STANDARD", "shortDescription": "Le système relève-t-il d'une autre interdiction de l'article 5 ?", "longDescription": "Techniques subliminales ou manipulatrices, exploitation de vulnérabilités, prédiction individuelle d'infraction, moissonnage facial, catégorisation biométrique sur attributs sensibles, identification biométrique temps réel à des fins répressives, contenus intimes non consentis.", "position": {"x": 390, "y": 384}, "color": "#E67E22", "classes": ["Pratiques interdites"], "nodeTypeDescriptionId": "1000000001"}, {"id": "11", "label": "Pratique interdite — arrêt", "nodeCategory": "STANDARD", "shortDescription": "Pratique interdite — arrêt", "longDescription": "Interdiction absolue depuis le 2 février 2025. Aucune évaluation de conformité, aucune mesure d'atténuation, aucun consentement ne la lève. Sanction : jusqu'à 35 000 000 € ou 7 % du chiffre d'affaires annuel mondial, le montant le plus élevé étant retenu — le plus faible pour les PME (art. 99, §3 et §6).", "position": {"x": 390, "y": 492}, "color": "#C0392B", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "12", "label": "Composant de sécurité d'un produit de l'annexe I ?", "nodeCategory": "STANDARD", "shortDescription": "Composant de sécurité d'un produit de l'annexe I ?", "longDescription": "Art. 6, §1. Deux conditions CUMULATIVES : a) le système est un composant de sécurité d'un produit couvert par la législation d'harmonisation de l'annexe I — machines, jouets, ascenseurs, équipements sous pression, dispositifs médicaux, véhicules, aviation, ferroviaire — ou constitue lui-même un tel produit ; b) ce produit est soumis à une évaluation de conformité par un TIERS.", "position": {"x": 720, "y": 60}, "color": "#E67E22", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "13", "label": "Haut risque — voie produit (annexe I)", "nodeCategory": "STANDARD", "shortDescription": "Haut risque — voie produit (annexe I)", "longDescription": "Régime haut risque intégré à la conformité produit existante. L'évaluation de la conformité suit la procédure sectorielle (art. 43, §3) et le fabricant du produit est réputé fournisseur du système d'IA (art. 25, §3). Application repoussée au 2 août 2028 par le règlement Omnibus (2 août 2027 dans le texte de 2024).", "position": {"x": 720, "y": 168}, "color": "#D68910", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "14", "label": "Le système relève-t-il d'un domaine de l'annexe III ?", "nodeCategory": "STANDARD", "shortDescription": "Le système relève-t-il d'un domaine de l'annexe III ?", "longDescription": "Art. 6, §2. Huit domaines : 1) biométrie ; 2) infrastructures critiques ; 3) éducation et formation professionnelle ; 4) emploi et gestion de la main-d'œuvre ; 5) accès aux services essentiels ; 6) répression ; 7) migration, asile et frontières ; 8) justice et processus démocratiques. Pour la RH, le point 4 couvre le recrutement et la sélection (publication ciblée d'offres, filtrage de candidatures, évaluation des candidats) ainsi que les décisions sur les conditions de travail, la promotion, le licenciement, l'attribution de tâches et le suivi de performance.", "position": {"x": 720, "y": 276}, "color": "#E67E22", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "15", "label": "Une des quatre conditions de l'article 6, §3 est-elle remplie ?", "nodeCategory": "STANDARD", "shortDescription": "Une des quatre conditions de l'article 6, §3 est-elle remplie ?", "longDescription": "Art. 6, §3. Le système n'est pas à haut risque s'il ne présente pas de risque important, ce qui est établi quand il : a) accomplit une tâche procédurale étroite ; b) améliore le résultat d'une activité humaine préalablement réalisée ; c) détecte des constantes de décision ou des écarts sans se substituer à l'évaluation humaine ni l'influencer sans examen approprié ; d) exécute une tâche préparatoire. Lecture stricte : « aide à la décision » n'est pas en soi une dérogation.", "position": {"x": 720, "y": 384}, "color": "#E67E22", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "16", "label": "Le système effectue-t-il un profilage de personnes physiques ?", "nodeCategory": "STANDARD", "shortDescription": "Le système effectue-t-il un profilage de personnes physiques ?", "longDescription": "Art. 6, §3, dernier alinéa. Un système de l'annexe III effectuant un profilage est TOUJOURS à haut risque : la dérogation tombe. Profilage au sens de l'art. 4, 4) du RGPD — traitement automatisé évaluant des aspects personnels, notamment le rendement au travail, la situation économique, la fiabilité, le comportement. En RH, le filtrage de candidatures, l'évaluation de candidats et le suivi de performance individuelle sont du profilage : la dérogation ne joue quasiment jamais.", "position": {"x": 720, "y": 492}, "color": "#E67E22", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "17", "label": "Haut risque — voie domaine (annexe III)", "nodeCategory": "STANDARD", "shortDescription": "Haut risque — voie domaine (annexe III)", "longDescription": "Régime complet du chapitre III : exigences des art. 8 à 15, obligations de l'art. 16 pour le fournisseur et de l'art. 26 pour le déployeur. Évaluation de la conformité par contrôle interne (annexe VI), sans organisme notifié, sauf pour la biométrie (annexe III.1). Application repoussée au 2 décembre 2027 par le règlement Omnibus (2 août 2026 dans le texte de 2024). Exception transitoire, art. 111, §2 (version consolidée) : un système d'IA à haut risque mis sur le marché ou mis en service AVANT le 2 décembre 2027 n'est soumis au règlement que si, à compter de cette date, il subit d'importantes modifications de sa conception. Le considérant 177 précise que cette notion équivaut sur le fond à la « modification substantielle » de l'art. 3, point 23. Les systèmes destinés à être utilisés par des autorités publiques doivent, eux, être mis en conformité au plus tard le 2 août 2030. Les interdictions de l'art. 5 restent applicables dans tous les cas.", "position": {"x": 720, "y": 600}, "color": "#D68910", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "18", "label": "Non haut risque par dérogation — mais documenté et enregistré", "nodeCategory": "STANDARD", "shortDescription": "Non haut risque par dérogation — mais documenté et enregistré", "longDescription": "Art. 6, §3 et §4, et art. 49, §2. Le système échappe au régime haut risque, MAIS le fournisseur doit documenter son évaluation AVANT la mise sur le marché, s'enregistrer et enregistrer le système dans la base de données de l'UE, et produire la documentation à la demande des autorités nationales. Une autorité peut contester cette qualification (art. 80) et imposer le régime complet. C'est une dérogation sous condition documentaire, pas une exonération.", "position": {"x": 720, "y": 708}, "color": "#C9A227", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "19", "label": "Contrôle cumulatif de transparence", "nodeCategory": "STANDARD", "shortDescription": "Contrôle cumulatif de transparence", "longDescription": "Art. 50, §6. Les obligations de transparence s'ajoutent au régime déterminé plus haut : un système à haut risque qui dialogue avec des candidats doit satisfaire aux deux. Applicable depuis le 2 août 2026 — non reporté par le règlement Omnibus.", "position": {"x": 1050, "y": 60}, "color": "#3498DB", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "20", "label": "Le système interagit-il directement avec des personnes physiques ?", "nodeCategory": "STANDARD", "shortDescription": "Le système interagit-il directement avec des personnes physiques ?", "longDescription": "Art. 50, §1. Le fournisseur conçoit le système de sorte que la personne sache qu'elle interagit avec une IA, sauf si cela est manifeste. Vise les chatbots de présélection, les assistants d'entretien, les agents conversationnels internes.", "position": {"x": 1050, "y": 168}, "color": "#E67E22", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "21", "label": "Génère-t-il du contenu de synthèse — texte, image, audio, vidéo ?", "nodeCategory": "STANDARD", "shortDescription": "Génère-t-il du contenu de synthèse — texte, image, audio, vidéo ?", "longDescription": "Art. 50, §2. Marquage lisible par machine des sorties, identifiable comme généré ou manipulé par IA. Exception pour l'assistance à la mise en forme standard qui ne modifie pas substantiellement les données d'entrée. Vise la génération d'offres d'emploi, de comptes rendus d'entretien, de synthèses d'évaluation.", "position": {"x": 1050, "y": 276}, "color": "#E67E22", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "22", "label": "Reconnaît-il des émotions ou catégorise-t-il par biométrie ?", "nodeCategory": "STANDARD", "shortDescription": "Reconnaît-il des émotions ou catégorise-t-il par biométrie ?", "longDescription": "Art. 50, §3. Le déployeur informe les personnes exposées du fonctionnement du système. À lire avec l'art. 5, §1, f) : sur le lieu de travail, l'usage est en principe INTERDIT, pas seulement soumis à information.", "position": {"x": 1050, "y": 384}, "color": "#E67E22", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "23", "label": "Produit-il des hypertrucages ou des textes d'intérêt public ?", "nodeCategory": "STANDARD", "shortDescription": "Produit-il des hypertrucages ou des textes d'intérêt public ?", "longDescription": "Art. 50, §4. Le déployeur indique que le contenu a été généré ou manipulé par IA. Régime allégé pour les œuvres manifestement artistiques, satiriques ou fictionnelles. Exonération pour les textes ayant fait l'objet d'un contrôle éditorial humain assumé.", "position": {"x": 1050, "y": 492}, "color": "#E67E22", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "24", "label": "Obligations de transparence applicables", "nodeCategory": "STANDARD", "shortDescription": "Obligations de transparence applicables", "longDescription": "Un ou plusieurs des cas de l'art. 50 sont réunis. Ces obligations s'ajoutent au régime principal. L'information doit être fournie de manière claire et reconnaissable au plus tard à la première interaction ou exposition, dans le respect des exigences d'accessibilité (art. 50, §5). Sanction : 15 M€ ou 3 % du CA (art. 99, §4, g).", "position": {"x": 1050, "y": 600}, "color": "#C9A227", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "25", "label": "Risque minimal — aucune obligation contraignante", "nodeCategory": "STANDARD", "shortDescription": "Risque minimal — aucune obligation contraignante", "longDescription": "Le système n'est ni interdit, ni à haut risque, ni soumis à l'art. 50. Aucune obligation contraignante, hors l'art. 4 (maîtrise de l'IA) qui s'applique à tout fournisseur et déployeur. Les codes de conduite volontaires de l'art. 95 restent ouverts. C'est le cas le plus fréquent : le règlement ne régule pas « l'IA », il régule des usages.", "position": {"x": 1050, "y": 708}, "color": "#95A5A6", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "26", "label": "Fournissez-vous aussi un modèle d'IA à usage général ?", "nodeCategory": "STANDARD", "shortDescription": "Fournissez-vous aussi un modèle d'IA à usage général ?", "longDescription": "Art. 3, 63). Modèle présentant une généralité significative, capable d'exécuter de manière compétente un large éventail de tâches distinctes et intégrable en aval. Branche PARALLÈLE : elle s'ajoute au parcours système, elle ne s'y substitue pas. Si vous ne faites qu'intégrer un modèle tiers, vous êtes fournisseur en aval (art. 3, 68) et c'est le fournisseur du modèle qui porte les obligations de l'art. 53.", "position": {"x": 1380, "y": 60}, "color": "#E67E22", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "27", "label": "L'entraînement dépasse-t-il 10²⁵ FLOP, ou le modèle est-il désigné ?", "nodeCategory": "STANDARD", "shortDescription": "L'entraînement dépasse-t-il 10²⁵ FLOP, ou le modèle est-il désigné ?", "longDescription": "Art. 51. Présomption de capacités à fort impact au-delà de 10²⁵ opérations en virgule flottante cumulées (§2), ou désignation par la Commission au vu des critères de l'annexe XIII (§1, b). Notification à la Commission dans les deux semaines (art. 52, §1).", "position": {"x": 1380, "y": 168}, "color": "#E67E22", "classes": ["Qualification du risque"], "nodeTypeDescriptionId": "1000000001"}, {"id": "28", "label": "Modèle à usage général — obligations de l'article 53", "nodeCategory": "STANDARD", "shortDescription": "Modèle à usage général — obligations de l'article 53", "longDescription": "Documentation technique du modèle (annexe XI), information et documentation aux fournisseurs en aval (annexe XII), politique de respect du droit d'auteur, résumé suffisamment détaillé des contenus d'entraînement. Allègements pour les modèles sous licence libre et ouverte, sauf risque systémique. Applicable depuis le 2 août 2025.", "position": {"x": 1380, "y": 276}, "color": "#D68910", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "29", "label": "Modèle à risque systémique — obligations renforcées", "nodeCategory": "STANDARD", "shortDescription": "Modèle à risque systémique — obligations renforcées", "longDescription": "En sus de l'art. 53 : évaluation du modèle avec essais contradictoires documentés, évaluation et atténuation des risques systémiques au niveau de l'Union, signalement des incidents graves au Bureau de l'IA, cybersécurité du modèle et de son infrastructure physique (art. 55). Les codes de bonne pratique de l'art. 56 valent moyen de démonstration jusqu'à publication d'une norme harmonisée. Supervision exclusive du Bureau de l'IA (art. 88).", "position": {"x": 1380, "y": 384}, "color": "#C0392B", "classes": ["Issues et régimes"], "nodeTypeDescriptionId": "1000000001"}, {"id": "30", "label": "Quel est votre rôle dans la chaîne de valeur ?", "nodeCategory": "STANDARD", "shortDescription": "Quel est votre rôle dans la chaîne de valeur ?", "longDescription": "Art. 3, points 3 à 8. Le rôle détermine l'article d'obligations applicable. Une même entité peut cumuler plusieurs rôles pour des systèmes différents — un cabinet qui édite son propre outil et en déploie d'autres est fournisseur pour le premier et déployeur pour les seconds.", "position": {"x": 1710, "y": 60}, "color": "#E67E22", "classes": ["Rôle de l'opérateur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "31", "label": "Rebadgez-vous, modifiez-vous substantiellement, ou changez-vous la destination ?", "nodeCategory": "STANDARD", "shortDescription": "Rebadgez-vous, modifiez-vous substantiellement, ou changez-vous la destination ?", "longDescription": "Art. 25, §1. Trois cas font basculer un distributeur, importateur, déployeur ou tiers dans le rôle de FOURNISSEUR, avec l'intégralité des obligations de l'art. 16 : a) commercialisation sous son propre nom ou sa marque ; b) modification substantielle d'un système à haut risque ; c) changement de destination d'un système — y compris à usage général — qui le rend à haut risque. Le fournisseur initial cesse alors de l'être (§2). Risque contractuel majeur pour un intégrateur ou un consultant qui paramètre lourdement un outil chez un client.", "position": {"x": 1710, "y": 168}, "color": "#E67E22", "classes": ["Rôle de l'opérateur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "32", "label": "Fournisseur", "nodeCategory": "STANDARD", "shortDescription": "Fournisseur", "longDescription": "Art. 3, 3). Développe ou fait développer et met sur le marché ou en service sous son nom ou sa marque, à titre onéreux ou gratuit. Obligations de l'art. 16.", "position": {"x": 1710, "y": 276}, "color": "#9B59B6", "classes": ["Rôle de l'opérateur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "33", "label": "Déployeur", "nodeCategory": "STANDARD", "shortDescription": "Déployeur", "longDescription": "Art. 3, 4). Utilise le système sous sa propre autorité, hors activité personnelle non professionnelle. Obligations de l'art. 26.", "position": {"x": 1710, "y": 384}, "color": "#9B59B6", "classes": ["Rôle de l'opérateur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "34", "label": "Employeur déployeur", "nodeCategory": "STANDARD", "shortDescription": "Employeur déployeur", "longDescription": "Déployeur utilisant un système à haut risque sur le lieu de travail. Obligations supplémentaires d'information : représentants des travailleurs (art. 26, §7) et personnes soumises au système (art. 26, §11).", "position": {"x": 1710, "y": 492}, "color": "#16A085", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "35", "label": "Importateur", "nodeCategory": "STANDARD", "shortDescription": "Importateur", "longDescription": "Art. 3, 6). Établi dans l'Union, met sur le marché un système portant le nom d'une personne établie dans un pays tiers. Obligations de l'art. 23.", "position": {"x": 1710, "y": 600}, "color": "#9B59B6", "classes": ["Rôle de l'opérateur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "36", "label": "Distributeur", "nodeCategory": "STANDARD", "shortDescription": "Distributeur", "longDescription": "Art. 3, 7). Maillon de la chaîne autre que fournisseur ou importateur, met le système à disposition sur le marché. Obligations de l'art. 24.", "position": {"x": 1710, "y": 708}, "color": "#9B59B6", "classes": ["Rôle de l'opérateur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "37", "label": "Mandataire", "nodeCategory": "STANDARD", "shortDescription": "Mandataire", "longDescription": "Art. 3, 5). Mandaté par écrit par un fournisseur de pays tiers. Obligations de l'art. 22. Désignation obligatoire pour tout fournisseur hors UE d'un système à haut risque.", "position": {"x": 1710, "y": 816}, "color": "#9B59B6", "classes": ["Rôle de l'opérateur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "38", "label": "Établir le système de gestion des risques", "nodeCategory": "STANDARD", "shortDescription": "Établir le système de gestion des risques", "longDescription": "Art. 9. Processus itératif et continu sur tout le cycle de vie : identifier et analyser les risques connus et raisonnablement prévisibles en usage conforme ET en mauvaise utilisation raisonnablement prévisible, estimer, adopter des mesures d'atténuation, tester. Attention explicite aux personnes vulnérables et aux mineurs (§9).", "position": {"x": 2040, "y": 60}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "39", "label": "Gouverner les données d'entraînement, de validation et de test", "nodeCategory": "STANDARD", "shortDescription": "Gouverner les données d'entraînement, de validation et de test", "longDescription": "Art. 10. Jeux pertinents, suffisamment représentatifs, exempts d'erreurs et complets « dans toute la mesure du possible ». Examen des biais susceptibles d'induire une discrimination. Le §5 autorise, sous garanties strictes, le traitement de catégories particulières de données à seule fin de détection et correction des biais — faculté étendue à tous les systèmes par l'Omnibus.", "position": {"x": 2040, "y": 168}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "40", "label": "Rédiger la documentation technique", "nodeCategory": "STANDARD", "shortDescription": "Rédiger la documentation technique", "longDescription": "Art. 11 et annexe IV. Établie AVANT la mise sur le marché et tenue à jour : description générale, conception, architecture, ressources de calcul, jeux de données, métriques de performance, mesures de contrôle humain, gestion des risques. Régime simplifié pour les PME.", "position": {"x": 2040, "y": 276}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "41", "label": "Concevoir l'enregistrement automatique des journaux", "nodeCategory": "STANDARD", "shortDescription": "Concevoir l'enregistrement automatique des journaux", "longDescription": "Art. 12. Traçabilité du fonctionnement sur la durée de vie, permettant d'identifier les situations de risque et d'alimenter la surveillance après commercialisation. Conservation par le fournisseur : art. 19.", "position": {"x": 2040, "y": 384}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "42", "label": "Rédiger la notice d'utilisation", "nodeCategory": "STANDARD", "shortDescription": "Rédiger la notice d'utilisation", "longDescription": "Art. 13. Le système doit être suffisamment transparent pour que le déployeur interprète correctement les sorties. La notice précise les caractéristiques, les capacités et surtout les LIMITES de performance, les circonstances pouvant conduire à des risques, et les niveaux d'exactitude par groupe de personnes. C'est l'article qui alimente en pratique l'art. 26 et le droit à l'explication de l'art. 86.", "position": {"x": 2040, "y": 492}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "43", "label": "Rendre le contrôle humain possible par conception", "nodeCategory": "STANDARD", "shortDescription": "Rendre le contrôle humain possible par conception", "longDescription": "Art. 14. Le système est conçu pour permettre à une personne de comprendre ses capacités et ses limites, de rester consciente du biais d'automatisation, d'interpréter la sortie, de décider de ne pas l'utiliser, et d'interrompre le système. Le contrôle humain doit être possible PAR CONCEPTION, pas seulement organisé par procédure.", "position": {"x": 2040, "y": 600}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "44", "label": "Atteindre l'exactitude, la robustesse et la cybersécurité", "nodeCategory": "STANDARD", "shortDescription": "Atteindre l'exactitude, la robustesse et la cybersécurité", "longDescription": "Art. 15. Niveau approprié et constant sur le cycle de vie. Métriques déclarées dans la notice. Résilience aux défaillances et aux attaques spécifiques à l'IA : empoisonnement des données, exemples adverses, extraction de modèle.", "position": {"x": 2040, "y": 708}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "45", "label": "Mettre en place le système de gestion de la qualité", "nodeCategory": "STANDARD", "shortDescription": "Mettre en place le système de gestion de la qualité", "longDescription": "Art. 17. Politiques, procédures et instructions écrites : stratégie de conformité, conception, développement, tests, spécifications techniques, gouvernance des données, gestion des risques, surveillance après commercialisation, signalement d'incidents, communication avec les autorités. Régime proportionné pour les PME.", "position": {"x": 2040, "y": 816}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "46", "label": "Conduire l'évaluation de la conformité", "nodeCategory": "STANDARD", "shortDescription": "Conduire l'évaluation de la conformité", "longDescription": "Art. 43. Pour l'annexe III points 2 à 8 — donc pour tous les usages RH — contrôle interne de l'annexe VI, sans organisme notifié. Organisme notifié requis pour la biométrie (annexe III.1) quand les normes harmonisées ne sont pas appliquées, et pour les produits de l'annexe I. À refaire en cas de modification substantielle (§4).", "position": {"x": 2040, "y": 924}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "47", "label": "Établir la déclaration UE de conformité", "nodeCategory": "STANDARD", "shortDescription": "Établir la déclaration UE de conformité", "longDescription": "Art. 47. Rédigée par écrit pour chaque système, tenue à disposition des autorités pendant dix ans. Le fournisseur assume la responsabilité du respect des exigences.", "position": {"x": 2040, "y": 1032}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "48", "label": "Apposer le marquage CE", "nodeCategory": "STANDARD", "shortDescription": "Apposer le marquage CE", "longDescription": "Art. 48. De façon visible, lisible et indélébile sur le système, son emballage ou sa documentation. Marquage électronique pour les systèmes purement numériques. Suivi du numéro de l'organisme notifié quand il intervient.", "position": {"x": 2040, "y": 1140}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "49", "label": "S'enregistrer dans la base de données de l'UE", "nodeCategory": "STANDARD", "shortDescription": "S'enregistrer dans la base de données de l'UE", "longDescription": "Art. 49 et 71. Enregistrement du fournisseur et du système AVANT mise sur le marché — y compris, au titre du §2, quand le fournisseur a conclu que le système n'est PAS à haut risque en application de l'art. 6, §3. Section sécurisée non publique pour les annexes III.1, III.6 et III.7.", "position": {"x": 2040, "y": 1248}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "50", "label": "Opérer la surveillance après commercialisation", "nodeCategory": "STANDARD", "shortDescription": "Opérer la surveillance après commercialisation", "longDescription": "Art. 72. Système documenté et proportionné de collecte et d'analyse des données d'expérience d'utilisation, sur la base d'un plan intégré à la documentation technique.", "position": {"x": 2040, "y": 1356}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "51", "label": "Signaler les incidents graves", "nodeCategory": "STANDARD", "shortDescription": "Signaler les incidents graves", "longDescription": "Art. 73. Incident grave = décès ou atteinte grave à la santé, perturbation grave et irréversible d'une infrastructure critique, violation d'obligations protégeant les droits fondamentaux, dommage grave aux biens ou à l'environnement. Délai : quinze jours ; deux jours en cas d'infraction de grande ampleur ou de décès.", "position": {"x": 2040, "y": 1464}, "color": "#6DCD59", "classes": ["Parcours fournisseur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "52", "label": "Lire la notice et utiliser le système conformément", "nodeCategory": "STANDARD", "shortDescription": "Lire la notice et utiliser le système conformément", "longDescription": "Art. 26, §1. Mesures techniques et organisationnelles appropriées garantissant un usage conforme à la notice. Si la notice est insuffisante pour cela, c'est un signal : l'art. 13 n'a pas été respecté par le fournisseur.", "position": {"x": 2370, "y": 60}, "color": "#6DCD59", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "53", "label": "Confier le contrôle humain à des personnes compétentes, formées et dotées d'autorité", "nodeCategory": "STANDARD", "shortDescription": "Confier le contrôle humain à des personnes compétentes, formées et dotées d'autorité", "longDescription": "Art. 26, §2. Trois conditions cumulatives : compétence, formation, AUTORITÉ — plus le soutien nécessaire. Un contrôle humain confié à quelqu'un qui n'a pas le pouvoir de contredire la sortie du système ne satisfait pas à l'article. C'est le point de contrôle le plus souvent défaillant en pratique.", "position": {"x": 2370, "y": 168}, "color": "#6DCD59", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "54", "label": "Assurer la pertinence des données d'entrée sous son contrôle", "nodeCategory": "STANDARD", "shortDescription": "Assurer la pertinence des données d'entrée sous son contrôle", "longDescription": "Art. 26, §4. Les données d'entrée doivent être pertinentes et suffisamment représentatives au regard de la destination du système. Concerne directement l'employeur qui alimente un outil avec ses propres référentiels de poste ou historiques RH.", "position": {"x": 2370, "y": 276}, "color": "#6DCD59", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "55", "label": "Informer les représentants des travailleurs et les travailleurs concernés", "nodeCategory": "STANDARD", "shortDescription": "Informer les représentants des travailleurs et les travailleurs concernés", "longDescription": "Art. 26, §7. AVANT la mise en service ou l'utilisation sur le lieu de travail. Information fournie selon les règles et pratiques nationales — en France, elle s'articule avec la consultation du CSE. L'art. 2, §11 réserve expressément les dispositions nationales et conventionnelles plus favorables aux travailleurs.", "position": {"x": 2370, "y": 384}, "color": "#16A085", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "56", "label": "Informer les personnes soumises au système", "nodeCategory": "STANDARD", "shortDescription": "Informer les personnes soumises au système", "longDescription": "Art. 26, §11. Le déployeur d'un système de l'annexe III qui prend ou facilite des décisions concernant des personnes physiques les informe qu'elles y sont soumises. Vise directement le candidat trié par un ATS et le salarié évalué.", "position": {"x": 2370, "y": 492}, "color": "#16A085", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "57", "label": "Conduire l'analyse d'impact sur les droits fondamentaux — si concerné", "nodeCategory": "STANDARD", "shortDescription": "Conduire l'analyse d'impact sur les droits fondamentaux — si concerné", "longDescription": "Art. 27. Obligatoire uniquement pour : les organismes de droit public, les entités privées fournissant des services publics, et les déployeurs des points 5, b) et c) de l'annexe III (solvabilité, tarification assurance-vie et santé). ⚠ Un employeur PRIVÉ déployant un outil RH de l'annexe III.4 n'y est PAS soumis — erreur de lecture très fréquente. Il reste soumis à l'art. 26 et, le cas échéant, à l'analyse d'impact du RGPD (art. 35).", "position": {"x": 2370, "y": 600}, "color": "#16A085", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "58", "label": "Conserver les journaux au moins six mois", "nodeCategory": "STANDARD", "shortDescription": "Conserver les journaux au moins six mois", "longDescription": "Art. 26, §6. Pour les journaux générés automatiquement et se trouvant sous son contrôle, pendant une période adaptée à la destination, d'au moins six mois, sauf disposition contraire — en particulier en droit de la protection des données.", "position": {"x": 2370, "y": 708}, "color": "#6DCD59", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "59", "label": "Surveiller le fonctionnement et suspendre en cas de risque", "nodeCategory": "STANDARD", "shortDescription": "Surveiller le fonctionnement et suspendre en cas de risque", "longDescription": "Art. 26, §5. Surveillance sur la base de la notice. Si le déployeur a des raisons de considérer que l'usage conforme peut conduire à un risque au sens de l'art. 79, §1, il informe sans retard le fournisseur ou le distributeur et l'autorité de surveillance du marché, et SUSPEND l'utilisation.", "position": {"x": 2370, "y": 816}, "color": "#6DCD59", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "60", "label": "Signaler les incidents graves", "nodeCategory": "STANDARD", "shortDescription": "Signaler les incidents graves", "longDescription": "Art. 26, §5 et art. 73. Information immédiate du fournisseur, puis de l'importateur ou du distributeur, puis des autorités de surveillance du marché. Si le fournisseur est injoignable, l'art. 73 s'applique mutatis mutandis.", "position": {"x": 2370, "y": 924}, "color": "#6DCD59", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "61", "label": "Répondre aux demandes d'explication", "nodeCategory": "STANDARD", "shortDescription": "Répondre aux demandes d'explication", "longDescription": "Art. 86. Toute personne faisant l'objet d'une décision prise par le déployeur sur la base des sorties d'un système de l'annexe III (hors point 2), produisant des effets juridiques ou l'affectant significativement de façon défavorable, a droit à des explications claires et pertinentes sur le rôle du système dans la procédure décisionnelle. Un refus de promotion ou un rejet de candidature entre dans ce champ.", "position": {"x": 2370, "y": 1032}, "color": "#16A085", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "62", "label": "Assurer la maîtrise de l'IA du personnel concerné", "nodeCategory": "STANDARD", "shortDescription": "Assurer la maîtrise de l'IA du personnel concerné", "longDescription": "Art. 4 (version consolidée). Fournisseurs et déployeurs prennent des mesures pour « favoriser le développement de la maîtrise de l'IA » de leur personnel, au regard de ses connaissances techniques, de son expérience et du contexte d'utilisation ; l'obligation « ne contraint pas [...] à garantir un niveau spécifique de maîtrise de l'IA par un individu ». Applicable depuis le 2 février 2025. Le texte de 2024 visait un « niveau suffisant » : le règlement (UE) 2026/1744 a assoupli la formulation.", "position": {"x": 2370, "y": 1140}, "color": "#6DCD59", "classes": ["Parcours déployeur et employeur"], "nodeTypeDescriptionId": "1000000001"}, {"id": "63", "label": "2 février 2025", "nodeCategory": "STANDARD", "shortDescription": "2 février 2025", "longDescription": "Chapitres I et II : définitions, maîtrise de l'IA (art. 4), interdictions (art. 5). Art. 113, a).", "position": {"x": 2700, "y": 60}, "color": "#7F8C8D", "classes": ["Jalons temporels"], "nodeTypeDescriptionId": "1000000001"}, {"id": "64", "label": "2 août 2025", "nodeCategory": "STANDARD", "shortDescription": "2 août 2025", "longDescription": "Chapitre V (modèles à usage général), chapitre VII (gouvernance), chapitre XII (sanctions, sauf art. 101), section 4 du chapitre III, art. 78. Art. 113, b).", "position": {"x": 2700, "y": 168}, "color": "#7F8C8D", "classes": ["Jalons temporels"], "nodeTypeDescriptionId": "1000000001"}, {"id": "65", "label": "2 août 2026", "nodeCategory": "STANDARD", "shortDescription": "2 août 2026", "longDescription": "Application générale, dont l'art. 50 (transparence) et l'art. 101. Date NON reportée par le règlement Omnibus.", "position": {"x": 2700, "y": 276}, "color": "#7F8C8D", "classes": ["Jalons temporels"], "nodeTypeDescriptionId": "1000000001"}, {"id": "66", "label": "2 décembre 2027", "nodeCategory": "STANDARD", "shortDescription": "2 décembre 2027", "longDescription": "Haut risque — annexe III, dont l'emploi et la gestion de la main-d'œuvre. Reporté par le règlement (UE) 2026/1744 ; le texte de 2024 prévoyait le 2 août 2026. ⚠ Hors PDF fourni. Exception transitoire, art. 111, §2 (version consolidée) : un système d'IA à haut risque mis sur le marché ou mis en service AVANT le 2 décembre 2027 n'est soumis au règlement que si, à compter de cette date, il subit d'importantes modifications de sa conception. Le considérant 177 précise que cette notion équivaut sur le fond à la « modification substantielle » de l'art. 3, point 23. Les systèmes destinés à être utilisés par des autorités publiques doivent, eux, être mis en conformité au plus tard le 2 août 2030. Les interdictions de l'art. 5 restent applicables dans tous les cas.", "position": {"x": 2700, "y": 384}, "color": "#7F8C8D", "classes": ["Jalons temporels"], "nodeTypeDescriptionId": "1000000001"}, {"id": "67", "label": "2 août 2028", "nodeCategory": "STANDARD", "shortDescription": "2 août 2028", "longDescription": "Haut risque — annexe I, systèmes intégrés à des produits réglementés. Reporté par le règlement (UE) 2026/1744 ; le texte de 2024 prévoyait le 2 août 2027. ⚠ Hors PDF fourni.", "position": {"x": 2700, "y": 492}, "color": "#7F8C8D", "classes": ["Jalons temporels"], "nodeTypeDescriptionId": "1000000001"}, {"id": "68", "label": "Système déjà en service avant le 2 décembre 2027", "nodeCategory": "STANDARD", "shortDescription": "Système déjà en service avant le 2 décembre 2027", "longDescription": "Exception transitoire, art. 111, §2 (version consolidée) : un système d'IA à haut risque mis sur le marché ou mis en service AVANT le 2 décembre 2027 n'est soumis au règlement que si, à compter de cette date, il subit d'importantes modifications de sa conception. Le considérant 177 précise que cette notion équivaut sur le fond à la « modification substantielle » de l'art. 3, point 23. Les systèmes destinés à être utilisés par des autorités publiques doivent, eux, être mis en conformité au plus tard le 2 août 2030. Les interdictions de l'art. 5 restent applicables dans tous les cas.", "position": {"x": 2700, "y": 600}, "color": "#7F8C8D", "classes": ["Jalons temporels"], "nodeTypeDescriptionId": "1000000001"}], "arcs": [{"thickness": 0.0, "sourceNodeId": "0", "targetNodeId": "1", "description": "conduit à", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "1", "targetNodeId": "4", "description": "si non", "color": null, "answer": "non"}, {"thickness": 2.0, "sourceNodeId": "1", "targetNodeId": "2", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 1.5, "sourceNodeId": "2", "targetNodeId": "5", "description": "si non", "color": null, "answer": "non"}, {"thickness": 2.0, "sourceNodeId": "2", "targetNodeId": "3", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 1.5, "sourceNodeId": "3", "targetNodeId": "6", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 2.0, "sourceNodeId": "3", "targetNodeId": "7", "description": "si non", "color": null, "answer": "non"}, {"thickness": 0.0, "sourceNodeId": "7", "targetNodeId": "8", "description": "se vérifie par", "color": null, "answer": null}, {"thickness": 2.0, "sourceNodeId": "8", "targetNodeId": "11", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 2.0, "sourceNodeId": "8", "targetNodeId": "9", "description": "si non", "color": null, "answer": "non"}, {"thickness": 2.0, "sourceNodeId": "9", "targetNodeId": "11", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 2.0, "sourceNodeId": "9", "targetNodeId": "10", "description": "si non", "color": null, "answer": "non"}, {"thickness": 2.0, "sourceNodeId": "10", "targetNodeId": "11", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 2.0, "sourceNodeId": "10", "targetNodeId": "12", "description": "si non", "color": null, "answer": "non"}, {"thickness": 2.0, "sourceNodeId": "12", "targetNodeId": "13", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 2.0, "sourceNodeId": "12", "targetNodeId": "14", "description": "si non", "color": null, "answer": "non"}, {"thickness": 2.0, "sourceNodeId": "14", "targetNodeId": "15", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 2.0, "sourceNodeId": "15", "targetNodeId": "17", "description": "si non", "color": null, "answer": "non"}, {"thickness": 2.0, "sourceNodeId": "15", "targetNodeId": "16", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 2.0, "sourceNodeId": "16", "targetNodeId": "17", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 1.5, "sourceNodeId": "16", "targetNodeId": "18", "description": "si non", "color": null, "answer": "non"}, {"thickness": 2.0, "sourceNodeId": "14", "targetNodeId": "19", "description": "si non", "color": null, "answer": "non"}, {"thickness": 1.0, "sourceNodeId": "13", "targetNodeId": "19", "description": "puis vérifier", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "17", "targetNodeId": "19", "description": "puis vérifier", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "18", "targetNodeId": "19", "description": "puis vérifier", "color": null, "answer": null}, {"thickness": 0.0, "sourceNodeId": "19", "targetNodeId": "20", "description": "se vérifie par", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "20", "targetNodeId": "24", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 0.0, "sourceNodeId": "19", "targetNodeId": "21", "description": "se vérifie par", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "21", "targetNodeId": "24", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 0.0, "sourceNodeId": "19", "targetNodeId": "22", "description": "se vérifie par", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "22", "targetNodeId": "24", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 0.0, "sourceNodeId": "19", "targetNodeId": "23", "description": "se vérifie par", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "23", "targetNodeId": "24", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 1.0, "sourceNodeId": "23", "targetNodeId": "25", "description": "si aucun cas", "color": null, "answer": "non"}, {"thickness": 1.0, "sourceNodeId": "24", "targetNodeId": "26", "description": "puis vérifier", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "25", "targetNodeId": "26", "description": "puis vérifier", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "26", "targetNodeId": "27", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 1.5, "sourceNodeId": "27", "targetNodeId": "28", "description": "si non", "color": null, "answer": "non"}, {"thickness": 2.0, "sourceNodeId": "27", "targetNodeId": "29", "description": "si oui", "color": null, "answer": "oui"}, {"thickness": 1.0, "sourceNodeId": "28", "targetNodeId": "30", "description": "puis déterminer", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "29", "targetNodeId": "30", "description": "puis déterminer", "color": null, "answer": null}, {"thickness": 2.0, "sourceNodeId": "26", "targetNodeId": "30", "description": "si non", "color": null, "answer": "non"}, {"thickness": 1.5, "sourceNodeId": "30", "targetNodeId": "31", "description": "se vérifie par", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "31", "targetNodeId": "32", "description": "oriente vers", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "31", "targetNodeId": "33", "description": "oriente vers", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "31", "targetNodeId": "35", "description": "oriente vers", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "31", "targetNodeId": "36", "description": "oriente vers", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "31", "targetNodeId": "37", "description": "oriente vers", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "33", "targetNodeId": "34", "description": "se décline en", "color": null, "answer": null}, {"thickness": 2.0, "sourceNodeId": "32", "targetNodeId": "38", "description": "impose", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "38", "targetNodeId": "39", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "39", "targetNodeId": "40", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "40", "targetNodeId": "41", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "41", "targetNodeId": "42", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "42", "targetNodeId": "43", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "43", "targetNodeId": "44", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "44", "targetNodeId": "45", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "45", "targetNodeId": "46", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "46", "targetNodeId": "47", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "47", "targetNodeId": "48", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "48", "targetNodeId": "49", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "49", "targetNodeId": "50", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "50", "targetNodeId": "51", "description": "puis", "color": null, "answer": null}, {"thickness": 2.0, "sourceNodeId": "33", "targetNodeId": "52", "description": "impose", "color": null, "answer": null}, {"thickness": 2.0, "sourceNodeId": "34", "targetNodeId": "55", "description": "impose", "color": null, "answer": null}, {"thickness": 2.0, "sourceNodeId": "34", "targetNodeId": "56", "description": "impose", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "52", "targetNodeId": "53", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "53", "targetNodeId": "54", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "54", "targetNodeId": "55", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "55", "targetNodeId": "56", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "56", "targetNodeId": "57", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "57", "targetNodeId": "58", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "58", "targetNodeId": "59", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "59", "targetNodeId": "60", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "60", "targetNodeId": "61", "description": "puis", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "61", "targetNodeId": "62", "description": "puis", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "42", "targetNodeId": "52", "description": "alimente", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "51", "targetNodeId": "60", "description": "se coordonne avec", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "11", "targetNodeId": "63", "description": "est applicable depuis le", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "25", "targetNodeId": "63", "description": "est applicable depuis le", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "28", "targetNodeId": "64", "description": "est applicable depuis le", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "29", "targetNodeId": "64", "description": "est applicable depuis le", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "24", "targetNodeId": "65", "description": "est applicable depuis le", "color": null, "answer": null}, {"thickness": 2.0, "sourceNodeId": "17", "targetNodeId": "66", "description": "devient applicable le", "color": null, "answer": null}, {"thickness": 1.0, "sourceNodeId": "18", "targetNodeId": "66", "description": "devient applicable le", "color": null, "answer": null}, {"thickness": 2.0, "sourceNodeId": "13", "targetNodeId": "67", "description": "devient applicable le", "color": null, "answer": null}, {"thickness": 1.5, "sourceNodeId": "66", "targetNodeId": "68", "description": "sauf pour un", "color": null, "answer": null}], "meta": {"0": {"kind": "start", "phase": 0}, "1": {"kind": "decision", "phase": 0}, "2": {"kind": "decision", "phase": 0}, "3": {"kind": "decision", "phase": 0}, "4": {"kind": "outcome", "phase": 0, "regime": "Hors champ", "why": "Le système ne relève pas de la définition de l'art. 3, 1)."}, "5": {"kind": "outcome", "phase": 0, "regime": "Hors champ", "why": "Aucun rattachement territorial au sens de l'art. 2, §1."}, "6": {"kind": "outcome", "phase": 0, "regime": "Hors champ", "why": "Exclusion de l'art. 2, §3 à §12."}, "7": {"kind": "info", "phase": 1}, "8": {"kind": "decision", "phase": 1}, "9": {"kind": "decision", "phase": 1}, "10": {"kind": "decision", "phase": 1}, "11": {"kind": "outcome", "phase": 1, "regime": "Interdit", "why": "Le système relève de l'article 5.", "amende": "35 M€ ou 7 % du CA mondial", "date": "applicable depuis le 2 février 2025"}, "12": {"kind": "decision", "phase": 2}, "13": {"kind": "outcome", "phase": 2, "regime": "Haut risque — annexe I", "why": "Art. 6, §1 : composant de sécurité soumis à évaluation tierce.", "amende": "15 M€ ou 3 % du CA mondial", "date": "applicable au 2 août 2028"}, "14": {"kind": "decision", "phase": 2}, "15": {"kind": "decision", "phase": 2}, "16": {"kind": "decision", "phase": 2}, "17": {"kind": "outcome", "phase": 2, "regime": "Haut risque — annexe III", "why": "Art. 6, §2 : le système relève d'un domaine listé, sans dérogation applicable.", "amende": "15 M€ ou 3 % du CA mondial", "date": "applicable au 2 décembre 2027, sauf système déjà en service avant cette date et non modifié ensuite de façon importante (art. 111, §2)"}, "18": {"kind": "outcome", "phase": 2, "regime": "Non haut risque — dérogation art. 6, §3", "why": "Une condition de l'art. 6, §3 est remplie et le système ne fait pas de profilage.", "amende": "15 M€ ou 3 % du CA mondial en cas de qualification erronée", "date": "obligation d'enregistrement au 2 décembre 2027"}, "19": {"kind": "info", "phase": 3}, "20": {"kind": "check", "phase": 3}, "21": {"kind": "check", "phase": 3}, "22": {"kind": "check", "phase": 3}, "23": {"kind": "check", "phase": 3}, "24": {"kind": "outcome", "phase": 3, "regime": "Transparence art. 50", "why": "Un cas de l'art. 50 est réuni.", "amende": "15 M€ ou 3 % du CA mondial", "date": "applicable depuis le 2 août 2026"}, "25": {"kind": "outcome", "phase": 3, "regime": "Risque minimal", "why": "Aucun régime spécifique n'est déclenché.", "amende": "aucune", "date": "art. 4 applicable depuis le 2 février 2025"}, "26": {"kind": "decision", "phase": 4}, "27": {"kind": "decision", "phase": 4}, "28": {"kind": "outcome", "phase": 4, "regime": "Modèle à usage général", "why": "Art. 53.", "amende": "15 M€ ou 3 % du CA mondial (art. 101)", "date": "applicable depuis le 2 août 2025"}, "29": {"kind": "outcome", "phase": 4, "regime": "Modèle à usage général à risque systémique", "why": "Art. 51 et 55.", "amende": "15 M€ ou 3 % du CA mondial (art. 101)", "date": "applicable depuis le 2 août 2025"}, "30": {"kind": "decision", "phase": 5}, "31": {"kind": "decision", "phase": 5}, "32": {"kind": "role", "phase": 5}, "33": {"kind": "role", "phase": 5}, "34": {"kind": "role", "phase": 5}, "35": {"kind": "role", "phase": 5}, "36": {"kind": "role", "phase": 5}, "37": {"kind": "role", "phase": 5}, "38": {"kind": "obligation", "phase": 6}, "39": {"kind": "obligation", "phase": 6}, "40": {"kind": "obligation", "phase": 6}, "41": {"kind": "obligation", "phase": 6}, "42": {"kind": "obligation", "phase": 6}, "43": {"kind": "obligation", "phase": 6}, "44": {"kind": "obligation", "phase": 6}, "45": {"kind": "obligation", "phase": 6}, "46": {"kind": "obligation", "phase": 6}, "47": {"kind": "obligation", "phase": 6}, "48": {"kind": "obligation", "phase": 6}, "49": {"kind": "obligation", "phase": 6}, "50": {"kind": "obligation", "phase": 6}, "51": {"kind": "obligation", "phase": 6}, "52": {"kind": "obligation", "phase": 7}, "53": {"kind": "obligation", "phase": 7}, "54": {"kind": "obligation", "phase": 7}, "55": {"kind": "obligation", "phase": 7}, "56": {"kind": "obligation", "phase": 7}, "57": {"kind": "obligation", "phase": 7}, "58": {"kind": "obligation", "phase": 7}, "59": {"kind": "obligation", "phase": 7}, "60": {"kind": "obligation", "phase": 7}, "61": {"kind": "obligation", "phase": 7}, "62": {"kind": "obligation", "phase": 7}, "63": {"kind": "milestone", "phase": 8}, "64": {"kind": "milestone", "phase": 8}, "65": {"kind": "milestone", "phase": 8}, "66": {"kind": "milestone", "phase": 8}, "67": {"kind": "milestone", "phase": 8}, "68": {"kind": "milestone", "phase": 8}}, "order": ["START", "D1", "D2", "D3", "OUT_DEF", "OUT_TERR", "OUT_EXCL", "I_LIST", "I_EMO", "I_SCORE", "I_AUTRE", "OUT_INTERDIT", "D6", "OUT_HR1", "D7", "D8", "D8B", "OUT_HR3", "OUT_DEROG", "T_INTRO", "T1", "T2", "T3", "T4", "OUT_TRANSP", "OUT_MIN", "G1", "G2", "OUT_IAUG", "OUT_IAUG_S", "R_Q", "R_REQ", "R_FOURN", "R_DEPLOY", "R_EMPL", "R_IMPORT", "R_DISTRIB", "R_MANDAT", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "P10", "P11", "T2025_02", "T2025_08", "T2026_08", "T2027_12", "T2028_08", "T_111_2"], "phases": ["Champ d'application", "Pratiques interdites", "Qualification haut risque", "Transparence (art. 50)", "Modèles à usage général", "Rôle de l'opérateur", "Obligations — fournisseur", "Obligations — déployeur / employeur", "Échéances"], "classes": ["Champ d'application", "Pratiques interdites", "Qualification du risque", "Rôle de l'opérateur", "Parcours fournisseur", "Parcours déployeur et employeur", "Issues et régimes", "Jalons temporels"], "question": "Un système d'IA donné relève-t-il de l'AI Act, sous quel régime, et quelles obligations pèsent alors sur quel opérateur, à quelle échéance ?"};
+// index par clé technique, via l'ordre d'insertion exporté par le constructeur
+const byKey = {}; DATA.order.forEach((k,i)=>byKey[k]=DATA.nodes[i]);
+function nd(k){return byKey[k];}
+function txt(k){return nd(k).longDescription;}
+function ttl(k){return nd(k).label;}
+
+/* ---------------- machine de parcours ---------------- */
+const PHASES = DATA.phases;
+const STEPS = [
+  {id:'D1',  phase:0, kind:'yn', no:{end:'OUT_DEF'}},
+  {id:'D2',  phase:0, kind:'yn', no:{end:'OUT_TERR'}},
+  {id:'D3',  phase:0, kind:'yn', yes:{end:'OUT_EXCL'}},
+  {id:'I_EMO',  phase:1, kind:'yn', yes:{end:'OUT_INTERDIT'}},
+  {id:'I_SCORE',phase:1, kind:'yn', yes:{end:'OUT_INTERDIT'}},
+  {id:'I_AUTRE',phase:1, kind:'yn', yes:{end:'OUT_INTERDIT'}},
+  {id:'D6',  phase:2, kind:'yn', yes:{set:'OUT_HR1', goto:'TRANSP'}},
+  {id:'D7',  phase:2, kind:'yn', no:{set:null, goto:'TRANSP'}},
+  {id:'D8',  phase:2, kind:'yn', no:{set:'OUT_HR3', goto:'TRANSP'}},
+  {id:'D8B', phase:2, kind:'yn', yes:{set:'OUT_HR3', goto:'TRANSP'},
+                                  no:{set:'OUT_DEROG', goto:'TRANSP'}},
+  {id:'TRANSP', phase:3, kind:'multi', items:['T1','T2','T3','T4'], intro:'T_INTRO'},
+  {id:'G1',  phase:4, kind:'yn', no:{goto:'R_Q'}},
+  {id:'G2',  phase:4, kind:'yn', yes:{setg:'OUT_IAUG_S'}, no:{setg:'OUT_IAUG'}},
+  {id:'R_Q', phase:5, kind:'role'},
+  {id:'R_REQ',phase:5, kind:'yn'},
+  {id:'EMPL', phase:5, kind:'yn', only:'deployeur', src:'R_EMPL',
+   q:"Le système est-il utilisé sur le lieu de travail, et êtes-vous l'employeur ?"},
+  {id:'AIDF', phase:5, kind:'yn', only:'deployeur', src:'P6',
+   q:"Êtes-vous un organisme de droit public, une entité privée fournissant des services publics, ou déployeur des points 5.b ou 5.c de l'annexe III ?"},
+  {id:'DONE', phase:6, kind:'result'}
+];
+const ROLES = [
+  ['R_FOURN','fournisseur'],['R_DEPLOY','deployeur'],['R_IMPORT','importateur'],
+  ['R_DISTRIB','distributeur'],['R_MANDAT','mandataire']
+];
+const OBL_F = ['F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F11','F12','F13','F14'];
+const OBL_P = ['P1','P2','P3','P4','P5','P6','P7','P8','P9','P10','P11'];
+
+let st = null;
+function reset0(){
+  st = {i:0, answers:[], regime:undefined, gpai:null, transp:[], role:null,
+        requal:false, employeur:false, aidf:false, terminal:null};
+}
+function reset(){ reset0(); render(); }
+function cur(){ return STEPS[st.i]; }
+
+function advance(){
+  st.i++;
+  while(st.i<STEPS.length){
+    const s=STEPS[st.i];
+    if(s.only==='deployeur' && st.role!=='deployeur'){ st.i++; continue; }
+    break;
+  }
+}
+function gotoId(id){
+  const k=STEPS.findIndex(s=>s.id===id);
+  st.i = k<0 ? STEPS.length-1 : k;
+  const s=STEPS[st.i];
+  if(s && s.only==='deployeur' && st.role!=='deployeur') advance();
+}
+/* applique une réponse oui/non : effets de bord puis branchement */
+function stepYN(val){
+  const s=cur();
+  if(s.id==='R_REQ') st.requal = (val==='oui');
+  if(s.id==='EMPL')  st.employeur = (val==='oui');
+  if(s.id==='AIDF')  st.aidf = (val==='oui');
+  const br = val==='oui' ? s.yes : s.no;
+  if(br){
+    if(br.end){ st.terminal=br.end; st.i=STEPS.length-1; return; }
+    if('set'  in br) st.regime = br.set;
+    if('setg' in br) st.gpai   = br.setg;
+    if(br.goto){ gotoId(br.goto); return; }
+  }
+  advance();
+}
+function answer(val){
+  const s=cur();
+  st.answers.push({step:s.id, label:s.q||ttl(s.src||s.id), value:val});
+  stepYN(val); render();
+}
+function pickRole(key){
+  const rec = ROLES.find(r=>r[1]===key);
+  st.role = key;
+  st.answers.push({step:'R_Q', label:'Rôle dans la chaîne de valeur',
+                   value:'choix', role:key, node:rec[0]});
+  advance(); render();
+}
+function finishMulti(){
+  st.answers.push({step:'TRANSP', label:'Obligations de transparence (art. 50)',
+                   value:st.transp.length?'oui':'non', list:st.transp.slice()});
+  advance(); render();
+}
+/* rejoue les k premières réponses depuis un état neuf */
+function backTo(k){
+  const replay = st.answers.slice(0,k);
+  reset0();
+  for(const a of replay){
+    const idx = STEPS.findIndex(x=>x.id===a.step);
+    if(idx>=0) st.i = idx;
+    st.answers.push(a);
+    if(a.step==='TRANSP'){ st.transp=(a.list||[]).slice(); advance(); continue; }
+    if(a.step==='R_Q'){ st.role=a.role; advance(); continue; }
+    stepYN(a.value);
+    if(st.terminal) break;
+  }
+  render();
+}
+
+/* ---------------- rendu ---------------- */
+const main=document.getElementById('main');
+const stepper=document.getElementById('stepper');
+const trail=document.getElementById('trail');
+const PH=["Champ d'application","Interdictions","Haut risque","Transparence",
+          "Usage général","Rôle et obligations","Synthèse"];
+
+function renderStepper(){
+  const p = st.terminal ? 6 : cur().phase;
+  stepper.innerHTML='';
+  PH.forEach((nm,i)=>{
+    const d=document.createElement('div');
+    d.className='step'+(i<p?' done':i===p?' now':'');
+    d.innerHTML='<div class="bar"></div><span class="num">'+String(i+1).padStart(2,'0')+
+                '</span><span class="nm">'+nm+'</span>';
+    stepper.appendChild(d);
+  });
+}
+function renderTrail(){
+  trail.innerHTML='';
+  if(!st.answers.length){trail.innerHTML='<li class="empty">Aucune réponse pour l’instant.</li>';return;}
+  st.answers.forEach((a,k)=>{
+    const li=document.createElement('li');
+    const badge=document.createElement('span');
+    badge.className='ans '+(a.value==='oui'?'oui':'non');
+    badge.textContent = a.value==='oui'?'oui':a.value==='non'?'non':'choix';
+    const b=document.createElement('button');
+    b.textContent=a.label; b.title='Revenir à cette question';
+    b.addEventListener('click',()=>backTo(k));
+    li.appendChild(badge);li.appendChild(b);trail.appendChild(li);
+  });
+}
+function card(tag,title,body){
+  return '<div class="card"><span class="tag">'+tag+'</span><h2>'+title+'</h2>'+
+         '<div class="why">'+body+'</div>';
+}
+function artOf(t){ const m=t.match(/^(Art\.[^.]*\.(?:\s*§[^.]*\.)?)/); return m?m[1]:''; }
+
+function render(){
+  renderStepper(); renderTrail(); highlightPath();
+  const s=cur();
+  if(st.terminal || s.kind==='result'){ renderResult(); return; }
+  if(s.kind==='yn'){
+    const src=s.src||s.id;
+    main.innerHTML = card(PHASES[s.phase], s.q||ttl(src), txt(src)) +
+      '<div class="answers"><button class="btn yes" data-v="oui">Oui</button>'+
+      '<button class="btn" data-v="non">Non</button></div></div>';
+    main.querySelectorAll('.answers .btn').forEach(b=>
+      b.addEventListener('click',()=>answer(b.dataset.v)));
+    return;
+  }
+  if(s.kind==='multi'){
+    let h = card(PHASES[s.phase],'Quelles obligations de transparence s’appliquent ?',
+                 txt(s.intro)) + '<div class="opts">';
+    s.items.forEach(k=>{
+      h+='<button class="opt'+(st.transp.includes(k)?' sel':'')+'" data-k="'+k+'">'+
+         '<span class="box">✓</span><span><b>'+ttl(k)+'</b><span>'+txt(k)+'</span></span></button>';
+    });
+    h+='</div><div class="answers"><button class="btn yes" id="mnext">Continuer</button>'+
+       '<button class="btn" id="mnone">Aucun de ces cas</button></div></div>';
+    main.innerHTML=h;
+    main.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+      const k=b.dataset.k;
+      st.transp = st.transp.includes(k)?st.transp.filter(x=>x!==k):st.transp.concat([k]);
+      b.classList.toggle('sel');
+    }));
+    document.getElementById('mnone').addEventListener('click',()=>{st.transp=[];finishMulti();});
+    document.getElementById('mnext').addEventListener('click',finishMulti);
+    return;
+  }
+  if(s.kind==='role'){
+    let h = card(PHASES[s.phase], ttl('R_Q'), txt('R_Q')) + '<div class="opts">';
+    ROLES.forEach(([k,key])=>{
+      h+='<button class="opt" data-k="'+key+'"><span class="box"></span>'+
+         '<span><b>'+ttl(k)+'</b><span>'+txt(k)+'</span></span></button>';
+    });
+    h+='</div></div>';
+    main.innerHTML=h;
+    main.querySelectorAll('.opt').forEach(b=>
+      b.addEventListener('click',()=>pickRole(b.dataset.k)));
+    return;
+  }
+}
+/* --------- synthèse --------- */
+const LS='aiact-flow-checks';
+function loadChecks(){try{return JSON.parse(localStorage.getItem(LS)||'{}');}catch(e){return{};}}
+function saveChecks(o){try{localStorage.setItem(LS,JSON.stringify(o));}catch(e){}}
+
+function renderResult(){
+  const term = st.terminal;
+  let key = term || st.regime || (st.transp.length?'OUT_TRANSP':'OUT_MIN');
+  const n = nd(key);
+  const cls = {OUT_INTERDIT:'v-stop',OUT_HR1:'v-hr',OUT_HR3:'v-hr',OUT_DEROG:'v-light',
+               OUT_TRANSP:'v-light',OUT_MIN:'v-neut',OUT_DEF:'v-neut',OUT_TERR:'v-neut',
+               OUT_EXCL:'v-neut'}[key]||'v-neut';
+  const ico = {OUT_INTERDIT:'✕',OUT_HR1:'!',OUT_HR3:'!',OUT_DEROG:'~',OUT_TRANSP:'~'}[key]||'·';
+  const m = DATA.meta[n.id]||{};
+  let h='<div class="result"><span class="tag">Synthèse</span>';
+  h+='<div class="verdict '+cls+'"><span class="ico">'+ico+'</span><div><h2>'+n.label+'</h2>'+
+     '<p>'+(m.why||'')+'</p></div></div>';
+
+  const facts=[];
+  facts.push(['Régime', m.regime||n.label]);
+  if(m.date) facts.push(['Échéance', m.date]);
+  if(m.amende) facts.push(['Sanction maximale', m.amende]);
+  if(st.role) facts.push(['Rôle', st.requal?'Fournisseur (requalifié, art. 25)'
+                                 : ttl(ROLES.find(r=>r[1]===st.role)[0])]);
+  if(st.gpai) facts.push(['Modèle à usage général', nd(st.gpai).label]);
+  h+='<div class="facts">'+facts.map(([k,v])=>
+     '<div class="fact"><span>'+k+'</span><b class="'+(k==='Échéance'||k==='Sanction maximale'?'mono':'')+'">'+v+'</b></div>').join('')+'</div>';
+
+  h+='<p class="why">'+n.longDescription+'</p>';
+
+  if(st.transp.length){
+    h+='<h3>Transparence — article 50</h3>';
+    st.transp.forEach(k=>{h+=chkRow(k,false);});
+  }
+  if(st.gpai){
+    h+='<h3>Modèle d’IA à usage général</h3>'+chkRow(st.gpai,false);
+  }
+  const terminalHors = ['OUT_DEF','OUT_TERR','OUT_EXCL'].includes(key);
+  const interdit = key==='OUT_INTERDIT';
+  if(!terminalHors && !interdit && st.role){
+    if(st.role==='fournisseur'||st.requal){
+      h+='<h3>Obligations du fournisseur — articles 9 à 17, 43 à 49, 72 et 73</h3>';
+      OBL_F.forEach(k=>{h+=chkRow(k,false);});
+    } else if(st.role==='deployeur'){
+      h+='<h3>Obligations du déployeur — article 26 et suivants</h3>';
+      OBL_P.forEach(k=>{
+        if((k==='P4'||k==='P5') && !st.employeur) return;
+        if(k==='P6' && !st.aidf) return;
+        h+=chkRow(k, k==='P4'||k==='P5'||k==='P6'||k==='P10');
+      });
+    } else {
+      const art={importateur:['R_IMPORT','Article 23'],distributeur:['R_DISTRIB','Article 24'],
+                 mandataire:['R_MANDAT','Article 22']}[st.role];
+      h+='<h3>Obligations — '+art[1]+'</h3>'+chkRow(art[0],false);
+    }
+  }
+  if(interdit){
+    h+='<h3>Ce qu’il faut faire</h3><div class="chk"><div class="txt">'+
+       '<b>Ne pas mettre sur le marché, ne pas mettre en service, ne pas utiliser</b>'+
+       '<p>L’interdiction de l’article 5 est absolue. Ni évaluation de conformité, ni mesure '+
+       'd’atténuation, ni consentement des personnes ne la lèvent. La seule voie est de '+
+       'reconcevoir la fonctionnalité pour qu’elle sorte du champ de l’interdiction — par exemple '+
+       'en supprimant toute inférence émotionnelle, ou en cantonnant strictement un score à son '+
+       'contexte de collecte d’origine.</p></div></div>';
+  }
+  h+='<div class="foot"><button class="btn" id="again">Recommencer le parcours</button></div></div>';
+  main.innerHTML=h;
+  document.getElementById('again').addEventListener('click',reset);
+  const checks=loadChecks();
+  main.querySelectorAll('.chk input').forEach(cb=>{
+    cb.checked=!!checks[cb.dataset.k];
+    cb.closest('.chk').classList.toggle('done',cb.checked);
+    cb.addEventListener('change',()=>{
+      const o=loadChecks(); o[cb.dataset.k]=cb.checked; saveChecks(o);
+      cb.closest('.chk').classList.toggle('done',cb.checked);
+    });
+  });
+}
+function chkRow(k,flag){
+  const n=nd(k);
+  return '<div class="chk'+(flag?' flag':'')+'"><input type="checkbox" data-k="'+k+
+         '" aria-label="Fait"><div class="txt"><b>'+n.label+'</b><p>'+n.longDescription+'</p></div></div>';
+}
+
+/* ---------------- flowchart SVG ---------------- */
+const NS='http://www.w3.org/2000/svg';
+const stage=document.getElementById('stage');
+const gRoot=document.createElementNS(NS,'g');
+const gCap=document.createElementNS(NS,'g'),gE=document.createElementNS(NS,'g'),
+      gN=document.createElementNS(NS,'g');
+gRoot.appendChild(gCap);gRoot.appendChild(gE);gRoot.appendChild(gN);stage.appendChild(gRoot);
+const NW=252,LH=13,PY=10;
+function wrapT(t,m){const w=t.split(' '),o=[];let c='';
+  for(const x of w){if((c+' '+x).trim().length>m){if(c)o.push(c);c=x;}else c=(c?c+' ':'')+x;}
+  if(c)o.push(c);return o.slice(0,4);}
+const L={};
+DATA.nodes.forEach(n=>{const li=wrapT(n.label,34);
+  L[n.id]={x:n.position.x,y:n.position.y,w:NW,h:PY*2+li.length*LH,li};});
+DATA.phases.forEach((p,i)=>{
+  const t=document.createElementNS(NS,'text');
+  t.setAttribute('class','phase-cap');t.setAttribute('x',60+i*330);t.setAttribute('y',24);
+  t.setAttribute('fill','currentColor');t.setAttribute('opacity','0.45');
+  wrapT(p,26).forEach((ln,j)=>{const ts=document.createElementNS(NS,'tspan');
+    ts.setAttribute('x',60+i*330);ts.setAttribute('y',6+j*20);ts.textContent=ln;t.appendChild(ts);});
+  gCap.appendChild(t);
+});
+const eEls=[];
+DATA.arcs.forEach(a=>{
+  const A=L[a.sourceNodeId],B=L[a.targetNodeId];
+  const s={x:A.x+A.w,y:A.y+A.h/2}, e={x:B.x,y:B.y+B.h/2};
+  const same = a.sourceNodeId!==a.targetNodeId && Math.abs(A.x-B.x)<1;
+  let d;
+  if(same){ d='M'+(A.x+A.w/2)+','+(A.y+A.h)+' L'+(B.x+B.w/2)+','+B.y; }
+  else { const mx=(s.x+e.x)/2; d='M'+s.x+','+s.y+' C'+mx+','+s.y+' '+mx+','+e.y+' '+e.x+','+e.y; }
+  const p=document.createElementNS(NS,'path');
+  p.setAttribute('d',d);p.setAttribute('class','edge');
+  p.setAttribute('stroke','currentColor');p.setAttribute('opacity','0.2');
+  p.setAttribute('stroke-width',(1+(a.thickness||0)*0.4).toFixed(2));
+  gE.appendChild(p);
+  let lab=null;
+  if(a.answer){
+    lab=document.createElementNS(NS,'text');lab.setAttribute('class','elab');
+    lab.setAttribute('x',same?(A.x+A.w/2+8):((s.x+e.x)/2));
+    lab.setAttribute('y',same?(A.y+A.h+14):((s.y+e.y)/2-4));
+    lab.setAttribute('text-anchor','middle');lab.setAttribute('fill','currentColor');
+    lab.setAttribute('opacity','0.5');lab.textContent=a.answer;
+    gE.appendChild(lab);
+  }
+  eEls.push({a,p,lab});
+});
+const nEls={};
+DATA.nodes.forEach(n=>{
+  const l=L[n.id];const g=document.createElementNS(NS,'g');
+  g.setAttribute('transform','translate('+l.x+','+l.y+')');
+  const r=document.createElementNS(NS,'rect');
+  r.setAttribute('width',l.w);r.setAttribute('height',l.h);r.setAttribute('rx','4');
+  r.setAttribute('fill',n.color);r.setAttribute('fill-opacity','0.13');
+  r.setAttribute('stroke',n.color);r.setAttribute('stroke-width','1');
+  g.appendChild(r);
+  const b=document.createElementNS(NS,'rect');
+  b.setAttribute('width','4');b.setAttribute('height',l.h);b.setAttribute('rx','2');
+  b.setAttribute('fill',n.color);g.appendChild(b);
+  const t=document.createElementNS(NS,'text');t.setAttribute('class','n-label');
+  t.setAttribute('fill','currentColor');
+  l.li.forEach((ln,i)=>{const ts=document.createElementNS(NS,'tspan');
+    ts.setAttribute('x','12');ts.setAttribute('y',PY+LH*(i+0.75));ts.textContent=ln;t.appendChild(ts);});
+  g.appendChild(t);gN.appendChild(g);nEls[n.id]={g,r};
+});
+let vx=0,vy=0,vk=1;
+function av(){gRoot.setAttribute('transform','translate('+vx+','+vy+') scale('+vk+')');
+  gN.querySelectorAll('.n-label').forEach(t=>t.style.display=vk>0.4?'':'none');}
+function fitAll(){
+  let x0=1e9,y0=-30,x1=-1e9,y1=-1e9;
+  DATA.nodes.forEach(n=>{const l=L[n.id];x0=Math.min(x0,l.x);x1=Math.max(x1,l.x+l.w);
+    y1=Math.max(y1,l.y+l.h);});
+  const R=stage.getBoundingClientRect(),pad=30;
+  vk=Math.max(0.14,Math.min((R.width-pad*2)/(x1-x0),1.2));
+  vx=pad-x0*vk; vy=pad-y0*vk; av();
+}
+function pathIds(){
+  const ids=new Set();
+  const add=k=>{const n=nd(k); if(n) ids.add(n.id);};
+  st.answers.forEach(a=>{ if(a.step==='TRANSP'){add('T_INTRO');(a.list||[]).forEach(add);}
+                          else if(a.step==='R_Q'){add('R_Q');add(a.node);}
+                          else add(a.step); });
+  add('START');
+  if(st.terminal) add(st.terminal);
+  if(st.regime) add(st.regime);
+  if(st.gpai) add(st.gpai);
+  if(!st.terminal && st.i>=STEPS.length-1){
+    const key=st.regime||(st.transp.length?'OUT_TRANSP':'OUT_MIN'); add(key);
+    if(st.role==='fournisseur'||st.requal) OBL_F.forEach(add);
+    else if(st.role==='deployeur') OBL_P.forEach(k=>{
+      if((k==='P4'||k==='P5')&&!st.employeur)return; if(k==='P6'&&!st.aidf)return; add(k);});
+  }
+  return ids;
+}
+function highlightPath(){
+  const ids=pathIds(); const on=ids.size>1;
+  DATA.nodes.forEach(n=>{const e=nEls[n.id];
+    const hit=ids.has(n.id);
+    e.g.setAttribute('opacity', !on?'1':(hit?'1':'0.22'));
+    e.r.setAttribute('stroke-width',hit&&on?'2.2':'1');
+    e.r.setAttribute('fill-opacity',hit&&on?'0.28':'0.13');});
+  eEls.forEach(({a,p,lab})=>{
+    const hit=ids.has(a.sourceNodeId)&&ids.has(a.targetNodeId);
+    p.setAttribute('opacity', !on?'0.2':(hit?'0.8':'0.06'));
+    p.setAttribute('stroke',hit&&on?'var(--accent)':'currentColor');
+    if(lab)lab.setAttribute('opacity', !on?'0.5':(hit?'0.9':'0.08'));});
+}
+function focusPath(){
+  const ids=pathIds(); let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  ids.forEach(id=>{const l=L[id];if(!l)return;
+    x0=Math.min(x0,l.x);y0=Math.min(y0,l.y);x1=Math.max(x1,l.x+l.w);y1=Math.max(y1,l.y+l.h);});
+  if(x0>x1){fitAll();return;}
+  const R=stage.getBoundingClientRect(),pad=40;
+  vk=Math.max(0.16,Math.min(Math.min((R.width-pad*2)/(x1-x0),(R.height-pad*2)/(y1-y0)),1.1));
+  vx=(R.width-(x1-x0)*vk)/2-x0*vk; vy=(R.height-(y1-y0)*vk)/2-y0*vk; av();
+}
+let dr=null;
+stage.addEventListener('pointerdown',e=>{dr={x:e.clientX,y:e.clientY,vx,vy};
+  stage.setPointerCapture(e.pointerId);stage.classList.add('dragging');});
+stage.addEventListener('pointermove',e=>{if(!dr)return;
+  vx=dr.vx+(e.clientX-dr.x);vy=dr.vy+(e.clientY-dr.y);av();});
+stage.addEventListener('pointerup',()=>{dr=null;stage.classList.remove('dragging');});
+stage.addEventListener('wheel',e=>{e.preventDefault();
+  const R=stage.getBoundingClientRect(),mx=e.clientX-R.left,my=e.clientY-R.top;
+  const f=Math.exp(-e.deltaY*0.0016),nk=Math.max(0.14,Math.min(2.2,vk*f));
+  vx=mx-(mx-vx)*(nk/vk);vy=my-(my-vy)*(nk/vk);vk=nk;av();},{passive:false});
+document.getElementById('fc-fit').addEventListener('click',fitAll);
+document.getElementById('fc-path').addEventListener('click',focusPath);
+
+reset();
+requestAnimationFrame(fitAll);
+window.addEventListener('resize',fitAll);
+</script>
+
+</body>
+</html>
