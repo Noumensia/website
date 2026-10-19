@@ -6,14 +6,14 @@
 <base href="/">
 <title>L'AI Act en RH, sans le brouillard — Noumensia</title>
 <meta name="description" content="Ce qui est tranché et ce qui ne l'est pas dans l'AI Act après l'Omnibus, et trois outils construits sur le texte consolidé pour qualifier un outil RH, lister ses obligations et choisir par quoi commencer.">
-<link rel="canonical" href="https://noumensia.com/dossiers/ai-act/">
+<link rel="canonical" href="https://noumensia.com/decryptages/ai-act/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Noumensia">
-<meta property="og:url" content="https://noumensia.com/dossiers/ai-act/">
+<meta property="og:url" content="https://noumensia.com/decryptages/ai-act/">
 <meta property="og:title" content="L'AI Act en RH, sans le brouillard">
 <meta property="og:description" content="Ce qui est tranché et ce qui ne l'est pas dans l'AI Act après l'Omnibus, et trois outils construits sur le texte consolidé pour qualifier un outil RH, lister ses obligations et choisir par quoi commencer.">
-<meta property="og:image" content="https://noumensia.com/images/og-image.png">
+<meta property="og:image" content="https://noumensia.com/images/decryptages/ai-act-cartographie.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/newsreader-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -121,6 +121,18 @@ html[data-theme="light"] .aa-fog__col, html[data-theme="light"] .aa-step, html[d
 html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
 .aa-finding .callout-label{ font-family:var(--font-body); font-size:.72rem; letter-spacing:.05em; font-weight:600;
   text-transform:uppercase; color:var(--bordeaux-vif); margin-bottom:.6rem; display:block; }
+
+/* Hellixmap */
+.aa-hx{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:62rem; }
+@media (max-width:860px){ .aa-hx{ grid-template-columns:1fr; } }
+.aa-hx__card{ display:flex; flex-direction:column; gap:.5rem; padding:1.4rem 1.5rem; border-radius:12px;
+  border:1px solid var(--ardoise-3); background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+  color:var(--blanc-casse); text-decoration:none; transition:border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base); }
+.aa-hx__card:hover{ text-decoration:none; transform:translateY(-3px); border-color:var(--bordeaux-vif); box-shadow:0 10px 30px rgba(0,0,0,.28); }
+.aa-hx__k{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--bordeaux-vif); }
+.aa-hx__t{ font-family:var(--font-display); font-size:1.35rem; font-weight:600; }
+.aa-hx__d{ font-size:.93rem; color:var(--gris-doux); line-height:1.55; }
+html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
 </style>
 <script type="application/ld+json">
 {
@@ -128,23 +140,23 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
   "@graph": [
     {
       "@type": "CollectionPage",
-      "@id": "https://noumensia.com/dossiers/ai-act/#webpage",
-      "url": "https://noumensia.com/dossiers/ai-act/",
+      "@id": "https://noumensia.com/decryptages/ai-act/#webpage",
+      "url": "https://noumensia.com/decryptages/ai-act/",
       "name": "L'AI Act en RH, sans le brouillard — Noumensia",
       "description": "Ce qui est tranché et ce qui ne l'est pas dans l'AI Act après l'Omnibus, et trois outils construits sur le texte consolidé pour qualifier un outil RH, lister ses obligations et choisir par quoi commencer.",
       "inLanguage": "fr-FR",
-      "dateModified": "2026-10-16",
+      "dateModified": "2026-10-19",
       "isPartOf": { "@id": "https://noumensia.com/#website" },
       "about": { "@id": "https://noumensia.com/#org" },
-      "breadcrumb": { "@id": "https://noumensia.com/dossiers/ai-act/#breadcrumb" }
+      "breadcrumb": { "@id": "https://noumensia.com/decryptages/ai-act/#breadcrumb" }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://noumensia.com/dossiers/ai-act/#breadcrumb",
+      "@id": "https://noumensia.com/decryptages/ai-act/#breadcrumb",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://noumensia.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Dossiers", "item": "https://noumensia.com/dossiers" },
-        { "@type": "ListItem", "position": 3, "name": "AI Act", "item": "https://noumensia.com/dossiers/ai-act/" }
+        { "@type": "ListItem", "position": 2, "name": "Décryptages", "item": "https://noumensia.com/decryptages" },
+        { "@type": "ListItem", "position": 3, "name": "AI Act", "item": "https://noumensia.com/decryptages/ai-act/" }
       ]
     }
   ]
@@ -166,7 +178,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
     <ul class="nav-links" id="nav-links">
       <li><a href="/">Accueil</a></li>
       <li><a href="/modeles/">Modèles</a></li>
-      <li><a href="/dossiers" aria-current="page">Dossiers</a></li>
+      <li><a href="/decryptages" aria-current="page">Décryptages</a></li>
       <li><a href="/articles">Articles</a></li>
       <li><a href="/methode">Méthode</a></li>
       <li><a href="/faq">FAQ</a></li>
@@ -181,8 +193,8 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
   <!-- ============ INTRO ============ -->
   <section class="section" id="ai-act">
     <div class="wrap reveal">
-      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span><a href="/dossiers">Dossiers</a><span>/</span>AI Act</p>
-      <p class="eyebrow">Dossier · AI Act et ressources humaines</p>
+      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span><a href="/decryptages">Décryptages</a><span>/</span>AI Act</p>
+      <p class="eyebrow">Décryptage · AI Act et ressources humaines</p>
       <h1>L'AI&nbsp;Act en RH, sans le brouillard</h1>
       <p class="lede">
         Reporté, simplifié, en attente de lignes directrices&nbsp;: depuis l'Omnibus de
@@ -192,7 +204,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
         dois-je faire et pour quand, par quoi commencer.
       </p>
       <div class="cta-row">
-        <a class="btn btn--primary" href="/dossiers/ai-act/parcours-qualification" data-nm-click="aiact-hero-parcours">Mon outil est-il concerné&nbsp;?</a>
+        <a class="btn btn--primary" href="/decryptages/ai-act/parcours-qualification" data-nm-click="aiact-hero-parcours">Mon outil est-il concerné&nbsp;?</a>
         <a class="btn btn--ghost" href="#question">Poser une question</a>
       </div>
       <p class="aa-ref">
@@ -267,7 +279,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
 
       <ol class="aa-steps">
         <li>
-          <a class="aa-step" href="/dossiers/ai-act/parcours-qualification" data-nm-click="aiact-outil-parcours">
+          <a class="aa-step" href="/decryptages/ai-act/parcours-qualification" data-nm-click="aiact-outil-parcours">
             <span class="aa-step__n">1</span>
             <span class="aa-step__q">Mon outil est-il concerné&nbsp;?</span>
             <span class="aa-step__d">Des questions en oui ou non, chacune adossée à son article.
@@ -276,7 +288,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
           </a>
         </li>
         <li>
-          <a class="aa-step" href="/dossiers/ai-act/registre-obligations" data-nm-click="aiact-outil-registre">
+          <a class="aa-step" href="/decryptages/ai-act/registre-obligations" data-nm-click="aiact-outil-registre">
             <span class="aa-step__n">2</span>
             <span class="aa-step__q">Que dois-je faire, et pour quand&nbsp;?</span>
             <span class="aa-step__d">Les obligations découpées une par une, filtrées sur votre
@@ -285,7 +297,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
           </a>
         </li>
         <li>
-          <a class="aa-step" href="/dossiers/ai-act/simulateur-sanction" data-nm-click="aiact-outil-simulateur">
+          <a class="aa-step" href="/decryptages/ai-act/simulateur-sanction" data-nm-click="aiact-outil-simulateur">
             <span class="aa-step__n">3</span>
             <span class="aa-step__q">Par quoi commencer&nbsp;?</span>
             <span class="aa-step__d">Un réseau bayésien qui suit la chaîne de contrôle du
@@ -323,15 +335,18 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
           chemin qui part des usages RH.
         </p>
         <div class="cta-row">
-          <a class="btn btn--primary" href="/dossiers/ai-act/cartographie" data-nm-click="aiact-outil-cartographie">Explorer le graphe</a>
-          <!--HELLIXMAP-->
+          <a class="btn btn--primary" href="/decryptages/ai-act/cartographie" data-nm-click="aiact-outil-cartographie">Explorer le graphe</a>
+          
         </div>
       </div>
-      <a class="aa-shot" href="/dossiers/ai-act/cartographie" aria-label="Ouvrir la cartographie de l'AI Act">
-        <img src="/images/dossiers/ai-act-cartographie.png" alt="Extrait du graphe de l'AI Act : concepts colorés par famille, reliés par des relations nommées" loading="lazy" width="1200" height="750">
+      <a class="aa-shot" href="/decryptages/ai-act/cartographie" aria-label="Ouvrir la cartographie de l'AI Act">
+        <img src="/images/decryptages/ai-act-cartographie.png" alt="Extrait du graphe de l'AI Act : concepts colorés par famille, reliés par des relations nommées" loading="lazy" width="1200" height="750">
       </a>
     </div>
   </section>
+
+
+  
 
   <!-- ============ CALENDRIER ============ -->
   <section class="section" id="calendrier">
@@ -463,25 +478,25 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
         Pour les curieux et les modélisateurs, quatre lectures plus techniques du même texte.
       </p>
       <div class="tool-links aa-tools-4">
-        <a class="tool-link" href="/dossiers/ai-act/mecanique-causale" data-nm-click="aiact-outil-mecanique">
+        <a class="tool-link" href="/decryptages/ai-act/mecanique-causale" data-nm-click="aiact-outil-mecanique">
           <span class="tool-link__body">
             <span class="tool-link__title">Comment un outil RH finit en sanction <span class="arrow" aria-hidden="true">→</span></span>
             <span class="tool-link__desc">Diagramme causal&nbsp;: 50 concepts, 78 relations.</span>
           </span>
         </a>
-        <a class="tool-link" href="/dossiers/ai-act/effets-causaux" data-nm-click="aiact-outil-effets">
+        <a class="tool-link" href="/decryptages/ai-act/effets-causaux" data-nm-click="aiact-outil-effets">
           <span class="tool-link__body">
             <span class="tool-link__title">Quels facteurs pèsent le plus <span class="arrow" aria-hidden="true">→</span></span>
             <span class="tool-link__desc">Réseau causal quantifié par formule&nbsp;: 83 effets signés.</span>
           </span>
         </a>
-        <a class="tool-link" href="/dossiers/ai-act/arbitrage-conformite" data-nm-click="aiact-outil-arbitrage">
+        <a class="tool-link" href="/decryptages/ai-act/arbitrage-conformite" data-nm-click="aiact-outil-arbitrage">
           <span class="tool-link__body">
             <span class="tool-link__title">Ce que coûte la conformité <span class="arrow" aria-hidden="true">→</span></span>
             <span class="tool-link__desc">Réseau décisionnel&nbsp;: 36 stratégies, coût contre préjudice.</span>
           </span>
         </a>
-        <a class="tool-link" href="/dossiers/ai-act/structure-du-texte" data-nm-click="aiact-outil-structure">
+        <a class="tool-link" href="/decryptages/ai-act/structure-du-texte" data-nm-click="aiact-outil-structure">
           <span class="tool-link__body">
             <span class="tool-link__title">De quoi parle vraiment le texte <span class="arrow" aria-hidden="true">→</span></span>
             <span class="tool-link__desc">Analyse sémantique des 113 articles.</span>
@@ -548,7 +563,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
         <form id="aiact-form" class="contact-form" action="https://formspree.io/f/mojzoazo" method="POST" novalidate data-nm-submit="aiact-question">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <input type="hidden" name="provenance" value="Page AI Act — question">
-          <input type="hidden" name="_subject" value="Question AI Act (noumensia.com/dossiers/ai-act)">
+          <input type="hidden" name="_subject" value="Question AI Act (noumensia.com/decryptages/ai-act)">
 
           <div class="form-row">
             <div class="form-group">
@@ -602,7 +617,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
       <nav aria-label="Pied de page">
         <ul>
           <li><a href="/modeles/">Modèles</a></li>
-          <li><a href="/dossiers" aria-current="page">Dossiers</a></li>
+          <li><a href="/decryptages" aria-current="page">Décryptages</a></li>
           <li><a href="/articles">Articles</a></li>
           <li><a href="/methode">Méthode</a></li>
           <li><a href="/contact">Contact</a></li>

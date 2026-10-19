@@ -1,9 +1,12 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style><title>AI Act : par quoi commencer pour réduire son exposition — Noumensia</title>
+<script>
+try{if(localStorage.getItem('noumensia-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}
+</script>
 <meta name="description" content="Un réseau bayésien construit sur la chaîne de contrôle de l'AI Act : activez ou retirez des mesures et voyez de combien chacune déplace le risque de sanction. Un instrument de raisonnement, pas un taux calibré.">
-<link rel="canonical" href="https://noumensia.com/dossiers/ai-act/simulateur-sanction">
+<link rel="canonical" href="https://noumensia.com/decryptages/ai-act/simulateur-sanction">
 <meta property="og:title" content="AI Act : par quoi commencer pour réduire son exposition">
 <meta property="og:description" content="Un réseau bayésien construit sur la chaîne de contrôle de l'AI Act : activez ou retirez des mesures et voyez de combien chacune déplace le risque de sanction. Un instrument de raisonnement, pas un taux calibré.">
-<meta property="og:image" content="https://noumensia.com/images/og-image.png">
+<meta property="og:image" content="https://noumensia.com/images/decryptages/ai-act-cartographie.png">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <style>
 @font-face{font-family:"Newsreader";src:url("/fonts/newsreader-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
@@ -17,19 +20,11 @@
 @font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
 html,body{overflow-x:clip}
-.nm-bar{position:relative;z-index:9999;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 18px;
-  padding:9px clamp(14px,3vw,28px);background:#1E2630;color:#F2EFEA;border-bottom:1px solid #3A4756;
-  font:500 13px/1.4 "IBM Plex Sans",-apple-system,sans-serif;letter-spacing:.01em}
-.nm-bar a{color:#F2EFEA;text-decoration:none}
-.nm-bar a:hover{color:#D98A95}
-.nm-bar a:focus-visible{outline:2px solid #D98A95;outline-offset:2px;border-radius:2px}
-.nm-bar__crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0}
-.nm-bar__brand{display:inline-flex;align-items:center;gap:8px;font-family:"Newsreader",Georgia,serif;font-size:15px;font-weight:500}
-.nm-bar__brand img{width:20px;height:20px;display:block}
-.nm-bar__sep{color:#A8B4C2}
-.nm-bar__here{color:#A8B4C2}
-.nm-bar__links{display:flex;flex-wrap:wrap;gap:4px 16px}
-.nm-bar__cta{color:#D98A95 !important}
+.nm-crumbs{font:400 13px/1.4 var(--sans);color:var(--ink-3);margin:0 0 14px;display:flex;flex-wrap:wrap;gap:4px 8px}
+.nm-crumbs a{color:var(--ink-2);text-decoration:none}
+.nm-crumbs a:hover{color:var(--nm-bx)}
+.nm-meta .nm-hx{font-weight:600}
+.nm-site-footer{font-size:16px;color:var(--gris-doux);border-top:1px solid var(--ardoise-3)!important;padding:2.5rem 0!important}
 
 /* ---- Carrosserie : en-tête écrit pour un lecteur métier ---- */
 :root{--nm-bx:#7A2B3D;--nm-bx-soft:#F6E8EB}
@@ -49,6 +44,7 @@ html,body{overflow-x:clip}
 .nm-card--warn{border-left:3px solid var(--nm-bx)}
 .nm-meta{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:13px;color:var(--ink-3);margin:6px 0 4px}
 .nm-meta a{color:var(--nm-bx);text-decoration:none;border-bottom:1px solid currentColor}
+.nm-card a,.nm-lede a,.nm-capot a{color:var(--nm-bx);text-underline-offset:2px}
 .nm-steps{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}
 .nm-steps a,.nm-steps span{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 var(--sans);padding:8px 12px;border-radius:999px;border:1px solid var(--rule);color:var(--ink-2);text-decoration:none;background:var(--surface)}
 .nm-steps .on{border-color:var(--nm-bx);color:var(--nm-bx);background:var(--nm-bx-soft)}
@@ -74,7 +70,269 @@ html,body{overflow-x:clip}
   .tl-track{overflow-x:auto;-webkit-overflow-scrolling:touch}}
 .wrap>.nm-intro,.wrap>.nm-next,.wrap>.nm-capot{max-width:none;margin-left:0;margin-right:0;padding-left:0;padding-right:0}
 .wrap>.nm-intro{padding-top:8px}
-@media print{.nm-bar,.nm-capot,.nm-next{display:none}}
+@media print{.nav,.nm-site-footer,.nm-capot,.nm-next{display:none}}
+</style>
+<style>
+:root{
+  --ardoise:      #1E2630;
+  --ardoise-2:    #2A3440;  
+  --ardoise-3:    #3A4756;  
+  --ardoise-4:    #141A22;  
+  --bordeaux:     #7A1F2D;  
+  --bordeaux-vif: #D98A95;  
+  --blanc-casse:  #F2EFEA;  
+  --gris-doux:    #A8B4C2;  
+
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body:    "IBM Plex Sans", -apple-system, sans-serif;
+  --font-mono:    "IBM Plex Mono", "SF Mono", monospace;
+
+  --maxw: 1180px;
+  --maxw-prose: 44rem;
+  --pad:  clamp(1.25rem, 4vw, 3.5rem);
+
+  
+  --t-fast:    150ms cubic-bezier(.4, 0, .2, 1);
+  --t-base:    220ms cubic-bezier(.4, 0, .2, 1);
+  --t-slow:    600ms cubic-bezier(.16, 1, .3, 1);
+  --ease-out:  cubic-bezier(.16, 1, .3, 1);
+  --ring:      0 0 0 3px rgba(217, 138, 149, .35);   
+  --ring-light:0 0 0 3px rgba(242, 239, 234, .28);   
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.12), 0 12px 32px rgba(0,0,0,.14);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.22);
+  --shadow-xl: 0 24px 70px rgba(0,0,0,.35);
+}
+.scroll-progress{
+  position:fixed; top:0; left:0; height:2px; width:0;
+  background:linear-gradient(90deg, var(--bordeaux), var(--bordeaux-vif));
+  z-index:120; transition:width 90ms linear;
+  box-shadow:0 0 10px rgba(217,138,149,.5);
+}
+.nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(30,38,48,.82);
+  backdrop-filter:blur(10px) saturate(1.1);
+  -webkit-backdrop-filter:blur(10px) saturate(1.1);
+  border-bottom:1px solid transparent;
+  transition:box-shadow var(--t-base), background var(--t-base), border-color var(--t-base);
+}
+.nav.is-scrolled{
+  background:rgba(30,38,48,.94);
+  border-bottom-color:var(--ardoise-3);
+  box-shadow:0 4px 22px rgba(0,0,0,.22);
+}
+.nav .nm-wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  height:64px;
+}
+.brand{
+  display:flex; align-items:center; gap:.6rem; color:var(--blanc-casse);
+  transition:opacity var(--t-fast);
+}
+.brand:hover{ text-decoration:none; opacity:.85; }
+.brand-icon{
+  width:42px;
+  height:42px;
+  flex-shrink:0;
+  
+  content:url("/images/logo/noumensia-icon-cream.svg");
+}
+html[data-theme="light"] .brand-icon{ content:url("/images/logo/noumensia-icon-color.svg"); }
+.brand-name{ font-family:var(--font-display); font-size:1.25rem; font-weight:600; letter-spacing:.01em; }
+.nav-links{ display:flex; gap:1.75rem; list-style:none; align-items:center; }
+.nav-links li{ flex-shrink:0; }
+.nav-links a{
+  position:relative;
+  color:var(--blanc-casse); font-size:.92rem; font-weight:500;
+  padding-bottom:.3rem;
+  white-space:nowrap;
+  transition:color var(--t-fast);
+}
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:1px;
+  background:var(--bordeaux-vif);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform var(--t-base);
+}
+.nav-links a:hover,
+.nav-links a[aria-current="page"]{
+  text-decoration:none; color:var(--bordeaux-vif);
+}
+.nav-links a:hover::after,
+.nav-links a[aria-current="page"]::after{
+  transform:scaleX(1);
+}
+.nav-links .nav-cta{
+  padding:.5rem 1rem; border:1px solid var(--ardoise-3); border-radius:5px;
+  color:var(--blanc-casse); font-weight:600;
+}
+.nav-links .nav-cta::after{ display:none; }
+.nav-links .nav-cta:hover{
+  background:var(--bordeaux); border-color:var(--bordeaux); color:var(--blanc-casse);
+}
+.nav-toggle{
+  display:none; background:none; border:1px solid var(--ardoise-3);
+  color:var(--blanc-casse); border-radius:6px; padding:.5rem .75rem;
+  font-family:var(--font-body); font-size:.85rem; cursor:pointer;
+  transition:border-color var(--t-fast), color var(--t-fast);
+}
+.nav-toggle:hover{ border-color:var(--bordeaux-vif); color:var(--bordeaux-vif); }
+.nav-actions{ display:flex; align-items:center; gap:1.75rem; }
+.nav-actions #nav-links{ order:1; }
+.nav-actions .theme-toggle-li{ order:2; }
+.nav-actions #nav-toggle{ order:3; }
+footer.nm-site-footer{ padding:2.5rem 0; border-top:1px solid var(--ardoise-3); }
+.footer-top{
+  display:flex; flex-wrap:wrap; gap:1rem 1.5rem;
+  justify-content:space-between; align-items:center;
+}
+.footer-brand{ display:none; }
+.footer-socials{ display:flex; align-items:center; gap:.6rem; }
+footer.nm-site-footer nav ul{ list-style:none; display:flex; gap:1.25rem; flex-wrap:wrap; }
+footer.nm-site-footer nav a{ color:var(--gris-doux); font-size:.9rem; transition:color var(--t-fast); }
+footer.nm-site-footer nav a:hover{ color:var(--bordeaux-vif); }
+footer.nm-site-footer nav a, .footer-bottom a, .model-pager a, .breadcrumb a{
+  text-decoration:none;
+  background-image:linear-gradient(currentColor, currentColor);
+  background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat;
+  transition:background-size .35s cubic-bezier(.22,1,.36,1), color var(--t-fast);
+}
+footer.nm-site-footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:hover{
+  background-size:100% 1.5px;
+}
+.social-link{
+  position:relative;
+  display:inline-grid; place-items:center; width:30px; height:30px;
+  border:1px solid var(--ardoise-3); border-radius:7px; color:var(--gris-doux);
+  transition:color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+  flex-shrink:0;
+}
+.social-link::before{
+  content:""; position:absolute; inset:-1px; border-radius:8px; padding:1.6px;
+  background:conic-gradient(from -90deg, #0A66C2 var(--lk-fill), transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  --lk-fill:0%; opacity:1;
+  transition:--lk-fill .7s cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+.social-link:hover{
+  color:#0A66C2; border-color:transparent;
+  background:rgba(10,102,194,.1); text-decoration:none;
+  transform:translateY(-2px);
+}
+.social-link:hover::before{ --lk-fill:100%; }
+.social-link > svg{ width:16px; height:16px; position:relative; }
+.social-badge{
+  position:absolute; right:-3px; bottom:-3px; z-index:1;
+  width:14px; height:14px; border-radius:50%;
+  background:var(--bordeaux); border:1.4px solid var(--ardoise);
+  display:grid; place-items:center; pointer-events:none;
+  transition:border-color var(--t-fast);
+}
+.social-badge svg{ width:9px; height:9px; }
+.footer-bottom{
+  display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; justify-content:space-between;
+  align-items:center; margin-top:1.5rem; padding-top:1.25rem;
+  border-top:1px solid var(--ardoise-3);
+  font-size:.82rem; color:var(--gris-doux);
+}
+@media (max-width:1060px){.nav-links{
+    position:absolute; top:64px; left:0; right:0;
+    background:var(--ardoise); border-bottom:1px solid var(--ardoise-3);
+    flex-direction:column; gap:0; padding:.5rem var(--pad) 1rem; display:none;
+    align-items:stretch;
+  }.nav-links.is-open{ display:flex; }.nav-links a{ display:block; padding:.7rem 0; border-bottom:none; }.nav-links .nav-cta{ margin-top:.5rem; text-align:center; }.nav-toggle{ display:inline-block; }.nav-actions{ gap:.6rem; }.nav-actions .theme-toggle-li{ order:1; }.nav-actions #nav-toggle{ order:2; }}
+@media (max-width:600px){.footer-top{ justify-content:flex-start; gap:1rem; }}
+.theme-toggle{
+  display:inline-grid; place-items:center; width:38px; height:38px;
+  background:none; border:1px solid var(--ardoise-3); border-radius:8px;
+  color:var(--blanc-casse); cursor:pointer;
+  transition:border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+}
+.theme-toggle:hover{ border-color:var(--bordeaux-vif); color:var(--bordeaux-vif); }
+.theme-toggle svg{ width:18px; height:18px; }
+.theme-toggle-li{ display:flex; align-items:center; }
+html[data-theme="light"]{
+  --ardoise:#F1E7D3;        
+  --ardoise-2:#E7DAC1;      
+  --ardoise-3:#D6C8AC;      
+  --ardoise-4:#E0D2B9;
+  --blanc-casse:#221E17;    
+  --gris-doux:#5c5342;
+  --bordeaux-vif:#8f2233;
+  color-scheme:light;
+}
+html[data-theme="light"] .nav{ background:rgba(241,231,211,.82); }
+html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); box-shadow:0 4px 20px rgba(60,45,25,.09); }
+html[data-theme="light"] .nav-links .nav-cta:hover{ color:#F5EEDD; }
+html:root:not([data-theme="light"]){
+  --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
+  --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
+  --rule:#28313D; --rule-strong:#3A4653;
+  --accent:#5598E7; --accent-soft:#1B2C42;
+  --alt:#F08A5D; --alt-soft:#33211A;
+  --regl:#86B6EF; --jug:#E0A143; --scen:#B187E8; --ok:#4FB56A;
+  --regl-bg:#16283C; --jug-bg:#2E2415; --scen-bg:#241C33; --ok-bg:#15291A;
+  --danger:#F2A9A2; --danger-bg:#371917;
+  --focus:#5598E7;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+}
+html:root[data-theme="light"]{
+  --ground:#E9ECF0; --surface:#FFFFFF; --surface-2:#F3F5F8;
+  --ink:#131820; --ink-2:#4E5866; --ink-3:#78828F;
+  --rule:#D0D6DE; --rule-strong:#B4BDC8;
+  --accent:#2A78D6; --accent-soft:#DCE7F5;
+  --alt:#EB6834; --alt-soft:#FBE6DC;
+  --regl:#256ABF; --jug:#9C5E00; --scen:#6B3FA0; --ok:#00730A;
+  --regl-bg:#DCE7F5; --jug-bg:#FBF0DC; --scen-bg:#EDE4F6; --ok-bg:#DDEEDD;
+  --danger:#B3261E; --danger-bg:#F7DEDC;
+  --focus:#2A78D6;
+  --shadow:0 1px 2px rgba(19,24,32,.06),0 8px 24px rgba(19,24,32,.08);
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+}
+
+/* ---- habillage : remise à zéro locale, typographie du site ---- */
+.nav,.nm-site-footer{font-family:var(--font-body);line-height:1.5;-webkit-font-smoothing:antialiased}
+:where(.nav,.nm-site-footer) *{box-sizing:border-box;margin:0;padding:0}
+:where(.nav,.nm-site-footer) a{text-decoration:none}
+.nav,.nm-site-footer{width:100%;align-self:stretch}
+.nm-wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.nm-site-footer{margin-top:24px;background:var(--ardoise)}
+.nm-site-footer .footer-bottom a{color:var(--bordeaux-vif)}
+
+/* ---- palette des outils alignée sur le site ----
+   Sombre par défaut (comme le site), clair si l'interrupteur du site est sur clair.
+   Seules les couleurs neutres et l'accent sont remappés : les couleurs sémantiques
+   des graphes (interdit, haut risque, transparence…) restent celles de chaque outil. */
+html:root:not([data-theme="light"]){
+  --ground:#1E2630; --surface:#26303B; --surface-2:#222B35;
+  --ink:#F2EFEA; --ink-2:#C2CBD6; --ink-3:#8E9BAA;
+  --rule:#3A4756; --rule-strong:#4D5C6E;
+  --accent:#D98A95; --accent-soft:rgba(217,138,149,.16); --focus:#D98A95;
+  --shadow:0 1px 2px rgba(0,0,0,.25),0 10px 28px rgba(0,0,0,.22);
+  --nm-bx:#D98A95; --nm-bx-soft:rgba(217,138,149,.12);
+  color-scheme:dark;
+}
+html:root[data-theme="light"]{
+  --ground:#F1E7D3; --surface:#FAF4E8; --surface-2:#EFE4CE;
+  --ink:#221E17; --ink-2:#4E4636; --ink-3:#7A6F5C;
+  --rule:#D6C8AC; --rule-strong:#C2B293;
+  --accent:#8F2233; --accent-soft:#F3E3E1; --focus:#8F2233;
+  --shadow:0 1px 2px rgba(60,45,25,.06),0 8px 24px rgba(60,45,25,.08);
+  --nm-bx:#8F2233; --nm-bx-soft:#F3E3E1;
+  color-scheme:light;
+}
+html,body{background:var(--ground)}
+
 </style>
 
 <style>
@@ -268,10 +526,29 @@ svg.chart{width:100%;height:300px;display:block;overflow:visible}
 footer{font-size:11.5px;color:var(--ink-3);padding-top:6px;line-height:1.6}
 </style>
 
-<nav class="nm-bar" aria-label="Noumensia"><span class="nm-bar__crumbs"><a class="nm-bar__brand" href="/"><img src="/images/logo/noumensia-icon-light.svg" alt="" aria-hidden="true">Noumensia</a><span class="nm-bar__sep" aria-hidden="true">/</span><a href="/dossiers">Dossiers</a><span class="nm-bar__sep" aria-hidden="true">/</span><a href="/dossiers/ai-act/">AI Act</a><span class="nm-bar__sep" aria-hidden="true">/</span><span class="nm-bar__here">Par quoi commencer ?</span></span><span class="nm-bar__links"><a href="/dossiers/ai-act/#outils">Les outils du dossier</a><a class="nm-bar__cta" href="/dossiers/ai-act/#question">Poser une question</a></span></nav>
+<div class="scroll-progress" aria-hidden="true"></div>
+<header class="nav">
+  <div class="nm-wrap">
+    <a class="brand" href="/">
+      <img src="/images/logo/noumensia-badge-cream.svg" alt="" aria-hidden="true" class="brand-icon">
+      <span class="brand-name">Noumensia</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Accueil</a></li>
+      <li><a href="/modeles/">Modèles</a></li>
+      <li><a href="/decryptages" aria-current="page">Décryptages</a></li>
+      <li><a href="/articles">Articles</a></li>
+      <li><a href="/methode">Méthode</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/a-propos">À propos</a></li>
+      <li><a href="/contact" class="nav-cta">Prendre contact</a></li>
+    </ul>
+  </div>
+</header>
 <div class="wrap">
 
-<section class="nm-intro" aria-labelledby="nm-h1"><p class="nm-kicker">Dossier AI Act · Outil 3 sur 3</p><ol class="nm-steps" aria-label="Les trois outils du dossier"><li><a href="/dossiers/ai-act/parcours-qualification"><b>1</b>Mon outil est-il concerné ?</a></li><li><a href="/dossiers/ai-act/registre-obligations"><b>2</b>Que dois-je faire ?</a></li><li><a href="/dossiers/ai-act/simulateur-sanction" class="on" aria-current="page"><b>3</b>Par quoi commencer ?</a></li></ol><h1 id="nm-h1">Par quoi commencer pour réduire votre exposition&nbsp;?</h1><p class="nm-lede">Le règlement décrit une chaîne : un manquement, quelque chose qui attire l'attention de l'autorité, un examen, un constat, une décision. Ce simulateur suit cette chaîne. Activez ou retirez des mesures et regardez de combien chacune réduit le risque, et laquelle compte le plus.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>L'écart entre une organisation sans mesure et une organisation qui les a toutes : environ ×5, et entre ×3,6 et ×7,8 quand on bouscule toutes les hypothèses.</li><li>Le classement des mesures par effet. Sur un profil type, les deux premières sont un dossier de conformité qu'on peut produire et un contrôle humain réel, loin devant la qualité des données.</li><li>Les effets à contre-courant, laissés visibles plutôt que lissés.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Choisissez une situation : aujourd'hui, après décembre 2027, ou un outil déjà en service.</li><li>Basculez menaces et mesures, le résultat se met à jour.</li><li>Lancez « Calculer la sensibilité » pour classer les mesures.</li></ol></div><div class="nm-card nm-card--warn"><h2>À lire avant tout chiffre</h2><p>Aucune amende n'a encore été prononcée au titre du haut risque, qui ne s'applique pas avant décembre 2027. Les probabilités sont des jugements explicités, pas des taux observés. <b>Lisez les écarts entre deux situations, jamais le niveau.</b></p></div></div><p class="nm-meta"><span>5 à 10 minutes · réseau bayésien, 74 variables, inférence exacte</span><a href="#capot">Comment c'est construit</a></p></section>
+<section class="nm-intro" aria-labelledby="nm-h1"><p class="nm-crumbs"><a href="/">Accueil</a><span>/</span><a href="/decryptages">Décryptages</a><span>/</span><a href="/decryptages/ai-act/">AI Act</a><span>/</span>Par quoi commencer ?</p><p class="nm-kicker">Décryptage AI Act · Outil 3 sur 3</p><ol class="nm-steps" aria-label="Les trois outils du décryptage"><li><a href="/decryptages/ai-act/parcours-qualification"><b>1</b>Mon outil est-il concerné ?</a></li><li><a href="/decryptages/ai-act/registre-obligations"><b>2</b>Que dois-je faire ?</a></li><li><a href="/decryptages/ai-act/simulateur-sanction" class="on" aria-current="page"><b>3</b>Par quoi commencer ?</a></li></ol><h1 id="nm-h1">Par quoi commencer pour réduire votre exposition&nbsp;?</h1><p class="nm-lede">Le règlement décrit une chaîne : un manquement, quelque chose qui attire l'attention de l'autorité, un examen, un constat, une décision. Ce simulateur suit cette chaîne. Activez ou retirez des mesures et regardez de combien chacune réduit le risque, et laquelle compte le plus.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>L'écart entre une organisation sans mesure et une organisation qui les a toutes : environ ×5, et entre ×3,6 et ×7,8 quand on bouscule toutes les hypothèses.</li><li>Le classement des mesures par effet. Sur un profil type, les deux premières sont un dossier de conformité qu'on peut produire et un contrôle humain réel, loin devant la qualité des données.</li><li>Les effets à contre-courant, laissés visibles plutôt que lissés.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Choisissez une situation : aujourd'hui, après décembre 2027, ou un outil déjà en service.</li><li>Basculez menaces et mesures, le résultat se met à jour.</li><li>Lancez « Calculer la sensibilité » pour classer les mesures.</li></ol></div><div class="nm-card nm-card--warn"><h2>À lire avant tout chiffre</h2><p>Aucune amende n'a encore été prononcée au titre du haut risque, qui ne s'applique pas avant décembre 2027. Les probabilités sont des jugements explicités, pas des taux observés. <b>Lisez les écarts entre deux situations, jamais le niveau.</b></p></div></div><p class="nm-meta"><span>5 à 10 minutes · réseau bayésien, 74 variables, inférence exacte</span><a href="#capot">Comment c'est construit</a></p></section>
 
 
 
@@ -350,7 +627,7 @@ footer{font-size:11.5px;color:var(--ink-3);padding-top:6px;line-height:1.6}
 
 </div>
 
-<div class="nm-next"><a href="/dossiers/ai-act/#question"><span><small>Et maintenant</small><strong>Une question sur votre cas ? Posez-la</strong></span><span class="go">Continuer →</span></a></div>
+<div class="nm-next"><a href="/decryptages/ai-act/#question"><span><small>Et maintenant</small><strong>Une question sur votre cas ? Posez-la</strong></span><span class="go">Continuer →</span></a></div>
 <details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>Le nœud papillon, l'hypothèse de contrôle, la passerelle avec le registre et toute la méthode</span></summary>
 <div class="nm-capot-stats"><div class="stats">
     <div class="stat"><b id="s-n">—</b><span>nœuds</span></div>
@@ -484,7 +761,7 @@ footer{font-size:11.5px;color:var(--ink-3);padding-top:6px;line-height:1.6}
     pas le second.</li>
     <li>La famille noisy-OR est <b>monotone</b> : elle ne sait pas représenter d'effet de seuil
     ni d'interaction entre causes. Quand une telle relation compte, il faut une table tabulaire —
-    c'est ce que fait le réseau « Arbitrage de conformité » de ce dossier.</li>
+    c'est ce que fait le réseau « Arbitrage de conformité » de ce décryptage.</li>
   </ul>
 
   <h3>Inférence dans cette page — et ce qu'elle ne remplace pas</h3>
@@ -923,7 +1200,7 @@ function appliquer(){
 }
 function exporter(){
   const L=["# Profil courant du simulateur de risque de sanction",
-           "# Dossier AI Act — noumensia.com/dossiers/ai-act/",
+           "# Décryptage AI Act — noumensia.com/decryptages/ai-act/",
            "# Les dix premiers noms sont partagés avec le registre de contrôle.",""];
   PONT.forEach(nm=>L.push(nm+" = "+(state.ev[nm]===undefined?"?":
     (state.ev[nm]?"True":"False"))));
@@ -977,4 +1254,50 @@ sweep();
   charger(); window.addEventListener("hashchange",charger);
 })();
 </script>
+
+<footer class="nm-site-footer">
+  <div class="nm-wrap">
+    <div class="footer-top">
+      <a class="footer-brand" href="/">
+        <img src="/images/logo/noumensia-badge-cream.svg" alt="" aria-hidden="true">
+        <span>Noumensia</span>
+      </a>
+      <nav aria-label="Pied de page">
+        <ul>
+          <li><a href="/modeles/">Modèles</a></li>
+          <li><a href="/decryptages">Décryptages</a></li>
+          <li><a href="/articles">Articles</a></li>
+          <li><a href="/methode">Méthode</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/mentions-legales">Mentions légales</a></li>
+          <li><a href="/mentions-legales/confidentialite">Confidentialité</a></li>
+        </ul>
+      </nav>
+      <div class="footer-socials">
+        <a class="social-link"
+           href="https://www.linkedin.com/in/arthur-jouffe"
+           target="_blank" rel="noopener"
+           aria-label="Profil LinkedIn d'Arthur Jouffe (nouvel onglet)"
+           title="LinkedIn — Arthur Jouffe">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.15 2.07 2.07 0 0 1 0 4.15zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0z"/></svg>
+        </a>
+        <a class="social-link"
+           href="https://www.linkedin.com/company/noumensia"
+           target="_blank" rel="noopener"
+           aria-label="Page LinkedIn Noumensia (nouvel onglet)"
+           title="LinkedIn — Page Noumensia">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.15 2.07 2.07 0 0 1 0 4.15zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0z"/></svg>
+          <span class="social-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M6.5 4h11v16h-11z M9 20v-4h2v4z M8.3 6.5h2.2v2.5H8.3z M11.5 6.5h2.2v2.5h-2.2z M8.3 10.5h2.2v2.5H8.3z M11.5 10.5h2.2v2.5h-2.2z"/></svg></span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Noumensia — Modélisation bayésienne des phénomènes RH</span>
+      <span>Arthur Jouffe · <a href="mailto:contact@noumensia.com">contact@noumensia.com</a></span>
+    </div>
+  </div>
+</footer>
+<script src="/script.js" defer></script>
 </body></html>

@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="/">
-<title>Dossiers — Noumensia</title>
-<meta name="description" content="Des sujets denses modélisés en knowledge graph, réseau causal et réseau bayésien, et rendus interrogeables sans être modélisateur. Premier dossier : l'AI Act en RH.">
-<link rel="canonical" href="https://noumensia.com/dossiers">
+<title>Décryptages — Noumensia</title>
+<meta name="description" content="Des sujets denses modélisés en knowledge graph, réseau causal et réseau bayésien, et rendus interrogeables sans être modélisateur. Premier décryptage : l'AI Act en RH.">
+<link rel="canonical" href="https://noumensia.com/decryptages">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Noumensia">
-<meta property="og:url" content="https://noumensia.com/dossiers">
-<meta property="og:title" content="Dossiers — un sujet dense, rendu explorable">
-<meta property="og:description" content="Des sujets denses modélisés en knowledge graph, réseau causal et réseau bayésien, et rendus interrogeables sans être modélisateur. Premier dossier : l'AI Act en RH.">
-<meta property="og:image" content="https://noumensia.com/images/og-image.png">
+<meta property="og:url" content="https://noumensia.com/decryptages">
+<meta property="og:title" content="Décryptages — un sujet dense, rendu clair">
+<meta property="og:description" content="Des sujets denses modélisés en knowledge graph, réseau causal et réseau bayésien, et rendus interrogeables sans être modélisateur. Premier décryptage : l'AI Act en RH.">
+<meta property="og:image" content="https://noumensia.com/images/decryptages/ai-act-cartographie.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/newsreader-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -121,6 +121,18 @@ html[data-theme="light"] .aa-fog__col, html[data-theme="light"] .aa-step, html[d
 html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
 .aa-finding .callout-label{ font-family:var(--font-body); font-size:.72rem; letter-spacing:.05em; font-weight:600;
   text-transform:uppercase; color:var(--bordeaux-vif); margin-bottom:.6rem; display:block; }
+
+/* Hellixmap */
+.aa-hx{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:62rem; }
+@media (max-width:860px){ .aa-hx{ grid-template-columns:1fr; } }
+.aa-hx__card{ display:flex; flex-direction:column; gap:.5rem; padding:1.4rem 1.5rem; border-radius:12px;
+  border:1px solid var(--ardoise-3); background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+  color:var(--blanc-casse); text-decoration:none; transition:border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base); }
+.aa-hx__card:hover{ text-decoration:none; transform:translateY(-3px); border-color:var(--bordeaux-vif); box-shadow:0 10px 30px rgba(0,0,0,.28); }
+.aa-hx__k{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--bordeaux-vif); }
+.aa-hx__t{ font-family:var(--font-display); font-size:1.35rem; font-weight:600; }
+.aa-hx__d{ font-size:.93rem; color:var(--gris-doux); line-height:1.55; }
+html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
 </style>
 <script type="application/ld+json">
 {
@@ -128,22 +140,22 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
   "@graph": [
     {
       "@type": "CollectionPage",
-      "@id": "https://noumensia.com/dossiers#webpage",
-      "url": "https://noumensia.com/dossiers",
-      "name": "Dossiers — Noumensia",
-      "description": "Des sujets denses modélisés en knowledge graph, réseau causal et réseau bayésien, et rendus interrogeables sans être modélisateur. Premier dossier : l'AI Act en RH.",
+      "@id": "https://noumensia.com/decryptages#webpage",
+      "url": "https://noumensia.com/decryptages",
+      "name": "Décryptages — Noumensia",
+      "description": "Des sujets denses modélisés en knowledge graph, réseau causal et réseau bayésien, et rendus interrogeables sans être modélisateur. Premier décryptage : l'AI Act en RH.",
       "inLanguage": "fr-FR",
-      "dateModified": "2026-10-16",
+      "dateModified": "2026-10-19",
       "isPartOf": { "@id": "https://noumensia.com/#website" },
       "about": { "@id": "https://noumensia.com/#org" },
-      "breadcrumb": { "@id": "https://noumensia.com/dossiers#breadcrumb" }
+      "breadcrumb": { "@id": "https://noumensia.com/decryptages#breadcrumb" }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://noumensia.com/dossiers#breadcrumb",
+      "@id": "https://noumensia.com/decryptages#breadcrumb",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://noumensia.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Dossiers", "item": "https://noumensia.com/dossiers" }
+        { "@type": "ListItem", "position": 2, "name": "Décryptages", "item": "https://noumensia.com/decryptages" }
       ]
     }
   ]
@@ -165,7 +177,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
     <ul class="nav-links" id="nav-links">
       <li><a href="/">Accueil</a></li>
       <li><a href="/modeles/">Modèles</a></li>
-      <li><a href="/dossiers" aria-current="page">Dossiers</a></li>
+      <li><a href="/decryptages" aria-current="page">Décryptages</a></li>
       <li><a href="/articles">Articles</a></li>
       <li><a href="/methode">Méthode</a></li>
       <li><a href="/faq">FAQ</a></li>
@@ -177,14 +189,14 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
 
 <main id="main">
 
-  <section class="section" id="dossiers">
+  <section class="section" id="decryptages">
     <div class="wrap reveal">
-      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span>Dossiers</p>
-      <p class="eyebrow">Dossiers</p>
+      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span>Décryptages</p>
+      <p class="eyebrow">Décryptages</p>
       <h1>Un sujet dense, rendu explorable</h1>
       <p class="lede">
         Certains sujets se lisent mal en fiche de synthèse&nbsp;: un règlement de 113 articles,
-        un phénomène aux dizaines de causes croisées. Un dossier, c'est ce sujet modélisé avec
+        un phénomène aux dizaines de causes croisées. Un décryptage, c'est ce sujet modélisé avec
         les mêmes outils que mes modèles RH, knowledge graph, réseau causal, réseau bayésien,
         puis livré sous une forme qu'on peut interroger sans être modélisateur.
       </p>
@@ -193,7 +205,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
 
   <section class="section section--alt" id="liste">
     <div class="wrap reveal">
-      <a class="ds-card" href="/dossiers/ai-act/" data-nm-click="dossiers-ai-act">
+      <a class="ds-card" href="/decryptages/ai-act/" data-nm-click="decryptages-ai-act">
         <div class="ds-card__body">
           <span class="ds-card__tag">Disponible · mis à jour le 16 octobre 2026</span>
           <span class="ds-card__title">L'AI&nbsp;Act en RH, sans le brouillard</span>
@@ -201,11 +213,11 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
           de juillet&nbsp;2026, modélisé pour répondre à trois questions&nbsp;: mon outil RH est-il
           concerné, que dois-je faire et pour quand, par quoi commencer.</span>
           <span class="ds-card__meta"><span>Parcours de qualification</span><span>Registre de 73 obligations</span><span>Réseau bayésien</span><span>Knowledge graph</span></span>
-          <span class="ds-card__go">Ouvrir le dossier →</span>
+          <span class="ds-card__go">Ouvrir le décryptage →</span>
         </div>
-        <div class="ds-card__img"><img src="/images/dossiers/ai-act-cartographie.png" alt="" loading="lazy" width="1200" height="750"></div>
+        <div class="ds-card__img"><img src="/images/decryptages/ai-act-cartographie.png" alt="" loading="lazy" width="1200" height="750"></div>
       </a>
-      <p class="aa-lab-note">D'autres dossiers suivront, sur des sujets où le flou coûte cher
+      <p class="aa-lab-note">D'autres décryptages suivront, sur des sujets où le flou coûte cher
       à ceux qui doivent décider.</p>
     </div>
   </section>
@@ -215,7 +227,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
       <p class="eyebrow">Le principe</p>
       <h2>La complexité reste dans le modèle, pas dans la page</h2>
       <div class="prose">
-        <p>Chaque dossier se lit à deux niveaux. En surface, des questions concrètes et des
+        <p>Chaque décryptage se lit à deux niveaux. En surface, des questions concrètes et des
         outils qui y répondent en quelques minutes. Dessous, accessible d'un clic, tout ce qui
         les fait tenir&nbsp;: la structure du modèle, ses sources, les hypothèses qui relèvent du
         jugement et ce que le modèle ne sait pas faire.</p>
@@ -243,7 +255,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
       <nav aria-label="Pied de page">
         <ul>
           <li><a href="/modeles/">Modèles</a></li>
-          <li><a href="/dossiers" aria-current="page">Dossiers</a></li>
+          <li><a href="/decryptages" aria-current="page">Décryptages</a></li>
           <li><a href="/articles">Articles</a></li>
           <li><a href="/methode">Méthode</a></li>
           <li><a href="/contact">Contact</a></li>

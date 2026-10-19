@@ -25,7 +25,7 @@ const STATIC_PAGES = [
   { file: 'modeles.html', url: '/modeles', priority: '0.9', changefreq: 'monthly' },
   { file: 'articles.html', url: '/articles', priority: '0.8', changefreq: 'weekly' },
   { file: 'methode.html', url: '/methode', priority: '0.8', changefreq: 'monthly' },
-  { file: 'dossiers.html', url: '/dossiers', priority: '0.8', changefreq: 'monthly' },
+  { file: 'decryptages.html', url: '/decryptages', priority: '0.8', changefreq: 'monthly' },
   { file: 'faq.html', url: '/faq', priority: '0.7', changefreq: 'monthly' },
   { file: 'contact.html', url: '/contact', priority: '0.7', changefreq: 'yearly' },
   { file: 'a-propos.html', url: '/a-propos', priority: '0.6', changefreq: 'yearly' },
@@ -36,7 +36,7 @@ const STATIC_PAGES = [
 const SCANNED_DIRS = [
   { dir: 'modeles', urlPrefix: '/modeles', priority: '0.8', changefreq: 'monthly' },
   { dir: 'articles', urlPrefix: '/articles', priority: '0.8', changefreq: 'monthly' },
-  { dir: 'dossiers/ai-act', urlPrefix: '/dossiers/ai-act', priority: '0.8', changefreq: 'monthly' },
+  { dir: 'decryptages/ai-act', urlPrefix: '/decryptages/ai-act', priority: '0.8', changefreq: 'monthly' },
   { dir: 'mentions-legales', urlPrefix: '/mentions-legales', priority: '0.2', changefreq: 'yearly' },
 ];
 
@@ -74,7 +74,7 @@ for (const scan of SCANNED_DIRS) {
     const rel = path.join(scan.dir, f);
     const slug = f.replace(/\.html$/, '');
     entries.push({
-      // index.html d'un dossier -> URL du dossier, avec la barre finale
+      // index.html d'un sous-dossier -> URL du dossier, avec la barre finale
       loc: slug === 'index' ? `${DOMAIN}${scan.urlPrefix}/` : `${DOMAIN}${scan.urlPrefix}/${slug}`,
       lastmod: lastmod(rel),
       changefreq: scan.changefreq,

@@ -33,10 +33,16 @@
 /methode.html            /methode             301
 /mentions-legales.html   /mentions-legales    301
 
-# Dossiers (16/10/2026) : la rubrique AI Act, préparée sous /ai-act/, vit sous /dossiers/ai-act/.
-# Le lien court noumensia.com/ai-act reste utilisable dans les posts.
-/dossiers.html          /dossiers            301
-/dossiers/              /dossiers            301
-/ai-act                 /dossiers/ai-act/    301
-/ai-act/                /dossiers/ai-act/    301
-/ai-act/*               /dossiers/ai-act/:splat   301
+# Décryptages (19/10/2026) : la rubrique AI Act a été publiée sous /ai-act/ (12/10) puis
+# /dossiers/ai-act/ (16/10). Les deux formes restent valables et mènent au même endroit.
+# Le lien court noumensia.com/ai-act sert dans les posts LinkedIn.
+/decryptages.html       /decryptages             301
+/decryptages/           /decryptages             301
+/ai-act                 /decryptages/ai-act/     301
+/ai-act/                /decryptages/ai-act/     301
+/ai-act/*               /decryptages/ai-act/:splat   301
+/dossiers               /decryptages             301
+/dossiers.html          /decryptages             301
+/dossiers/              /decryptages             301
+/dossiers/ai-act        /decryptages/ai-act/     301
+/dossiers/ai-act/*      /decryptages/ai-act/:splat   301
