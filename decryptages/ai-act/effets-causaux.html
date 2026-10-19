@@ -543,42 +543,42 @@ html,body{background:var(--ground)}
 
 
 <div class="nm-next"><a href="/decryptages/ai-act/"><span><small>Retour au décryptage</small><strong>Les trois outils pour un DRH</strong></span><span class="go">Continuer →</span></a></div>
-<details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>La formule noisy-OR, ses hypothèses et ce qu'elle ne sait pas représenter</span></summary>
+<details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>La formule qui remplace les tables de probabilités, et ses limites</span></summary>
+
 <div class="panel count">
   <div>
-    <h2>Pourquoi la paramétrisation par formule</h2>
-    <p>Le diagramme « Mécanique causale » de ce décryptage a produit la structure&nbsp;: 50&nbsp;concepts, 78&nbsp;relations
-      causales. Trois de ses nœuds ont cinq parents, un en a six. En tables tabulaires
-      complètes, un nœud booléen à six parents booléens demande <b>64&nbsp;lignes</b>, soit
-      64&nbsp;paramètres libres à défendre un par un. Personne ne peut faire ça honnêtement.</p>
-    <p>La formule ci-dessous engendre les 319&nbsp;lignes du réseau à partir de
-      <b>un poids par arc et une fuite par nœud</b>. Chaque paramètre a une lecture en langue
-      naturelle, donc chacun est contestable isolément.</p>
-    <div class="formula">P(X = Vrai | parents) = [ 1 − (1−b) · Π<sub>promoteurs actifs</sub> (1−wᵢ) ] · Π<sub>inhibiteurs actifs</sub> (1−|wⱼ|)</div>
-    <p><b>b</b>, la fuite&nbsp;: probabilité que X soit vrai quand aucun parent ne l'est — elle
-      absorbe les causes hors modèle. &nbsp;·&nbsp; <b>wᵢ&nbsp;&gt;&nbsp;0</b>, promoteur&nbsp;:
-      activer ce seul parent fait passer P(X) de b à b&nbsp;+&nbsp;(1−b)·wᵢ. &nbsp;·&nbsp;
-      <b>wⱼ&nbsp;&lt;&nbsp;0</b>, inhibiteur&nbsp;: activer ce seul parent multiplie P(X) par
-      (1−|wⱼ|). Famille noisy-OR à inhibiteurs, d'après Pearl (1988), <i>Probabilistic Reasoning
-      in Intelligent Systems</i>, §4.3.2, généralisée aux effets négatifs.</p>
-    <p><b>Ce que la formule ne sait pas faire.</b> Les promoteurs se composent sans interaction
-      ni effet de seuil, et les inhibiteurs sont multiplicatifs — donc le réseau est
-      <b>monotone</b>. Il ne peut pas représenter une non-monotonie du type «&nbsp;high-strain
-      contre passive job&nbsp;». Quand une telle relation compte, il faut une table tabulaire,
-      et c'est exactement ce que fait le réseau « Arbitrage de conformité ». Les deux coexistent pour cette raison.</p>
+    <h2>Une formule plutôt que des tables</h2>
+    <p>Le diagramme <a href="/decryptages/ai-act/mecanique-causale">«&nbsp;Mécanique causale&nbsp;»</a>
+      donne la structure&nbsp;: 50 concepts, 78 relations causales. Plusieurs nœuds ont cinq ou
+      six causes directes. Chiffrer un nœud à six causes case par case demande 64 probabilités,
+      qu'aucun expert ne peut justifier une par une.</p>
+    <p>La formule ci-dessous produit les 319 lignes de probabilités du réseau à partir d'<b>un
+      poids par lien et d'une probabilité de base par nœud</b>. Chaque paramètre se lit en
+      français, et chacun peut être discuté séparément.</p>
+    <div class="formula">P(X = vrai | causes) = [ 1 − (1−b) · Π<sub>causes favorisantes actives</sub> (1−wᵢ) ] · Π<sub>causes freinantes actives</sub> (1−|wⱼ|)</div>
+    <p><b>b</b>, la probabilité de base&nbsp;: celle de X quand aucune de ses causes n'est
+      présente, qui absorbe tout ce que le modèle ne représente pas. &nbsp;·&nbsp;
+      <b>wᵢ&nbsp;&gt;&nbsp;0</b>, une cause qui favorise X&nbsp;: seule, elle fait passer P(X) de b
+      à b&nbsp;+&nbsp;(1−b)·wᵢ. &nbsp;·&nbsp; <b>wⱼ&nbsp;&lt;&nbsp;0</b>, une cause qui freine
+      X&nbsp;: seule, elle multiplie P(X) par (1−|wⱼ|). C'est la famille dite <i>noisy-OR</i>
+      (Pearl, 1988, <i>Probabilistic Reasoning in Intelligent Systems</i>), étendue aux effets
+      qui réduisent un risque.</p>
+    <p><b>Ce que la formule ne sait pas faire.</b> Les causes s'additionnent sans jamais
+      interagir&nbsp;: pas d'effet de seuil, pas de cause qui n'agit qu'en présence d'une autre.
+      Quand c'est important, il faut des tables écrites case par case, comme dans le réseau
+      <a href="/decryptages/ai-act/arbitrage-conformite">«&nbsp;Arbitrage de conformité&nbsp;»</a>.</p>
+    <p><b>Comment lire les résultats.</b> Les propositions se lisent «&nbsp;au moins une fois sur
+      l'exercice&nbsp;», pas comme un taux par décision. Les probabilités de base s'accumulent le
+      long des chaînes&nbsp;: ce sont les écarts entre situations qui portent l'information, pas
+      les niveaux.</p>
   </div>
   <div class="vs">
-    <div class="vsbox"><b>319</b><span>lignes de table engendrées</span></div>
+    <div class="vsbox"><b>319</b><span>lignes de probabilités produites</span></div>
     <div class="vsarrow">←</div>
     <div class="vsbox hi"><b>133</b><span>paramètres réellement posés</span></div>
   </div>
 </div>
-<footer>Propositional Causal Bayesian Network — propositions booléennes, effets directs signés,
-tables engendrées par formule. Fichier BayesiaLab associé&nbsp;:
-<code>06_AI_Act_Propositional_Causal_BN.json</code>. Les propositions d'effet se lisent
-«&nbsp;au moins une fois sur l'exercice&nbsp;», pas comme des taux par décision&nbsp;: dans une
-famille noisy-OR les fuites s'accumulent le long des chaînes, ce sont donc les <b>écarts</b> qui
-portent l'information, pas les niveaux absolus.</footer>
+
 </details>
 </div>
 

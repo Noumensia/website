@@ -528,29 +528,29 @@ html,body{background:var(--ground)}
 
 
 <div class="nm-next"><a href="/decryptages/ai-act/"><span><small>Retour au décryptage</small><strong>Les trois outils pour un DRH</strong></span><span class="go">Continuer →</span></a></div>
-<details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>Comment la boucle du biais a été déroulée, et les autres choix de modélisation</span></summary>
+<details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>Deux choix de construction et leurs raisons</span></summary>
 <div class="nm-capot-stats"><div class="stats">
     <div class="stat"><b id="st-n">0</b><span>concepts</span></div>
     <div class="stat"><b id="st-a">0</b><span>relations causales</span></div>
     <div class="stat"><b>9</b><span>couches</span></div>
   </div></div>
-<p class="note"><b>Une boucle déroulée dans le temps.</b> Le considérant&nbsp;67 décrit un mécanisme
-cyclique&nbsp;: les biais produisent des décisions, ces décisions deviennent l'historique qui
-entraîne la version suivante, «&nbsp;en particulier lorsque les données de sortie influencent les
-entrées pour les opérations futures (boucles de rétroaction)&nbsp;». Un graphe acyclique ne peut pas
-représenter une boucle. Elle est donc déroulée&nbsp;: les effets de la génération&nbsp;t alimentent
-le nœud terminal «&nbsp;Amplification du biais à la génération suivante&nbsp;», sans arc de retour.
-C'est un choix de modélisation assumé, pas un oubli — sans lui, le graphe ne pourrait plus être
-quantifié en réseau bayésien.</p>
-<p class="note" style="border-left-color:var(--effet)"><b>Trois nœuds à surveiller avant
-quantification.</b> «&nbsp;Préjudice pour la personne&nbsp;», «&nbsp;Probabilité de détection&nbsp;»
-et «&nbsp;Coût de mise en conformité&nbsp;» ont chacun cinq parents. Une table de probabilité à cinq
-parents binaires compte 32&nbsp;lignes&nbsp;: c'est le seuil au-delà duquel les paramètres cessent
-d'être défendables un par un. Les réseaux bayésiens du décryptage les traitent par divorce — une
-variable latente intermédiaire nommée sémantiquement — ou par une paramétrisation par formule.</p>
-<footer>Causal Semantic Diagram — fondation structurelle des réseaux quantifiés. Fichier BayesiaLab
-associé&nbsp;: <code>03_AI_Act_Causal_Semantic_Diagram.json</code>. Sources citées nœud par nœud
-dans les définitions.</footer>
+
+<p class="note"><b>Ce que c'est.</b> Un diagramme causal&nbsp;: chaque flèche dit qu'une chose en
+provoque ou en favorise une autre, depuis les choix de conception d'un outil jusqu'à la sanction.
+Il dit ce qui influence quoi, pas de combien. C'est la structure sur laquelle sont construits les
+réseaux bayésiens du décryptage. Chaque lien cite sa source dans le texte.</p>
+<p class="note"><b>Une boucle mise à plat.</b> Le considérant&nbsp;67 décrit un cercle vicieux&nbsp;:
+des décisions biaisées deviennent l'historique sur lequel la version suivante de l'outil est
+entraînée. Un réseau bayésien ne peut pas contenir de boucle. Celle-ci est donc représentée
+dans le temps&nbsp;: les effets d'une génération de l'outil mènent à un nœud final,
+«&nbsp;Amplification du biais à la génération suivante&nbsp;», sans flèche de retour.</p>
+<p class="note" style="border-left-color:var(--effet)"><b>Des nœuds trop chargés pour être
+chiffrés tels quels.</b> «&nbsp;Préjudice pour la personne&nbsp;», «&nbsp;Probabilité de
+détection&nbsp;» et «&nbsp;Coût de mise en conformité&nbsp;» ont chacun cinq causes directes. Les
+chiffrer case par case demanderait 32 probabilités pour chacun, bien au-delà de ce qu'on peut
+justifier une par une. Les réseaux bayésiens du décryptage les traitent soit en ajoutant une
+étape intermédiaire nommée, soit par une formule.</p>
+
 </details>
 </div>
 

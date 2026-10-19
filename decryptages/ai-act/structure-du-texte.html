@@ -572,17 +572,30 @@ html,body{background:var(--ground)}
 
 
 <div class="nm-next"><a href="/decryptages/ai-act/"><span><small>Retour au décryptage</small><strong>Les trois outils pour un DRH</strong></span><span class="go">Continuer →</span></a></div>
-<details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>Méthode de mesure (LSA, regroupement de Ward) et ses limites</span></summary>
+<details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>Comment les articles ont été regroupés, et les limites de la mesure</span></summary>
 <div class="nm-capot-stats"><div class="stats">
     <div class="stat"><b>113</b><span>articles</span></div>
     <div class="stat"><b id="st-a">0</b><span>arcs mesurés</span></div>
     <div class="stat"><b>12</b><span>clusters</span></div>
     <div class="stat"><b id="st-ari">0</b><span>indice de Rand ajusté</span></div>
   </div></div>
-<div class="method" id="method"></div>
-<footer>Semantic Network — la seule des sept cartes dont la structure est mesurée et non
-spécifiée. Format Knowledge Graph Bayesia.
-Pipeline reproductible hors ligne&nbsp;: <code>embed_lsa.py</code> puis <code>build_semnet.py</code>.</footer>
+
+<p class="note"><b>Ce que c'est.</b> La seule carte du décryptage dont la structure n'a pas été
+décidée mais mesurée. Les 113 articles sont comparés sur leur vocabulaire, sans tenir compte du
+plan officiel, puis regroupés en douze familles. Chaque article est relié à ses plus proches
+voisins par le sens. Seuls les noms des familles ont été choisis à la main, leur
+composition est calculée.</p>
+<p class="note"><b>Comment.</b> Analyse sémantique latente (pondération TF-IDF sur environ
+4&nbsp;000 termes, réduite à 40 dimensions), puis regroupement hiérarchique de Ward. Le nombre de
+familles a été choisi par le critère de silhouette. L'indice affiché plus haut mesure l'accord
+entre ces familles et les chapitres du règlement&nbsp;: il est faible, ce qui est précisément le
+résultat, les thèmes réels du texte ne suivent pas son plan.</p>
+<p class="note"><b>Limites.</b> La méthode repère les mots partagés, pas les nuances de sens ni la
+négation&nbsp;: deux articles qui disent le contraire avec les mêmes mots seront proches. La carte
+en deux dimensions déforme les distances&nbsp;; ce sont les liens et la matrice qui portent la
+mesure. L'analyse porte sur le texte de 2024, sans les articles ajoutés par l'Omnibus.</p>
+<div class="method" id="method" hidden></div>
+
 </details>
 </div>
 
@@ -593,21 +606,7 @@ const N = DATA.nodes.length;
 document.getElementById('st-a').textContent = ST.nArcs;
 document.getElementById('st-ari').textContent = ST.ari.toFixed(2).replace('.', ',');
 
-document.getElementById('method').innerHTML =
- '<p><b>Comment cette carte est faite, et ce qu\'elle ne dit pas.</b> Les 113 articles sont '+
- 'vectorisés par analyse sémantique latente — TF-IDF sur '+ST.vocab.toLocaleString('fr-FR')+
- ' termes (unigrammes et bigrammes), puis décomposition en valeurs singulières tronquée à '+
- '40 dimensions, '+(100*ST.variance).toFixed(0)+'&nbsp;% de variance expliquée. '+
- 'Les arcs sont les '+ST.knn+' plus proches voisins de chaque article au-dessus d\'une '+
- 'similarité cosinus de '+String(ST.floor).replace('.',',')+'. Les clusters viennent d\'un '+
- 'regroupement de Ward, k=12 choisi par silhouette ('+ST.sil.toFixed(3).replace('.',',')+'). '+
- 'Seuls les NOMS de clusters sont de moi ; leur composition est mesurée.</p>'+
- '<p><b>Deux limites, mesurées et non contournées.</b> L\'encodeur de phrases neuronal prévu '+
- 'au départ n\'a pas pu être téléchargé (accès réseau refusé) : la LSA capte la co-occurrence '+
- 'lexicale, pas la synonymie profonde ni la négation. Et la projection en deux dimensions a un '+
- 'stress-1 de '+ST.stress.toFixed(2).replace('.',',')+' — au-delà de 0,20 la carte déforme. '+
- 'Les distances à l\'écran sont indicatives ; ce sont les arcs et la matrice ci-dessous qui '+
- 'portent la mesure.</p>';
+/* méthode : voir « Sous le capot » */
 
 /* ---------------- carte ---------------- */
 const NS='http://www.w3.org/2000/svg';
