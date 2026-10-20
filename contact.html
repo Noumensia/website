@@ -181,11 +181,10 @@
 
       <div class="contact-alternatives">
         <a
-          href="https://cal.eu/arthur.jouffe-noumensia/30min-meeting"
-          target="_blank"
-          rel="noopener"
+          href="/rendez-vous"
+          id="contact-rdv-link"
           class="contact-alt-link"
-          data-nm-click="contact-cal-book">Réserver un créneau directement ↗</a>
+          data-nm-click="contact-cal-book">Réserver directement un créneau de 30&nbsp;min</a>
         <span class="contact-alt-sep">ou</span>
         <a href="mailto:contact@noumensia.com" class="contact-alt-link" data-nm-click="contact-mailto">contact@noumensia.com</a>
       </div>
@@ -373,6 +372,7 @@
       </p>
       <div class="contact-links">
         <a href="#contact" class="btn btn--primary" data-nm-click="contact-cta-scroll">Décrire ma problématique</a>
+        <a href="/rendez-vous" class="btn btn--ghost" data-nm-click="contact-cta-rdv">Choisir un créneau</a>
       </div>
     </div>
   </section>
@@ -441,6 +441,9 @@
       var s = SUJETS[cle];
       var champ = document.getElementById('provenance');
       if (champ) champ.value = s ? s.libelle : cle;
+      // La provenance suit aussi vers la page de réservation
+      var rdv = document.getElementById('contact-rdv-link');
+      if (rdv) rdv.href = '/rendez-vous?sujet=' + encodeURIComponent(cle);
       var note = document.getElementById('contact-context');
       if (note && s) {
         note.innerHTML = 'Vous arrivez depuis <a href="' + s.href + '">' + s.libelle +

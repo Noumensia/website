@@ -1081,6 +1081,48 @@ figure{ margin:0; }
 }
 .contact-alt-sep{ opacity:.35; color:var(--blanc-casse); }
 
+/* ============ PRISE DE RENDEZ-VOUS (page /rendez-vous, agenda Cal intégré) ============ */
+/* Couleurs en dur : la carte reste crème dans les deux thèmes, et --ardoise
+   devient crème en thème clair (texte invisible sinon). */
+.rdv-card{
+  position:relative;
+  background:var(--blanc-casse);
+  border-radius:12px;
+  padding:clamp(.5rem, 1.5vw, 1rem);
+  margin-top:2rem;
+  box-shadow:var(--shadow-lg);
+}
+.rdv-embed{ width:100%; min-height:560px; border-radius:8px; }
+.rdv-status{
+  position:absolute; inset:0; z-index:1;
+  display:flex; align-items:center; justify-content:center; gap:.75rem;
+  padding:2rem; text-align:center;
+  font-family:var(--font-body); font-size:.95rem; color:#3b4350;
+}
+.rdv-status[hidden]{ display:none; }
+.rdv-status a{ color:#7A1F2D; text-decoration:underline; text-underline-offset:3px; }
+.rdv-status.is-error{ flex-direction:column; max-width:30rem; margin:auto; line-height:1.6; }
+.rdv-status.is-error .rdv-spinner{ display:none; }
+.rdv-spinner{
+  width:18px; height:18px; flex-shrink:0; border-radius:50%;
+  border:2px solid rgba(122,31,45,.2); border-top-color:#7A1F2D;
+  animation:rdvSpin .8s linear infinite;
+}
+@keyframes rdvSpin{ to{ transform:rotate(360deg); } }
+.rdv-noscript{ color:#3b4350 !important; padding:1rem; margin:0 !important; max-width:none !important; }
+.rdv-noscript a{ color:#7A1F2D; text-decoration:underline; }
+.rdv-after{
+  margin-top:2.5rem; max-width:42rem;
+  color:var(--gris-doux); font-size:.92rem; line-height:1.7;
+}
+@media (max-width:640px){
+  .rdv-embed{ min-height:480px; }
+}
+
+/* CTA final de la page contact : bouton secondaire « créneau » à côté du principal */
+.cta-final .contact-links a.btn.btn--ghost{ border-color:var(--ardoise-3); color:var(--blanc-casse); }
+.cta-final .contact-links a.btn.btn--ghost:hover{ background:transparent; border-color:transparent; color:var(--bordeaux-vif); }
+
 /* ============ FORMULAIRE (page contact) ============ */
 [data-fs-success],
 [data-fs-error]{ display:none; }
@@ -1397,6 +1439,6 @@ html[data-theme="light"] .explore-cta{ background:linear-gradient(135deg,#EBDFC7
 html[data-theme="light"] .figure-frame--pad{ background:#EDE3CD; }
 html[data-theme="light"] .contact-card{ background:rgba(255,255,255,.06); }
 /* le bloc contact reste bordeaux : on rétablit localement les tokens clairs sur fond sombre */
-html[data-theme="light"] .contact{ --blanc-casse:#F5EEDD; --gris-doux:#f3dee2; --ardoise-3:rgba(255,255,255,.22); }
+html[data-theme="light"] .contact{ --blanc-casse:#F5EEDD; --gris-doux:#f3dee2; --ardoise-3:rgba(255,255,255,.22); --bordeaux-vif:#E8A3AD; }
 html[data-theme="light"] .contact-form .btn--primary{ color:var(--bordeaux); }
 html[data-theme="light"] .fig-link .fig-hint{ color:#F5EEDD; }

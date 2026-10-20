@@ -29,6 +29,12 @@
 /index.html             /                    301
 /a-propos.html           /a-propos            301
 /contact.html            /contact             301
+/rendez-vous.html        /rendez-vous         301
+# Alias courts de la page de réservation (messages LinkedIn, signature e-mail)
+/rdv                     /rendez-vous         301
+/rdv/                    /rendez-vous         301
+/rdv.html                /rendez-vous         301
+/prendre-rendez-vous     /rendez-vous         301
 /faq.html                /faq                 301
 /methode.html            /methode             301
 /mentions-legales.html   /mentions-legales    301
