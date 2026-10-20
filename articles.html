@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Thème : choix du visiteur s'il en a fait un, sinon réglage clair/sombre de l'ordinateur (clair par défaut) */(function(){var t;try{t=localStorage.getItem('noumensia-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='light')document.documentElement.setAttribute('data-theme','light')})();</script>
 <base href="/">
 <title>Articles — Noumensia</title>
 <meta name="description" content="Analyses sourcées sur les phénomènes RH : ce qu'établit réellement la recherche sur le turnover et le burn-out, et ce qu'on peut en faire pour décider.">
@@ -79,7 +80,7 @@
   <!-- ============ INTRO ============ -->
   <section class="section" id="articles">
     <div class="wrap reveal">
-      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span>Articles</p>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span>Articles</nav>
       <p class="eyebrow">Articles</p>
       <h1>Ce que dit la recherche, et ce qu'on peut en faire</h1>
       <p class="lede">
@@ -99,7 +100,7 @@
 
         <article class="article-card reveal">
           <p class="eyebrow eyebrow--on-light">Turnover · article pilier</p>
-          <h3><a href="/articles/causes-turnover-recherche">Pourquoi vos salariés partent&nbsp;: ce que 60&nbsp;ans de recherche dit vraiment</a></h3>
+          <h3><a href="/articles/causes-turnover-recherche">Pourquoi vos salariés partent&nbsp;: ce que 60&nbsp;ans de recherche disent vraiment</a></h3>
           <p>
             Les listes de causes du turnover circulent partout sans source.
             Ce qu'établissent réellement les méta-analyses — et pourquoi une liste
@@ -144,7 +145,7 @@
       </div>
 
       <p class="lede" style="margin-top:2.5rem">
-        Les prochains articles paraissent au rythme de deux par mois. En complément,
+        D'autres articles sont en préparation. En attendant,
         les <a href="/modeles/">modèles</a> sont explorables&nbsp;: le graphe complet
         et le simulateur sont accessibles librement, sans inscription.
       </p>

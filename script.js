@@ -1,11 +1,26 @@
 // Noumensia — comportements partagés (thème, menu mobile, nav au scroll,
 // révélation au scroll, barre de progression). Aucune dépendance externe.
 
-// ---- Thème : appliqué le plus tôt possible pour limiter le flash ----
+// ---- Thème ----
+// Le choix est fait dans le <head> de chaque page (script en ligne, avant
+// l'affichage, pour éviter un flash) : choix mémorisé du visiteur s'il a
+// cliqué sur le bouton, sinon réglage clair/sombre de son ordinateur, clair
+// par défaut. Ici on ne fait que suivre un changement de réglage de
+// l'ordinateur en cours de visite, tant que le visiteur n'a rien choisi.
 (function () {
   try {
-    var t = localStorage.getItem('noumensia-theme');
-    if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    if (!window.matchMedia) return;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var follow = function (e) {
+      var t = null;
+      try { t = localStorage.getItem('noumensia-theme'); } catch (err) {}
+      if (t === 'light' || t === 'dark') return;
+      if (e.matches) document.documentElement.removeAttribute('data-theme');
+      else document.documentElement.setAttribute('data-theme', 'light');
+      document.dispatchEvent(new Event('nm-theme-change'));
+    };
+    if (mq.addEventListener) mq.addEventListener('change', follow);
+    else if (mq.addListener) mq.addListener(follow);
   } catch (e) {}
 })();
 
@@ -54,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       setLabel();
     });
+    document.addEventListener('nm-theme-change', setLabel);
     li.appendChild(btn);
     (navActions || navLinks).appendChild(li);
   }

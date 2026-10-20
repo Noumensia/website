@@ -151,7 +151,7 @@ footer code{font-family:var(--mono);font-size:11px}
 
 
 <script>
-try{if(localStorage.getItem('noumensia-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}
+(function(){var t;try{t=localStorage.getItem('noumensia-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='light')document.documentElement.setAttribute('data-theme','light')})();
 </script>
 <meta name="description" content="Réseau bayésien décisionnel : quatre leviers d'investissement de conformité pour un outil RH à haut risque, 36 stratégies comparées sur leur coût et le préjudice évité.">
 <link rel="canonical" href="https://noumensia.com/decryptages/ai-act/arbitrage-conformite">
@@ -241,8 +241,8 @@ html,body{overflow-x:clip}
   --ardoise-4:    #141A22;  
   --bordeaux:     #7A1F2D;  
   --bordeaux-vif: #D98A95;  
-  --blanc-casse:  #F2EFEA;  
-  --gris-doux:    #A8B4C2;  
+  --blanc-casse:  #F1E7D3;  
+  --gris-doux:    #B8AF9F;  
 
   --font-display: "Newsreader", Georgia, serif;
   --font-body:    "IBM Plex Sans", -apple-system, sans-serif;
@@ -258,7 +258,7 @@ html,body{overflow-x:clip}
   --t-slow:    600ms cubic-bezier(.16, 1, .3, 1);
   --ease-out:  cubic-bezier(.16, 1, .3, 1);
   --ring:      0 0 0 3px rgba(217, 138, 149, .35);   
-  --ring-light:0 0 0 3px rgba(242, 239, 234, .28);   
+  --ring-light:0 0 0 3px rgba(241, 231, 211, .28);   
   --shadow-sm: 0 1px 2px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,.12), 0 12px 32px rgba(0,0,0,.14);
   --shadow-lg: 0 12px 40px rgba(0,0,0,.22);
@@ -394,6 +394,7 @@ footer.nm-site-footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover,
   position:absolute; right:-3px; bottom:-3px; z-index:1;
   width:14px; height:14px; border-radius:50%;
   background:var(--bordeaux); border:1.4px solid var(--ardoise);
+  color:#F1E7D3;
   display:grid; place-items:center; pointer-events:none;
   transition:border-color var(--t-fast);
 }
@@ -425,14 +426,14 @@ html[data-theme="light"]{
   --ardoise-2:#E7DAC1;      
   --ardoise-3:#D6C8AC;      
   --ardoise-4:#E0D2B9;
-  --blanc-casse:#221E17;    
-  --gris-doux:#5c5342;
+  --blanc-casse:#1E2630;    
+  --gris-doux:#4D5968;
   --bordeaux-vif:#8f2233;
   color-scheme:light;
 }
 html[data-theme="light"] .nav{ background:rgba(241,231,211,.82); }
 html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); box-shadow:0 4px 20px rgba(60,45,25,.09); }
-html[data-theme="light"] .nav-links .nav-cta:hover{ color:#F5EEDD; }
+html[data-theme="light"] .nav-links .nav-cta:hover{ color:#F1E7D3; }
 html:root:not([data-theme="light"]){
   --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
   --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
@@ -474,7 +475,7 @@ html:root[data-theme="light"]{
    des graphes (interdit, haut risque, transparence…) restent celles de chaque outil. */
 html:root:not([data-theme="light"]){
   --ground:#1E2630; --surface:#26303B; --surface-2:#222B35;
-  --ink:#F2EFEA; --ink-2:#C2CBD6; --ink-3:#8E9BAA;
+  --ink:#F1E7D3; --ink-2:#CFC6B6; --ink-3:#A39A8B;
   --rule:#3A4756; --rule-strong:#4D5C6E;
   --accent:#D98A95; --accent-soft:rgba(217,138,149,.16); --focus:#D98A95;
   --shadow:0 1px 2px rgba(0,0,0,.25),0 10px 28px rgba(0,0,0,.22);
@@ -483,7 +484,7 @@ html:root:not([data-theme="light"]){
 }
 html:root[data-theme="light"]{
   --ground:#F1E7D3; --surface:#FAF4E8; --surface-2:#EFE4CE;
-  --ink:#221E17; --ink-2:#4E4636; --ink-3:#7A6F5C;
+  --ink:#1E2630; --ink-2:#4D5968; --ink-3:#5E6877;
   --rule:#D6C8AC; --rule-strong:#C2B293;
   --accent:#8F2233; --accent-soft:#F3E3E1; --focus:#8F2233;
   --shadow:0 1px 2px rgba(60,45,25,.06),0 8px 24px rgba(60,45,25,.08);
@@ -492,6 +493,20 @@ html:root[data-theme="light"]{
 }
 html,body{background:var(--ground)}
 
+@property --lk-fill{syntax:"<percentage>";inherits:false;initial-value:0%}
+/* Nav : même geste de survol que le reste du site */
+.nav-links .nav-cta,.theme-toggle,.nav-toggle{position:relative;transition:color .15s,border-color .15s,transform .22s cubic-bezier(.4,0,.2,1)}
+.nav-links .nav-cta::before,.theme-toggle::before,.nav-toggle::before{content:"";position:absolute;inset:-1px;border-radius:7px;padding:1.5px;pointer-events:none;
+  background:conic-gradient(from -90deg,var(--bordeaux-vif) var(--lk-fill),transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;--lk-fill:0%;transition:--lk-fill .6s cubic-bezier(.4,0,.2,1)}
+.theme-toggle::before{border-radius:9px}
+.nav-links .nav-cta:hover::before,.theme-toggle:hover::before,.nav-toggle:hover::before{--lk-fill:100%}
+.nav-links .nav-cta:hover,.theme-toggle:hover,.nav-toggle:hover{background:none;border-color:transparent;color:var(--bordeaux-vif)}
+.nav-links .nav-cta:hover{transform:scale(1.04)}
+.theme-toggle:hover,.nav-toggle:hover{transform:scale(1.06)}
+.social-link{transition:color .15s,border-color .15s,background .15s,transform .22s cubic-bezier(.4,0,.2,1)}
+.social-link:hover{transform:scale(1.08)}
 </style>
 </head>
 <body>
@@ -517,7 +532,7 @@ html,body{background:var(--ground)}
 </header>
 
 <div class="wrap">
-<section class="nm-intro" aria-labelledby="nm-h1"><p class="nm-crumbs"><a href="/">Accueil</a><span>/</span><a href="/decryptages">Décryptages</a><span>/</span><a href="/decryptages/ai-act/">AI Act</a><span>/</span>Arbitrage de conformité</p><p class="nm-kicker">Décryptage AI Act · Sous le capot · Réseau décisionnel</p><h1 id="nm-h1">Combien coûte la conformité, et que rapporte-t-elle&nbsp;?</h1><p class="nm-lede">Quatre leviers (audit de biais, contrôle humain, documentation, information des personnes), 36 combinaisons possibles. Le réseau compare ce que chacune coûte à ce qu'elle évite, en préjudices pour les personnes comme en euros pour l'organisation.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>Les 36 stratégies classées par coût annuel espéré.</li><li>Le compromis coût contre préjudice, stratégie par stratégie.</li><li>Deux curseurs pour tester les deux hypothèses dont dépend la conclusion.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Décrivez le déploiement (usage, volume, origine du système…).</li><li>Bougez les deux curseurs pour éprouver les hypothèses.</li><li>Comparez la stratégie la moins chère et celle qui protège le plus.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Les montants sont des ordres de grandeur de scénario et les effets des leviers des jugements d'expert. Construit sur le texte de 2024 avec le calendrier de l'Omnibus, il ne modélise pas l'exception des outils déjà en service.</p></div></div><p class="nm-meta"><span>Réseau bayésien décisionnel · 28 variables · 36 stratégies</span><a href="#capot">Comment c'est construit</a></p></section>
+<section class="nm-intro" aria-labelledby="nm-h1"><nav class="nm-crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages">Décryptages</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages/ai-act/">AI Act</a><span aria-hidden="true">&rsaquo;</span>Arbitrage de conformité</nav><p class="nm-kicker">Décryptage AI Act · Sous le capot · Réseau décisionnel</p><h1 id="nm-h1">Combien coûte la conformité, et que rapporte-t-elle&nbsp;?</h1><p class="nm-lede">Quatre leviers (audit de biais, contrôle humain, documentation, information des personnes), 36 combinaisons possibles. Le réseau compare ce que chacune coûte à ce qu'elle évite, en préjudices pour les personnes comme en euros pour l'organisation.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>Les 36 stratégies classées par coût annuel espéré.</li><li>Le compromis coût contre préjudice, stratégie par stratégie.</li><li>Deux curseurs pour tester les deux hypothèses dont dépend la conclusion.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Décrivez le déploiement (usage, volume, origine du système…).</li><li>Bougez les deux curseurs pour éprouver les hypothèses.</li><li>Comparez la stratégie la moins chère et celle qui protège le plus.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Les montants sont des ordres de grandeur de scénario et les effets des leviers des jugements d'expert. Construit sur le texte de 2024 avec le calendrier de l'Omnibus, il ne modélise pas l'exception des outils déjà en service.</p></div></div><p class="nm-meta"><span>Réseau bayésien décisionnel · 28 variables · 36 stratégies</span><a href="#capot">Comment c'est construit</a></p></section>
 
 
 

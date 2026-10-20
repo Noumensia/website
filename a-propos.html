@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Thème : choix du visiteur s'il en a fait un, sinon réglage clair/sombre de l'ordinateur (clair par défaut) */(function(){var t;try{t=localStorage.getItem('noumensia-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='light')document.documentElement.setAttribute('data-theme','light')})();</script>
 <title>À propos — Noumensia</title>
 <meta name="description" content="Noumensia est porté par Arthur Jouffe — parcours, approche et ce que Noumensia est et n'est pas.">
 <link rel="preload" href="fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -86,7 +87,7 @@
   <!-- ============ LE FONDATEUR ============ -->
   <section class="section">
     <div class="wrap reveal">
-      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span>À propos</p>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span>À propos</nav>
       <p class="eyebrow">Le fondateur</p>
       <h1>Arthur Jouffe</h1>
       <div class="founder">
@@ -149,7 +150,7 @@
         <p class="not-lead">Pour être clair, Noumensia n'est pas&nbsp;:</p>
         <ul class="not-list">
           <li><strong>un cabinet de conseil RH</strong> — pas de rapports standardisés ni de benchmarks sectoriels génériques.</li>
-          <li><strong>une prédiction</strong> — un modèle structure un raisonnement, il ne garantit pas que la réalité se comportera comme prévu.</li>
+          <li><strong>un outil de prédiction</strong> — un modèle structure un raisonnement, il ne garantit pas que la réalité se comportera comme prévu.</li>
           <li><strong>un substitut à votre expertise métier</strong> — le modèle encode ce que vous savez déjà, le rend navigable et révèle des angles morts. La décision reste la vôtre.</li>
           <li><strong>un logiciel clé en main</strong> — pas de solution générique à installer.</li>
         </ul>
@@ -161,7 +162,7 @@
   <section class="section">
     <div class="wrap reveal">
       <p class="eyebrow">Périmètre</p>
-      <h2>Noumensia</h2>
+      <h2>Quand la modélisation bayésienne est le bon outil</h2>
       <div class="prose">
         <p>
           La modélisation bayésienne est particulièrement adaptée quand plusieurs conditions 

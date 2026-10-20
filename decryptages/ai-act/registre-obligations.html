@@ -1,6 +1,6 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style><title>AI Act : les obligations, une par une — Noumensia</title>
 <script>
-try{if(localStorage.getItem('noumensia-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}
+(function(){var t;try{t=localStorage.getItem('noumensia-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='light')document.documentElement.setAttribute('data-theme','light')})();
 </script>
 <meta name="description" content="Les obligations de l'AI Act découpées une par une et filtrées sur votre profil : qui, quand, quel article, quelle preuve attendue, quelle question de contrôle. Plan d'action exportable.">
 <link rel="canonical" href="https://noumensia.com/decryptages/ai-act/registre-obligations">
@@ -90,8 +90,8 @@ html,body{overflow-x:clip}
   --ardoise-4:    #141A22;  
   --bordeaux:     #7A1F2D;  
   --bordeaux-vif: #D98A95;  
-  --blanc-casse:  #F2EFEA;  
-  --gris-doux:    #A8B4C2;  
+  --blanc-casse:  #F1E7D3;  
+  --gris-doux:    #B8AF9F;  
 
   --font-display: "Newsreader", Georgia, serif;
   --font-body:    "IBM Plex Sans", -apple-system, sans-serif;
@@ -107,7 +107,7 @@ html,body{overflow-x:clip}
   --t-slow:    600ms cubic-bezier(.16, 1, .3, 1);
   --ease-out:  cubic-bezier(.16, 1, .3, 1);
   --ring:      0 0 0 3px rgba(217, 138, 149, .35);   
-  --ring-light:0 0 0 3px rgba(242, 239, 234, .28);   
+  --ring-light:0 0 0 3px rgba(241, 231, 211, .28);   
   --shadow-sm: 0 1px 2px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,.12), 0 12px 32px rgba(0,0,0,.14);
   --shadow-lg: 0 12px 40px rgba(0,0,0,.22);
@@ -243,6 +243,7 @@ footer.nm-site-footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover,
   position:absolute; right:-3px; bottom:-3px; z-index:1;
   width:14px; height:14px; border-radius:50%;
   background:var(--bordeaux); border:1.4px solid var(--ardoise);
+  color:#F1E7D3;
   display:grid; place-items:center; pointer-events:none;
   transition:border-color var(--t-fast);
 }
@@ -274,14 +275,14 @@ html[data-theme="light"]{
   --ardoise-2:#E7DAC1;      
   --ardoise-3:#D6C8AC;      
   --ardoise-4:#E0D2B9;
-  --blanc-casse:#221E17;    
-  --gris-doux:#5c5342;
+  --blanc-casse:#1E2630;    
+  --gris-doux:#4D5968;
   --bordeaux-vif:#8f2233;
   color-scheme:light;
 }
 html[data-theme="light"] .nav{ background:rgba(241,231,211,.82); }
 html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); box-shadow:0 4px 20px rgba(60,45,25,.09); }
-html[data-theme="light"] .nav-links .nav-cta:hover{ color:#F5EEDD; }
+html[data-theme="light"] .nav-links .nav-cta:hover{ color:#F1E7D3; }
 html:root:not([data-theme="light"]){
   --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
   --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
@@ -325,7 +326,7 @@ html:root[data-theme="light"]{
    des graphes (interdit, haut risque, transparence…) restent celles de chaque outil. */
 html:root:not([data-theme="light"]){
   --ground:#1E2630; --surface:#26303B; --surface-2:#222B35;
-  --ink:#F2EFEA; --ink-2:#C2CBD6; --ink-3:#8E9BAA;
+  --ink:#F1E7D3; --ink-2:#CFC6B6; --ink-3:#A39A8B;
   --rule:#3A4756; --rule-strong:#4D5C6E;
   --accent:#D98A95; --accent-soft:rgba(217,138,149,.16); --focus:#D98A95;
   --shadow:0 1px 2px rgba(0,0,0,.25),0 10px 28px rgba(0,0,0,.22);
@@ -334,7 +335,7 @@ html:root:not([data-theme="light"]){
 }
 html:root[data-theme="light"]{
   --ground:#F1E7D3; --surface:#FAF4E8; --surface-2:#EFE4CE;
-  --ink:#221E17; --ink-2:#4E4636; --ink-3:#7A6F5C;
+  --ink:#1E2630; --ink-2:#4D5968; --ink-3:#5E6877;
   --rule:#D6C8AC; --rule-strong:#C2B293;
   --accent:#8F2233; --accent-soft:#F3E3E1; --focus:#8F2233;
   --shadow:0 1px 2px rgba(60,45,25,.06),0 8px 24px rgba(60,45,25,.08);
@@ -581,6 +582,29 @@ pre.out{font-family:var(--mono);font-size:11.5px;line-height:1.6;background:var(
 .method li{margin-bottom:4px}
 footer{font-size:11.5px;color:var(--ink-3);padding-top:6px;line-height:1.6}
 .tblwrap{overflow-x:auto}
+@property --lk-fill{syntax:"<percentage>";inherits:false;initial-value:0%}
+/* Nav : même geste de survol que le reste du site */
+.nav-links .nav-cta,.theme-toggle,.nav-toggle{position:relative;transition:color .15s,border-color .15s,transform .22s cubic-bezier(.4,0,.2,1)}
+.nav-links .nav-cta::before,.theme-toggle::before,.nav-toggle::before{content:"";position:absolute;inset:-1px;border-radius:7px;padding:1.5px;pointer-events:none;
+  background:conic-gradient(from -90deg,var(--bordeaux-vif) var(--lk-fill),transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;--lk-fill:0%;transition:--lk-fill .6s cubic-bezier(.4,0,.2,1)}
+.theme-toggle::before{border-radius:9px}
+.nav-links .nav-cta:hover::before,.theme-toggle:hover::before,.nav-toggle:hover::before{--lk-fill:100%}
+.nav-links .nav-cta:hover,.theme-toggle:hover,.nav-toggle:hover{background:none;border-color:transparent;color:var(--bordeaux-vif)}
+.nav-links .nav-cta:hover{transform:scale(1.04)}
+.theme-toggle:hover,.nav-toggle:hover{transform:scale(1.06)}
+.social-link{transition:color .15s,border-color .15s,background .15s,transform .22s cubic-bezier(.4,0,.2,1)}
+.social-link:hover{transform:scale(1.08)}
+/* Geste de survol commun au site : léger zoom + contour qui se trace et se résorbe */
+.btn{position:relative;transition:transform .22s cubic-bezier(.4,0,.2,1),border-color .15s,color .15s,background .15s}
+.btn:hover{transform:scale(1.035)}
+.btn::before{content:"";position:absolute;inset:-1px;border-radius:6px;padding:1.5px;pointer-events:none;
+  background:conic-gradient(from -90deg,var(--accent) var(--lk-fill),transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;--lk-fill:0%;transition:--lk-fill .6s cubic-bezier(.4,0,.2,1)}
+.btn:hover::before,.btn:focus-visible::before{--lk-fill:100%}
+.btn.yes::before,.btn.on::before{inset:-4px;border-radius:8px}
 </style>
 
 <div class="scroll-progress" aria-hidden="true"></div>
@@ -605,7 +629,7 @@ footer{font-size:11.5px;color:var(--ink-3);padding-top:6px;line-height:1.6}
 </header>
 <div class="wrap">
 
-<section class="nm-intro" aria-labelledby="nm-h1"><p class="nm-crumbs"><a href="/">Accueil</a><span>/</span><a href="/decryptages">Décryptages</a><span>/</span><a href="/decryptages/ai-act/">AI Act</a><span>/</span>Que dois-je faire ?</p><p class="nm-kicker">Décryptage AI Act · Outil 2 sur 3</p><ol class="nm-steps" aria-label="Les trois outils du décryptage"><li><a href="/decryptages/ai-act/parcours-qualification"><b>1</b>Mon outil est-il concerné ?</a></li><li><a href="/decryptages/ai-act/registre-obligations" class="on" aria-current="page"><b>2</b>Que dois-je faire ?</a></li><li><a href="/decryptages/ai-act/simulateur-sanction"><b>3</b>Par quoi commencer ?</a></li></ol><h1 id="nm-h1">Que devez-vous faire, et pour quand&nbsp;?</h1><p class="nm-lede">Le règlement contient des dizaines d'obligations dispersées sur 113 articles et 13 annexes. Elles sont ici découpées une par une. Indiquez votre rôle et les usages concernés, le registre ne garde que ce qui vous regarde et le classe par échéance.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>La liste des obligations qui vous concernent, avec l'article et la date d'application.</li><li>Pour chacune, la preuve attendue et la question qu'un contrôleur poserait.</li><li>Un plan d'action à exporter, et vos réponses transmises au simulateur.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Cochez vos rôles et les régimes de vos outils (le parcours vous les donne).</li><li>Dépliez une obligation, marquez-la couverte si elle l'est déjà.</li><li>Exportez le plan, puis ouvrez vos réponses dans le simulateur.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Le score d'exposition sert à trier, pas à prédire : c'est le palier de sanction multiplié par deux jugements d'expert (criticité, détectabilité), expliqués pour chaque obligation.</p></div></div><p class="nm-meta"><span>10 à 20 minutes · 73 obligations · texte consolidé au 27/07/2026</span><a href="#capot">Comment c'est construit</a></p></section>
+<section class="nm-intro" aria-labelledby="nm-h1"><nav class="nm-crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages">Décryptages</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages/ai-act/">AI Act</a><span aria-hidden="true">&rsaquo;</span>Que dois-je faire ?</nav><p class="nm-kicker">Décryptage AI Act · Outil 2 sur 3</p><ol class="nm-steps" aria-label="Les trois outils du décryptage"><li><a href="/decryptages/ai-act/parcours-qualification"><b>1</b>Mon outil est-il concerné ?</a></li><li><a href="/decryptages/ai-act/registre-obligations" class="on" aria-current="page"><b>2</b>Que dois-je faire ?</a></li><li><a href="/decryptages/ai-act/simulateur-sanction"><b>3</b>Par quoi commencer ?</a></li></ol><h1 id="nm-h1">Que devez-vous faire, et pour quand&nbsp;?</h1><p class="nm-lede">Le règlement contient des dizaines d'obligations dispersées sur 113 articles et 13 annexes. Elles sont ici découpées une par une. Indiquez votre rôle et les usages concernés, le registre ne garde que ce qui vous regarde et le classe par échéance.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>La liste des obligations qui vous concernent, avec l'article et la date d'application.</li><li>Pour chacune, la preuve attendue et la question qu'un contrôleur poserait.</li><li>Un plan d'action à exporter, et vos réponses transmises au simulateur.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Cochez vos rôles et les régimes de vos outils (le parcours vous les donne).</li><li>Dépliez une obligation, marquez-la couverte si elle l'est déjà.</li><li>Exportez le plan, puis ouvrez vos réponses dans le simulateur.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Le score d'exposition sert à trier, pas à prédire : c'est le palier de sanction multiplié par deux jugements d'expert (criticité, détectabilité), expliqués pour chaque obligation.</p></div></div><p class="nm-meta"><span>10 à 20 minutes · 73 obligations · texte consolidé au 27/07/2026</span><a href="#capot">Comment c'est construit</a></p></section>
 
 
 

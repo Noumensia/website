@@ -28,6 +28,7 @@ const STATIC_PAGES = [
   { file: 'decryptages.html', url: '/decryptages', priority: '0.8', changefreq: 'monthly' },
   { file: 'faq.html', url: '/faq', priority: '0.7', changefreq: 'monthly' },
   { file: 'contact.html', url: '/contact', priority: '0.7', changefreq: 'yearly' },
+  { file: 'rendez-vous.html', url: '/rendez-vous', priority: '0.6', changefreq: 'yearly' },
   { file: 'a-propos.html', url: '/a-propos', priority: '0.6', changefreq: 'yearly' },
   { file: 'mentions-legales.html', url: '/mentions-legales', priority: '0.2', changefreq: 'yearly' },
 ];

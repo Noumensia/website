@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Thème : choix du visiteur s'il en a fait un, sinon réglage clair/sombre de l'ordinateur (clair par défaut) */(function(){var t;try{t=localStorage.getItem('noumensia-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='light')document.documentElement.setAttribute('data-theme','light')})();</script>
 <title>Méthode — Noumensia</title>
 <meta name="description" content="Comment un réseau bayésien est construit : structure, calibration, simulation — et pourquoi cette approche complète le diagnostic RH sans remplacer l'expertise humaine.">
 <link rel="preload" href="fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -83,7 +84,7 @@
   <!-- ============ INTRO ============ -->
   <section class="section" id="methode">
     <div class="wrap reveal">
-      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span>Méthode</p>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span>Méthode</nav>
       <p class="eyebrow">Méthode</p>
       <h1>Comment les modèles sont construits — et ce qu'on peut en attendre</h1>
       <p class="lede">
@@ -160,13 +161,13 @@
 
           <!-- Nœuds d'entrée : blanc cassé / bordure ardoise -->
           <rect x="8" y="10" width="149" height="30" rx="3"
-                fill="#F2EFEA" stroke="#1E2630" stroke-width="1.5"/>
+                fill="#F1E7D3" stroke="#1E2630" stroke-width="1.5"/>
           <text x="82" y="25" text-anchor="middle" dominant-baseline="central"
                 font-family="'IBM Plex Sans',Helvetica,Arial,sans-serif"
                 font-size="11" font-weight="500" fill="#1E2630">Charge de travail</text>
 
           <rect x="8" y="95" width="149" height="30" rx="3"
-                fill="#F2EFEA" stroke="#1E2630" stroke-width="1.5"/>
+                fill="#F1E7D3" stroke="#1E2630" stroke-width="1.5"/>
           <text x="82" y="110" text-anchor="middle" dominant-baseline="central"
                 font-family="'IBM Plex Sans',Helvetica,Arial,sans-serif"
                 font-size="11" font-weight="500" fill="#1E2630">Soutien managérial</text>
@@ -175,18 +176,18 @@
           <rect x="204" y="52" width="178" height="30" rx="3" fill="#7A1F2D"/>
           <text x="293" y="67" text-anchor="middle" dominant-baseline="central"
                 font-family="'IBM Plex Sans',Helvetica,Arial,sans-serif"
-                font-size="11" font-weight="500" fill="#F2EFEA">Épuisement émotionnel</text>
+                font-size="11" font-weight="500" fill="#F1E7D3">Épuisement émotionnel</text>
 
           <!-- Nœuds de sortie : ardoise -->
           <rect x="422" y="10" width="150" height="30" rx="3" fill="#1E2630"/>
           <text x="497" y="25" text-anchor="middle" dominant-baseline="central"
                 font-family="'IBM Plex Sans',Helvetica,Arial,sans-serif"
-                font-size="11" font-weight="500" fill="#F2EFEA">Intention de départ</text>
+                font-size="11" font-weight="500" fill="#F1E7D3">Intention de départ</text>
 
           <rect x="434" y="95" width="124" height="30" rx="3" fill="#1E2630"/>
           <text x="496" y="110" text-anchor="middle" dominant-baseline="central"
                 font-family="'IBM Plex Sans',Helvetica,Arial,sans-serif"
-                font-size="11" font-weight="500" fill="#F2EFEA">Absentéisme</text>
+                font-size="11" font-weight="500" fill="#F1E7D3">Absentéisme</text>
         </svg>
         <figcaption>
           Extrait simplifié — graphe complet disponible dans la section
@@ -224,7 +225,7 @@
             Les paramètres du modèle sont d'abord estimés depuis la littérature,
             puis affinés avec vos données disponibles. Celles-ci peuvent prendre 
             des formes variées&nbsp;: extraits SIRH, baromètres internes, enquêtes
-            psychosociales existantes, ou questionnaires sur-mesures récoltés 
+            psychosociales existantes, ou questionnaires sur mesure recueillis 
             directement auprès des collaborateurs — chaque source alimente 
             les paramètres du modèle de façon tracée. Quand les données internes 
             sont insuffisantes, les paramètres issus de la littérature restent 
@@ -238,7 +239,7 @@
             Une fois calibré, le modèle explore des scénarios&nbsp;:
             «&nbsp;si l'on agit sur X, qu'est-ce qui change sur Y&nbsp;?&nbsp;»
             Les résultats sont exprimés en distributions de probabilités, 
-            plutôt qu'en score unique et aggrégé, avec une estimation explicite 
+            plutôt qu'en score unique et agrégé, avec une estimation explicite 
             de l'incertitude. Vous recevez le simulateur interactif et les 
             résultats commentés, conçus pour être présentés en CODIR ou avec le CSE.
           </p>
@@ -272,7 +273,7 @@
         <p>
         Les enquêtes internes et les tableaux de bord mesurent déjà beaucoup.
         Mais ils mesurent chaque variable séparément. Ce que Noumensia permet
-        via la modélisation bayésienne c'est de relier ces variables dans un 
+        via la modélisation bayésienne, c'est de relier ces variables dans un 
         même système pour passer du constat («&nbsp;l'absentéisme a augmenté&nbsp;») 
         au diagnostic («&nbsp;voici les facteurs qui y sont le plus associés, 
         et dans quelles proportions&nbsp;»). Et de là, comparer plusieurs pistes 
@@ -320,8 +321,10 @@
           <strong>Risques psychosociaux</strong> —
           Burr et al. (2019), troisième version du Copenhagen Psychosocial
           Questionnaire (COPSOQ III), cadre exigences-ressources&nbsp;;
-          Aronsson &amp; Gustafsson (2000), étude empirique fondatrice sur
-          le présentéisme-maladie&nbsp;; données DARES, enquête
+          Karasek (1979), modèle demande-contrôle, <em>Administrative Science Quarterly</em>&nbsp;;
+          Siegrist (1996), déséquilibre effort-récompense, <em>Journal of Occupational Health Psychology</em>&nbsp;;
+          Demerouti et al. (2001), modèle exigences-ressources (JD-R) du burn-out, <em>Journal of Applied Psychology</em>&nbsp;;
+          Maslach &amp; Jackson (1981), Maslach Burnout Inventory&nbsp;; données DARES, enquête
           <em>Conditions de travail</em> (2019)
         </li>
       </ul>

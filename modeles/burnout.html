@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Thème : choix du visiteur s'il en a fait un, sinon réglage clair/sombre de l'ordinateur (clair par défaut) */(function(){var t;try{t=localStorage.getItem('noumensia-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='light')document.documentElement.setAttribute('data-theme','light')})();</script>
 <base href="/">
 <title>Burn-out au travail : facteurs, prévention et leviers d'action — Noumensia</title>
 <meta name="description" content="Burn-out au travail : comprendre les facteurs (charge, autonomie, soutien, reconnaissance) et hiérarchiser les leviers d'action réellement accessibles en entreprise, à l'aide d'un modèle bayésien issu de la recherche (JD-R, Karasek, Maslach, Siegrist).">
@@ -84,7 +85,7 @@
   <!-- ============ HERO ARTICLE ============ -->
   <section class="article-hero">
     <div class="wrap reveal">
-      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span><a href="/modeles/">Modèles</a><span>/</span>Burn-out &amp; RPS</p>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span><a href="/modeles/">Modèles</a><span>&rsaquo;</span>Burn-out &amp; RPS</nav>
       <p class="eyebrow">Modèle · Réseau bayésien</p>
       <h1>Burn-out&nbsp;: connaître les causes ne suffit pas à bien décider</h1>
       <p class="standfirst">
@@ -385,9 +386,7 @@
           spirales de perte de ressources (Hobfoll, théorie COR) ne sont pas
           représentées — et il modélise des mécanismes, pas des profils démographiques.
           La page <a href="/methode">Méthode</a> détaille la construction, le
-          paramétrage et les limites de ce type de modèle. Les
-          <a href="/articles">articles</a> reprennent chaque mécanisme séparément,
-          source par source.
+          paramétrage et les limites de ce type de modèle.
         </p>
 
         <div class="model-cta reveal">

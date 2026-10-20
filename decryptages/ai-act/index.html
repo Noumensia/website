@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Thème : choix du visiteur s'il en a fait un, sinon réglage clair/sombre de l'ordinateur (clair par défaut) */(function(){var t;try{t=localStorage.getItem('noumensia-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='light')document.documentElement.setAttribute('data-theme','light')})();</script>
 <base href="/">
 <title>L'AI Act en RH, sans le brouillard — Noumensia</title>
 <meta name="description" content="Ce qui est tranché et ce qui ne l'est pas dans l'AI Act après l'Omnibus, et trois outils construits sur le texte consolidé pour qualifier un outil RH, lister ses obligations et choisir par quoi commencer.">
@@ -74,9 +75,9 @@
   border:1px solid var(--ardoise-3); background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
   color:var(--blanc-casse); text-decoration:none;
   transition:border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base); }
-.aa-step:hover{ text-decoration:none; transform:translateY(-3px); border-color:var(--bordeaux-vif); box-shadow:0 10px 30px rgba(0,0,0,.28); }
+.aa-step:hover{ text-decoration:none; transform:translateY(-3px); border-color:transparent; box-shadow:0 10px 30px rgba(0,0,0,.28); }
 .aa-step__n{ width:2rem; height:2rem; border-radius:50%; display:grid; place-items:center; font-family:var(--font-mono); font-size:.9rem;
-  background:var(--bordeaux); color:#F5EEDD; }
+  background:var(--bordeaux); color:#F1E7D3; }
 .aa-step__q{ font-family:var(--font-display); font-size:1.35rem; font-weight:600; line-height:1.2; }
 .aa-step__d{ font-size:.93rem; color:var(--gris-doux); line-height:1.5; flex:1; }
 .aa-step__t{ font-size:.82rem; font-weight:600; color:var(--bordeaux-vif); }
@@ -106,7 +107,7 @@
 .ds-card{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:0; border-radius:14px; overflow:hidden;
   border:1px solid var(--ardoise-3); background:rgba(255,255,255,.03); color:var(--blanc-casse); text-decoration:none;
   transition:border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base); }
-.ds-card:hover{ text-decoration:none; transform:translateY(-3px); border-color:var(--bordeaux-vif); box-shadow:0 10px 30px rgba(0,0,0,.28); }
+.ds-card:hover{ text-decoration:none; transform:translateY(-3px); border-color:transparent; box-shadow:0 10px 30px rgba(0,0,0,.28); }
 @media (max-width:860px){ .ds-card{ grid-template-columns:1fr; } }
 .ds-card__body{ padding:1.75rem 1.75rem 1.5rem; display:flex; flex-direction:column; gap:.75rem; }
 .ds-card__tag{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--bordeaux-vif); }
@@ -128,7 +129,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
 .aa-hx__card{ display:flex; flex-direction:column; gap:.5rem; padding:1.4rem 1.5rem; border-radius:12px;
   border:1px solid var(--ardoise-3); background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
   color:var(--blanc-casse); text-decoration:none; transition:border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base); }
-.aa-hx__card:hover{ text-decoration:none; transform:translateY(-3px); border-color:var(--bordeaux-vif); box-shadow:0 10px 30px rgba(0,0,0,.28); }
+.aa-hx__card:hover{ text-decoration:none; transform:translateY(-3px); border-color:transparent; box-shadow:0 10px 30px rgba(0,0,0,.28); }
 .aa-hx__k{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--bordeaux-vif); }
 .aa-hx__t{ font-family:var(--font-display); font-size:1.35rem; font-weight:600; }
 .aa-hx__d{ font-size:.93rem; color:var(--gris-doux); line-height:1.55; }
@@ -193,7 +194,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
   <!-- ============ INTRO ============ -->
   <section class="section" id="ai-act">
     <div class="wrap reveal">
-      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span><a href="/decryptages">Décryptages</a><span>/</span>AI Act</p>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span><a href="/decryptages">Décryptages</a><span>&rsaquo;</span>AI Act</nav>
       <p class="eyebrow">Décryptage · AI Act et ressources humaines</p>
       <h1>L'AI&nbsp;Act en RH, sans le brouillard</h1>
       <p class="lede">
@@ -205,7 +206,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
       </p>
       <div class="cta-row">
         <a class="btn btn--primary" href="/decryptages/ai-act/parcours-qualification" data-nm-click="aiact-hero-parcours">Mon outil est-il concerné&nbsp;?</a>
-        <a class="btn btn--ghost" href="#question">Poser une question</a>
+        <a class="btn btn--ghost" href="/decryptages/ai-act/#question">Poser une question</a>
       </div>
       <p class="aa-ref">
         Texte de référence&nbsp;: version consolidée au 27&nbsp;juillet&nbsp;2026, après le
@@ -262,7 +263,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
         </div>
       </div>
       <p class="aa-fog__note">
-        Sources dans la section <a href="#methode-ai-act">Méthode et limites</a>. Ce point est
+        Sources dans la section <a href="/decryptages/ai-act/#methode-ai-act">Méthode et limites</a>. Ce point est
         daté&nbsp;: je le mets à jour quand l'un de ces documents paraît.
       </p>
     </div>
@@ -568,7 +569,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
 
           <div class="form-row">
             <div class="form-group">
-              <label for="aa-email">Email professionnel</label>
+              <label for="aa-email">E-mail professionnel</label>
               <input type="email" id="aa-email" name="email" placeholder="vous@organisation.com" required data-fs-field>
               <span data-fs-error="email" class="form-field-error"></span>
             </div>

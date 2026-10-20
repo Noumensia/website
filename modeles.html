@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Thème : choix du visiteur s'il en a fait un, sinon réglage clair/sombre de l'ordinateur (clair par défaut) */(function(){var t;try{t=localStorage.getItem('noumensia-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='light')document.documentElement.setAttribute('data-theme','light')})();</script>
 <base href="/">
 <title>Modèles — Noumensia</title>
 <meta name="description" content="Des réseaux bayésiens construits à partir de la littérature scientifique, consultables et explorables de façon interactive : turnover volontaire, burn-out et risques psychosociaux.">
@@ -98,7 +99,7 @@
   <!-- ============ INTRO ============ -->
   <section class="section" id="modeles">
     <div class="wrap reveal">
-      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span>Modèles</p>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span>Modèles</nav>
       <p class="eyebrow">Modèles</p>
       <h1>Des réseaux à explorer, pas seulement à lire</h1>
       <p class="lede">
@@ -179,8 +180,8 @@
       </p>
 
       <div class="cta-row">
+        <a class="btn btn--primary" href="/contact?sujet=modeles" data-nm-click="modeles-cta-contact">Discuter d'un sujet spécifique</a>
         <a class="btn btn--ghost" href="/methode">La méthode derrière ces modèles</a>
-        <a class="btn btn--ghost" href="/contact">Discuter d'un sujet spécifique</a>
       </div>
     </div>
   </section>

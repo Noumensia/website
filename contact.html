@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Thème : choix du visiteur s'il en a fait un, sinon réglage clair/sombre de l'ordinateur (clair par défaut) */(function(){var t;try{t=localStorage.getItem('noumensia-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='light')document.documentElement.setAttribute('data-theme','light')})();</script>
 <title>Contact — Noumensia</title>
 <meta name="description" content="Premier échange de 30 minutes pour cadrer votre problématique RH. Réponse sous 48 h ouvrées.">
 <link rel="preload" href="fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -101,6 +102,15 @@
         <li class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>NDA &amp; RGPD</li>
       </ul>
 
+      <!-- Deux portes d'entrée : réserver tout de suite, ou écrire d'abord (formulaire) -->
+      <div class="contact-choice">
+        <a href="/rendez-vous" class="btn btn--ghost" data-rdv-link data-nm-click="contact-top-rdv">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+          Réserver un créneau de 30&nbsp;min
+        </a>
+        <span class="contact-choice__or">ou décrivez votre besoin ci-dessous, je vous réponds sous 48&nbsp;h ouvrées.</span>
+      </div>
+
       <!--
         États gérés par @formspree/ajax :
         - data-fs-success : affiché après soumission réussie (le formulaire est masqué)
@@ -136,7 +146,7 @@
             <span data-fs-error="nom" class="form-field-error"></span>
           </div>
           <div class="form-group">
-            <label for="email">Email professionnel</label>
+            <label for="email">E-mail professionnel</label>
             <input
               type="email"
               id="email"
@@ -182,7 +192,7 @@
       <div class="contact-alternatives">
         <a
           href="/rendez-vous"
-          id="contact-rdv-link"
+          data-rdv-link
           class="contact-alt-link"
           data-nm-click="contact-cal-book">Réserver directement un créneau de 30&nbsp;min</a>
         <span class="contact-alt-sep">ou</span>
@@ -263,7 +273,7 @@
           <p>
             Le tarif dépend de la complexité du modèle et du périmètre fixé pendant 
             la phase de cadrage. Cette phase permet de créer la visibilité nécessaire
-            à la poursuite du projet
+            à la poursuite du projet.
             Un modèle exploratoire sur un phénomène ciblé — un facteur de turnover,
             un risque psychosocial — représente typiquement quelques jours de travail.
             L'estimation précise est formalisée dans la note de cadrage,
@@ -442,8 +452,9 @@
       var champ = document.getElementById('provenance');
       if (champ) champ.value = s ? s.libelle : cle;
       // La provenance suit aussi vers la page de réservation
-      var rdv = document.getElementById('contact-rdv-link');
-      if (rdv) rdv.href = '/rendez-vous?sujet=' + encodeURIComponent(cle);
+      document.querySelectorAll('[data-rdv-link]').forEach(function (rdv) {
+        rdv.href = '/rendez-vous?sujet=' + encodeURIComponent(cle);
+      });
       var note = document.getElementById('contact-context');
       if (note && s) {
         note.innerHTML = 'Vous arrivez depuis <a href="' + s.href + '">' + s.libelle +

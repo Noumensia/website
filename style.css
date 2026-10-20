@@ -58,8 +58,14 @@
   --ardoise-4:    #141A22;  /* fonds plus profonds (footer, halos) */
   --bordeaux:     #7A1F2D;  /* aplats forts : CTA, bloc contact */
   --bordeaux-vif: #D98A95;  /* liens / accents lisibles sur fond sombre */
-  --blanc-casse:  #F2EFEA;  /* texte principal sur fond sombre, fond des "vitrines" claires */
-  --gris-doux:    #A8B4C2;  /* texte secondaire sur fond sombre (contraste AAA sur ardoise) */
+  /* Principe de la palette : deux couleurs de marque qui échangent leur rôle.
+     Sombre = fond ardoise #1E2630 + texte crème #F1E7D3.
+     Clair  = fond crème #F1E7D3 + texte ardoise #1E2630 (voir THÈME CLAIR).
+     Le bordeaux reste l'accent dans les deux. */
+  --creme:        #F1E7D3;  /* valeur fixe, quel que soit le thème */
+  --encre:        #1E2630;  /* ardoise, valeur fixe, quel que soit le thème */
+  --blanc-casse:  #F1E7D3;  /* texte principal (crème en sombre), fond des "vitrines" claires */
+  --gris-doux:    #B8AF9F;  /* texte secondaire : gris chaud (contraste 7:1 sur ardoise) */
 
   --font-display: "Newsreader", Georgia, serif;
   --font-body:    "IBM Plex Sans", -apple-system, sans-serif;
@@ -75,7 +81,7 @@
   --t-slow:    600ms cubic-bezier(.16, 1, .3, 1);
   --ease-out:  cubic-bezier(.16, 1, .3, 1);
   --ring:      0 0 0 3px rgba(217, 138, 149, .35);   /* halo bordeaux-vif transparent */
-  --ring-light:0 0 0 3px rgba(242, 239, 234, .28);   /* halo blanc-cassé pour fond bordeaux */
+  --ring-light:0 0 0 3px rgba(241, 231, 211, .28);   /* halo blanc-cassé pour fond bordeaux */
   --shadow-sm: 0 1px 2px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,.12), 0 12px 32px rgba(0,0,0,.14);
   --shadow-lg: 0 12px 40px rgba(0,0,0,.22);
@@ -249,18 +255,23 @@ html[data-theme="light"] .brand-icon{ content:url("images/logo/noumensia-icon-co
 .nav-links .nav-cta{
   padding:.5rem 1rem; border:1px solid var(--ardoise-3); border-radius:5px;
   color:var(--blanc-casse); font-weight:600;
+  transition:color var(--t-fast), border-color var(--t-fast), transform var(--t-base);
 }
 .nav-links .nav-cta::after{ display:none; }
-.nav-links .nav-cta:hover{
-  background:var(--bordeaux); border-color:var(--bordeaux); color:var(--blanc-casse);
+.nav-links .nav-cta:hover,
+.nav-links .nav-cta[aria-current="page"]{
+  border-color:transparent; color:var(--bordeaux-vif);
 }
+.nav-links .nav-cta:hover{ transform:scale(1.04); }
+.nav-links .nav-cta[aria-current="page"]::before{ --lk-fill:100%; }
 .nav-toggle{
   display:none; background:none; border:1px solid var(--ardoise-3);
   color:var(--blanc-casse); border-radius:6px; padding:.5rem .75rem;
   font-family:var(--font-body); font-size:.85rem; cursor:pointer;
-  transition:border-color var(--t-fast), color var(--t-fast);
+  transition:border-color var(--t-fast), color var(--t-fast), transform var(--t-base);
+  --trace-radius:7px;
 }
-.nav-toggle:hover{ border-color:var(--bordeaux-vif); color:var(--bordeaux-vif); }
+.nav-toggle:hover{ border-color:transparent; color:var(--bordeaux-vif); transform:scale(1.05); }
 
 /* Conteneur commun : liens + bouton thème + burger (permet au bouton thème
    de rester visible à côté du burger sur mobile, hors du panneau replié) */
@@ -270,48 +281,62 @@ html[data-theme="light"] .brand-icon{ content:url("images/logo/noumensia-icon-co
 .nav-actions #nav-toggle{ order:3; }
 
 /* ============ BOUTONS ============ */
+/* Un seul geste de survol sur tout le site (boutons, pastilles, cartes cliquables) :
+   léger zoom + contour bordeaux qui se trace autour de l'élément, et qui se
+   résorbe dans l'autre sens quand la souris s'en va.
+   Le contour est un pseudo-élément ::before animé via --lk-fill (déclaré plus bas
+   avec @property, ce qui permet la transition dans les deux sens).
+   Réglages par élément : --trace-color (couleur), --trace-inset (écart au bord),
+   --trace-radius (arrondi). */
+.btn,
+.nav-links .nav-cta,
+.theme-toggle,
+.nav-toggle{
+  position:relative;
+  --trace-color:var(--bordeaux-vif);
+}
+.btn::before,
+.nav-links .nav-cta::before,
+.theme-toggle::before,
+.nav-toggle::before{
+  content:""; position:absolute; inset:var(--trace-inset, -1px);
+  border-radius:var(--trace-radius, 6px); padding:1.5px;
+  background:conic-gradient(from -90deg, var(--trace-color) var(--lk-fill), transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  --lk-fill:0%; pointer-events:none;
+  transition:--lk-fill .6s cubic-bezier(.4,0,.2,1);
+}
+.btn:hover::before, .btn:focus-visible::before,
+.nav-links .nav-cta:hover::before, .nav-links .nav-cta:focus-visible::before,
+.theme-toggle:hover::before, .theme-toggle:focus-visible::before,
+.nav-toggle:hover::before, .nav-toggle:focus-visible::before{ --lk-fill:100%; }
+
 .btn{
   font-family:var(--font-body); font-weight:600; font-size:.95rem;
   padding:.85rem 1.5rem; border-radius:5px; border:1px solid transparent;
   cursor:pointer; display:inline-flex; align-items:center; gap:.5rem;
   transition:background var(--t-fast), color var(--t-fast),
-             border-color var(--t-fast), transform var(--t-fast),
+             border-color var(--t-fast), transform var(--t-base),
              box-shadow var(--t-base);
   will-change:transform;
 }
-.btn{ position:relative; }
-.btn:hover{ transform:translateY(-2px); text-decoration:none; }
-.btn:active{ transform:translateY(0); }
+.btn:hover{ transform:scale(1.035); text-decoration:none; }
+.btn:active{ transform:scale(.99); }
 
-/* Primaire : balayage lumineux qui traverse au survol */
-.btn--primary{ background:var(--bordeaux); color:var(--blanc-casse); overflow:hidden; }
-.btn--primary::after{
-  content:""; position:absolute; top:0; left:-130%; width:55%; height:100%;
-  background:linear-gradient(100deg, transparent, rgba(255,255,255,.22), transparent);
-  transform:skewX(-18deg); pointer-events:none;
-  transition:left .55s var(--ease-out, ease);
-}
+/* Primaire : aplat bordeaux, le contour se trace juste à l'extérieur du bouton */
+.btn--primary{ background:var(--bordeaux); color:var(--blanc-casse); --trace-inset:-4px; --trace-radius:8px; }
 .btn--primary:hover{
   background:#8f2536; text-decoration:none;
-  box-shadow:0 8px 22px rgba(122, 31, 45, .38);
+  box-shadow:0 8px 22px rgba(122, 31, 45, .32);
 }
-.btn--primary:hover::after{ left:140%; }
 
-/* Ghost : la bordure bordeaux se trace autour du bouton au survol (même geste que l'icône LinkedIn) */
+/* Secondaire (contour) : le tracé remplace la bordure */
 .btn--ghost{ border-color:var(--ardoise-3); color:var(--blanc-casse); }
-.btn--ghost::before{
-  content:""; position:absolute; inset:0; border-radius:5px; padding:1px;
-  background:conic-gradient(from -90deg, var(--bordeaux-vif) var(--lk-fill), transparent 0);
-  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor; mask-composite:exclude;
-  --lk-fill:0%; opacity:1; pointer-events:none;
-  transition:--lk-fill .6s cubic-bezier(.4,0,.2,1);
-}
 .btn--ghost:hover{
   border-color:transparent; color:var(--bordeaux-vif); text-decoration:none;
 }
-.btn--ghost:hover::before{ --lk-fill:100%; }
 .btn svg{ width:1.05em; height:1.05em; flex-shrink:0; position:relative; }
 .cta-row{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2rem; }
 
@@ -428,6 +453,8 @@ figure{ margin:0; }
 }
 .model-card{
   position:relative;
+  --gris-doux:#4D5968;   /* carte crème dans les deux thèmes : texte secondaire ardoise */
+  --ardoise-3:#D6C8AC;
   background:var(--blanc-casse); color:var(--ardoise);
   border-radius:14px; overflow:hidden; display:flex; flex-direction:column;
   box-shadow:var(--shadow-sm);
@@ -511,7 +538,7 @@ figure{ margin:0; }
 }
 .tool-link:hover{
   text-decoration:none; transform:translateY(-3px);
-  border-color:var(--bordeaux-vif);
+  border-color:transparent;
   background:linear-gradient(180deg, rgba(217,138,149,.08), rgba(255,255,255,.02));
   box-shadow:0 10px 30px rgba(0,0,0,.28);
 }
@@ -556,7 +583,7 @@ figure{ margin:0; }
 }
 .access-card:hover{
   text-decoration:none; transform:translateY(-3px);
-  border-color:var(--bordeaux-vif);
+  border-color:transparent;
   background:linear-gradient(180deg, rgba(217,138,149,.09), rgba(255,255,255,.02));
   box-shadow:0 12px 34px rgba(0,0,0,.3);
 }
@@ -686,6 +713,28 @@ figure{ margin:0; }
 .article-card--soon{ opacity:.6; }
 .article-card--soon::before{ display:none; }
 .article-card--soon:hover{ transform:none; border-color:var(--ardoise-3); box-shadow:none; }
+/* Cartes cliquables : même contour qui se trace et se résorbe que les boutons
+   (le léger soulèvement propre aux cartes est conservé). Les classes aa-/ds-
+   sont celles des pages Décryptages. */
+.tool-link, .access-card, .model-inline, .aa-step, .ds-card, .aa-hx__card{ position:relative; }
+.tool-link::before, .access-card::before, .model-inline::before,
+.aa-step::before, .ds-card::before, .aa-hx__card::before{
+  content:""; position:absolute; inset:var(--trace-inset, -1px); z-index:3;
+  border-radius:var(--trace-radius, 12px); padding:1.5px;
+  background:conic-gradient(from -90deg, var(--bordeaux-vif) var(--lk-fill), transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  --lk-fill:0%; pointer-events:none;
+  transition:--lk-fill .6s cubic-bezier(.4,0,.2,1);
+}
+.tool-link:hover::before, .access-card:hover::before, .model-inline:hover::before,
+.aa-step:hover::before, .ds-card:hover::before, .aa-hx__card:hover::before,
+.tool-link:focus-visible::before, .access-card:focus-visible::before, .model-inline:focus-visible::before,
+.aa-step:focus-visible::before, .ds-card:focus-visible::before, .aa-hx__card:focus-visible::before{ --lk-fill:100%; }
+.tool-link{ --trace-radius:11px; }
+.ds-card{ --trace-inset:0; --trace-radius:14px; }   /* overflow:hidden : le tracé se fait à l'intérieur */
+
 /* Encart de renvoi vers un modèle, à insérer dans le corps d'un article */
 .model-inline{
   display:flex; gap:1rem; align-items:center;
@@ -694,7 +743,7 @@ figure{ margin:0; }
   background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
   transition:border-color var(--t-base), transform var(--t-base);
 }
-.model-inline:hover{ transform:translateY(-2px); border-color:var(--bordeaux-vif); text-decoration:none; }
+.model-inline:hover{ transform:translateY(-2px); border-color:transparent; text-decoration:none; }
 .model-inline__thumb{
   flex:0 0 auto; width:96px; height:66px; border-radius:8px; overflow:hidden;
   background:var(--ardoise-2); border:1px solid var(--ardoise-3);
@@ -739,7 +788,7 @@ figure{ margin:0; }
   transition:color var(--t-fast), border-color var(--t-fast), background var(--t-fast), transform var(--t-fast);
 }
 .share-link svg{ width:15px; height:15px; position:relative; }
-.share-link:hover{ transform:translateY(-2px); text-decoration:none; }
+.share-link:hover{ transform:scale(1.08); text-decoration:none; }
 
 /* Anneau qui se trace au survol — même geste que .social-link / .fig-link, pour rester cohérent visuellement */
 .share-link::before{
@@ -1053,17 +1102,29 @@ figure{ margin:0; }
   max-width:42rem; margin-bottom:1.25rem;
 }
 .contact h2{ color:var(--blanc-casse); max-width:38rem; }
-.contact p{ color:#f4e4e7; max-width:36rem; margin-bottom:1.75rem; }
+.contact p{ color:rgba(241,231,211,.92); max-width:36rem; margin-bottom:1.75rem; }
 .contact .contact-note{
-  font-size:.85rem; color:rgba(242,239,234,.65); margin:0; max-width:none;
+  font-size:.85rem; color:rgba(241,231,211,.65); margin:0; max-width:none;
 }
 .contact-links{ display:flex; gap:1rem; flex-wrap:wrap; }
-.contact-links a{
+.contact-links a:not(.btn){
   font-family:var(--font-body); font-weight:600; font-size:.95rem;
   padding:.85rem 1.5rem; border-radius:5px; border:1px solid var(--blanc-casse);
   color:var(--blanc-casse);
 }
-.contact-links a:hover{ background:var(--blanc-casse); color:var(--bordeaux); text-decoration:none; }
+.contact-links a:not(.btn):hover{ background:var(--blanc-casse); color:var(--bordeaux); text-decoration:none; }
+
+/* Page contact : choix entre réserver directement et écrire (au-dessus du formulaire) */
+.contact-choice{
+  display:flex; flex-wrap:wrap; align-items:center; gap:.75rem 1.1rem;
+  margin:1.75rem 0 1.5rem;
+}
+.contact .btn--ghost{
+  border-color:rgba(241,231,211,.38); color:var(--blanc-casse);
+  --trace-color:var(--creme);
+}
+.contact .btn--ghost:hover{ color:var(--blanc-casse); border-color:transparent; }
+.contact .contact-choice__or{ font-size:.9rem; color:rgba(241,231,211,.78); }
 
 /* Liens alternatifs sous le formulaire (Cal.eu + email) */
 .contact-alternatives{
@@ -1088,11 +1149,13 @@ figure{ margin:0; }
   position:relative;
   background:var(--blanc-casse);
   border-radius:12px;
-  padding:clamp(.5rem, 1.5vw, 1rem);
-  margin-top:2rem;
+  overflow:hidden;           /* coins arrondis sur l'iframe Cal */
+  margin-top:2.5rem;
   box-shadow:var(--shadow-lg);
+  /* pas de marge intérieure : l'agenda Cal a besoin de toute la largeur,
+     sinon il affiche ses propres barres de défilement */
 }
-.rdv-embed{ width:100%; min-height:560px; border-radius:8px; }
+.rdv-embed{ width:100%; min-height:560px; }
 .rdv-status{
   position:absolute; inset:0; z-index:1;
   display:flex; align-items:center; justify-content:center; gap:.75rem;
@@ -1112,16 +1175,14 @@ figure{ margin:0; }
 .rdv-noscript{ color:#3b4350 !important; padding:1rem; margin:0 !important; max-width:none !important; }
 .rdv-noscript a{ color:#7A1F2D; text-decoration:underline; }
 .rdv-after{
-  margin-top:2.5rem; max-width:42rem;
+  margin-top:3.5rem; padding-top:1.5rem; border-top:1px solid var(--ardoise-3);
+  max-width:42rem;
   color:var(--gris-doux); font-size:.92rem; line-height:1.7;
 }
 @media (max-width:640px){
   .rdv-embed{ min-height:480px; }
 }
 
-/* CTA final de la page contact : bouton secondaire « créneau » à côté du principal */
-.cta-final .contact-links a.btn.btn--ghost{ border-color:var(--ardoise-3); color:var(--blanc-casse); }
-.cta-final .contact-links a.btn.btn--ghost:hover{ background:transparent; border-color:transparent; color:var(--bordeaux-vif); }
 
 /* ============ FORMULAIRE (page contact) ============ */
 [data-fs-success],
@@ -1150,7 +1211,7 @@ figure{ margin:0; }
   transition:border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-base);
 }
 .form-group input::placeholder,
-.form-group textarea::placeholder{ color:rgba(242,239,234,.42); }
+.form-group textarea::placeholder{ color:rgba(241,231,211,.42); }
 .form-group input:hover,
 .form-group textarea:hover{ border-color:rgba(255,255,255,.32); }
 .form-group input:focus,
@@ -1162,9 +1223,10 @@ figure{ margin:0; }
 .contact-form .btn--primary{
   background:var(--blanc-casse); color:var(--bordeaux);
   border-color:transparent; padding:.95rem 1.65rem;
+  --trace-color:var(--creme);
 }
 .contact-form .btn--primary:hover{
-  background:#ffffff; color:var(--bordeaux); text-decoration:none;
+  background:#FAF3E4; color:var(--bordeaux); text-decoration:none;
   box-shadow:0 8px 22px rgba(0, 0, 0, .25);
 }
 .contact-form .btn--primary[disabled]{ opacity:.55; cursor:wait; transform:none; box-shadow:none; }
@@ -1219,7 +1281,7 @@ textarea[aria-invalid="true"]{
 .trust-badge{
   display:inline-flex; align-items:center; gap:.45rem;
   font-family:var(--font-body); font-size:.74rem; letter-spacing:.02em;
-  color:rgba(242,239,234,.9);
+  color:rgba(241,231,211,.9);
   border:1px solid rgba(255,255,255,.20); border-radius:999px;
   padding:.42rem .85rem; background:rgba(255,255,255,.05);
 }
@@ -1261,8 +1323,6 @@ textarea[aria-invalid="true"]{
 }
 .cta-final h2{ font-size:clamp(1.5rem, 2.8vw, 2.1rem); max-width:42rem; margin-bottom:1rem; }
 .cta-final p{ color:var(--gris-doux); max-width:36rem; margin-bottom:2rem; }
-.cta-final .contact-links a.btn{ border-color:transparent; }
-.cta-final .contact-links a.btn:hover{ background:#8f2536; color:var(--blanc-casse); text-decoration:none; }
 
 /* ============ FOOTER ============ */
 footer{ padding:2.5rem 0; border-top:1px solid var(--ardoise-3); }
@@ -1293,7 +1353,7 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
   position:relative;
   display:inline-grid; place-items:center; width:30px; height:30px;
   border:1px solid var(--ardoise-3); border-radius:7px; color:var(--gris-doux);
-  transition:color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+  transition:color var(--t-fast), border-color var(--t-fast), background var(--t-fast), transform var(--t-base);
   flex-shrink:0;
 }
 .social-link::before{
@@ -1309,7 +1369,7 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
 .social-link:hover{
   color:#0A66C2; border-color:transparent;
   background:rgba(10,102,194,.1); text-decoration:none;
-  transform:translateY(-2px);
+  transform:scale(1.08);
 }
 .social-link:hover::before{ --lk-fill:100%; }
 .social-link > svg{ width:16px; height:16px; position:relative; }
@@ -1321,6 +1381,7 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
   position:absolute; right:-3px; bottom:-3px; z-index:1;
   width:14px; height:14px; border-radius:50%;
   background:var(--bordeaux); border:1.4px solid var(--ardoise);
+  color:var(--creme);   /* bâtiment toujours crème sur la pastille bordeaux, dans les deux thèmes */
   display:grid; place-items:center; pointer-events:none;
   transition:border-color var(--t-fast);
 }
@@ -1386,20 +1447,21 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
   display:inline-grid; place-items:center; width:38px; height:38px;
   background:none; border:1px solid var(--ardoise-3); border-radius:8px;
   color:var(--blanc-casse); cursor:pointer;
-  transition:border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+  transition:border-color var(--t-fast), color var(--t-fast), background var(--t-fast), transform var(--t-base);
+  --trace-radius:9px;
 }
-.theme-toggle:hover{ border-color:var(--bordeaux-vif); color:var(--bordeaux-vif); }
+.theme-toggle:hover{ border-color:transparent; color:var(--bordeaux-vif); transform:scale(1.06); }
 .theme-toggle svg{ width:18px; height:18px; }
 .theme-toggle-li{ display:flex; align-items:center; }
 
-/* ============ THÈME CLAIR (opt-in) ============ */
+/* ============ THÈME CLAIR (par défaut, sauf ordinateur réglé en sombre) ============ */
 html[data-theme="light"]{
   --ardoise:#F1E7D3;        /* fond page : crème chaud, plus de blanc pur */
   --ardoise-2:#E7DAC1;      /* surfaces alternées : cran plus foncé */
   --ardoise-3:#D6C8AC;      /* bordures : crème sableux */
   --ardoise-4:#E0D2B9;
-  --blanc-casse:#221E17;    /* texte : brun-encre chaud plutôt que gris froid */
-  --gris-doux:#5c5342;
+  --blanc-casse:#1E2630;    /* texte : ardoise (la couleur de fond du thème sombre) */
+  --gris-doux:#4D5968;      /* texte secondaire : ardoise grisé (contraste 5,8:1 sur crème) */
   --bordeaux-vif:#8f2233;
   color-scheme:light;
 }
@@ -1413,8 +1475,7 @@ html[data-theme="light"] body::after{
 }
 html[data-theme="light"] .nav{ background:rgba(241,231,211,.82); }
 html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); box-shadow:0 4px 20px rgba(60,45,25,.09); }
-html[data-theme="light"] .btn--primary{ color:#F5EEDD; }
-html[data-theme="light"] .nav-links .nav-cta:hover{ color:#F5EEDD; }
+html[data-theme="light"] .btn--primary{ color:#F1E7D3; }
 html[data-theme="light"] .section--alt{
   background:
     radial-gradient(80% 120% at 92% 0%, rgba(122,31,45,.055), transparent 60%),
@@ -1425,7 +1486,7 @@ html[data-theme="light"] .process{
 }
 html[data-theme="light"] .cta-final{ background:#E9DCC4; }
 /* cartes modèles : îlots crème (pas blanc), texte foncé dans les deux thèmes */
-html[data-theme="light"] .model-card{ --blanc-casse:#FAF3E4; --ardoise:#221E17; box-shadow:var(--shadow-md); }
+html[data-theme="light"] .model-card{ --blanc-casse:#FAF3E4; --ardoise:#1E2630; box-shadow:var(--shadow-md); }
 html[data-theme="light"] .model-shot{ background:#ded0b6; }
 /* panneaux de graphes/captures : restent sombres (inset premium) */
 html[data-theme="light"] .figure-frame{ background:#233041; border-color:#2c3948; }
@@ -1433,12 +1494,12 @@ html[data-theme="light"] .figure-frame{ background:#233041; border-color:#2c3948
 html[data-theme="light"] .tool-link{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
 html[data-theme="light"] .tool-link:hover{ background:#F5EBD6; }
 /* garder les petits symboles clairs sur la pastille bordeaux, même en thème clair */
-html[data-theme="light"] .tool-link__icon{ color:#F5EEDD; }
+html[data-theme="light"] .tool-link__icon{ color:#F1E7D3; }
 html[data-theme="light"] .callout{ background:#F3EAD4; }
 html[data-theme="light"] .explore-cta{ background:linear-gradient(135deg,#EBDFC7,#E1D3B8); }
 html[data-theme="light"] .figure-frame--pad{ background:#EDE3CD; }
 html[data-theme="light"] .contact-card{ background:rgba(255,255,255,.06); }
 /* le bloc contact reste bordeaux : on rétablit localement les tokens clairs sur fond sombre */
-html[data-theme="light"] .contact{ --blanc-casse:#F5EEDD; --gris-doux:#f3dee2; --ardoise-3:rgba(255,255,255,.22); --bordeaux-vif:#E8A3AD; }
+html[data-theme="light"] .contact{ --blanc-casse:#F1E7D3; --gris-doux:#f3dee2; --ardoise-3:rgba(255,255,255,.22); --bordeaux-vif:#E8A3AD; }
 html[data-theme="light"] .contact-form .btn--primary{ color:var(--bordeaux); }
-html[data-theme="light"] .fig-link .fig-hint{ color:#F5EEDD; }
+html[data-theme="light"] .fig-link .fig-hint{ color:#F1E7D3; }

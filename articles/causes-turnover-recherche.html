@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Thème : choix du visiteur s'il en a fait un, sinon réglage clair/sombre de l'ordinateur (clair par défaut) */(function(){var t;try{t=localStorage.getItem('noumensia-theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='light')document.documentElement.setAttribute('data-theme','light')})();</script>
 <base href="/">
 <title>Causes du turnover : ce que dit la recherche — Noumensia</title>
 <meta name="description" content="Les listes de causes du turnover circulent sans source. Ce qu'établissent réellement les méta-analyses, et pourquoi une liste ne suffit pas à décider.">
@@ -31,7 +32,7 @@
     {
       "@type": "Article",
       "@id": "https://noumensia.com/articles/causes-turnover-recherche#article",
-      "headline": "Pourquoi vos salariés partent : ce que 60 ans de recherche dit vraiment sur les causes du turnover",
+      "headline": "Pourquoi vos salariés partent : ce que 60 ans de recherche disent vraiment sur les causes du turnover",
       "description": "Les listes de causes du turnover circulent partout sans source. Ce qu'établissent réellement les méta-analyses, et pourquoi une liste de facteurs ne suffit pas à décider.",
       "inLanguage": "fr-FR",
       "datePublished": "2026-08-10",
@@ -98,9 +99,9 @@
   <!-- ============ HERO ============ -->
   <section class="section article-hero">
     <div class="wrap reveal">
-      <p class="breadcrumb"><a href="/">Accueil</a><span>/</span><a href="/articles">Articles</a><span>/</span>Causes du turnover</p>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span><a href="/articles">Articles</a><span>&rsaquo;</span>Causes du turnover</nav>
       <p class="eyebrow">Turnover · article pilier</p>
-      <h1>Pourquoi vos salariés partent&nbsp;: ce que 60&nbsp;ans de recherche dit vraiment sur les causes du turnover</h1>
+      <h1>Pourquoi vos salariés partent&nbsp;: ce que 60&nbsp;ans de recherche disent vraiment sur les causes du turnover</h1>
       <p class="standfirst lede">
         Les listes de causes du turnover circulent partout sans jamais citer de source.
         La recherche, elle, a mesuré 57&nbsp;prédicteurs sur des milliers d'études. Ce
@@ -436,7 +437,7 @@
         </p>
 
         <p>
-          L'approche que nous utilisons consiste à représenter explicitement cette structure sous
+          L'approche que j'utilise consiste à représenter explicitement cette structure sous
           forme de graphe, puis à quantifier chaque relation à partir des données de l'organisation et
           de la littérature. Un réseau bayésien fait exactement cela&nbsp;: les nœuds sont les
           variables, les arcs sont les relations orientées, et chaque relation porte une distribution
