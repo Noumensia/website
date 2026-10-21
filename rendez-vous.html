@@ -230,6 +230,7 @@
     le visiteur voit un lien direct vers la page Cal.
   - ?sujet=xxx dans l'URL (ex. /rendez-vous?sujet=ai-act) est transmis à Cal comme
     métadonnée « provenance » pour savoir quelle page a amené la réservation.
+  - ?date=AAAA-MM-JJ ouvre l'agenda directement sur ce jour (combinable avec ?sujet=).
 -->
 <script>
   (function (C, A, L) {
@@ -259,7 +260,7 @@
 
   (function () {
     var CAL_LINK = "arthur.jouffe-noumensia/30min-meeting";
-    var CAL_URL = "https://cal.eu/" + CAL_LINK;
+    var CAL_URL = "https://cal.eu/" + CAL_LINK;  // complété par ?date= si présent
     var status = document.getElementById("rdv-status");
     var statusText = document.getElementById("rdv-status-text");
     var ready = false, booked = false;
@@ -269,8 +270,21 @@
     try { sujet = new URLSearchParams(location.search).get("sujet"); } catch (e) {}
     if (sujet) sujet = sujet.replace(/[^a-z0-9-]/gi, "").slice(0, 40);
 
+    // ?date=AAAA-MM-JJ (ex. /rendez-vous?date=2026-10-22) : l'agenda s'ouvre
+    // directement sur ce jour, comme le lien Cal équivalent.
+    var date = null;
+    try { date = new URLSearchParams(location.search).get("date"); } catch (e) {}
+    if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) date = null;
+
     var config = { layout: "month_view", theme: "light" };
     if (sujet) config["metadata[provenance]"] = sujet;
+    if (date) {
+      config.date = date;
+      CAL_URL += "?date=" + date;
+      // le lien de secours « nouvel onglet » ouvre lui aussi le bon jour
+      var newTab = document.querySelector('[data-nm-click="rdv-cal-newtab"]');
+      if (newTab) newTab.href = CAL_URL;
+    }
 
     function showFallback() {
       if (ready || !status) return;
