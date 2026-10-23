@@ -44,6 +44,17 @@
 # Le lien court noumensia.com/ai-act sert dans les posts LinkedIn.
 /decryptages.html       /decryptages             301
 /decryptages/           /decryptages             301
+# Liens courts vers les graphes Hellixmap, assistant déjà ouvert (23/10/2026).
+# Pour les posts LinkedIn et les QR codes. 302 (temporaire) : la destination peut changer
+# sans toucher aux posts. Doivent rester AVANT la règle /ai-act/* ci-dessous.
+/ai-act/assistant       https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&openChat=expert&fullscreen=0   302
+/ai-act/assistant/      https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&openChat=expert&fullscreen=0   302
+/ai-act/coach           https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&openChat=coach&fullscreen=0   302
+/ai-act/coach/          https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&openChat=coach&fullscreen=0   302
+/ai-act/registre-ia     https://hellixmap.bayesia.com/display/1c82f7c705ca5ae8?panel=0&openChat=expert&fullscreen=0   302
+/ai-act/registre-ia/    https://hellixmap.bayesia.com/display/1c82f7c705ca5ae8?panel=0&openChat=expert&fullscreen=0   302
+/ai-act/simulateur-ia   https://hellixmap.bayesia.com/display/1c82fb13128a58e3?panel=0&openChat=expert&fullscreen=0   302
+/ai-act/simulateur-ia/  https://hellixmap.bayesia.com/display/1c82fb13128a58e3?panel=0&openChat=expert&fullscreen=0   302
 /ai-act                 /decryptages/ai-act/     301
 /ai-act/                /decryptages/ai-act/     301
 /ai-act/*               /decryptages/ai-act/:splat   301
