@@ -52,3 +52,12 @@
 /dossiers/              /decryptages             301
 /dossiers/ai-act        /decryptages/ai-act/     301
 /dossiers/ai-act/*      /decryptages/ai-act/:splat   301
+
+# Anciennes URLs fautives sous /mentions-legales/ (liens relatifs d'une version
+# antérieure) signalées en 404 par Google Search Console → pages réelles.
+/mentions-legales/index.html             /                    301
+/mentions-legales/contact.html           /contact             301
+/mentions-legales/methode.html           /methode             301
+/mentions-legales/a-propos.html          /a-propos            301
+/mentions-legales/faq.html               /faq                 301
+/mentions-legales/mentions-legales.html  /mentions-legales    301
