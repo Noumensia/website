@@ -563,6 +563,27 @@ footer{font-size:11.5px;color:var(--ink-3);padding-top:6px;line-height:1.6}
    (le menu est centré sur --maxw) ; l'outil lui-même garde sa largeur. */
 html body .nm-intro,html body .nm-next,html body .nm-capot,html body .wrap>.nm-intro,html body .wrap>.nm-next,html body .wrap>.nm-capot{width:100%;max-width:var(--maxw);margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:var(--pad);padding-right:var(--pad)}
 @media (max-width:760px){html body .wrap>.nm-intro{padding-left:0;padding-right:0}}
+
+/* Démarrage rapide (24/10/2026) */
+.qs .qs-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.qs .qs-grid{grid-template-columns:1fr}}
+.qs-pills{display:flex;flex-wrap:wrap;gap:8px}
+.qs-pill{font:inherit;font-size:14px;padding:8px 16px;border-radius:999px;border:1px solid var(--rule-strong);background:transparent;color:var(--ink);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.qs-pill:hover{border-color:var(--nm-bx)}
+.qs-pill.on{background:var(--nm-bx);border-color:var(--nm-bx);color:var(--ground,#F1E7D3)}
+.qs-list{display:grid;gap:8px}
+.qs-item{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45;color:var(--ink);cursor:pointer;padding:9px 12px;border:1px solid var(--rule);border-radius:10px;transition:border-color .15s,background .15s}
+.qs-item:hover{border-color:var(--nm-bx)}
+.qs-item input{margin-top:3px;accent-color:var(--nm-bx);width:16px;height:16px;flex:none}
+.qs-res{padding:20px 22px;border-radius:12px;border:1px solid var(--rule);background:color-mix(in srgb, var(--nm-bx) 6%, transparent)}
+.qs-k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0}
+.qs-big{font-family:var(--serif);font-size:clamp(44px,6vw,64px);line-height:1;margin:10px 0 12px;color:var(--ink);font-weight:600}
+.qs-scale{height:8px;border-radius:99px;background:var(--rule);overflow:hidden}
+.qs-scale i{display:block;height:100%;background:var(--nm-bx);border-radius:99px;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.qs-cmp{font-size:14px;color:var(--ink-2);margin:12px 0 6px}
+.qs-note{font-size:12.5px;color:var(--ink-3);line-height:1.5;margin:0 0 12px}
+.qs-more{font-size:13.5px;font-weight:600;color:var(--nm-bx);text-decoration:none}
+.qs-more:hover{text-decoration:underline;text-underline-offset:3px}
 </style>
 
 <div class="scroll-progress" aria-hidden="true"></div>
@@ -592,6 +613,31 @@ html body .nm-intro,html body .nm-next,html body .nm-capot,html body .wrap>.nm-i
 
 
 
+<section class="panel pad qs" id="rapide" aria-labelledby="qs-h">
+  <h2 class="sec" id="qs-h">En 30 secondes</h2>
+  <p class="d">Deux choix suffisent pour voir l'essentiel. Le réseau complet, avec ses 74 variables et ses 13 mesures, est juste en dessous.</p>
+  <div class="qs-grid">
+    <div>
+      <p class="lab">1. Quand&nbsp;?</p>
+      <div class="qs-pills" role="group" aria-label="Période">
+        <button type="button" class="qs-pill" data-p="auj">Aujourd'hui</button>
+        <button type="button" class="qs-pill" data-p="2027">Après le 2 décembre 2027</button>
+      </div>
+      <p class="lab" style="margin-top:18px">2. Quelles mesures avez-vous en place&nbsp;?</p>
+      <div class="qs-list" id="qs-list"></div>
+    </div>
+    <div class="qs-res" aria-live="polite">
+      <p class="qs-k">Probabilité qu'une amende soit infligée sur un exercice</p>
+      <p class="qs-big" id="qs-big">—</p>
+      <div class="qs-scale"><i id="qs-bar"></i></div>
+      <p class="qs-cmp" id="qs-cmp"></p>
+      <p class="qs-note" id="qs-note"></p>
+      <a class="qs-more" href="#bow-anchor">Voir tout le réseau et les 13 mesures&nbsp;↓</a>
+    </div>
+  </div>
+</section>
+
+<span id="bow-anchor"></span>
 <section class="panel pad">
   <h2 class="sec">1. Le nœud papillon</h2>
   <p class="d">Lecture de gauche à droite. Les <b>menaces</b> sont l'état du monde, subi. Les
@@ -1252,6 +1298,45 @@ BAR.forEach(b=>state.ev[b]=0);
 refresh();
 sensibilite();
 sweep();
+
+/* ---------- démarrage rapide (24/10/2026) : branché sur le même état et la même inférence ---------- */
+(function(){
+  const KEYS=[["Inv_Doc","Un dossier de conformité que l'on peut produire sous quinze jours"],
+              ["Inv_Ctrl","Un contrôle humain confié à quelqu'un qui peut contredire l'outil"],
+              ["B_FORMEL","Le marquage CE, la déclaration et l'enregistrement"],
+              ["B_DATA","Un audit de biais et une gouvernance des données"],
+              ["Inv_Info","L'information des salariés, des candidats et de leurs représentants"]];
+  const list=$("#qs-list");
+  KEYS.forEach(([k,lab])=>{
+    const l=el("label","qs-item"); const c=document.createElement("input"); c.type="checkbox"; c.dataset.k=k;
+    c.onchange=()=>{ state.ev[k]=c.checked?1:0; refresh(); };
+    l.appendChild(c); l.appendChild(el("span",null,lab)); list.appendChild(l);
+  });
+  function periode(){ return state.ev.T_CHAP3===1 ? "2027" : "auj"; }
+  document.querySelectorAll(".qs-pill").forEach(b=>b.onclick=()=>{
+    const keep={}; KEYS.forEach(([k])=>keep[k]=state.ev[k]===1?1:0);
+    const ctrl={}; BAR.forEach(x=>{ if(!(x in keep)) ctrl[x]=state.ev[x]; });
+    state.ev=Object.assign({}, b.dataset.p==="2027"?PROFIL_2027:PROFIL_AUJ, ctrl, keep);
+    Object.keys(state.ev).forEach(x=>{ if(state.ev[x]===undefined) delete state.ev[x]; });
+    refresh();
+  });
+  function quick(){
+    const r=state.last; if(!r) return;
+    document.querySelectorAll("#qs-list input").forEach(c=>c.checked=state.ev[c.dataset.k]===1);
+    document.querySelectorAll(".qs-pill").forEach(b=>b.classList.toggle("on", b.dataset.p===periode()));
+    const none=Object.assign({},state.ev), all=Object.assign({},state.ev);
+    KEYS.forEach(([k])=>{none[k]=0; all[k]=1;});
+    const a=infer(none).AMENDE, c=infer(all).AMENDE;
+    $("#qs-big").textContent=pct(r.AMENDE);
+    $("#qs-bar").style.width=Math.min(100, r.AMENDE*100/Math.max(a,0.0001)*100/100)+"%";
+    $("#qs-cmp").innerHTML="Sans aucune de ces cinq mesures&nbsp;: <b>"+pct(a)+"</b> · avec les cinq&nbsp;: <b>"+pct(c)+"</b>";
+    $("#qs-note").textContent = periode()==="auj"
+      ? "Aujourd'hui, le régime haut risque n'est pas encore exigible : le risque reste faible quoi que vous cochiez. Passez à « après le 2 décembre 2027 » pour voir ce que chaque mesure change."
+      : "Ces chiffres reposent sur des jugements explicités, pas sur des amendes observées : lisez l'écart entre deux situations, pas le niveau.";
+  }
+  const _refresh=refresh; refresh=function(){ _refresh(); quick(); };
+  quick();
+})();
 </script>
 <script>
 (function(){

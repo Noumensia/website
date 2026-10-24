@@ -94,7 +94,15 @@ h1{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.1;margi
      color:var(--ink-2);border:1px solid var(--rule);margin-bottom:12px}
 .card h2{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.2;margin:0 0 14px;
          text-wrap:balance}
-.card .why{font-size:13.5px;color:var(--ink-2);line-height:1.6;max-width:68ch}
+.card .plain{font-size:15px;line-height:1.6;color:var(--ink);margin:4px 0 14px;max-width:68ch;padding:10px 14px;border-left:3px solid var(--nm-bx);background:color-mix(in srgb, var(--nm-bx) 7%, transparent);border-radius:0 8px 8px 0}
+.plain b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--nm-bx);font-weight:600;margin-bottom:3px}
+.why-d{margin:0 0 4px}
+.why-d>summary{cursor:pointer;font-size:12.5px;color:var(--ink-3);list-style:none;display:inline-flex;gap:6px;align-items:center;padding:2px 0}
+.why-d>summary::-webkit-details-marker{display:none}
+.why-d>summary::before{content:"▸";color:var(--nm-bx)}
+.why-d[open]>summary::before{content:"▾"}
+.why-d[open]>summary{margin-bottom:8px}
+.why{font-size:13.5px;color:var(--ink-2);line-height:1.6;max-width:68ch}
 .card .why b{color:var(--ink)}
 .answers{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .btn{font:inherit;font-size:14px;font-weight:600;padding:10px 22px;border-radius:5px;cursor:pointer;
@@ -591,7 +599,7 @@ html body .wrap>.nm-intro{padding-left:0;padding-right:0}
 </header>
 
 <div class="wrap">
-<section class="nm-intro" aria-labelledby="nm-h1"><nav class="nm-crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages">Décryptages</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages/ai-act/">AI Act</a><span aria-hidden="true">&rsaquo;</span>Mon outil est-il concerné ?</nav><p class="nm-kicker">Décryptage AI Act · Outil 1 sur 3</p><ol class="nm-steps" aria-label="Les trois outils du décryptage"><li><a href="/decryptages/ai-act/parcours-qualification" class="on" aria-current="page"><b>1</b>Mon outil est-il concerné ?</a></li><li><a href="/decryptages/ai-act/registre-obligations"><b>2</b>Que dois-je faire ?</a></li><li><a href="/decryptages/ai-act/simulateur-sanction"><b>3</b>Par quoi commencer ?</a></li></ol><h1 id="nm-h1">Votre outil RH est&#8209;il concerné par l'AI&nbsp;Act&nbsp;?</h1><p class="nm-lede">Pensez à un outil précis, un logiciel de tri de CV, une plateforme d'entretiens vidéo, un chatbot RH, puis répondez par oui ou par non. Le parcours vous dit sous quel régime il tombe, si vous êtes fournisseur ou déployeur, ce qui en découle et à partir de quand.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>Le régime applicable : interdit, haut risque, transparence ou aucune obligation particulière.</li><li>Votre rôle dans la chaîne (fournisseur, déployeur…) et les obligations qui vont avec.</li><li>L'échéance, y compris le cas d'un outil déjà en service avant décembre 2027.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Répondez à la question affichée. Chacune cite l'article qui la fonde.</li><li>En cas de doute, lisez le texte sous la question avant de répondre.</li><li>Le schéma en dessous montre où vous en êtes dans le règlement.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Ce n'est pas un avis juridique. C'est le texte consolidé au 27 juillet 2026, mis en questions. La frontière du haut risque dépend aussi de les lignes directrices de la Commission prévues à l'article 6, §5, publiées en projet le 19 mai 2026 et pas encore adoptées à la mi-octobre 2026.</p></div></div><p class="nm-meta"><span>Environ 5 minutes · texte consolidé au 27/07/2026</span><a href="https://hellixmap.bayesia.com/display/1c82f87fd74a55e1?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" class="nm-hx" title="S\'ouvre sur Hellixmap, dans un nouvel onglet">Poser une question sur ce parcours <span aria-hidden="true">↗</span></a><a href="#capot">Comment c'est construit</a></p></section>
+<section class="nm-intro" aria-labelledby="nm-h1"><nav class="nm-crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages">Décryptages</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages/ai-act/">AI Act</a><span aria-hidden="true">&rsaquo;</span>Mon outil est-il concerné ?</nav><p class="nm-kicker">Décryptage AI Act · Outil 1 sur 3</p><ol class="nm-steps" aria-label="Les trois outils du décryptage"><li><a href="/decryptages/ai-act/parcours-qualification" class="on" aria-current="page"><b>1</b>Mon outil est-il concerné ?</a></li><li><a href="/decryptages/ai-act/registre-obligations"><b>2</b>Que dois-je faire ?</a></li><li><a href="/decryptages/ai-act/simulateur-sanction"><b>3</b>Par quoi commencer ?</a></li></ol><h1 id="nm-h1">Votre outil RH est&#8209;il concerné par l'AI&nbsp;Act&nbsp;?</h1><p class="nm-lede">Pensez à un outil précis, un logiciel de tri de CV, une plateforme d'entretiens vidéo, un chatbot RH, puis répondez par oui ou par non. Le parcours vous dit sous quel régime il tombe, si vous êtes fournisseur ou déployeur, ce qui en découle et à partir de quand.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>Le régime applicable : interdit, haut risque, transparence ou aucune obligation particulière.</li><li>Votre rôle dans la chaîne (fournisseur, déployeur…) et les obligations qui vont avec.</li><li>L'échéance, y compris le cas d'un outil déjà en service avant décembre 2027.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Répondez à la question affichée. Chacune cite l'article qui la fonde.</li><li>Chaque question est expliquée en clair, le texte du règlement est juste en dessous si vous voulez le lire.</li><li>Le schéma en dessous montre où vous en êtes dans le règlement.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Ce n'est pas un avis juridique. C'est le texte consolidé au 27 juillet 2026, mis en questions. La frontière du haut risque dépend aussi de les lignes directrices de la Commission prévues à l'article 6, §5, publiées en projet le 19 mai 2026 et pas encore adoptées à la mi-octobre 2026.</p></div></div><p class="nm-meta"><span>Environ 5 minutes · texte consolidé au 27/07/2026</span><a href="https://hellixmap.bayesia.com/display/1c82f87fd74a55e1?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" class="nm-hx" title="S\'ouvre sur Hellixmap, dans un nouvel onglet">Poser une question sur ce parcours <span aria-hidden="true">↗</span></a><a href="#capot">Comment c'est construit</a></p></section>
 
 
 <div class="stepper" id="stepper"></div>
@@ -783,6 +791,13 @@ function card(tag,title,body){
   return '<div class="card"><span class="tag">'+tag+'</span><h2>'+title+'</h2>'+
          '<div class="why">'+body+'</div>';
 }
+const EN_CLAIR = {"D1": "Un logiciel qui s'appuie sur des données pour classer, noter, recommander ou rédiger, c'est oui : la plupart des outils de tri de CV, d'évaluation de candidats et les chatbots. Un tableur ou un outil dont toutes les règles ont été écrites à la main, c'est non.", "D2": "Si l'outil est utilisé en France ou ailleurs dans l'Union, ou si ses résultats y sont utilisés, c'est oui, même si l'éditeur est établi hors d'Europe.", "D3": "Pour un outil RH utilisé en entreprise, la réponse est presque toujours non. Les exclusions visent la défense, la recherche avant mise sur le marché, l'usage purement personnel et certains logiciels libres.", "I_EMO": "L'outil tire-t-il de la voix, du visage ou de l'attitude d'un candidat ou d'un salarié un indicateur de stress, d'enthousiasme, de sincérité ou d'engagement ? Si oui, c'est interdit, sauf raison médicale ou de sécurité.", "I_SCORE": "Une note sur le comportement ou la personnalité d'une personne est-elle réutilisée à son détriment dans un autre contexte que celui de la collecte, ou de façon disproportionnée ? Un outil d'évaluation utilisé pour ce à quoi il sert répond non.", "I_AUTRE": "Pour un outil RH, la réponse est presque toujours non. Cette question couvre les cas extrêmes : manipulation, exploitation de vulnérabilités, reconnaissance faciale de masse, déduction des opinions ou de l'origine à partir de données biométriques.", "D6": "Pour un logiciel RH, c'est non. Cette voie concerne l'IA intégrée à des produits réglementés comme les machines, les dispositifs médicaux ou les véhicules.", "D7": "L'outil sert-il à recruter (offres ciblées, tri ou évaluation de candidatures), à décider de promotions, de licenciements ou d'affectations, ou à suivre la performance ? Si oui, c'est oui.", "D8": "L'outil se limite-t-il à une tâche annexe, comme planifier des entretiens ou extraire les informations d'un CV, sans évaluer les personnes ni orienter la décision ? S'il classe, note ou recommande des candidats, c'est non.", "D8B": "L'outil évalue-t-il des personnes : compétences, performance, fiabilité, comportement ? Trier ou évaluer des candidatures, c'est du profilage, donc en RH la réponse est presque toujours oui.", "TRANSP": "Cochez ce qui correspond à votre outil, par exemple un chatbot qui échange avec les candidats. Si rien ne correspond, choisissez « Aucun de ces cas ».", "G1": "Si vous utilisez ou intégrez un grand modèle d'un éditeur tiers sans l'avoir développé vous-même, c'est non. Seuls les éditeurs de ces modèles répondent oui.", "G2": "Cette question ne concerne que les modèles les plus puissants du marché, au-delà d'un seuil de calcul d'entraînement fixé par le texte, ou désignés par la Commission.", "R_Q": "Vous avez développé l'outil ou le vendez sous votre nom : vous êtes fournisseur. Vous l'utilisez dans votre organisation : vous êtes déployeur. Un employeur qui achète un logiciel RH est déployeur.", "R_REQ": "Vendez-vous l'outil sous votre nom, l'avez-vous profondément modifié, ou l'utilisez-vous pour autre chose que ce que prévoyait son éditeur, par exemple faire trier des candidatures par un assistant généraliste ? Si oui, vous devenez fournisseur.", "EMPL": "Vous utilisez l'outil pour vos propres candidats ou salariés ? C'est oui.", "AIDF": "Une entreprise privée qui utilise un outil RH répond non. Cette obligation vise le secteur public, les services publics, et l'évaluation de solvabilité ou la tarification d'assurance."};
+function cardP(tag,title,key,body){
+  const p=EN_CLAIR[key], a=artOf(body);
+  return '<div class="card"><span class="tag">'+tag+'</span><h2>'+title+'</h2>'+
+    (p?'<p class="plain"><b>En clair</b>'+p+'</p>':'')+
+    '<details class="why-d"><summary>Ce que dit le texte'+(a?' · '+a.replace(/\.$/,''):'')+'</summary><div class="why">'+body+'</div></details>';
+}
 function artOf(t){ const m=t.match(/^(Art\.[^.]*\.(?:\s*§[^.]*\.)?)/); return m?m[1]:''; }
 
 function render(){
@@ -791,7 +806,7 @@ function render(){
   if(st.terminal || s.kind==='result'){ renderResult(); return; }
   if(s.kind==='yn'){
     const src=s.src||s.id;
-    main.innerHTML = card(PHASES[s.phase], s.q||ttl(src), txt(src)) +
+    main.innerHTML = cardP(PHASES[s.phase], s.q||ttl(src), s.id, txt(src)) +
       '<div class="answers"><button class="btn yes" data-v="oui">Oui</button>'+
       '<button class="btn" data-v="non">Non</button></div></div>';
     main.querySelectorAll('.answers .btn').forEach(b=>
@@ -799,7 +814,7 @@ function render(){
     return;
   }
   if(s.kind==='multi'){
-    let h = card(PHASES[s.phase],'Quelles obligations de transparence s’appliquent ?',
+    let h = cardP(PHASES[s.phase],'Quelles obligations de transparence s’appliquent ?','TRANSP',
                  txt(s.intro)) + '<div class="opts">';
     s.items.forEach(k=>{
       h+='<button class="opt'+(st.transp.includes(k)?' sel':'')+'" data-k="'+k+'">'+
@@ -818,7 +833,7 @@ function render(){
     return;
   }
   if(s.kind==='role'){
-    let h = card(PHASES[s.phase], ttl('R_Q'), txt('R_Q')) + '<div class="opts">';
+    let h = cardP(PHASES[s.phase], ttl('R_Q'), 'R_Q', txt('R_Q')) + '<div class="opts">';
     ROLES.forEach(([k,key])=>{
       h+='<button class="opt" data-k="'+key+'"><span class="box"></span>'+
          '<span><b>'+ttl(k)+'</b><span>'+txt(k)+'</span></span></button>';
