@@ -59,7 +59,7 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
      font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.wrap{max-width:1500px;margin:0 auto;padding:22px 20px 30px;display:flex;flex-direction:column;gap:16px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:22px var(--pad) 30px;display:flex;flex-direction:column;gap:16px;box-sizing:border-box}
 
 header{display:flex;flex-wrap:wrap;align-items:flex-end;gap:18px 32px;
        border-bottom:1px solid var(--rule);padding-bottom:16px}
@@ -470,7 +470,7 @@ html[data-theme="light"]{
 }
 html[data-theme="light"] .nav{ background:rgba(241,231,211,.82); }
 html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); box-shadow:0 4px 20px rgba(60,45,25,.09); }
-html[data-theme="light"] .nav-links .nav-cta:hover{ color:#F1E7D3; }
+html[data-theme="light"] .nav-links 
 html:root:not([data-theme="light"]){
   --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
   --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
@@ -561,6 +561,11 @@ html,body{background:var(--ground)}
   -webkit-mask-composite:xor;mask-composite:exclude;--lk-fill:0%;transition:--lk-fill .6s cubic-bezier(.4,0,.2,1)}
 .btn:hover::before,.btn:focus-visible::before{--lk-fill:100%}
 .btn.yes::before,.btn.on::before{inset:-4px;border-radius:8px}
+
+/* 24/10/2026 : en-tête, suite et « Sous le capot » alignés sur la colonne du site
+   (le menu est centré sur --maxw) ; l'outil lui-même garde sa largeur. */
+html body .nm-intro,html body .nm-next,html body .nm-capot,html body .wrap>.nm-intro,html body .wrap>.nm-next,html body .wrap>.nm-capot{width:100%;max-width:var(--maxw);margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:var(--pad);padding-right:var(--pad)}
+html body .wrap>.nm-intro{padding-left:0;padding-right:0}
 </style>
 </head>
 <body>
@@ -586,7 +591,7 @@ html,body{background:var(--ground)}
 </header>
 
 <div class="wrap">
-<section class="nm-intro" aria-labelledby="nm-h1"><nav class="nm-crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages">Décryptages</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages/ai-act/">AI Act</a><span aria-hidden="true">&rsaquo;</span>Mon outil est-il concerné ?</nav><p class="nm-kicker">Décryptage AI Act · Outil 1 sur 3</p><ol class="nm-steps" aria-label="Les trois outils du décryptage"><li><a href="/decryptages/ai-act/parcours-qualification" class="on" aria-current="page"><b>1</b>Mon outil est-il concerné ?</a></li><li><a href="/decryptages/ai-act/registre-obligations"><b>2</b>Que dois-je faire ?</a></li><li><a href="/decryptages/ai-act/simulateur-sanction"><b>3</b>Par quoi commencer ?</a></li></ol><h1 id="nm-h1">Votre outil RH est&#8209;il concerné par l'AI&nbsp;Act&nbsp;?</h1><p class="nm-lede">Pensez à un outil précis, un logiciel de tri de CV, une plateforme d'entretiens vidéo, un chatbot RH, puis répondez par oui ou par non. Le parcours vous dit sous quel régime il tombe, si vous êtes fournisseur ou déployeur, ce qui en découle et à partir de quand.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>Le régime applicable : interdit, haut risque, transparence ou aucune obligation particulière.</li><li>Votre rôle dans la chaîne (fournisseur, déployeur…) et les obligations qui vont avec.</li><li>L'échéance, y compris le cas d'un outil déjà en service avant décembre 2027.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Répondez à la question affichée. Chacune cite l'article qui la fonde.</li><li>En cas de doute, lisez le texte sous la question avant de répondre.</li><li>Le schéma en dessous montre où vous en êtes dans le règlement.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Ce n'est pas un avis juridique. C'est le texte consolidé au 27 juillet 2026, mis en questions. La frontière du haut risque dépend aussi de les lignes directrices de la Commission prévues à l'article 6, §5, publiées en projet le 19 mai 2026 et pas encore adoptées à la mi-octobre 2026.</p></div></div><p class="nm-meta"><span>Environ 5 minutes · texte consolidé au 27/07/2026</span><a href="https://hellixmap.bayesia.com/display/1c82f87fd74a55e1?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" class="nm-hx">Le graphe source sur Hellixmap <span aria-hidden="true">↗</span></a><a href="#capot">Comment c'est construit</a></p></section>
+<section class="nm-intro" aria-labelledby="nm-h1"><nav class="nm-crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages">Décryptages</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages/ai-act/">AI Act</a><span aria-hidden="true">&rsaquo;</span>Mon outil est-il concerné ?</nav><p class="nm-kicker">Décryptage AI Act · Outil 1 sur 3</p><ol class="nm-steps" aria-label="Les trois outils du décryptage"><li><a href="/decryptages/ai-act/parcours-qualification" class="on" aria-current="page"><b>1</b>Mon outil est-il concerné ?</a></li><li><a href="/decryptages/ai-act/registre-obligations"><b>2</b>Que dois-je faire ?</a></li><li><a href="/decryptages/ai-act/simulateur-sanction"><b>3</b>Par quoi commencer ?</a></li></ol><h1 id="nm-h1">Votre outil RH est&#8209;il concerné par l'AI&nbsp;Act&nbsp;?</h1><p class="nm-lede">Pensez à un outil précis, un logiciel de tri de CV, une plateforme d'entretiens vidéo, un chatbot RH, puis répondez par oui ou par non. Le parcours vous dit sous quel régime il tombe, si vous êtes fournisseur ou déployeur, ce qui en découle et à partir de quand.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>Le régime applicable : interdit, haut risque, transparence ou aucune obligation particulière.</li><li>Votre rôle dans la chaîne (fournisseur, déployeur…) et les obligations qui vont avec.</li><li>L'échéance, y compris le cas d'un outil déjà en service avant décembre 2027.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Répondez à la question affichée. Chacune cite l'article qui la fonde.</li><li>En cas de doute, lisez le texte sous la question avant de répondre.</li><li>Le schéma en dessous montre où vous en êtes dans le règlement.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Ce n'est pas un avis juridique. C'est le texte consolidé au 27 juillet 2026, mis en questions. La frontière du haut risque dépend aussi de les lignes directrices de la Commission prévues à l'article 6, §5, publiées en projet le 19 mai 2026 et pas encore adoptées à la mi-octobre 2026.</p></div></div><p class="nm-meta"><span>Environ 5 minutes · texte consolidé au 27/07/2026</span><a href="https://hellixmap.bayesia.com/display/1c82f87fd74a55e1?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" class="nm-hx" title="S\'ouvre sur Hellixmap, dans un nouvel onglet">Poser une question sur ce parcours <span aria-hidden="true">↗</span></a><a href="#capot">Comment c'est construit</a></p></section>
 
 
 <div class="stepper" id="stepper"></div>

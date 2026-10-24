@@ -433,7 +433,7 @@ html[data-theme="light"]{
 }
 html[data-theme="light"] .nav{ background:rgba(241,231,211,.82); }
 html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); box-shadow:0 4px 20px rgba(60,45,25,.09); }
-html[data-theme="light"] .nav-links .nav-cta:hover{ color:#F1E7D3; }
+html[data-theme="light"] .nav-links 
 html:root:not([data-theme="light"]){
   --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;
   --ink:#E7ECF3; --ink-2:#A3AEBD; --ink-3:#7C8797;
@@ -507,6 +507,11 @@ html,body{background:var(--ground)}
 .theme-toggle:hover,.nav-toggle:hover{transform:scale(1.06)}
 .social-link{transition:color .15s,border-color .15s,background .15s,transform .22s cubic-bezier(.4,0,.2,1)}
 .social-link:hover{transform:scale(1.08)}
+
+/* 24/10/2026 : en-tête, suite et « Sous le capot » alignés sur la colonne du site
+   (le menu est centré sur --maxw) ; l'outil lui-même garde sa largeur. */
+html body .nm-intro,html body .nm-next,html body .nm-capot,html body .wrap>.nm-intro,html body .wrap>.nm-next,html body .wrap>.nm-capot{width:100%;max-width:var(--maxw);margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:var(--pad);padding-right:var(--pad)}
+@media (max-width:760px){html body .wrap>.nm-intro{padding-left:0;padding-right:0}}
 </style>
 </head>
 <body>
@@ -532,7 +537,7 @@ html,body{background:var(--ground)}
 </header>
 
 <div class="wrap">
-<section class="nm-intro" aria-labelledby="nm-h1"><nav class="nm-crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages">Décryptages</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages/ai-act/">AI Act</a><span aria-hidden="true">&rsaquo;</span>Arbitrage de conformité</nav><p class="nm-kicker">Décryptage AI Act · Sous le capot · Réseau décisionnel</p><h1 id="nm-h1">Combien coûte la conformité, et que rapporte-t-elle&nbsp;?</h1><p class="nm-lede">Quatre leviers (audit de biais, contrôle humain, documentation, information des personnes), 36 combinaisons possibles. Le réseau compare ce que chacune coûte à ce qu'elle évite, en préjudices pour les personnes comme en euros pour l'organisation.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>Les 36 stratégies classées par coût annuel espéré.</li><li>Le compromis coût contre préjudice, stratégie par stratégie.</li><li>Deux curseurs pour tester les deux hypothèses dont dépend la conclusion.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Décrivez le déploiement (usage, volume, origine du système…).</li><li>Bougez les deux curseurs pour éprouver les hypothèses.</li><li>Comparez la stratégie la moins chère et celle qui protège le plus.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Les montants sont des ordres de grandeur de scénario et les effets des leviers des jugements d'expert. Construit sur le texte de 2024 avec le calendrier de l'Omnibus, il ne modélise pas l'exception des outils déjà en service.</p></div></div><p class="nm-meta"><span>Réseau bayésien décisionnel · 28 variables · 36 stratégies</span><a href="https://hellixmap.bayesia.com/display/1c82fa57000a5946?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" class="nm-hx">Le réseau sur Hellixmap <span aria-hidden="true">↗</span></a><a href="#capot">Comment c'est construit</a></p></section>
+<section class="nm-intro" aria-labelledby="nm-h1"><nav class="nm-crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages">Décryptages</a><span aria-hidden="true">&rsaquo;</span><a href="/decryptages/ai-act/">AI Act</a><span aria-hidden="true">&rsaquo;</span>Arbitrage de conformité</nav><p class="nm-kicker">Décryptage AI Act · Sous le capot · Réseau décisionnel</p><h1 id="nm-h1">Combien coûte la conformité, et que rapporte-t-elle&nbsp;?</h1><p class="nm-lede">Quatre leviers (audit de biais, contrôle humain, documentation, information des personnes), 36 combinaisons possibles. Le réseau compare ce que chacune coûte à ce qu'elle évite, en préjudices pour les personnes comme en euros pour l'organisation.</p><div class="nm-grid"><div class="nm-card"><h2>Ce que vous obtenez</h2><ul><li>Les 36 stratégies classées par coût annuel espéré.</li><li>Le compromis coût contre préjudice, stratégie par stratégie.</li><li>Deux curseurs pour tester les deux hypothèses dont dépend la conclusion.</li></ul></div><div class="nm-card"><h2>Comment s'en servir</h2><ol><li>Décrivez le déploiement (usage, volume, origine du système…).</li><li>Bougez les deux curseurs pour éprouver les hypothèses.</li><li>Comparez la stratégie la moins chère et celle qui protège le plus.</li></ol></div><div class="nm-card nm-card--warn"><h2>Ce que l’outil ne fait pas</h2><p>Les montants sont des ordres de grandeur de scénario et les effets des leviers des jugements d'expert. Construit sur le texte de 2024 avec le calendrier de l'Omnibus, il ne modélise pas l'exception des outils déjà en service.</p></div></div><p class="nm-meta"><span>Réseau bayésien décisionnel · 28 variables · 36 stratégies</span><a href="https://hellixmap.bayesia.com/display/1c82fa57000a5946?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" class="nm-hx" title="S\'ouvre sur Hellixmap, dans un nouvel onglet">Poser une question sur ce réseau <span aria-hidden="true">↗</span></a><a href="#capot">Comment c'est construit</a></p></section>
 
 
 

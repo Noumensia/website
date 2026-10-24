@@ -123,6 +123,11 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
 .aa-finding .callout-label{ font-family:var(--font-body); font-size:.72rem; letter-spacing:.05em; font-weight:600;
   text-transform:uppercase; color:var(--bordeaux-vif); margin-bottom:.6rem; display:block; }
 
+.aa-ask__lead{ font-size:.95rem; color:var(--gris-doux); margin:0 0 1rem; }
+#vue > .wrap + .wrap{ margin-top:clamp(2rem,4vw,3rem); }
+#vue .aa-hx{ max-width:none; }
+.aa-hx__card .aa-hx__t{ font-size:1.18rem; line-height:1.35; }
+.aa-hx__go{ margin-top:auto; padding-top:.6rem; font-size:.85rem; font-weight:600; color:var(--bordeaux-vif); }
 /* Hellixmap */
 .aa-hx{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:62rem; }
 @media (max-width:860px){ .aa-hx{ grid-template-columns:1fr; } }
@@ -324,7 +329,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
     </div>
   </section>
 
-  <!-- ============ VUE D'ENSEMBLE ============ -->
+  <!-- ============ VUE D'ENSEMBLE + ASSISTANT (24/10/2026) ============ -->
   <section class="section section--alt" id="vue">
     <div class="wrap reveal aa-split">
       <div>
@@ -336,74 +341,46 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
           ce que chacun doit faire, ce qui arrive quand il ne le fait pas. Un bouton isole le
           chemin qui part des usages RH.
         </p>
+        <p class="aa-intro">
+          Vous pouvez aussi lui poser vos questions&nbsp;: un assistant répond en s'appuyant
+          sur les concepts et les relations du graphe, et renvoie aux articles.
+        </p>
         <div class="cta-row">
           <a class="btn btn--primary" href="/decryptages/ai-act/cartographie" data-nm-click="aiact-outil-cartographie">Explorer le graphe</a>
-          <a class="btn btn--ghost" href="https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-carto">Ouvrir dans Hellixmap <span aria-hidden="true">↗</span></a>
+          <a class="btn btn--ghost" href="https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-carto">Poser une question <span aria-hidden="true">↗</span></a>
         </div>
       </div>
       <a class="aa-shot" href="/decryptages/ai-act/cartographie" aria-label="Ouvrir la cartographie de l'AI Act">
         <img src="/images/decryptages/ai-act-cartographie.png" alt="Extrait du graphe de l'AI Act : concepts colorés par famille, reliés par des relations nommées" loading="lazy" width="1200" height="750">
       </a>
     </div>
-  </section>
-
-
-  
-
-  <!-- ============ HELLIXMAP ============ -->
-  <section class="section" id="hellixmap">
-    <div class="wrap reveal">
-      <p class="eyebrow">Hellixmap · Ask Hellix</p>
-      <h2>Posez vos questions aux graphes</h2>
-      <p class="aa-intro">
-        Chaque outil de ce décryptage repose sur un graphe, et ces graphes sont publiés sur
-        Hellixmap, la plateforme de cartes de connaissance de Bayesia. Son assistant, Ask Hellix,
-        répond en s'appuyant sur les concepts et les relations du graphe ouvert plutôt que sur
-        ce qu'il croit savoir de l'AI&nbsp;Act, avec trois modes&nbsp;: Expert pour la connaissance
-        du domaine, Navigator pour circuler dans le graphe, Coach pour un apprentissage guidé.
-      </p>
+    <div class="wrap reveal" id="hellixmap">
+      <p class="aa-ask__lead">Deux questions pour essayer, copiées au clic&nbsp;: il suffit de les coller dans l'assistant.</p>
       <div class="aa-hx">
-        <a class="aa-hx__card" href="https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-carto">
+        <a class="aa-hx__card" href="https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-carto" data-copy-q="Qu'est-ce qui rend un outil de recrutement à haut risque ?">
           <span class="aa-hx__k">Pour comprendre</span>
-          <span class="aa-hx__t">La cartographie du règlement&nbsp;<span aria-hidden="true">↗</span></span>
-          <span class="aa-hx__d">107 concepts, 183 relations. Demandez par exemple «&nbsp;qu'est-ce qui rend un outil de recrutement à haut risque&nbsp;?&nbsp;» ou «&nbsp;quel est le rôle de l'employeur&nbsp;?&nbsp;».</span>
+          <span class="aa-hx__t">«&nbsp;Qu'est-ce qui rend un outil de recrutement à haut risque&nbsp;?&nbsp;»</span>
+          <span class="aa-hx__d">Posée à la cartographie du règlement.</span>
+          <span class="aa-hx__go">Copier et ouvrir l'assistant&nbsp;<span aria-hidden="true">↗</span></span>
         </a>
-        <a class="aa-hx__card" href="https://hellixmap.bayesia.com/display/1c82f7c705ca5ae8?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-registre">
+        <a class="aa-hx__card" href="https://hellixmap.bayesia.com/display/1c82f7c705ca5ae8?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-registre" data-copy-q="Prépare le plan d'action d'un employeur qui utilise un logiciel de tri de CV.">
           <span class="aa-hx__k">Pour agir</span>
-          <span class="aa-hx__t">Le registre des obligations&nbsp;<span aria-hidden="true">↗</span></span>
-          <span class="aa-hx__d">266 nœuds, une obligation par nœud, construit pour qu'un assistant puisse faire une liste complète. Demandez «&nbsp;prépare le plan d'action d'un employeur qui utilise un logiciel de tri de CV&nbsp;».</span>
-        </a>
-        <a class="aa-hx__card" href="https://hellixmap.bayesia.com/display/1c82f87fd74a55e1?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-parcours">
-          <span class="aa-hx__k">Mon outil est-il concerné&nbsp;?</span>
-          <span class="aa-hx__t">Le parcours de qualification&nbsp;<span aria-hidden="true">↗</span></span>
-          <span class="aa-hx__d">Le graphe derrière l'outil 1&nbsp;: 68 étapes, chacune adossée à son article. Demandez «&nbsp;à quelles conditions un outil de l'annexe&nbsp;III échappe-t-il au haut risque&nbsp;?&nbsp;».</span>
-        </a>
-        <a class="aa-hx__card" href="https://hellixmap.bayesia.com/display/1c82fb13128a58e3?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-simulateur">
-          <span class="aa-hx__k">Par quoi commencer&nbsp;?</span>
-          <span class="aa-hx__t">Le réseau du simulateur&nbsp;<span aria-hidden="true">↗</span></span>
-          <span class="aa-hx__d">La structure du réseau bayésien de l'outil 3&nbsp;: 74 nœuds, 128 arcs, de la menace à l'amende. Demandez «&nbsp;par quels chemins le contrôle humain réduit-il le risque de sanction&nbsp;?&nbsp;».</span>
+          <span class="aa-hx__t">«&nbsp;Prépare le plan d'action d'un employeur qui utilise un logiciel de tri de CV&nbsp;»</span>
+          <span class="aa-hx__d">Posée au registre des obligations, construit pour que la liste soit complète.</span>
+          <span class="aa-hx__go">Copier et ouvrir l'assistant&nbsp;<span aria-hidden="true">↗</span></span>
         </a>
       </div>
       <p class="aa-lab-note">
-        Pour apprendre plutôt que chercher, ouvrez <a href="https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&amp;openChat=coach&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-coach">la cartographie avec le Coach</a>&nbsp;:
-        fiches, quiz, questions ouvertes ou tuteur socratique, au niveau que vous choisissez.
-      </p>
-      <p class="aa-lab-note">
-        Les quatre lectures techniques ont aussi leur graphe&nbsp;: <a href="https://hellixmap.bayesia.com/display/1c82f906698a594c?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">la mécanique causale</a>,
-        <a href="https://hellixmap.bayesia.com/display/1c82fac35a8a55c6?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">les effets directs signés</a>, <a href="https://hellixmap.bayesia.com/display/1c82fa57000a5946?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">l'arbitrage de conformité</a>
-        et <a href="https://hellixmap.bayesia.com/display/1c82f9bacc8a59e8?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">la structure mesurée du texte</a>.
-      </p>
-      <p class="aa-lab-note">
-        Hellixmap s'ouvre dans un nouvel onglet. Les réseaux bayésiens y apparaissent avec leur
-        structure et le texte de chaque nœud&nbsp;; leurs probabilités se manipulent dans les outils
-        de cette page. Comme toute IA, l'assistant peut se tromper&nbsp;: vérifiez toujours l'article
+        Pour apprendre plutôt que chercher, la même carte existe <a href="https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&amp;openChat=coach&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-coach">en mode quiz et fiches</a>.
+        L'assistant est celui de Hellixmap, la plateforme de cartes de connaissance de Bayesia&nbsp;:
+        il s'ouvre dans un nouvel onglet et, comme toute IA, il peut se tromper. Vérifiez l'article
         cité, et servez-vous des outils ci-dessus pour qualifier un cas précis.
       </p>
     </div>
   </section>
 
   <!-- ============ CALENDRIER ============ -->
-  <section class="section section--alt" id="calendrier">
+  <section class="section" id="calendrier">
     <div class="wrap reveal">
       <p class="eyebrow">Calendrier</p>
       <h2>Ce qui s'applique déjà, ce qui arrive</h2>
@@ -462,7 +439,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
   </section>
 
   <!-- ============ TROIS POINTS ============ -->
-  <section class="section" id="points-cles">
+  <section class="section section--alt" id="points-cles">
     <div class="wrap reveal">
       <p class="eyebrow">Pour un employeur</p>
       <h2>Trois points souvent mal compris</h2>
@@ -504,7 +481,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
   </section>
 
   <!-- ============ SOUS LE CAPOT ============ -->
-  <section class="section section--alt" id="capot">
+  <section class="section" id="capot">
     <div class="wrap reveal">
       <p class="eyebrow">Sous le capot</p>
       <h2>Pourquoi un graphe plutôt qu'une fiche de synthèse</h2>
@@ -558,6 +535,9 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
         </a>
       </div>
       <p class="aa-lab-note">
+        Chaque outil a son graphe source, publié sur Hellixmap avec le même assistant&nbsp;: <a href="https://hellixmap.bayesia.com/display/1c82f87fd74a55e1?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">parcours</a>, <a href="https://hellixmap.bayesia.com/display/1c82f7c705ca5ae8?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">registre</a>, <a href="https://hellixmap.bayesia.com/display/1c82fb13128a58e3?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">simulateur</a>, <a href="https://hellixmap.bayesia.com/display/1c82f906698a594c?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">mécanique causale</a>, <a href="https://hellixmap.bayesia.com/display/1c82fac35a8a55c6?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">effets directs</a>, <a href="https://hellixmap.bayesia.com/display/1c82fa57000a5946?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">arbitrage</a>, <a href="https://hellixmap.bayesia.com/display/1c82f9bacc8a59e8?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">structure du texte</a>, <a href="https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener">cartographie</a>.
+      </p>
+      <p class="aa-lab-note">
         C'est la même méthode que pour mes <a href="/modeles/">modèles RH</a> (turnover,
         burn-out)&nbsp;: rendre visible la structure qui relie les causes, puis la rendre
         interrogeable par ceux qui décident.
@@ -566,7 +546,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
   </section>
 
   <!-- ============ MÉTHODE ============ -->
-  <section class="section" id="methode-ai-act">
+  <section class="section section--alt" id="methode-ai-act">
     <div class="wrap reveal">
       <p class="eyebrow">Méthode et limites</p>
       <h2>D'où viennent ces outils</h2>
@@ -715,6 +695,15 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 <script src="script.js"></script>
 <script src="interactions.js" defer></script>
+<script>
+/* Cartes d'exemple : la question est copiée au clic, puis l'assistant s'ouvre (24/10/2026) */
+document.querySelectorAll('[data-copy-q]').forEach(function(a){
+  a.addEventListener('click',function(){
+    try{ navigator.clipboard && navigator.clipboard.writeText(a.getAttribute('data-copy-q')); }catch(e){}
+    var g=a.querySelector('.aa-hx__go'); if(g){ g.innerHTML='Question copiée, collez-la dans l\u2019assistant&nbsp;<span aria-hidden="true">↗</span>'; }
+  });
+});
+</script>
 <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8bd3e2f66b3c4bbba0b38cbcbbc972e0"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
