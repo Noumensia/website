@@ -44,7 +44,8 @@
 # Le lien court noumensia.com/ai-act sert dans les posts LinkedIn.
 /decryptages.html       /decryptages             301
 /decryptages/           /decryptages             301
-# Liens courts vers les graphes Hellixmap, assistant déjà ouvert (23/10/2026).
+# Liens courts historiques vers les graphes Hellixmap, assistant déjà ouvert (23/10/2026).
+# Gardés car déjà publiés dans les posts 3 à 5 et les QR codes.
 # Pour les posts LinkedIn et les QR codes. 302 (temporaire) : la destination peut changer
 # sans toucher aux posts. Doivent rester AVANT la règle /ai-act/* ci-dessous.
 /ai-act/assistant       https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&openChat=expert&fullscreen=0   302
@@ -55,6 +56,26 @@
 /ai-act/registre-ia/    https://hellixmap.bayesia.com/display/1c82f7c705ca5ae8?panel=0&openChat=expert&fullscreen=0   302
 /ai-act/simulateur-ia   https://hellixmap.bayesia.com/display/1c82fb13128a58e3?panel=0&openChat=expert&fullscreen=0   302
 /ai-act/simulateur-ia/  https://hellixmap.bayesia.com/display/1c82fb13128a58e3?panel=0&openChat=expert&fullscreen=0   302
+# Liens lisibles vers les graphes et simulateurs (26/10/2026). Tous les liens du site vers
+# Hellixmap et WebSimulator passent par ici : au survol, le visiteur lit une adresse qui dit
+# où il va (…/registre-obligations/graphe), et si une carte change d'identifiant, on ne
+# modifie que cette ligne. 302 pour garder la main sur la destination.
+# Forme courte pour les posts : noumensia.com/ai-act/<outil>/graphe (passe par /ai-act/* ci-dessous).
+/decryptages/ai-act/cartographie/graphe      https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&openChat=expert&fullscreen=0   302
+/decryptages/ai-act/parcours-qualification/graphe https://hellixmap.bayesia.com/display/1c82f87fd74a55e1?panel=0&openChat=expert&fullscreen=0   302
+/decryptages/ai-act/registre-obligations/graphe https://hellixmap.bayesia.com/display/1c82f7c705ca5ae8?panel=0&openChat=expert&fullscreen=0   302
+/decryptages/ai-act/mecanique-causale/graphe https://hellixmap.bayesia.com/display/1c82f906698a594c?panel=0&openChat=expert&fullscreen=0   302
+/decryptages/ai-act/effets-causaux/graphe    https://hellixmap.bayesia.com/display/1c82fac35a8a55c6?panel=0&openChat=expert&fullscreen=0   302
+/decryptages/ai-act/simulateur-sanction/graphe https://hellixmap.bayesia.com/display/1c82fb13128a58e3?panel=0&openChat=expert&fullscreen=0   302
+/decryptages/ai-act/arbitrage-conformite/graphe https://hellixmap.bayesia.com/display/1c82fa57000a5946?panel=0&openChat=expert&fullscreen=0   302
+/decryptages/ai-act/structure-du-texte/graphe https://hellixmap.bayesia.com/display/1c82f9bacc8a59e8?panel=0&openChat=expert&fullscreen=0   302
+/decryptages/ai-act/cartographie/coach       https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&openChat=coach&fullscreen=0   302
+/decryptages/ai-act/graphes                  https://hellixmap.bayesia.com/collections/uEc_Br51LRKyvnNYQRjqPg   302
+/modeles/turnover/graphe       https://hellixmap.bayesia.com/display/1b6247c58b13fe6b?panel=1&openChat=expert   302
+/modeles/burnout/graphe        https://hellixmap.bayesia.com/display/1b71489e10f4d684?panel=1&openChat=expert   302
+/modeles/turnover/simulateur   https://simulator.bayesialab.com/simulator/60898933782   302
+/modeles/burnout/simulateur    https://simulator.bayesialab.com/simulator/47192424779   302
+
 /ai-act                 /decryptages/ai-act/     301
 /ai-act/                /decryptages/ai-act/     301
 /ai-act/*               /decryptages/ai-act/:splat   301
