@@ -134,6 +134,19 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
 .aa-hx__t{ font-family:var(--font-display); font-size:1.35rem; font-weight:600; }
 .aa-hx__d{ font-size:.93rem; color:var(--gris-doux); line-height:1.55; }
 html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
+@property --lk-fill{ syntax:"<percentage>"; inherits:false; initial-value:0%; }
+/* Liseré qui se trace autour des cartes au survol, même geste que les cartes d'articles */
+.ds-card{ position:relative; }
+.ds-card::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; padding:1.5px; z-index:1;
+  background:conic-gradient(from -90deg, var(--bordeaux-vif) var(--lk-fill), transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  --lk-fill:0%; pointer-events:none; transition:--lk-fill .6s cubic-bezier(.4,0,.2,1);
+}
+.ds-card:hover::before, .ds-card:focus-visible::before{ --lk-fill:100%; }
+.ds-card:hover{ border-color:transparent; }
 </style>
 <script type="application/ld+json">
 {

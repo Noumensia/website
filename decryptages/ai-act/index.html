@@ -198,6 +198,21 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
 .aa-hx__go{ align-self:flex-start; }
 .aa-q-alt{ font-size:.95rem; margin-top:.4rem; opacity:.92; }
 .aa-q-alt a{ color:inherit; font-weight:600; }
+@property --lk-fill{ syntax:"<percentage>"; inherits:false; initial-value:0%; }
+/* Liseré qui se trace autour des cartes au survol, même geste que les cartes d'articles */
+.aa-step, .aa-gx__card, .aa-hx__card{ position:relative; }
+.aa-step::before, .aa-gx__card::before, .aa-hx__card::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; padding:1.5px; z-index:1;
+  background:conic-gradient(from -90deg, var(--bordeaux-vif) var(--lk-fill), transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  --lk-fill:0%; pointer-events:none; transition:--lk-fill .6s cubic-bezier(.4,0,.2,1);
+}
+.aa-step:hover::before, .aa-gx__card:hover::before, .aa-hx__card:hover::before, .aa-step:focus-visible::before, .aa-gx__card:focus-visible::before, .aa-hx__card:focus-visible::before{ --lk-fill:100%; }
+.aa-step:hover, .aa-gx__card:hover, .aa-hx__card:hover{ border-color:transparent; }
+.aa-gx__q{ font-family:var(--font-display); font-style:italic; font-size:1rem; line-height:1.35; color:var(--blanc-casse); margin:-.1rem 0 .1rem; }
+.aa-gx__tool{ display:inline-block; align-self:flex-start; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--creme); background:var(--bordeaux); padding:.15rem .5rem; border-radius:4px; }
 </style>
 </head>
 <body>
@@ -418,28 +433,35 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
       <p class="aa-intro">
         Une fiche résume le texte. Un modèle permet de l'interroger. Chaque outil de cette page
         repose sur son propre graphe, et chaque graphe fait ce que le précédent ne savait pas faire,
-        du knowledge graph au réseau bayésien. Tous sont publiés sur Hellixmap, où l'on peut les
-        parcourir et leur poser des questions.
+        du knowledge graph au réseau bayésien. Trois servent directement un DRH, ils portent la mention
+        «&nbsp;Outil DRH&nbsp;». Les cinq autres sont des lectures plus techniques du même texte, pour les
+        curieux et les modélisateurs. Tous sont publiés sur Hellixmap, où l'on peut les parcourir et
+        leur poser des questions.
       </p>
       <div class="aa-gx">
         <article class="aa-gx__card">
           <a class="aa-gx__fig" href="/decryptages/ai-act/cartographie" aria-label="Ouvrir l'outil : Cartographie du règlement"><img src="/images/decryptages/graphes/cartographie.svg" alt="" loading="lazy" width="480" height="270"></a>
           <span class="aa-gx__k">01 · Knowledge graph · 107 concepts</span>
           <h3 class="aa-gx__t">Cartographie du règlement</h3>
+          <p class="aa-gx__q">Le règlement en un seul graphe</p>
           <p class="aa-gx__d">Les concepts du texte et leurs relations nommées. Il répond à «&nbsp;qu'est-ce qui est relié à quoi&nbsp;», pas à «&nbsp;que dois-je faire&nbsp;».</p>
           <p class="aa-gx__links"><a href="/decryptages/ai-act/cartographie" data-nm-click="aiact-galerie-outil-cartographie">L'outil&nbsp;→</a><a href="https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-galerie-hx-cartographie">Interroger le graphe&nbsp;↗</a></p>
         </article>
         <article class="aa-gx__card">
           <a class="aa-gx__fig" href="/decryptages/ai-act/parcours-qualification" aria-label="Ouvrir l'outil : Parcours de qualification"><img src="/images/decryptages/graphes/parcours-qualification.svg" alt="" loading="lazy" width="480" height="270"></a>
           <span class="aa-gx__k">02 · Logigramme · 68 étapes</span>
+          <span class="aa-gx__tool">Outil DRH 1</span>
           <h3 class="aa-gx__t">Parcours de qualification</h3>
+          <p class="aa-gx__q">Mon outil est-il concerné&nbsp;?</p>
           <p class="aa-gx__d">Le même texte mis en séquence de décisions. Il qualifie un cas, mais ne dit rien du risque.</p>
           <p class="aa-gx__links"><a href="/decryptages/ai-act/parcours-qualification" data-nm-click="aiact-galerie-outil-parcours-qualification">L'outil&nbsp;→</a><a href="https://hellixmap.bayesia.com/display/1c82f87fd74a55e1?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-galerie-hx-parcours-qualification">Interroger le graphe&nbsp;↗</a></p>
         </article>
         <article class="aa-gx__card">
           <a class="aa-gx__fig" href="/decryptages/ai-act/registre-obligations" aria-label="Ouvrir l'outil : Registre des obligations"><img src="/images/decryptages/graphes/registre-obligations.svg" alt="" loading="lazy" width="480" height="270"></a>
           <span class="aa-gx__k">03 · Knowledge graph · 73 obligations</span>
+          <span class="aa-gx__tool">Outil DRH 2</span>
           <h3 class="aa-gx__t">Registre des obligations</h3>
+          <p class="aa-gx__q">Que dois-je faire, et pour quand&nbsp;?</p>
           <p class="aa-gx__d">Une obligation par nœud, toujours avec les mêmes champs, pour qu'un assistant puisse énumérer et pas seulement résumer.</p>
           <p class="aa-gx__links"><a href="/decryptages/ai-act/registre-obligations" data-nm-click="aiact-galerie-outil-registre-obligations">L'outil&nbsp;→</a><a href="https://hellixmap.bayesia.com/display/1c82f7c705ca5ae8?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-galerie-hx-registre-obligations">Interroger le graphe&nbsp;↗</a></p>
         </article>
@@ -447,6 +469,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
           <a class="aa-gx__fig" href="/decryptages/ai-act/mecanique-causale" aria-label="Ouvrir l'outil : Mécanique causale"><img src="/images/decryptages/graphes/mecanique-causale.svg" alt="" loading="lazy" width="480" height="270"></a>
           <span class="aa-gx__k">04 · Diagramme causal · 78 relations</span>
           <h3 class="aa-gx__t">Mécanique causale</h3>
+          <p class="aa-gx__q">Comment un outil RH finit en sanction</p>
           <p class="aa-gx__d">Ce qui cause quoi, de la conception d'un outil jusqu'à la sanction. Qualitatif.</p>
           <p class="aa-gx__links"><a href="/decryptages/ai-act/mecanique-causale" data-nm-click="aiact-galerie-outil-mecanique-causale">L'outil&nbsp;→</a><a href="https://hellixmap.bayesia.com/display/1c82f906698a594c?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-galerie-hx-mecanique-causale">Interroger le graphe&nbsp;↗</a></p>
         </article>
@@ -454,28 +477,33 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
           <a class="aa-gx__fig" href="/decryptages/ai-act/effets-causaux" aria-label="Ouvrir l'outil : Effets directs signés"><img src="/images/decryptages/graphes/effets-causaux.svg" alt="" loading="lazy" width="480" height="270"></a>
           <span class="aa-gx__k">05 · Réseau bayésien · 83 effets signés</span>
           <h3 class="aa-gx__t">Effets directs signés</h3>
-          <p class="aa-gx__d">La même structure, chaque lien chiffré entre −1 et +1, pour voir quels facteurs pèsent le plus.</p>
+          <p class="aa-gx__q">Quels facteurs pèsent le plus</p>
+          <p class="aa-gx__d">La structure de la mécanique causale, chaque lien chiffré entre −1 et +1.</p>
           <p class="aa-gx__links"><a href="/decryptages/ai-act/effets-causaux" data-nm-click="aiact-galerie-outil-effets-causaux">L'outil&nbsp;→</a><a href="https://hellixmap.bayesia.com/display/1c82fac35a8a55c6?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-galerie-hx-effets-causaux">Interroger le graphe&nbsp;↗</a></p>
         </article>
         <article class="aa-gx__card">
           <a class="aa-gx__fig" href="/decryptages/ai-act/simulateur-sanction" aria-label="Ouvrir l'outil : Simulateur de sanction"><img src="/images/decryptages/graphes/simulateur-sanction.svg" alt="" loading="lazy" width="480" height="270"></a>
           <span class="aa-gx__k">06 · Réseau bayésien · 74 variables</span>
+          <span class="aa-gx__tool">Outil DRH 3</span>
           <h3 class="aa-gx__t">Simulateur de sanction</h3>
-          <p class="aa-gx__d">La chaîne de contrôle quantifiée. Il compare des situations et classe des leviers, à partir de jugements explicités nœud par nœud.</p>
+          <p class="aa-gx__q">Par quoi commencer&nbsp;?</p>
+          <p class="aa-gx__d">La chaîne de contrôle quantifiée. Il compare des situations et classe des leviers, à partir de jugements explicités nœud par nœud, que chacun peut contester.</p>
           <p class="aa-gx__links"><a href="/decryptages/ai-act/simulateur-sanction" data-nm-click="aiact-galerie-outil-simulateur-sanction">L'outil&nbsp;→</a><a href="https://hellixmap.bayesia.com/display/1c82fb13128a58e3?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-galerie-hx-simulateur-sanction">Interroger le graphe&nbsp;↗</a></p>
         </article>
         <article class="aa-gx__card">
           <a class="aa-gx__fig" href="/decryptages/ai-act/arbitrage-conformite" aria-label="Ouvrir l'outil : Arbitrage de conformité"><img src="/images/decryptages/graphes/arbitrage-conformite.svg" alt="" loading="lazy" width="480" height="270"></a>
           <span class="aa-gx__k">07 · Réseau décisionnel · 36 stratégies</span>
           <h3 class="aa-gx__t">Arbitrage de conformité</h3>
-          <p class="aa-gx__d">Ce que coûte la conformité, mis en regard du préjudice qu'elle évite.</p>
+          <p class="aa-gx__q">Ce que coûte la conformité</p>
+          <p class="aa-gx__d">Le coût de chaque stratégie de mise en conformité, mis en regard du préjudice qu'elle évite.</p>
           <p class="aa-gx__links"><a href="/decryptages/ai-act/arbitrage-conformite" data-nm-click="aiact-galerie-outil-arbitrage-conformite">L'outil&nbsp;→</a><a href="https://hellixmap.bayesia.com/display/1c82fa57000a5946?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-galerie-hx-arbitrage-conformite">Interroger le graphe&nbsp;↗</a></p>
         </article>
         <article class="aa-gx__card">
           <a class="aa-gx__fig" href="/decryptages/ai-act/structure-du-texte" aria-label="Ouvrir l'outil : Structure mesurée du texte"><img src="/images/decryptages/graphes/structure-du-texte.svg" alt="" loading="lazy" width="480" height="270"></a>
           <span class="aa-gx__k">08 · Analyse sémantique · 113 articles</span>
           <h3 class="aa-gx__t">Structure mesurée du texte</h3>
-          <p class="aa-gx__d">De quoi parle vraiment le règlement, mesuré sur son vocabulaire plutôt que sur son plan.</p>
+          <p class="aa-gx__q">De quoi parle vraiment le texte</p>
+          <p class="aa-gx__d">Les 113 articles regroupés d'après leur vocabulaire plutôt que d'après le plan officiel. Les familles sont calculées, pas décidées.</p>
           <p class="aa-gx__links"><a href="/decryptages/ai-act/structure-du-texte" data-nm-click="aiact-galerie-outil-structure-du-texte">L'outil&nbsp;→</a><a href="https://hellixmap.bayesia.com/display/1c82f9bacc8a59e8?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-galerie-hx-structure-du-texte">Interroger le graphe&nbsp;↗</a></p>
         </article>
       </div>
