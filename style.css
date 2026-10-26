@@ -1363,7 +1363,14 @@ textarea[aria-invalid="true"]{
 .cta-final p{ color:var(--gris-doux); max-width:36rem; margin-bottom:2rem; }
 
 /* ============ FOOTER ============ */
-footer{ padding:2.5rem 0; border-top:1px solid var(--ardoise-3); }
+/* Pied de page : bloc de marque fixe, ardoise profond dans les deux thèmes (comme les
+   graphes sombres et le bloc contact bordeaux, il ne change pas avec le thème) */
+footer{
+  padding:2.5rem 0; border-top:1px solid rgba(122,31,45,.45); color:var(--blanc-casse);
+  background:
+    radial-gradient(50rem 22rem at 88% 0%, rgba(122,31,45,.26), transparent 62%),
+    linear-gradient(180deg, #1C232D 0%, #151B23 100%);
+}
 .footer-top{
   display:flex; flex-wrap:wrap; gap:1rem 1.5rem;
   justify-content:space-between; align-items:center;
@@ -1500,14 +1507,14 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
    chaude ; ce qui est en retrait (sections alternées) = sable plus profond + voile bordeaux.
    Le pied de page passe en ardoise : les deux couleurs de marque se répondent sur la page. */
 html[data-theme="light"]{
-  --ardoise:#EFE3CC;        /* fond page : crème chaud */
-  --ardoise-2:#E5D6BA;      /* surfaces en retrait : sable */
-  --ardoise-3:#D2C09F;      /* bordures : sable foncé, lisibles sans être dures */
-  --ardoise-4:#DCCAAA;
+  --ardoise:#F0E2CA;        /* fond page : crème chaud, pointe de rosé (même famille que le bordeaux) */
+  --ardoise-2:#E7D6BB;      /* surfaces en retrait : sable */
+  --ardoise-3:#D3BE9E;      /* bordures : sable foncé, lisibles sans être dures */
+  --ardoise-4:#DDC8A9;
   --blanc-casse:#1E2630;    /* texte : ardoise (la couleur de fond du thème sombre) */
   --gris-doux:#4A5564;      /* texte secondaire : ardoise grisé */
   --bordeaux-vif:#8f2233;
-  --papier:#F8F0E0;         /* cartes et encadrés posés sur la page */
+  --papier:#FAF1E2;         /* cartes et encadrés posés sur la page */
   --shadow-sm:0 1px 2px rgba(70,45,20,.07), 0 4px 14px rgba(70,45,20,.07);
   --shadow-md:0 2px 4px rgba(70,45,20,.07), 0 14px 34px rgba(70,45,20,.13);
   --shadow-lg:0 16px 44px rgba(70,45,20,.18);
@@ -1517,17 +1524,17 @@ html[data-theme="light"]{
 html[data-theme="light"] body::before{
   background:
     radial-gradient(56rem 38rem at 86% -8%, rgba(122,31,45,.20), transparent 62%),
-    radial-gradient(48rem 34rem at -6% 4%, rgba(150,100,45,.14), transparent 62%),
+    radial-gradient(48rem 34rem at -6% 4%, rgba(155,98,48,.14), transparent 62%),
     radial-gradient(60rem 46rem at 50% 118%, rgba(122,31,45,.10), transparent 60%);
 }
 html[data-theme="light"] body::after{
   background-image:radial-gradient(rgba(90,60,35,.12) 1px, transparent 1.4px);
 }
-html[data-theme="light"]::after{ opacity:.045; }
+html[data-theme="light"]::after{ opacity:.055; }
 
 /* Nav : crème translucide, filet net pour détacher l'entête (cohérent avec le sombre,
    où la nav reprend la couleur de la page) */
-html[data-theme="light"] .nav{ background:rgba(239,227,204,.84); border-bottom-color:var(--ardoise-3); }
+html[data-theme="light"] .nav{ background:rgba(240,226,202,.84); border-bottom-color:var(--ardoise-3); }
 html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.96); border-bottom-color:var(--ardoise-3); box-shadow:0 4px 20px rgba(70,45,20,.10); }
 
 /* Accents : sur-titres en bordeaux, filet bordeaux en tête des sections en retrait */
@@ -1544,9 +1551,9 @@ html[data-theme="light"] .hero-graph::before{ background:radial-gradient(60% 72%
 html[data-theme="light"] .section--alt,
 html[data-theme="light"] .process{
   background:
-    radial-gradient(70% 110% at 94% 0%, rgba(122,31,45,.10), transparent 60%),
-    radial-gradient(60% 90% at 0% 100%, rgba(150,100,45,.08), transparent 60%),
-    linear-gradient(180deg, #E8DAC0 0%, #DFCEAF 100%);
+    radial-gradient(70% 110% at 94% 0%, rgba(122,31,45,.11), transparent 60%),
+    radial-gradient(60% 90% at 0% 100%, rgba(155,98,48,.08), transparent 60%),
+    linear-gradient(180deg, #E9D8BC 0%, #E0CBAB 100%);
 }
 html[data-theme="light"] .cta-final{
   background:
@@ -1589,13 +1596,10 @@ html[data-theme="light"] .contact{ --blanc-casse:#F1E7D3; --gris-doux:#f3dee2; -
 html[data-theme="light"] .contact-form .btn--primary{ color:var(--bordeaux); }
 html[data-theme="light"] .fig-link .fig-hint{ color:#F1E7D3; }
 
-/* Pied de page : sable profond + voile bordeaux, il se distingue de la page sans changer
-   de couleur de marque (même logique qu'en sombre) */
+/* Pied de page : en clair, on rétablit localement les tokens sombres (voir PIED DE PAGE) */
 html[data-theme="light"] footer{
-  border-top-color:rgba(122,31,45,.28);
-  background:
-    radial-gradient(50rem 22rem at 88% 0%, rgba(122,31,45,.10), transparent 62%),
-    linear-gradient(180deg, #E4D4B6 0%, #DCCBAB 100%);
+  --blanc-casse:#F1E7D3; --gris-doux:#B8AF9F; --ardoise:#1E2630; --ardoise-2:#2A3440;
+  --ardoise-3:#3A4756; --ardoise-4:#141A22; --bordeaux-vif:#D98A95;
 }
 
 /* Accueil, « Trois questions concrètes » : questions en colonnes, comme les étapes
@@ -1604,3 +1608,41 @@ html[data-theme="light"] footer{
 .steps--q h3{ font-size:1.12rem; line-height:1.35; }
 .steps--q p{ font-size:.95rem; line-height:1.65; }
 
+
+/* ============ SYSTÈME DE CARTES (26/10/2026) ============
+   Une même base pour les trois familles de contenu (surface « posée », même élévation,
+   même soulèvement au survol), et une signature géométrique par famille :
+   - Modèles     : barre horizontale en haut qui se remplit (+ visuel du graphe en tête)
+   - Décryptages : filet vertical bordeaux à gauche, qui s'épaissit au survol
+   - Articles    : contour qui se trace autour de la carte
+   Les cartes modèles restent des îlots crème dans les deux thèmes : ce sont les « produits ». */
+
+/* Base : surface posée, au même niveau que les cartes modèles */
+.article-card, main a.ds-card{
+  background:linear-gradient(180deg, #29333F 0%, #242D38 100%);
+  border-color:#36424F;
+  box-shadow:0 6px 22px rgba(0,0,0,.22);
+}
+html[data-theme="light"] .article-card,
+html[data-theme="light"] main a.ds-card{
+  background:var(--papier); border-color:#DCCBAA; box-shadow:var(--shadow-md);
+}
+.article-card:hover, main a.ds-card:hover{ transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.32); }
+html[data-theme="light"] .article-card:hover,
+html[data-theme="light"] main a.ds-card:hover{ background:var(--papier); box-shadow:var(--shadow-lg); }
+
+/* Articles à venir : lisibles (plus d'opacité réduite), mais visiblement « pas encore » */
+.article-card--soon, html[data-theme="light"] .article-card--soon{
+  opacity:1; background:transparent; border-style:dashed; box-shadow:none;
+}
+.article-card--soon h3, .article-card--soon p{ opacity:.78; }
+.article-card--soon:hover, html[data-theme="light"] .article-card--soon:hover{ transform:none; box-shadow:none; background:transparent; }
+
+/* Décryptages : filet vertical à gauche (comme la carte « À la une » de l'accueil) */
+main a.ds-card::before{
+  inset:0 auto 0 0; width:3px; padding:0; border-radius:0;
+  -webkit-mask:none; mask:none;
+  background:var(--bordeaux-vif);
+  transition:width var(--t-base);
+}
+main a.ds-card:hover::before, main a.ds-card:focus-visible::before{ width:6px; }
