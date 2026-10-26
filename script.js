@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.2 10.5 16M17.2 7.2 13.5 16M7 6h10"/></svg>',
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="7" r="2.3" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r="2.3" fill="currentColor" stroke="none"/><circle cx="14" cy="17" r="2.3" fill="currentColor" stroke="none"/></svg>'
       ];
-      const LABELS = ['Le graphe', 'Le simulateur'];
+      const LABELS = ['Interroger le graphe', 'Le simulateur'];
 
       const dock = document.createElement('div');
       dock.className = 'model-dock';
