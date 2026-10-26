@@ -121,6 +121,26 @@
   ]
 }
 </script>
+<style>
+/* À la une (accueil) : CSS inline pour éviter le cache de style.css */
+.une{ padding:0 0 clamp(2.5rem,6vw,4rem); }
+.une-card{ display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:clamp(1.25rem,3vw,2.5rem); align-items:center;
+  padding:clamp(1.25rem,3vw,2rem); border:1px solid var(--ardoise-3); border-left:3px solid var(--bordeaux-vif); border-radius:14px;
+  background:var(--ardoise-2); color:inherit; text-decoration:none;
+  transition:transform var(--t-base), box-shadow var(--t-base); }
+.une-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.une-card:focus-visible{ outline:none; box-shadow:var(--ring); }
+.une-txt h2{ font-family:var(--font-display); font-weight:500; font-size:clamp(1.5rem,2.6vw,2rem); line-height:1.15; margin:.4rem 0 .65rem; color:var(--blanc-casse); }
+.une-txt p{ color:var(--gris-doux); line-height:1.65; max-width:38rem; }
+.une-go{ display:inline-block; margin-top:1rem; font-weight:600; color:var(--bordeaux-vif); }
+.une-card:hover .une-go{ text-decoration:underline; text-underline-offset:3px; }
+.une-figs{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; }
+.une-figs img{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; background:#1E2630; transition:transform var(--t-slow); }
+.une-card:hover .une-figs img{ transform:scale(1.03); }
+.une-count{ grid-column:1/-1; font-family:var(--font-mono); font-size:.76rem; letter-spacing:.04em; color:var(--gris-doux); text-align:right; }
+@media (max-width:760px){ .une-card{ grid-template-columns:1fr; } }
+html[data-theme="light"] .une-card{ background:#E9DCC4; box-shadow:var(--shadow-sm); }
+</style>
 </head>
 <body>
 
@@ -176,6 +196,27 @@
         </a>
         <figcaption class="visual-caption">Un modèle Noumensia du risque de burn-out — chaque nœud est un facteur, chaque flèche une hypothèse d'influence</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- ============ À LA UNE : DÉCRYPTAGE AI ACT ============ -->
+  <section class="une" id="a-la-une" aria-labelledby="une-titre">
+    <div class="wrap reveal">
+      <a class="une-card" href="/decryptages/ai-act/" data-nm-click="home-une-ai-act">
+        <div class="une-txt">
+          <p class="eyebrow">À la une · Décryptage</p>
+          <h2 id="une-titre">L'AI Act et vos outils RH</h2>
+          <p>Tri de CV, scoring de candidats, entretiens analysés par IA&nbsp;: le règlement européen les classe à haut risque. Une partie des règles s'applique déjà, le reste à partir du 2&nbsp;décembre&nbsp;2027. Le texte modélisé en huit graphes, et des outils pour qualifier un cas, lister ses obligations et comparer des mesures.</p>
+          <span class="une-go">Ouvrir le décryptage&nbsp;→</span>
+        </div>
+        <div class="une-figs" aria-hidden="true">
+          <img src="images/decryptages/graphes/cartographie.svg" alt="" loading="lazy">
+          <img src="images/decryptages/graphes/parcours-qualification.svg" alt="" loading="lazy">
+          <img src="images/decryptages/graphes/mecanique-causale.svg" alt="" loading="lazy">
+          <img src="images/decryptages/graphes/simulateur-sanction.svg" alt="" loading="lazy">
+          <span class="une-count">8 graphes · 8 outils · interrogeables</span>
+        </div>
+      </a>
     </div>
   </section>
 
