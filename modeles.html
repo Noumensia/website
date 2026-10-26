@@ -77,6 +77,10 @@
 .rubriques a:hover{ text-decoration:none; border-color:var(--bordeaux-vif); color:var(--blanc-casse); }
 .rubriques [aria-current]{ border-color:var(--bordeaux-vif); color:var(--blanc-casse); background:rgba(122,31,45,.06); }
 @media (max-width:700px){ .rubriques{ grid-template-columns:1fr; } }
+/* Lien des cartes modèles : soulignement qui se dessine au survol de la carte (26/10/2026) */
+.model-body .model-link, .model-body .model-link:hover{ text-decoration:none; }
+.model-link__t{ background-image:linear-gradient(currentColor,currentColor); background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat; padding-bottom:1px; transition:background-size .35s cubic-bezier(.22,1,.36,1); }
+.model-card:hover .model-link__t, .model-link:focus-visible .model-link__t{ background-size:100% 1.5px; }
 </style>
 </head>
 <body>
@@ -142,7 +146,7 @@
               collaborateur à partir, même quand chaque indicateur pris isolément
               semble bon.
             </p>
-            <a class="model-link" href="/modeles/turnover">Explorer le modèle <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="model-link" href="/modeles/turnover"><span class="model-link__t">Explorer le modèle</span> <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
         </article>
 
@@ -159,7 +163,7 @@
               mènent à l'épuisement, et hiérarchiser les leviers réellement
               accessibles.
             </p>
-            <a class="model-link" href="/modeles/burnout">Explorer le modèle <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="model-link" href="/modeles/burnout"><span class="model-link__t">Explorer le modèle</span> <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
         </article>
 

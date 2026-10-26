@@ -1604,7 +1604,7 @@ html[data-theme="light"] footer{
   --ardoise-3:#D3BE9E; --ardoise-4:#DDC8A9; --bordeaux-vif:#8f2233;
   border-top-color:rgba(122,31,45,.30);
   background:
-    radial-gradient(50rem 22rem at 88% 0%, rgba(122,31,45,.07), transparent 62%),
+    radial-gradient(50rem 22rem at 88% 0%, rgba(122,31,45,.15), transparent 62%),
     linear-gradient(180deg, #E6D4B7 0%, #DFCBAB 100%);
 }
 

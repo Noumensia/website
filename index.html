@@ -155,6 +155,37 @@ html[data-theme="light"] .une-card:hover{ box-shadow:var(--shadow-lg); }
   --lk-fill:0%; pointer-events:none; transition:--lk-fill .7s cubic-bezier(.4,0,.2,1);
 }
 .une-card:hover::before, .une-card:focus-visible::before{ --lk-fill:100%; }
+/* « Ce que vous obtenez » : trois apports en colonnes plutôt qu'un bloc de texte (26/10/2026) */
+.gains{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(1.25rem,3vw,2.25rem); margin-top:2rem; }
+.gain{ border-top:1px solid var(--ardoise-3); padding-top:1.1rem; }
+.gain h3{ font-family:var(--font-display); font-size:1.15rem; font-weight:600; line-height:1.3; margin:0 0 .55rem; color:var(--blanc-casse); }
+.gain p{ font-size:.95rem; line-height:1.65; color:var(--gris-doux); margin:0; }
+@media (max-width:860px){ .gains{ grid-template-columns:1fr; } }
+/* « À explorer » : les trois rubriques, une carte chacune, même survol que les autres cartes */
+.explore3{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.75rem; }
+@media (max-width:860px){ .explore3{ grid-template-columns:1fr; } }
+.ex-card{ position:relative; display:flex; flex-direction:column; gap:.5rem; padding:1.4rem 1.4rem 1.25rem; border-radius:12px;
+  border:1px solid #46566A; background:linear-gradient(180deg,#333F4D 0%,#2D3845 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 8px 26px rgba(0,0,0,.30); transition:transform var(--t-base), box-shadow var(--t-base); }
+html[data-theme="light"] .ex-card{ background:var(--papier); border-color:#DCCBAA; box-shadow:var(--shadow-md); }
+.ex-card:hover{ transform:translateY(-3px); border-color:transparent; }
+.ex-card::before{ content:""; position:absolute; inset:0; border-radius:inherit; padding:1.5px; z-index:1; pointer-events:none;
+  background:conic-gradient(from -90deg, var(--bordeaux-vif) var(--lk-fill), transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude; --lk-fill:0%; transition:--lk-fill .6s cubic-bezier(.4,0,.2,1); }
+.ex-card:hover::before, .ex-card:focus-within::before{ --lk-fill:100%; }
+.ex-card__k{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--bordeaux-vif); }
+.ex-card h3{ font-family:var(--font-display); font-size:1.25rem; font-weight:600; line-height:1.25; margin:0; }
+.ex-card__main{ color:var(--blanc-casse); text-decoration:none; }
+.ex-card__main::after{ content:""; position:absolute; inset:0; z-index:2; }
+.ex-card__main:hover{ text-decoration:none; }
+.ex-card p{ margin:0; font-size:.95rem; line-height:1.6; color:var(--gris-doux); }
+.ex-card__links{ display:flex; flex-wrap:wrap; gap:.35rem 1.1rem; margin-top:auto !important; padding-top:.4rem; font-size:.88rem; font-weight:600; }
+.ex-card__links a{ position:relative; z-index:3; color:var(--bordeaux-vif); text-decoration:none;
+  background-image:linear-gradient(currentColor,currentColor); background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat; padding-bottom:1px;
+  transition:background-size .35s cubic-bezier(.22,1,.36,1); }
+.ex-card__links a:hover{ text-decoration:none; background-size:100% 1.5px; }
+
 </style>
 </head>
 <body>
@@ -286,35 +317,22 @@ html[data-theme="light"] .une-card:hover{ box-shadow:var(--shadow-lg); }
           facteurs visibles et discutables, et permet de tester des hypothèses
           directement sur vos données.
         </p>
-        <h3>Un modèle sur-mesure</h3>
-        <p>
-          Le modèle est alimenté par trois sources&nbsp;: vos données RH
-          existantes (extraits SIRH, résultats d'enquêtes, indicateurs de
-          suivi), votre connaissance du terrain, et la littérature scientifique
-          qui structure les hypothèses. Leur poids respectif dépend de ce dont
-          vous disposez&nbsp;: plus vos données sont riches, plus le modèle s'y
-          ancre&nbsp;; à défaut, l'expertise et la littérature prennent le
-          relais — et la part de chacune est explicitée, jamais masquée.
-          Ce qui en sort est propre à votre organisation et votre situation,
-          pas calqué sur une grille standard.
-        </p>
-        <h3>Des scénarios que vous pouvez comparer avant de décider</h3>
-        <p>
-          Plutôt que d'arbitrer entre plusieurs plans d'action sans base
-          commune, vous les testez directement sur le modèle. Il indique ce
-          qui devient plus ou moins probable selon le levier activé — une base
-          argumentée pour décider, pas une prédiction certaine. La page
-          <a href="/methode">Méthode</a> précise les hypothèses sous
-          lesquelles ces comparaisons sont valides.
-        </p>
-        <h3>Un livrable conçu pour circuler</h3>
-        <p>
-          Vous recevez le modèle interactif, un simulateur de scénarios
-          accessible via navigateur, les résultats commentés, et une
-          restitution conçue pour être partagée en comité de direction ou
-          avec le CSE.
-        </p>
       </div>
+      <div class="gains">
+        <div class="gain">
+          <h3>Un modèle sur-mesure</h3>
+          <p>Le modèle est alimenté par trois sources&nbsp;: vos données RH existantes (extraits SIRH, résultats d'enquêtes, indicateurs de suivi), votre connaissance du terrain, et la littérature scientifique qui structure les hypothèses. Leur poids respectif dépend de ce dont vous disposez&nbsp;: plus vos données sont riches, plus le modèle s'y ancre&nbsp;; à défaut, l'expertise et la littérature prennent le relais — et la part de chacune est explicitée, jamais masquée. Ce qui en sort est propre à votre organisation et votre situation, pas calqué sur une grille standard.</p>
+        </div>
+        <div class="gain">
+          <h3>Des scénarios que vous pouvez comparer avant de décider</h3>
+          <p>Plutôt que d'arbitrer entre plusieurs plans d'action sans base commune, vous les testez directement sur le modèle. Il indique ce qui devient plus ou moins probable selon le levier activé — une base argumentée pour décider, pas une prédiction certaine. La page <a href="/methode">Méthode</a> précise les hypothèses sous lesquelles ces comparaisons sont valides.</p>
+        </div>
+        <div class="gain">
+          <h3>Un livrable conçu pour circuler</h3>
+          <p>Vous recevez le modèle interactif, un simulateur de scénarios accessible via navigateur, les résultats commentés, et une restitution conçue pour être partagée en comité de direction ou avec le CSE.</p>
+        </div>
+      </div>
+
 
       <figure class="reveal" data-delay="1" style="margin-top: 2rem;">
         <a class="fig-link figure-frame" href="/modeles/burnout" aria-label="Explorer le modèle burn-out">
@@ -337,8 +355,36 @@ html[data-theme="light"] .une-card:hover{ box-shadow:var(--shadow-lg); }
     </div>
   </section>
 
+  <!-- ============ À EXPLORER (26/10/2026) ============ -->
+  <section class="section section--alt" id="a-explorer">
+    <div class="wrap reveal">
+      <p class="eyebrow">À explorer</p>
+      <h2>Tout est en accès libre, graphes et simulateurs compris</h2>
+      <div class="explore3">
+        <article class="ex-card">
+          <span class="ex-card__k">Modèles</span>
+          <h3><a class="ex-card__main" href="/modeles/" data-nm-click="home-explorer-modeles">Deux modèles RH à manipuler</a></h3>
+          <p>Le turnover volontaire et les risques psychosociaux, chacun avec son réseau causal, ses sources et un simulateur pour tester des scénarios.</p>
+          <p class="ex-card__links"><a href="/modeles/turnover">Turnover&nbsp;→</a><a href="/modeles/burnout">Burn-out&nbsp;→</a></p>
+        </article>
+        <article class="ex-card">
+          <span class="ex-card__k">Décryptages</span>
+          <h3><a class="ex-card__main" href="/decryptages" data-nm-click="home-explorer-decryptages">Un texte dense, rendu explorable</a></h3>
+          <p>L'AI Act modélisé en huit graphes, du knowledge graph au réseau bayésien, et des outils pour un DRH qui n'est pas juriste.</p>
+          <p class="ex-card__links"><a href="/decryptages/ai-act/">Le décryptage&nbsp;→</a><a href="/decryptages/ai-act/#capot">Les huit graphes&nbsp;→</a></p>
+        </article>
+        <article class="ex-card">
+          <span class="ex-card__k">Articles</span>
+          <h3><a class="ex-card__main" href="/articles" data-nm-click="home-explorer-articles">Ce que dit vraiment la recherche</a></h3>
+          <p>Les méta-analyses lues de près, avec ce qu'elles permettent de conclure et ce qu'elles ne permettent pas, reliées au modèle du turnover.</p>
+          <p class="ex-card__links"><a href="/articles/causes-turnover-recherche">Causes du turnover&nbsp;→</a><a href="/articles/cout-turnover-ratios">Coût du turnover&nbsp;→</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ EN PRATIQUE ============ -->
-  <section class="section section--alt" id="en-pratique">
+  <section class="section" id="en-pratique">
     <div class="wrap reveal">
       <p class="eyebrow">En pratique</p>
       <h2>Un travail collaboratif, à partir de ce que vous avez déjà</h2>
