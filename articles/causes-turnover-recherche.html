@@ -68,6 +68,13 @@
   ]
 }
 </script>
+<style>
+/* Ligne d'auteur sous le titre des contenus (26/10/2026) */
+.byline{ display:flex; align-items:center; gap:.6rem; margin:.2rem 0 1.1rem; font-size:.88rem; color:var(--gris-doux); }
+.byline img{ width:28px; height:28px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+.byline a{ color:var(--blanc-casse); font-weight:600; text-decoration:none; background-image:linear-gradient(currentColor,currentColor); background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat; transition:background-size .35s cubic-bezier(.22,1,.36,1); }
+.byline a:hover{ text-decoration:none; background-size:100% 1.5px; }
+</style>
 </head>
 <body>
 
@@ -102,6 +109,7 @@
       <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span><a href="/articles">Articles</a><span>&rsaquo;</span>Causes du turnover</nav>
       <p class="eyebrow">Turnover · article pilier</p>
       <h1>Pourquoi vos salariés partent&nbsp;: ce que 60&nbsp;ans de recherche disent vraiment sur les causes du turnover</h1>
+      <p class="byline"><img src="/images/arthur-jouffe.jpg" alt="" width="28" height="28" loading="lazy"><span>Écrit par <a href="/a-propos">Arthur Jouffe</a> · publié le <time datetime="2026-08-10">10 août 2026</time></span></p>
       <p class="standfirst lede">
         Les listes de causes du turnover circulent partout sans jamais citer de source.
         La recherche, elle, a mesuré 57&nbsp;prédicteurs sur des milliers d'études. Ce

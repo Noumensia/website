@@ -53,6 +53,13 @@
   ]
 }
 </script>
+<style>
+/* Ligne d'auteur sous le titre des contenus (26/10/2026) */
+.byline{ display:flex; align-items:center; gap:.6rem; margin:.2rem 0 1.1rem; font-size:.88rem; color:var(--gris-doux); }
+.byline img{ width:28px; height:28px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+.byline a{ color:var(--blanc-casse); font-weight:600; text-decoration:none; background-image:linear-gradient(currentColor,currentColor); background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat; transition:background-size .35s cubic-bezier(.22,1,.36,1); }
+.byline a:hover{ text-decoration:none; background-size:100% 1.5px; }
+</style>
 </head>
 <body>
 
@@ -88,6 +95,7 @@
       <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span><a href="/modeles/">Modèles</a><span>&rsaquo;</span>Burn-out &amp; RPS</nav>
       <p class="eyebrow">Modèle · Réseau bayésien</p>
       <h1>Burn-out&nbsp;: connaître les causes ne suffit pas à bien décider</h1>
+      <p class="byline"><img src="/images/arthur-jouffe.jpg" alt="" width="28" height="28" loading="lazy"><span>Construit par <a href="/a-propos">Arthur Jouffe</a> · publié le <time datetime="2026-07-12">12 juillet 2026</time></span></p>
       <p class="standfirst">
         Les facteurs du burn-out sont documentés depuis plus de quarante ans.
         Et pourtant, on continue de prendre des décisions inefficaces — non par

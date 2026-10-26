@@ -67,6 +67,13 @@
   ]
 }
 </script>
+<style>
+/* Ligne d'auteur sous le titre des contenus (26/10/2026) */
+.byline{ display:flex; align-items:center; gap:.6rem; margin:.2rem 0 1.1rem; font-size:.88rem; color:var(--gris-doux); }
+.byline img{ width:28px; height:28px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+.byline a{ color:var(--blanc-casse); font-weight:600; text-decoration:none; background-image:linear-gradient(currentColor,currentColor); background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat; transition:background-size .35s cubic-bezier(.22,1,.36,1); }
+.byline a:hover{ text-decoration:none; background-size:100% 1.5px; }
+</style>
 </head>
 <body>
 
@@ -101,6 +108,7 @@
       <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span><a href="/articles">Articles</a><span>&rsaquo;</span>Coût du turnover</nav>
       <p class="eyebrow">Turnover · chiffrage</p>
       <h1>Coût du turnover&nbsp;: d'où viennent vraiment les ratios 21&nbsp;%, 150&nbsp;% et 213&nbsp;% du salaire</h1>
+      <p class="byline"><img src="/images/arthur-jouffe.jpg" alt="" width="28" height="28" loading="lazy"><span>Écrit par <a href="/a-propos">Arthur Jouffe</a> · publié le <time datetime="2026-08-10">10 août 2026</time></span></p>
       <p class="standfirst lede">
         «&nbsp;Remplacer un salarié coûte entre 50&nbsp;% et 200&nbsp;% de son salaire
         annuel.&nbsp;» Cette phrase est partout, presque jamais sourcée. J'ai remonté

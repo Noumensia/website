@@ -217,6 +217,13 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
 .aa-gx__q{ font-family:var(--font-display); font-style:italic; font-size:1rem; line-height:1.35; color:var(--blanc-casse); margin:-.1rem 0 .1rem; }
 .aa-gx__tool{ display:inline-block; align-self:flex-start; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--creme); background:var(--bordeaux); padding:.15rem .5rem; border-radius:4px; }
 </style>
+<style>
+/* Ligne d'auteur sous le titre des contenus (26/10/2026) */
+.byline{ display:flex; align-items:center; gap:.6rem; margin:.2rem 0 1.1rem; font-size:.88rem; color:var(--gris-doux); }
+.byline img{ width:28px; height:28px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+.byline a{ color:var(--blanc-casse); font-weight:600; text-decoration:none; background-image:linear-gradient(currentColor,currentColor); background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat; transition:background-size .35s cubic-bezier(.22,1,.36,1); }
+.byline a:hover{ text-decoration:none; background-size:100% 1.5px; }
+</style>
 </head>
 <body>
 
@@ -251,6 +258,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
       <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span>&rsaquo;</span><a href="/decryptages">Décryptages</a><span>&rsaquo;</span>AI Act</nav>
       <p class="eyebrow">Décryptage · AI Act et ressources humaines</p>
       <h1>L'AI&nbsp;Act en RH, sans le brouillard</h1>
+      <p class="byline"><img src="/images/arthur-jouffe.jpg" alt="" width="28" height="28" loading="lazy"><span>Construit par <a href="/a-propos">Arthur Jouffe</a> · mis à jour le <time datetime="2026-10-19">19 octobre 2026</time></span></p>
       <p class="lede">
         Reporté, simplifié, en attente de lignes directrices&nbsp;: depuis l'Omnibus de
         juillet&nbsp;2026, on lit tout et son contraire sur l'AI&nbsp;Act. J'ai repris le texte

@@ -155,6 +155,13 @@ html[data-theme="light"] .une-card:hover{ box-shadow:var(--shadow-lg); }
   --lk-fill:0%; pointer-events:none; transition:--lk-fill .7s cubic-bezier(.4,0,.2,1);
 }
 .une-card:hover::before, .une-card:focus-visible::before{ --lk-fill:100%; }
+/* Signature avant les boutons de « En pratique » (26/10/2026) */
+.sig{ display:flex; align-items:center; gap:.9rem; max-width:44rem; margin:1.6rem 0 1.4rem; padding-top:1.1rem; border-top:1px solid var(--ardoise-3); }
+.sig img{ width:46px; height:46px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+.sig p{ margin:0; font-size:.95rem; line-height:1.6; color:var(--gris-doux); }
+.sig a{ color:var(--bordeaux-vif); font-weight:600; white-space:nowrap; text-decoration:none; background-image:linear-gradient(currentColor,currentColor); background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat; transition:background-size .35s cubic-bezier(.22,1,.36,1); }
+.sig a:hover{ text-decoration:none; background-size:100% 1.5px; }
+
 /* « Ce que vous obtenez » : trois apports en colonnes plutôt qu'un bloc de texte (26/10/2026) */
 .gains{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(1.25rem,3vw,2.25rem); margin-top:2rem; }
 .gain{ border-top:1px solid var(--ardoise-3); padding-top:1.1rem; }
@@ -409,6 +416,10 @@ html[data-theme="light"] .ex-card{ background:var(--papier); border-color:#DCCBA
           typiquement 4 à 8 semaines selon la disponibilité des données et la
           complexité du sujet.
         </p>
+      </div>
+      <div class="sig">
+        <img src="/images/arthur-jouffe.jpg" alt="Arthur Jouffe" width="46" height="46" loading="lazy">
+        <p>Chaque modèle de ce site, je l'ai construit moi-même, et chaque hypothèse y est écrite pour être discutée. Du cadrage à la livraison, c'est à moi que vous parlez. <a href="/a-propos" data-nm-click="home-signature-a-propos">Arthur Jouffe&nbsp;→</a></p>
       </div>
       <div class="cta-row">
         <a class="btn btn--primary" href="/contact" data-nm-click="home-cta-cadrage">Demander un entretien de cadrage</a>
