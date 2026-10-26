@@ -19,8 +19,8 @@
     'ai-act': {
       libelle: 'le décryptage AI Act',
       href: '/decryptages/ai-act/',
-      avant: "Si un outil précis vous occupe, tri de CV, scoring de candidats ou entretien vidéo analysé par IA, notez simplement son nom en réservant, on partira de ce cas concret plutôt que du texte du règlement.",
-      apres: "Si un outil précis vous occupe, on partira de lui, c'est en général le chemin le plus court pour savoir ce qui s'applique vraiment.",
+      avant: "Notez en réservant la situation qui vous occupe, un outil d'IA dans vos recrutements ou un autre sujet RH, on partira de là.",
+      apres: "On partira de votre situation, et je vous dirai ce qu'un modèle peut vous apporter.",
       liens: [
         { texte: 'Qualifier un outil', href: '/decryptages/ai-act/parcours-qualification' },
         { texte: 'Lister ses obligations', href: '/decryptages/ai-act/registre-obligations' }

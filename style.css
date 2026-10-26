@@ -1648,3 +1648,7 @@ main a.ds-card::before{
   transition:width var(--t-base);
 }
 main a.ds-card:hover::before, main a.ds-card:focus-visible::before{ width:6px; }
+
+/* Dock graphe / simulateur des pages modèles : la pastille reste sombre en thème clair,
+   on y rétablit le texte crème (26/10/2026) */
+html[data-theme="light"] .model-dock{ --blanc-casse:#F1E7D3; --bordeaux-vif:#E8A3AD; border-color:rgba(255,255,255,.14); }

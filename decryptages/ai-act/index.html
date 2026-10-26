@@ -89,7 +89,7 @@
 /* Vue d'ensemble */
 .aa-split{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:2.5rem; align-items:center; }
 @media (max-width:960px){ .aa-split{ grid-template-columns:1fr; } }
-.aa-shot{ display:block; border-radius:12px; overflow:hidden; border:1px solid var(--ardoise-3); box-shadow:var(--shadow-md); background:#E9ECF0; }
+.aa-shot{ display:block; border-radius:12px; overflow:hidden; border:1px solid var(--ardoise-3); box-shadow:var(--shadow-md); background:#26303B; }
 .aa-shot img{ display:block; width:100%; height:auto; }
 .aa-shot:hover{ border-color:var(--bordeaux-vif); }
 
@@ -211,6 +211,9 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
 }
 .aa-step:hover::before, .aa-gx__card:hover::before, .aa-hx__card:hover::before, .aa-step:focus-visible::before, .aa-gx__card:focus-visible::before, .aa-hx__card:focus-visible::before{ --lk-fill:100%; }
 .aa-step:hover, .aa-gx__card:hover, .aa-hx__card:hover{ border-color:transparent; }
+.aa-gx__links a:first-child::after{ content:""; position:absolute; inset:0; border-radius:inherit; z-index:2; }
+.aa-gx__links a:nth-child(2), .aa-gx__fig{ position:relative; z-index:3; }
+.aa-gx__card{ cursor:pointer; }
 .aa-gx__q{ font-family:var(--font-display); font-style:italic; font-size:1rem; line-height:1.35; color:var(--blanc-casse); margin:-.1rem 0 .1rem; }
 .aa-gx__tool{ display:inline-block; align-self:flex-start; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--creme); background:var(--bordeaux); padding:.15rem .5rem; border-radius:4px; }
 </style>
@@ -397,7 +400,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
         </div>
       </div>
       <a class="aa-shot" href="/decryptages/ai-act/cartographie" aria-label="Ouvrir la cartographie de l'AI Act">
-        <img src="/images/decryptages/ai-act-cartographie.png" alt="Extrait du graphe de l'AI Act : concepts colorés par famille, reliés par des relations nommées" loading="lazy" width="1200" height="750">
+        <img src="/images/decryptages/ai-act-cartographie-sombre.jpg" alt="Extrait du graphe de l'AI Act : concepts colorés par famille, reliés par des relations nommées" loading="lazy" width="1600" height="1000">
       </a>
     </div>
     <div class="wrap reveal" id="hellixmap">
@@ -691,7 +694,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
           <div class="form-group">
             <label for="aa-question">Votre situation</label>
             <textarea id="aa-question" name="situation" rows="5" required data-fs-field
-              placeholder="Ex. : nous utilisons un logiciel de tri de CV depuis 2025 et voulons savoir où porter nos efforts d'ici 2027."></textarea>
+              placeholder="Ex. : nous voulons savoir ce que notre outil de présélection change vraiment à nos recrutements, ou comprendre pourquoi le turnover a doublé sur un site."></textarea>
             <span data-fs-error="situation" class="form-field-error"></span>
           </div>
 
