@@ -118,7 +118,7 @@
         Ces deux éléments sont cachés par défaut par la librairie.
       -->
       <!-- Renseigné par JS quand l'URL porte un paramètre ?sujet= (voir bas de page) -->
-      <p class="contact-context" id="contact-context" hidden></p>
+      <p class="contact-context rdv-context" id="contact-context" hidden></p>
 
       <div class="contact-card">
 
@@ -459,10 +459,10 @@
         rdv.href = '/rendez-vous?sujet=' + encodeURIComponent(cle);
       });
       var note = document.getElementById('contact-context');
-      if (note && s && cle !== 'faq' && cle !== 'a-propos') {
-        note.innerHTML = 'Vous arrivez depuis <a href="' + s.href + '">' + s.libelle +
-          '</a>. N’hésitez pas à le mentionner ci-dessous si votre situation s’en rapproche.';
-        note.hidden = false;
+      if (note) {
+        // Pas de « vous arrivez depuis… » : on propose seulement un point de départ adapté
+        var ns = window.nmSujets && window.nmSujets[cle];
+        if (ns && ns.avant) { note.textContent = ns.avant.replace(' en réservant', ''); note.hidden = false; }
       }
     } catch (e) {}
   })();

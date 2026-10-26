@@ -431,8 +431,10 @@ html[data-theme="light"]{
   --bordeaux-vif:#8f2233;
   color-scheme:light;
 }
-html[data-theme="light"] .nav{ background:rgba(239,227,204,.80); border-bottom-color:rgba(160,130,90,.18); }
-html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); border-bottom-color:#D2C09F; box-shadow:0 4px 20px rgba(70,45,20,.10); }
+html[data-theme="light"] .nav{ --blanc-casse:#F1E7D3; --gris-doux:#B8AF9F; --ardoise:#1E2630; --ardoise-2:#2A3440; --ardoise-3:#3A4756; --ardoise-4:#141A22; --bordeaux-vif:#D98A95; color:var(--blanc-casse); background:radial-gradient(40rem 8rem at 88% 0%, rgba(122,31,45,.30), transparent 70%), rgba(30,38,48,.94); border-bottom-color:rgba(122,31,45,.55); }
+html[data-theme="light"] .nav.is-scrolled{ background:radial-gradient(40rem 8rem at 88% 0%, rgba(122,31,45,.30), transparent 70%), rgba(30,38,48,.97); border-bottom-color:rgba(122,31,45,.55); box-shadow:0 6px 24px rgba(30,38,48,.22); }
+html[data-theme="light"] .nav .brand-icon{ content:normal; }
+html[data-theme="light"] .nm-site-footer{ --blanc-casse:#F1E7D3; --gris-doux:#B8AF9F; --ardoise:#1E2630; --ardoise-3:#3A4756; --bordeaux-vif:#D98A95; color:var(--blanc-casse); background:radial-gradient(50rem 22rem at 88% 0%, rgba(122,31,45,.28), transparent 62%), linear-gradient(180deg, #222B36 0%, #1A212A 100%); }
 html[data-theme="light"] .nav-links 
 html:root:not([data-theme="light"]){
   --ground:#0E1218; --surface:#161B22; --surface-2:#1D2430;

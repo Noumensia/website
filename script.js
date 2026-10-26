@@ -217,3 +217,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+// Parcours du visiteur : 404 intelligente, « Pour continuer », « Reprendre » (voir parcours.js)
+(function () {
+  var s = document.createElement('script');
+  s.src = '/parcours.js'; s.defer = true;
+  document.head.appendChild(s);
+})();

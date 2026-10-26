@@ -1183,7 +1183,11 @@ figure{ margin:0; }
   .rdv-embed{ min-height:480px; }
 }
 /* Prise de rendez-vous : mot d'accueil selon la provenance + confirmation après réservation (26/10/2026) */
-.rdv-context{ margin:1.75rem 0 0; max-width:44rem; color:var(--blanc-casse); background:rgba(255,255,255,.07); }
+.contact p.rdv-context{
+  margin:1.4rem 0 0; padding:0 0 0 .9rem; max-width:40rem;
+  background:none; border-radius:0; border-left:2px solid rgba(241,231,211,.35);
+  font-size:.95rem; line-height:1.6; color:rgba(241,231,211,.86);
+}
 .rdv-done{
   display:flex; gap:1rem; align-items:flex-start;
   margin-top:1.75rem; padding:1.4rem 1.6rem; max-width:48rem;
@@ -1521,9 +1525,32 @@ html[data-theme="light"] body::after{
 }
 html[data-theme="light"]::after{ opacity:.045; }
 
-/* Nav : crème translucide, filet sable toujours présent pour détacher l'entête */
-html[data-theme="light"] .nav{ background:rgba(239,227,204,.80); border-bottom-color:rgba(160,130,90,.18); }
-html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); border-bottom-color:var(--ardoise-3); box-shadow:0 4px 20px rgba(70,45,20,.10); }
+/* Entête ardoise (26/10/2026) : la page crème est encadrée par l'ardoise, en haut (nav)
+   et en bas (pied de page). On rétablit localement les tokens du thème sombre, ce qui
+   couvre aussi le menu mobile déroulant, le bouton thème et le bouton « Prendre contact ». */
+html[data-theme="light"] .nav{
+  --blanc-casse:#F1E7D3; --gris-doux:#B8AF9F; --ardoise:#1E2630; --ardoise-2:#2A3440;
+  --ardoise-3:#3A4756; --ardoise-4:#141A22; --bordeaux-vif:#D98A95;
+  color:var(--blanc-casse);
+  background:
+    radial-gradient(40rem 8rem at 88% 0%, rgba(122,31,45,.30), transparent 70%),
+    rgba(30,38,48,.94);
+  border-bottom-color:rgba(122,31,45,.55);
+}
+html[data-theme="light"] .nav.is-scrolled{
+  background:
+    radial-gradient(40rem 8rem at 88% 0%, rgba(122,31,45,.30), transparent 70%),
+    rgba(30,38,48,.97);
+  border-bottom-color:rgba(122,31,45,.55); box-shadow:0 6px 24px rgba(30,38,48,.22);
+}
+html[data-theme="light"] .nav .brand-icon{ content:normal; }  /* badge crème d'origine */
+
+/* Accents : sur-titres en bordeaux, filet bordeaux en tête des sections en retrait */
+html[data-theme="light"] .eyebrow{ color:var(--bordeaux-vif); }
+html[data-theme="light"] .contact .eyebrow{ color:var(--blanc-casse); }
+html[data-theme="light"] .section--alt::before{
+  background:linear-gradient(90deg, transparent, rgba(122,31,45,.35) 20%, rgba(122,31,45,.35) 80%, transparent);
+}
 html[data-theme="light"] .btn--primary{ color:#F1E7D3; }
 html[data-theme="light"] .btn--ghost{ background:rgba(248,240,224,.55); }
 html[data-theme="light"] .hero-graph::before{ background:radial-gradient(60% 72% at 50% 42%, rgba(122,31,45,.16), transparent 70%); }
@@ -1592,3 +1619,4 @@ html[data-theme="light"] footer{
 .steps--q{ margin-bottom:0; }
 .steps--q h3{ font-size:1.12rem; line-height:1.35; }
 .steps--q p{ font-size:.95rem; line-height:1.65; }
+

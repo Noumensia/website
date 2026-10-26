@@ -126,6 +126,35 @@
           traitement à comprendre l'usage de son site (article 6.1.f du RGPD).
         </p>
 
+        <h3>Mémoire de navigation dans votre navigateur</h3>
+        <p>
+          Pour vous proposer en fin de page des contenus que vous n'avez pas encore lus,
+          et un lien pour reprendre votre dernière lecture lors d'une visite suivante,
+          le site garde la liste des modèles, articles et décryptages que vous avez
+          consultés. Cette liste est enregistrée uniquement dans votre navigateur
+          (stockage local), n'est jamais transmise à Noumensia ni à un tiers, et
+          s'efface d'elle-même au bout de 60 jours. Votre choix de thème clair ou
+          sombre est conservé de la même façon.
+        </p>
+        <p>
+          La page depuis laquelle vous arrivez sur la prise de contact ou de rendez-vous
+          est en revanche transmise avec votre demande, pour savoir quel contenu l'a motivée.
+        </p>
+        <p>
+          <button type="button" class="btn btn--ghost" id="nm-forget">Effacer ma mémoire de navigation</button>
+          <span id="nm-forget-ok" role="status" hidden>&nbsp;C'est fait.</span>
+        </p>
+        <script>
+          (function () {
+            var b = document.getElementById('nm-forget'), ok = document.getElementById('nm-forget-ok');
+            if (!b) return;
+            b.addEventListener('click', function () {
+              try { localStorage.removeItem('nm-parcours'); localStorage.removeItem('nm-ev'); sessionStorage.removeItem('nm-s'); } catch (e) {}
+              if (ok) ok.hidden = false;
+            });
+          })();
+        </script>
+
         <h3>Formulaire de contact et e-mail</h3>
         <p>
           Lorsque vous utilisez le formulaire de contact ou que vous écrivez à

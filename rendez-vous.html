@@ -351,9 +351,8 @@
       var html = '<svg class="rdv-done__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' +
         '<div class="rdv-done__body">' +
         '<h2 class="rdv-done__title">C\'est noté, merci&nbsp;!</h2>' +
-        '<p>Votre créneau est réservé' + quand + ', vous allez recevoir l\'invitation avec le lien de visio dans quelques minutes.</p>';
-      if (info && info.apres) html += '<p>' + info.apres + '</p>';
-      else html += '<p>Si vous voulez me donner un peu de contexte avant l\'échange, vous pouvez m\'écrire à <a href="mailto:contact@noumensia.com">contact@noumensia.com</a>, sinon on partira simplement de votre question.</p>';
+        '<p>Votre créneau est réservé' + quand + ', l\'invitation avec le lien de visio arrive dans quelques minutes. ' +
+        ((info && info.apres) ? info.apres : 'Rien à préparer, on partira simplement de votre question.') + '</p>';
       html += '<p class="rdv-done__next">D\'ici là, si vous avez cinq minutes</p><ul class="rdv-done__links">';
       liens.forEach(function (l, i) {
         html += '<li><a href="' + l.href + '" data-done-link="' + i + '">' + l.texte + '&nbsp;→</a></li>';
