@@ -1363,8 +1363,8 @@ textarea[aria-invalid="true"]{
 .cta-final p{ color:var(--gris-doux); max-width:36rem; margin-bottom:2rem; }
 
 /* ============ FOOTER ============ */
-/* Pied de page : bloc de marque fixe, ardoise profond dans les deux thèmes (comme les
-   graphes sombres et le bloc contact bordeaux, il ne change pas avec le thème) */
+/* Pied de page : ardoise profond en thème sombre ; en thème clair, voir la règle
+   html[data-theme="light"] footer plus bas (sable, 26/10/2026) */
 footer{
   padding:2.5rem 0; border-top:1px solid rgba(122,31,45,.45); color:var(--blanc-casse);
   background:
@@ -1596,10 +1596,16 @@ html[data-theme="light"] .contact{ --blanc-casse:#F1E7D3; --gris-doux:#f3dee2; -
 html[data-theme="light"] .contact-form .btn--primary{ color:var(--bordeaux); }
 html[data-theme="light"] .fig-link .fig-hint{ color:#F1E7D3; }
 
-/* Pied de page : en clair, on rétablit localement les tokens sombres (voir PIED DE PAGE) */
+/* Pied de page : il suit le thème (26/10/2026). En clair, un sable un cran plus foncé que la
+   page, texte ardoise, même liseré bordeaux qu'en sombre : la fin de page reste dans la
+   continuité au lieu de basculer brutalement dans le sombre. */
 html[data-theme="light"] footer{
-  --blanc-casse:#F1E7D3; --gris-doux:#B8AF9F; --ardoise:#1E2630; --ardoise-2:#2A3440;
-  --ardoise-3:#3A4756; --ardoise-4:#141A22; --bordeaux-vif:#D98A95;
+  --blanc-casse:#1E2630; --gris-doux:#4A5564; --ardoise:#F0E2CA; --ardoise-2:#E7D6BB;
+  --ardoise-3:#D3BE9E; --ardoise-4:#DDC8A9; --bordeaux-vif:#8f2233;
+  border-top-color:rgba(122,31,45,.30);
+  background:
+    radial-gradient(50rem 22rem at 88% 0%, rgba(122,31,45,.07), transparent 62%),
+    linear-gradient(180deg, #E6D4B7 0%, #DFCBAB 100%);
 }
 
 /* Accueil, « Trois questions concrètes » : questions en colonnes, comme les étapes
@@ -1652,3 +1658,22 @@ main a.ds-card:hover::before, main a.ds-card:focus-visible::before{ width:6px; }
 /* Dock graphe / simulateur des pages modèles : la pastille reste sombre en thème clair,
    on y rétablit le texte crème (26/10/2026) */
 html[data-theme="light"] .model-dock{ --blanc-casse:#F1E7D3; --bordeaux-vif:#E8A3AD; border-color:rgba(255,255,255,.14); }
+
+/* ============ SURVOL UNIFIÉ DES CARTES (26/10/2026) ============
+   Un seul geste pour toutes les cartes cliquables : le contour qui se trace, déjà la
+   signature du site (boutons fantômes, figures, icône LinkedIn, cartes d'articles).
+   La famille de contenu se dit par l'étiquette (MODÈLE, ARTICLE, DÉCRYPTAGE) et, pour les
+   modèles, par le visuel du graphe en tête. Remplace les signatures par famille du bloc
+   « Système de cartes » ci-dessus (barre haute des modèles, filet gauche des décryptages). */
+.model-card::before, main a.ds-card::before{
+  content:""; position:absolute; top:0; right:0; bottom:0; left:0; width:auto; height:auto;
+  border-radius:inherit; padding:1.5px; z-index:4; transform:none;
+  background:conic-gradient(from -90deg, var(--trace, var(--bordeaux-vif)) var(--lk-fill), transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  --lk-fill:0%; pointer-events:none; transition:--lk-fill .6s cubic-bezier(.4,0,.2,1);
+}
+.model-card{ --trace:var(--bordeaux); }
+.model-card:hover::before, .model-card:focus-within::before,
+main a.ds-card:hover::before, main a.ds-card:focus-visible::before{ --lk-fill:100%; transform:none; width:auto; }

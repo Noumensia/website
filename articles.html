@@ -49,6 +49,16 @@
   ]
 }
 </script>
+<style>
+/* Repères entre les trois rubriques de contenu (26/10/2026) */
+.rubriques{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.75rem; max-width:52rem; margin:1.75rem 0 2.25rem; }
+.rubriques > *{ display:flex; flex-direction:column; gap:.2rem; padding:.7rem .9rem; border-radius:10px; border:1px solid var(--ardoise-3); font-size:.88rem; line-height:1.45; color:var(--gris-doux); text-decoration:none; }
+.rubriques b{ font-family:var(--font-mono); font-size:.72rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--bordeaux-vif); }
+.rubriques a{ transition:border-color var(--t-fast), color var(--t-fast); }
+.rubriques a:hover{ text-decoration:none; border-color:var(--bordeaux-vif); color:var(--blanc-casse); }
+.rubriques [aria-current]{ border-color:var(--bordeaux-vif); color:var(--blanc-casse); background:rgba(122,31,45,.06); }
+@media (max-width:700px){ .rubriques{ grid-template-columns:1fr; } }
+</style>
 </head>
 <body>
 
@@ -94,6 +104,11 @@
         Chaque article est relié à un <a href="/modeles/">modèle explorable</a>&nbsp;:
         la lecture donne le raisonnement, le modèle permet de le manipuler.
       </p>
+      <nav class="rubriques" aria-label="Les trois rubriques de contenu">
+        <a href="/modeles/" data-nm-click="rubriques-articles-vers-modeles"><b>Modèles</b>Un phénomène RH, son réseau causal et son simulateur</a>
+        <a href="/decryptages" data-nm-click="rubriques-articles-vers-decryptages"><b>Décryptages</b>Un sujet dense, modélisé en plusieurs graphes et outils</a>
+        <span aria-current="page"><b>Articles</b>Ce que dit la recherche, relié aux modèles</span>
+      </nav>
 
       <!-- ============ GRILLE DES ARTICLES ============ -->
       <div class="article-grid">

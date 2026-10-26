@@ -125,7 +125,7 @@
 /* À la une (accueil) : CSS inline pour éviter le cache de style.css */
 .une{ padding:0 0 clamp(2.5rem,6vw,4rem); }
 .une-card{ display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:clamp(1.25rem,3vw,2.5rem); align-items:center;
-  padding:clamp(1.25rem,3vw,2rem); border:1px solid var(--ardoise-3); border-left:3px solid var(--bordeaux-vif); border-radius:14px;
+  padding:clamp(1.25rem,3vw,2rem); border:1px solid var(--ardoise-3); border-radius:14px;
   background:var(--ardoise-2); color:inherit; text-decoration:none;
   transition:transform var(--t-base), box-shadow var(--t-base); }
 .une-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); text-decoration:none; }
@@ -141,7 +141,7 @@
 .une-card:hover .une-figs img{ transform:scale(1.03); }
 .une-count{ grid-column:1/-1; font-family:var(--font-mono); font-size:.76rem; letter-spacing:.04em; color:var(--gris-doux); text-align:right; }
 @media (max-width:760px){ .une-card{ grid-template-columns:1fr; } }
-html[data-theme="light"] .une-card{ background:radial-gradient(70% 140% at 100% 0%, rgba(122,31,45,.06), transparent 60%), var(--papier); border-color:#DCCBAA; border-left-color:var(--bordeaux-vif); box-shadow:var(--shadow-md); }
+html[data-theme="light"] .une-card{ background:radial-gradient(70% 140% at 100% 0%, rgba(122,31,45,.06), transparent 60%), var(--papier); border-color:#DCCBAA; box-shadow:var(--shadow-md); }
 html[data-theme="light"] .une-card:hover{ box-shadow:var(--shadow-lg); }
 @property --lk-fill{ syntax:"<percentage>"; inherits:false; initial-value:0%; }
 /* Liseré qui se trace autour de la carte au survol, même geste que les cartes d'articles */

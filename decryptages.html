@@ -134,19 +134,6 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
 .aa-hx__t{ font-family:var(--font-display); font-size:1.35rem; font-weight:600; }
 .aa-hx__d{ font-size:.93rem; color:var(--gris-doux); line-height:1.55; }
 html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
-@property --lk-fill{ syntax:"<percentage>"; inherits:false; initial-value:0%; }
-/* Liseré qui se trace autour des cartes au survol, même geste que les cartes d'articles */
-.ds-card{ position:relative; }
-.ds-card::before{
-  content:""; position:absolute; inset:0; border-radius:inherit; padding:1.5px; z-index:1;
-  background:conic-gradient(from -90deg, var(--bordeaux-vif) var(--lk-fill), transparent 0);
-  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor; mask-composite:exclude;
-  --lk-fill:0%; pointer-events:none; transition:--lk-fill .6s cubic-bezier(.4,0,.2,1);
-}
-.ds-card:hover::before, .ds-card:focus-visible::before{ --lk-fill:100%; }
-.ds-card:hover{ border-color:transparent; }
 </style>
 <script type="application/ld+json">
 {
@@ -175,6 +162,16 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
   ]
 }
 </script>
+<style>
+/* Repères entre les trois rubriques de contenu (26/10/2026) */
+.rubriques{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.75rem; max-width:52rem; margin:1.75rem 0 2.25rem; }
+.rubriques > *{ display:flex; flex-direction:column; gap:.2rem; padding:.7rem .9rem; border-radius:10px; border:1px solid var(--ardoise-3); font-size:.88rem; line-height:1.45; color:var(--gris-doux); text-decoration:none; }
+.rubriques b{ font-family:var(--font-mono); font-size:.72rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--bordeaux-vif); }
+.rubriques a{ transition:border-color var(--t-fast), color var(--t-fast); }
+.rubriques a:hover{ text-decoration:none; border-color:var(--bordeaux-vif); color:var(--blanc-casse); }
+.rubriques [aria-current]{ border-color:var(--bordeaux-vif); color:var(--blanc-casse); background:rgba(122,31,45,.06); }
+@media (max-width:700px){ .rubriques{ grid-template-columns:1fr; } }
+</style>
 </head>
 <body>
 
@@ -214,6 +211,11 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
         les mêmes outils que mes modèles RH, knowledge graph, réseau causal, réseau bayésien,
         puis livré sous une forme qu'on peut interroger sans être modélisateur.
       </p>
+      <nav class="rubriques" aria-label="Les trois rubriques de contenu">
+        <a href="/modeles/" data-nm-click="rubriques-decryptages-vers-modeles"><b>Modèles</b>Un phénomène RH, son réseau causal et son simulateur</a>
+        <span aria-current="page"><b>Décryptages</b>Un sujet dense, modélisé en plusieurs graphes et outils</span>
+        <a href="/articles" data-nm-click="rubriques-decryptages-vers-articles"><b>Articles</b>Ce que dit la recherche, relié aux modèles</a>
+      </nav>
     </div>
   </section>
 
@@ -231,8 +233,8 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
         </div>
         <div class="ds-card__img"><img src="/images/decryptages/ai-act-cartographie-sombre.jpg" alt="" loading="lazy" width="1600" height="1000"></div>
       </a>
-      <p class="aa-lab-note">D'autres décryptages suivront, sur des sujets où le flou coûte cher
-      à ceux qui doivent décider.</p>
+      <p class="aa-lab-note">Un texte ou un sujet dense pèse sur vos décisions&nbsp;? La même démarche
+      s'y applique, <a href="/contact?sujet=decryptages">parlez-m'en</a>.</p>
     </div>
   </section>
 
