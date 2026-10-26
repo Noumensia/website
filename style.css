@@ -1182,6 +1182,40 @@ figure{ margin:0; }
 @media (max-width:640px){
   .rdv-embed{ min-height:480px; }
 }
+/* Prise de rendez-vous : mot d'accueil selon la provenance + confirmation après réservation (26/10/2026) */
+.rdv-context{ margin:1.75rem 0 0; max-width:44rem; color:var(--blanc-casse); background:rgba(255,255,255,.07); }
+.rdv-done{
+  display:flex; gap:1rem; align-items:flex-start;
+  margin-top:1.75rem; padding:1.4rem 1.6rem; max-width:48rem;
+  border-radius:12px; border:1px solid rgba(255,255,255,.18); border-left:3px solid var(--bordeaux-vif);
+  background:linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+  box-shadow:0 12px 34px rgba(0,0,0,.22);
+  animation:rdvDoneIn .6s var(--ease-out) both;
+}
+.rdv-done[hidden]{ display:none; }
+.rdv-done:focus{ outline:none; }
+.rdv-done__icon{
+  flex:0 0 auto; width:34px; height:34px; padding:7px; border-radius:50%;
+  background:var(--blanc-casse); color:var(--bordeaux);
+}
+.rdv-done__title{ font-family:var(--font-display); font-weight:500; font-size:1.45rem; line-height:1.2; margin:.2rem 0 .6rem; }
+.contact .rdv-done p{ margin:0 0 .75rem; max-width:none; font-size:.98rem; line-height:1.65; }
+.rdv-done p a{ color:var(--blanc-casse); text-decoration:underline; text-underline-offset:3px; }
+.contact .rdv-done .rdv-done__next{
+  margin:1.1rem 0 .55rem; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--gris-doux);
+}
+.rdv-done__links{ list-style:none; display:flex; flex-wrap:wrap; gap:.6rem; margin:0; padding:0; }
+.rdv-done__links a{
+  display:inline-block; padding:.5rem .95rem; border-radius:999px;
+  border:1px solid rgba(255,255,255,.28); color:var(--blanc-casse);
+  font-size:.9rem; font-weight:500;
+  transition:background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+}
+.rdv-done__links a:hover{ background:var(--blanc-casse); color:var(--bordeaux); border-color:transparent; text-decoration:none; }
+@keyframes rdvDoneIn{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+@media (max-width:640px){ .rdv-done{ flex-direction:column; padding:1.2rem; } }
+
 
 
 /* ============ FORMULAIRE (page contact) ============ */
@@ -1454,55 +1488,104 @@ footer nav a:hover, .footer-bottom a:hover, .model-pager a:hover, .breadcrumb a:
 .theme-toggle svg{ width:18px; height:18px; }
 .theme-toggle-li{ display:flex; align-items:center; }
 
-/* ============ THÈME CLAIR (par défaut, sauf ordinateur réglé en sombre) ============ */
+/* ============ THÈME CLAIR (par défaut, sauf ordinateur réglé en sombre) ============
+   Refonte du 26/10/2026 : le thème clair reprend la même logique de matière que le sombre
+   (voiles bordeaux, trame, grain) mais avec des intensités recalibrées, car un même voile
+   se voit beaucoup moins sur fond clair que sur fond sombre.
+   Règle d'élévation : ce qui est posé dessus (cartes, encadrés) = papier plus clair + ombre
+   chaude ; ce qui est en retrait (sections alternées) = sable plus profond + voile bordeaux.
+   Le pied de page passe en ardoise : les deux couleurs de marque se répondent sur la page. */
 html[data-theme="light"]{
-  --ardoise:#F1E7D3;        /* fond page : crème chaud, plus de blanc pur */
-  --ardoise-2:#E7DAC1;      /* surfaces alternées : cran plus foncé */
-  --ardoise-3:#D6C8AC;      /* bordures : crème sableux */
-  --ardoise-4:#E0D2B9;
+  --ardoise:#EFE3CC;        /* fond page : crème chaud */
+  --ardoise-2:#E5D6BA;      /* surfaces en retrait : sable */
+  --ardoise-3:#D2C09F;      /* bordures : sable foncé, lisibles sans être dures */
+  --ardoise-4:#DCCAAA;
   --blanc-casse:#1E2630;    /* texte : ardoise (la couleur de fond du thème sombre) */
-  --gris-doux:#4D5968;      /* texte secondaire : ardoise grisé (contraste 5,8:1 sur crème) */
+  --gris-doux:#4A5564;      /* texte secondaire : ardoise grisé */
   --bordeaux-vif:#8f2233;
+  --papier:#F8F0E0;         /* cartes et encadrés posés sur la page */
+  --shadow-sm:0 1px 2px rgba(70,45,20,.07), 0 4px 14px rgba(70,45,20,.07);
+  --shadow-md:0 2px 4px rgba(70,45,20,.07), 0 14px 34px rgba(70,45,20,.13);
+  --shadow-lg:0 16px 44px rgba(70,45,20,.18);
+  --ring:0 0 0 3px rgba(143,34,51,.25);
   color-scheme:light;
 }
 html[data-theme="light"] body::before{
   background:
-    radial-gradient(52rem 34rem at 86% -6%, rgba(122,31,45,.08), transparent 60%),
-    radial-gradient(46rem 32rem at -6% 4%, rgba(140,96,40,.06), transparent 62%);
+    radial-gradient(56rem 38rem at 86% -8%, rgba(122,31,45,.20), transparent 62%),
+    radial-gradient(48rem 34rem at -6% 4%, rgba(150,100,45,.14), transparent 62%),
+    radial-gradient(60rem 46rem at 50% 118%, rgba(122,31,45,.10), transparent 60%);
 }
 html[data-theme="light"] body::after{
-  background-image:radial-gradient(rgba(90,70,40,.07) 1px, transparent 1.4px);
+  background-image:radial-gradient(rgba(90,60,35,.12) 1px, transparent 1.4px);
 }
-html[data-theme="light"] .nav{ background:rgba(241,231,211,.82); }
-html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); box-shadow:0 4px 20px rgba(60,45,25,.09); }
+html[data-theme="light"]::after{ opacity:.045; }
+
+/* Nav : crème translucide, filet sable toujours présent pour détacher l'entête */
+html[data-theme="light"] .nav{ background:rgba(239,227,204,.80); border-bottom-color:rgba(160,130,90,.18); }
+html[data-theme="light"] .nav.is-scrolled{ background:rgba(241,231,211,.95); border-bottom-color:var(--ardoise-3); box-shadow:0 4px 20px rgba(70,45,20,.10); }
 html[data-theme="light"] .btn--primary{ color:#F1E7D3; }
-html[data-theme="light"] .section--alt{
-  background:
-    radial-gradient(80% 120% at 92% 0%, rgba(122,31,45,.055), transparent 60%),
-    linear-gradient(180deg, #E9DCC4 0%, #DFD0B4 100%);
-}
+html[data-theme="light"] .btn--ghost{ background:rgba(248,240,224,.55); }
+html[data-theme="light"] .hero-graph::before{ background:radial-gradient(60% 72% at 50% 42%, rgba(122,31,45,.16), transparent 70%); }
+
+/* Sections en retrait : sable + voiles bordeaux et doré */
+html[data-theme="light"] .section--alt,
 html[data-theme="light"] .process{
-  background:linear-gradient(180deg, #E9DCC4 0%, #DFD0B4 100%);
+  background:
+    radial-gradient(70% 110% at 94% 0%, rgba(122,31,45,.10), transparent 60%),
+    radial-gradient(60% 90% at 0% 100%, rgba(150,100,45,.08), transparent 60%),
+    linear-gradient(180deg, #E8DAC0 0%, #DFCEAF 100%);
 }
-html[data-theme="light"] .cta-final{ background:#E9DCC4; }
+html[data-theme="light"] .cta-final{
+  background:
+    radial-gradient(60% 120% at 100% 0%, rgba(122,31,45,.10), transparent 60%),
+    linear-gradient(180deg, #E8DAC0 0%, #E0D0B2 100%);
+}
+
+/* Cartes et encadrés : papier clair posé sur la page, ombre chaude */
+html[data-theme="light"] .tool-link,
+html[data-theme="light"] .access-card,
+html[data-theme="light"] .article-card,
+html[data-theme="light"] .model-inline,
+html[data-theme="light"] .model-cta{
+  background:var(--papier); border-color:#DCCBAA; box-shadow:var(--shadow-sm);
+}
+html[data-theme="light"] .tool-link:hover,
+html[data-theme="light"] .access-card:hover,
+html[data-theme="light"] .article-card:hover{
+  background:linear-gradient(180deg, #FBF4E7, var(--papier)); box-shadow:var(--shadow-md);
+}
+html[data-theme="light"] .callout{
+  background:linear-gradient(90deg, rgba(122,31,45,.045), transparent 40%), var(--papier);
+  border-color:#DCCBAA; border-left-color:var(--bordeaux-vif); box-shadow:var(--shadow-sm);
+}
 /* cartes modèles : îlots crème (pas blanc), texte foncé dans les deux thèmes */
 html[data-theme="light"] .model-card{ --blanc-casse:#FAF3E4; --ardoise:#1E2630; box-shadow:var(--shadow-md); }
 html[data-theme="light"] .model-shot{ background:#ded0b6; }
 /* panneaux de graphes/captures : restent sombres (inset premium) */
-html[data-theme="light"] .figure-frame{ background:#233041; border-color:#2c3948; }
-/* encadrés -> papier crème sur fond crème plus clair */
-html[data-theme="light"] .tool-link{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
-html[data-theme="light"] .tool-link:hover{ background:#F5EBD6; }
+html[data-theme="light"] .figure-frame{ background:#233041; border-color:#2c3948; box-shadow:var(--shadow-md); }
 /* garder les petits symboles clairs sur la pastille bordeaux, même en thème clair */
 html[data-theme="light"] .tool-link__icon{ color:#F1E7D3; }
-html[data-theme="light"] .callout{ background:#F3EAD4; }
-html[data-theme="light"] .explore-cta{ background:linear-gradient(135deg,#EBDFC7,#E1D3B8); }
-html[data-theme="light"] .figure-frame--pad{ background:#EDE3CD; }
+html[data-theme="light"] .explore-cta{
+  background:radial-gradient(80% 140% at 100% 0%, rgba(122,31,45,.09), transparent 60%), linear-gradient(135deg,#EADCC2,#E0CFB0);
+}
+html[data-theme="light"] .figure-frame--pad{ background:var(--papier); }
+html[data-theme="light"] .faq-item summary:hover{ color:var(--bordeaux-vif); }
 html[data-theme="light"] .contact-card{ background:rgba(255,255,255,.06); }
 /* le bloc contact reste bordeaux : on rétablit localement les tokens clairs sur fond sombre */
 html[data-theme="light"] .contact{ --blanc-casse:#F1E7D3; --gris-doux:#f3dee2; --ardoise-3:rgba(255,255,255,.22); --bordeaux-vif:#E8A3AD; }
 html[data-theme="light"] .contact-form .btn--primary{ color:var(--bordeaux); }
 html[data-theme="light"] .fig-link .fig-hint{ color:#F1E7D3; }
+
+/* Pied de page ardoise : on rétablit localement les tokens du thème sombre */
+html[data-theme="light"] footer{
+  --blanc-casse:#F1E7D3; --gris-doux:#B8AF9F; --ardoise:#1E2630; --ardoise-2:#2A3440;
+  --ardoise-3:#3A4756; --ardoise-4:#141A22; --bordeaux-vif:#D98A95;
+  color:var(--blanc-casse); border-top-color:transparent;
+  background:
+    radial-gradient(50rem 22rem at 88% 0%, rgba(122,31,45,.28), transparent 62%),
+    linear-gradient(180deg, #222B36 0%, #1A212A 100%);
+}
 
 /* Accueil, « Trois questions concrètes » : questions en colonnes, comme les étapes
    de la page Méthode (24/10/2026) */

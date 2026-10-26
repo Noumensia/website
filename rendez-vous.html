@@ -101,6 +101,8 @@
         <li class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>30&nbsp;minutes en visio</li>
         <li class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>NDA &amp; RGPD</li>
       </ul>
+      <!-- Mot d'accueil adapté à la page d'où vient le visiteur (provenance.js) -->
+      <p class="contact-context rdv-context" id="rdv-context" hidden></p>
 
       <div class="rdv-card">
         <!-- Message de chargement (affiché par JS) : masqué dès que l'agenda est prêt, remplacé par une
@@ -116,6 +118,9 @@
           ou écrire à <a href="mailto:contact@noumensia.com">contact@noumensia.com</a>.</p>
         </noscript>
       </div>
+
+      <!-- Message affiché après une réservation réussie, adapté à la provenance -->
+      <div class="rdv-done" id="rdv-done" role="status" aria-live="polite" tabindex="-1" hidden></div>
 
       <div class="contact-alternatives">
         <a
@@ -228,10 +233,13 @@
   - Un message de chargement s'affiche tant que l'agenda n'est pas prêt.
   - Si rien ne s'affiche au bout de 12 s (bloqueur de contenu, réseau lent),
     le visiteur voit un lien direct vers la page Cal.
-  - ?sujet=xxx dans l'URL (ex. /rendez-vous?sujet=ai-act) est transmis à Cal comme
-    métadonnée « provenance » pour savoir quelle page a amené la réservation.
+  - Provenance (provenance.js) : ?sujet=xxx dans l'URL (ex. /rendez-vous?sujet=ai-act), ou à défaut
+    la page du site d'où arrive le visiteur. Elle est transmise à Cal comme métadonnée « provenance »
+    (+ « provenance_source » : lien ou navigation), affiche un mot d'accueil adapté au-dessus de
+    l'agenda, et un message de confirmation adapté sous l'agenda après la réservation.
   - ?date=AAAA-MM-JJ ouvre l'agenda directement sur ce jour (combinable avec ?sujet=).
 -->
+<script src="/provenance.js"></script>
 <script>
   (function (C, A, L) {
     var p = function (a, ar) { a.q.push(ar); };
@@ -266,9 +274,9 @@
     var ready = false, booked = false;
     if (status) status.hidden = false; // visible seulement si JavaScript tourne
 
-    var sujet = null;
-    try { sujet = new URLSearchParams(location.search).get("sujet"); } catch (e) {}
-    if (sujet) sujet = sujet.replace(/[^a-z0-9-]/gi, "").slice(0, 40);
+    // Provenance : ?sujet= dans l'URL, sinon la page du site d'où arrive le visiteur
+    var prov = window.nmProvenance ? window.nmProvenance() : { cle: null, source: null, info: null };
+    var sujet = prov.cle;
 
     // ?date=AAAA-MM-JJ (ex. /rendez-vous?date=2026-10-22) : l'agenda s'ouvre
     // directement sur ce jour, comme le lien Cal équivalent.
@@ -277,7 +285,27 @@
     if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) date = null;
 
     var config = { layout: "month_view", theme: "light" };
-    if (sujet) config["metadata[provenance]"] = sujet;
+    if (sujet) {
+      config["metadata[provenance]"] = sujet;
+      config["metadata[provenance_source]"] = prov.source;  // "lien" ou "navigation"
+    }
+    var JOURS = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+    var MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+    function jourLisible(d) { return JOURS[d.getDay()] + " " + d.getDate() + (d.getDate() === 1 ? "er" : "") + " " + MOIS[d.getMonth()]; }
+
+    // Mot d'accueil au-dessus de l'agenda : provenance, et jour présélectionné s'il y en a un
+    var accueil = [];
+    if (prov.info && prov.info.avant) accueil.push(prov.info.avant);
+    if (date) {
+      var dj = new Date(date + "T12:00:00");
+      var auj = new Date(); auj.setHours(0, 0, 0, 0);
+      if (!isNaN(dj) && dj >= auj) {
+        accueil.push("L'agenda s'ouvre directement sur le " + jourLisible(dj) + ", les autres jours restent accessibles dans le calendrier.");
+      }
+    }
+    var ctx = document.getElementById("rdv-context");
+    if (ctx && accueil.length) { ctx.textContent = accueil.join(" "); ctx.hidden = false; }
+
     if (date) {
       config.date = date;
       CAL_URL += "?date=" + date;
@@ -299,6 +327,51 @@
       if (status) status.hidden = true;
     }
 
+    // Message de confirmation affiché sous l'agenda après une réservation réussie.
+    // L'agenda Cal affiche aussi sa propre confirmation : celle-ci la complète avec un mot
+    // adapté à la provenance et deux pistes de lecture d'ici le rendez-vous.
+    function heureLisible(d) { return d.getHours() + " h " + String(d.getMinutes()).padStart(2, "0"); }
+    function showDone(e) {
+      var box = document.getElementById("rdv-done");
+      if (!box) return;
+      var info = prov.info;
+      // Date du créneau si l'embed la fournit (le format des données Cal peut varier : lecture défensive)
+      var quand = "";
+      try {
+        var data = e && e.detail && e.detail.data;
+        var st = data && (data.startTime || (data.booking && data.booking.startTime));
+        var d = st ? new Date(st) : null;
+        if (d && !isNaN(d)) quand = " pour le " + jourLisible(d) + " à " + heureLisible(d);
+      } catch (err) {}
+
+      var liens = (info && info.liens) || [
+        { texte: "Explorer les modèles", href: "/modeles/" },
+        { texte: "Comprendre la méthode", href: "/methode" }
+      ];
+      var html = '<svg class="rdv-done__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' +
+        '<div class="rdv-done__body">' +
+        '<h2 class="rdv-done__title">C\'est noté, merci&nbsp;!</h2>' +
+        '<p>Votre créneau est réservé' + quand + ', vous allez recevoir l\'invitation avec le lien de visio dans quelques minutes.</p>';
+      if (info && info.apres) html += '<p>' + info.apres + '</p>';
+      else html += '<p>Si vous voulez me donner un peu de contexte avant l\'échange, vous pouvez m\'écrire à <a href="mailto:contact@noumensia.com">contact@noumensia.com</a>, sinon on partira simplement de votre question.</p>';
+      html += '<p class="rdv-done__next">D\'ici là, si vous avez cinq minutes</p><ul class="rdv-done__links">';
+      liens.forEach(function (l, i) {
+        html += '<li><a href="' + l.href + '" data-done-link="' + i + '">' + l.texte + '&nbsp;→</a></li>';
+      });
+      html += '</ul></div>';
+      box.innerHTML = html;
+      box.hidden = false;
+      box.querySelectorAll("[data-done-link]").forEach(function (a) {
+        a.addEventListener("click", function () {
+          if (window.nmRecord) window.nmRecord("click", { name: "rdv-done-link", href: a.getAttribute("href"), provenance: sujet || null });
+        });
+      });
+      // les liens de secours n'ont plus d'utilité une fois le rendez-vous pris
+      var alt = box.parentNode.querySelector(".contact-alternatives");
+      if (alt) alt.hidden = true;
+      try { box.scrollIntoView({ behavior: "smooth", block: "nearest" }); } catch (err) {}
+    }
+
     Cal("init", { origin: "https://cal.eu" });
     Cal("inline", {
       elementOrSelector: "#cal-inline",
@@ -317,10 +390,11 @@
       Cal("on", { action: "linkFailed", callback: function () { showFallback(); } });
       // Mesure sans cookie d'une réservation aboutie. Les deux noms d'événement
       // existent selon la version de l'embed : on écoute les deux, une seule mesure.
-      var onBooked = function () {
+      var onBooked = function (e) {
         if (booked) return;
         booked = true;
-        if (window.nmRecord) window.nmRecord("click", { name: "rdv-booked", provenance: sujet || null });
+        if (window.nmRecord) window.nmRecord("click", { name: "rdv-booked", provenance: sujet || null, provenance_source: prov.source || null });
+        showDone(e);
       };
       Cal("on", { action: "bookingSuccessfulV2", callback: onBooked });
       Cal("on", { action: "bookingSuccessful", callback: onBooked });

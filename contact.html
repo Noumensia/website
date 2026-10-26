@@ -434,6 +434,7 @@
     </div>
   </div>
 </footer>
+<script src="/provenance.js"></script>
 <script>
   // Contexte d'arrivée : ?sujet=turnover, ?sujet=burnout, etc.
   // Affiche un rappel au visiteur et transmet la provenance avec le formulaire.
@@ -446,9 +447,11 @@
       'articles': { libelle: 'les articles',                   href: '/articles/' }
     };
     try {
-      var cle = new URLSearchParams(location.search).get('sujet');
+      // ?sujet= dans l'URL, sinon la page du site d'où arrive le visiteur (provenance.js)
+      var prov = window.nmProvenance ? window.nmProvenance() : null;
+      var cle = prov ? prov.cle : new URLSearchParams(location.search).get('sujet');
       if (!cle) return;
-      var s = SUJETS[cle];
+      var s = SUJETS[cle] || (window.nmSujets && window.nmSujets[cle]);
       var champ = document.getElementById('provenance');
       if (champ) champ.value = s ? s.libelle : cle;
       // La provenance suit aussi vers la page de réservation
@@ -456,7 +459,7 @@
         rdv.href = '/rendez-vous?sujet=' + encodeURIComponent(cle);
       });
       var note = document.getElementById('contact-context');
-      if (note && s) {
+      if (note && s && cle !== 'faq' && cle !== 'a-propos') {
         note.innerHTML = 'Vous arrivez depuis <a href="' + s.href + '">' + s.libelle +
           '</a>. N’hésitez pas à le mentionner ci-dessous si votre situation s’en rapproche.';
         note.hidden = false;
