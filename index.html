@@ -132,8 +132,10 @@
 .une-card:focus-visible{ outline:none; box-shadow:var(--ring); }
 .une-txt h2{ font-family:var(--font-display); font-weight:500; font-size:clamp(1.5rem,2.6vw,2rem); line-height:1.15; margin:.4rem 0 .65rem; color:var(--blanc-casse); }
 .une-txt p{ color:var(--gris-doux); line-height:1.65; max-width:38rem; }
-.une-go{ display:inline-block; margin-top:1rem; font-weight:600; color:var(--bordeaux-vif); }
-.une-card:hover .une-go{ text-decoration:underline; text-underline-offset:3px; }
+.une-go{ display:inline-block; margin-top:1rem; font-weight:600; color:var(--bordeaux-vif);
+  background-image:linear-gradient(currentColor,currentColor); background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat; padding-bottom:1px;
+  transition:background-size .35s cubic-bezier(.22,1,.36,1); }
+.une-card:hover .une-go{ background-size:100% 1.5px; }
 .une-figs{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; }
 .une-figs img{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; background:#1E2630; transition:transform var(--t-slow); }
 .une-card:hover .une-figs img{ transform:scale(1.03); }

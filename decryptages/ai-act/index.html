@@ -144,7 +144,7 @@ html[data-theme="light"] .aa-layers li, html[data-theme="light"] .ds-card{ backg
 .aa-gx__d{ font-size:.86rem; color:var(--gris-doux); line-height:1.5; margin:0; flex:1; }
 .aa-gx__links{ display:flex; flex-wrap:wrap; gap:.35rem 1rem; margin:.4rem 0 0; font-size:.84rem; font-weight:600; }
 .aa-gx__links a{ color:var(--bordeaux-vif); text-decoration:none; }
-.aa-gx__links a:hover{ text-decoration:underline; text-underline-offset:3px; }
+
 .aa-gx__all{ margin:1.6rem 0 0; }
 html[data-theme="light"] .aa-gx__card{ background:#F5EBD6; box-shadow:var(--shadow-sm); }
 /* Hellixmap */
@@ -187,6 +187,18 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
   ]
 }
 </script>
+<style>
+/* Liens : soulignement qui se dessine au survol, comme sur le reste du site */
+#main p a:not([class]), .aa-gx__links a, .aa-hx__go{
+  text-decoration:none; background-image:linear-gradient(currentColor,currentColor);
+  background-size:0% 1.5px; background-position:0 100%; background-repeat:no-repeat; padding-bottom:1px;
+  transition:background-size .35s cubic-bezier(.22,1,.36,1), color var(--t-fast);
+}
+#main p a:not([class]):hover, .aa-gx__links a:hover, .aa-hx__card:hover .aa-hx__go{ text-decoration:none; background-size:100% 1.5px; }
+.aa-hx__go{ align-self:flex-start; }
+.aa-q-alt{ font-size:.95rem; margin-top:.4rem; opacity:.92; }
+.aa-q-alt a{ color:inherit; font-weight:600; }
+</style>
 </head>
 <body>
 
@@ -230,7 +242,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
       </p>
       <div class="cta-row">
         <a class="btn btn--primary" href="/decryptages/ai-act/parcours-qualification" data-nm-click="aiact-hero-parcours">Mon outil est-il concerné&nbsp;?</a>
-        <a class="btn btn--ghost" href="/decryptages/ai-act/#question">Poser une question</a>
+        <a class="btn btn--ghost" href="#vue" data-nm-click="aiact-hero-vue">Poser une question au texte</a>
       </div>
       <p class="aa-ref">
         Texte de référence&nbsp;: version consolidée au 27&nbsp;juillet&nbsp;2026, après le
@@ -393,7 +405,7 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
         Pour apprendre plutôt que chercher, la même carte existe <a href="https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&amp;openChat=coach&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-hellixmap-coach">en mode quiz et fiches</a>.
         L'assistant, celui de Hellixmap, la plateforme de cartes de connaissance de Bayesia, répond
         à partir du graphe et non de sa mémoire&nbsp;: chaque réponse s'appuie sur des concepts et
-        des articles que vous pouvez vérifier. Il s'ouvre dans un nouvel onglet.
+        des articles que vous pouvez vérifier. Il s'ouvre dans un nouvel onglet. Sans compte, Hellixmap offre trois questions par visiteur, toutes cartes confondues.
       </p>
     </div>
   </section>
@@ -612,24 +624,29 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
 <!-- ============ QUESTION ============ -->
   <section class="contact" id="question">
     <div class="wrap reveal">
-      <p class="eyebrow eyebrow--on-bordeaux">Une question sur votre cas&nbsp;?</p>
-      <h2>Posez-la ici</h2>
+      <p class="eyebrow eyebrow--on-bordeaux">Et chez vous&nbsp;?</p>
+      <h2>Parlez-moi de votre situation</h2>
       <p>
-        Un outil que vous utilisez déjà, un projet de recrutement assisté par IA, un
-        doute sur votre rôle de fournisseur ou de déployeur&nbsp;: décrivez la situation.
-        Je réponds personnellement, sous 48&nbsp;h ouvrées.
+        Ce décryptage montre la méthode sur un texte de loi. En mission, je l'applique à vos
+        propres questions&nbsp;: un outil d'IA déjà en place dans vos recrutements dont vous
+        voulez mesurer l'exposition, un projet à arbitrer, ou tout autre sujet RH où plusieurs
+        facteurs s'entremêlent avant une décision. Décrivez la situation, je vous réponds
+        personnellement sous 48&nbsp;h ouvrées et nous voyons ce qu'un modèle peut vous apporter.
+      </p>
+      <p class="aa-q-alt">
+        Une question sur le texte lui-même&nbsp;? <a href="https://hellixmap.bayesia.com/display/1c82f532520a59fd?panel=0&amp;openChat=expert&amp;fullscreen=0" target="_blank" rel="noopener" data-nm-click="aiact-contact-vers-assistant">L'assistant de la cartographie y répond directement, en citant les articles&nbsp;↗</a>
       </p>
 
       <div class="contact-card">
         <div data-fs-success class="form-success">
-          Votre question est bien arrivée. Je vous réponds sous 48&nbsp;h ouvrées.
+          Votre message est bien arrivé. Je vous réponds sous 48&nbsp;h ouvrées.
         </div>
         <div data-fs-error class="form-error-global"></div>
 
         <form id="aiact-form" class="contact-form" action="https://formspree.io/f/mojzoazo" method="POST" novalidate data-nm-submit="aiact-question">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-          <input type="hidden" name="provenance" value="Page AI Act — question">
-          <input type="hidden" name="_subject" value="Question AI Act (noumensia.com/decryptages/ai-act)">
+          <input type="hidden" name="provenance" value="Page AI Act — situation">
+          <input type="hidden" name="_subject" value="Contact depuis le décryptage AI Act (noumensia.com/decryptages/ai-act)">
 
           <div class="form-row">
             <div class="form-group">
@@ -644,19 +661,14 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
           </div>
 
           <div class="form-group">
-            <label for="aa-question">Votre question</label>
-            <textarea id="aa-question" name="question" rows="5" required data-fs-field
-              placeholder="Ex. : notre outil de présélection de CV est en service depuis 2025. Sommes-nous concernés en décembre 2027 ?"></textarea>
-            <span data-fs-error="question" class="form-field-error"></span>
+            <label for="aa-question">Votre situation</label>
+            <textarea id="aa-question" name="situation" rows="5" required data-fs-field
+              placeholder="Ex. : nous utilisons un logiciel de tri de CV depuis 2025 et voulons savoir où porter nos efforts d'ici 2027."></textarea>
+            <span data-fs-error="situation" class="form-field-error"></span>
           </div>
 
-          <label class="aa-consent">
-            <input type="checkbox" name="faq_anonyme" value="oui">
-            <span>J'accepte que ma question soit reprise, anonymisée, dans une FAQ publique.</span>
-          </label>
-
           <div class="form-actions">
-            <button type="submit" class="btn btn--primary" data-fs-submit-btn>Envoyer ma question</button>
+            <button type="submit" class="btn btn--primary" data-fs-submit-btn>Envoyer</button>
             <p class="contact-note">Traitement décrit dans la <a href="/mentions-legales/confidentialite">politique de confidentialité</a>.</p>
           </div>
         </form>

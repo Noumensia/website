@@ -515,6 +515,11 @@ html,body{background:var(--ground)}
 html body .nm-intro,html body .nm-next,html body .nm-capot,html body .wrap>.nm-intro,html body .wrap>.nm-next,html body .wrap>.nm-capot{width:100%;max-width:var(--maxw);margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:var(--pad);padding-right:var(--pad)}
 @media (max-width:760px){html body .wrap>.nm-intro{padding-left:0;padding-right:0}}
 </style>
+<style>
+/* Liens de contenu : soulignement qui se dessine au survol, comme sur le reste du site */
+.nm-meta a,.qs-more,p a:not([class]),.nm-capot a:not([class]),.panel a:not([class]),.result a:not([class]){text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0% 1.5px;background-position:0 100%;background-repeat:no-repeat;padding-bottom:1px;transition:background-size .35s cubic-bezier(.22,1,.36,1),color .15s}
+.nm-meta a:hover,.qs-more:hover,p a:not([class]):hover,.nm-capot a:not([class]):hover,.panel a:not([class]):hover,.result a:not([class]):hover{text-decoration:none;background-size:100% 1.5px}
+</style>
 </head>
 <body>
 <div class="scroll-progress" aria-hidden="true"></div>
@@ -603,7 +608,7 @@ html body .nm-intro,html body .nm-next,html body .nm-capot,html body .wrap>.nm-i
 </div>
 
 
-<div class="nm-next"><a href="/decryptages/ai-act/"><span><small>Retour au décryptage</small><strong>Les trois outils pour un DRH</strong></span><span class="go">Continuer →</span></a></div>
+<div class="nm-next"><a href="/decryptages/ai-act/structure-du-texte"><span><small>Graphe suivant · 8 sur 8</small><strong>La structure mesurée du texte</strong></span><span class="go">Continuer →</span></a></div>
 <details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>D'où viennent les probabilités, et ce qu'elles valent</span></summary>
 <div class="nm-capot-stats"><div class="stats">
     <div class="stat"><b>28</b><span>nœuds</span></div>

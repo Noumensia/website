@@ -614,6 +614,11 @@ html body .nm-intro,html body .nm-next,html body .nm-capot,html body .wrap>.nm-i
 html body .wrap>.nm-intro{padding-left:0;padding-right:0}
 </style>
 
+<style>
+/* Liens de contenu : soulignement qui se dessine au survol, comme sur le reste du site */
+.nm-meta a,.qs-more,p a:not([class]),.nm-capot a:not([class]),.panel a:not([class]),.result a:not([class]){text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0% 1.5px;background-position:0 100%;background-repeat:no-repeat;padding-bottom:1px;transition:background-size .35s cubic-bezier(.22,1,.36,1),color .15s}
+.nm-meta a:hover,.qs-more:hover,p a:not([class]):hover,.nm-capot a:not([class]):hover,.panel a:not([class]):hover,.result a:not([class]):hover{text-decoration:none;background-size:100% 1.5px}
+</style>
 <div class="scroll-progress" aria-hidden="true"></div>
 <header class="nav">
   <div class="nm-wrap">
@@ -836,6 +841,17 @@ const state = {
   q: "", ech: "", sanct: "", openOnly: false, allOpen: false,
 };
 OBL.forEach(o => state.st[o.key] = "no");
+// Profil transmis par le parcours de qualification : #profil=roles:RO_DEPLOY,RO_EMPL;regs:R_HR3,R_MIN
+let fromParcours = false;
+(function(){
+  const h = decodeURIComponent(location.hash || "");
+  if (h.indexOf("#profil=") !== 0) return;
+  const okR = new Set(DATA.roles.map(r => r.key)), okG = new Set(DATA.regimes.map(r => r.key));
+  const parts = {}; h.slice(8).split(";").forEach(kv => { const [k, v] = kv.split(":"); if (k && v) parts[k] = v.split(",").filter(Boolean); });
+  const roles = (parts.roles || []).filter(k => okR.has(k)), regs = (parts.regs || []).filter(k => okG.has(k));
+  if (!roles.length || !regs.length) return;
+  state.roles = new Set(roles); state.regs = new Set(regs); fromParcours = true;
+})();
 
 /* ---------- profil ---------- */
 function chips(host, items, set, after) {
@@ -1152,7 +1168,7 @@ function facteurs() {
 /* ---------- init ---------- */
 function regHint() {
   const n = scoped().length;
-  $("#h-reg").textContent = n + " obligations correspondent à ce profil sur "
+  $("#h-reg").textContent = (fromParcours ? "Profil repris de votre parcours. " : "") + n + " obligations correspondent à ce profil sur "
     + OBL.length + " au registre.";
 }
 function refresh() { regHint(); gap(); registre(); }

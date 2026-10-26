@@ -588,6 +588,11 @@ html body .nm-intro,html body .nm-next,html body .nm-capot,html body .wrap>.nm-i
 .qs-more:hover{text-decoration:underline;text-underline-offset:3px}
 </style>
 
+<style>
+/* Liens de contenu : soulignement qui se dessine au survol, comme sur le reste du site */
+.nm-meta a,.qs-more,p a:not([class]),.nm-capot a:not([class]),.panel a:not([class]),.result a:not([class]){text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0% 1.5px;background-position:0 100%;background-repeat:no-repeat;padding-bottom:1px;transition:background-size .35s cubic-bezier(.22,1,.36,1),color .15s}
+.nm-meta a:hover,.qs-more:hover,p a:not([class]):hover,.nm-capot a:not([class]):hover,.panel a:not([class]):hover,.result a:not([class]):hover{text-decoration:none;background-size:100% 1.5px}
+</style>
 <div class="scroll-progress" aria-hidden="true"></div>
 <header class="nav">
   <div class="nm-wrap">
@@ -710,7 +715,7 @@ html body .nm-intro,html body .nm-next,html body .nm-capot,html body .wrap>.nm-i
 
 </div>
 
-<div class="nm-next"><a href="/decryptages/ai-act/#question"><span><small>Et maintenant</small><strong>Une question sur votre cas ? Posez-la</strong></span><span class="go">Continuer →</span></a></div>
+<div class="nm-next"><a href="/decryptages/ai-act/#question"><span><small>Et chez vous ?</small><strong>Parlez-moi de votre situation</strong></span><span class="go">Continuer →</span></a></div>
 <details class="nm-capot" id="capot"><summary><b>Sous le capot</b><span>Ce que valent les chiffres, la méthode et ce que le réseau ne fait pas</span></summary>
 <div class="nm-capot-stats"><div class="stats">
     <div class="stat"><b id="s-n">—</b><span>nœuds</span></div>
