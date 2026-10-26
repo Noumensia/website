@@ -194,7 +194,28 @@
     document.head.appendChild(st);
   }
 
-  function run() { injectCss(); suggest404(); nextReads(); resume(); }
+  // Écrans tactiles (26/10/2026) : sans souris, il n'y a pas de survol. Les gestes « qui se
+  // dessinent » (contour des cartes, soulignement des liens) se jouent donc une fois, quand
+  // l'élément entre à l'écran, et restent visibles : sur téléphone, ils signalent ce qui se clique.
+  var TOUCH_CARDS = '.article-card, main a.ds-card, .model-card, .next-read, .une-card, .ex-card, .aa-gx__card, .aa-step, .aa-hx__card';
+  var TOUCH_LINKS = '.prose a, .sources a, .callout a, .lede a, #main p a:not([class]), main p a:not([class]), .aa-gx__links a, .byline a, .sig a, .ex-card__links a, .nm-meta a:not(.nm-hx), .model-link__t, .une-go, .aa-hx__go';
+  var TOUCH_CSS = '@media (hover: none){ ' +
+    TOUCH_CARDS.split(', ').map(function (x) { return x + '.nm-in::before'; }).join(', ') + '{ --lk-fill:100%; } ' +
+    TOUCH_LINKS.split(', ').map(function (x) { return x + '.nm-in'; }).join(', ') + '{ background-size:100% 1.5px; } }';
+  function touchDraw() {
+    if (!window.matchMedia || !window.matchMedia('(hover: none)').matches || !('IntersectionObserver' in window)) return;
+    var st = document.createElement('style'); st.id = 'nm-touch-css'; st.textContent = TOUCH_CSS; document.head.appendChild(st);
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target; io.unobserve(el);
+        setTimeout(function () { el.classList.add('nm-in'); }, 150);
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll(TOUCH_CARDS + ', ' + TOUCH_LINKS).forEach(function (el) { io.observe(el); });
+  }
+
+  function run() { injectCss(); suggest404(); nextReads(); resume(); touchDraw(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
   else run();
 })();
