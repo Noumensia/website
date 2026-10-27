@@ -1,0 +1,11 @@
+# Configuration Cloudflare Pages (projet "website").
+# Ce fichier fait foi pour les liaisons des Pages Functions (dossier functions/).
+name = "website"
+pages_build_output_dir = "."
+compatibility_date = "2026-06-16"
+
+# Base D1 "noumensia-site" (juridiction UE) : inscrits aux alertes et compteurs de clics.
+[[d1_databases]]
+binding = "DB"
+database_name = "noumensia-site"
+database_id = "c5b51ef6-d853-4c03-847d-895111c9b6cb"

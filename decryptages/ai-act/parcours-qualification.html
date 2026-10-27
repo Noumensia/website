@@ -871,6 +871,7 @@ function renderResult(){
   const term = st.terminal;
   let key = term || st.regime || (st.transp.length?'OUT_TRANSP':'OUT_MIN');
   const n = nd(key);
+  if (window.nmRecord && window._nmRes !== key) { window._nmRes = key; window.nmRecord('resultat', { name: key }); }
   const cls = {OUT_INTERDIT:'v-stop',OUT_HR1:'v-hr',OUT_HR3:'v-hr',OUT_DEROG:'v-light',
                OUT_TRANSP:'v-light',OUT_MIN:'v-neut',OUT_DEF:'v-neut',OUT_TERR:'v-neut',
                OUT_EXCL:'v-neut'}[key]||'v-neut';
@@ -1141,6 +1142,7 @@ window.addEventListener('resize',fitAll);
   </div>
 </footer>
 <script src="/script.js" defer></script>
+<script src="/interactions.js" defer></script>
 <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8bd3e2f66b3c4bbba0b38cbcbbc972e0"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

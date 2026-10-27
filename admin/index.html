@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Espace privé · Noumensia</title>
+<link rel="icon" href="/favicon-32.png">
+<style>
+:root{ --bg:#F3E9D8; --card:#FBF6EE; --ink:#1E2630; --mute:#5E6670; --line:#DCCDB4; --accent:#7A1F2D; --accent-ink:#fff; --ok:#2F6B4F; --warn:#9A5B12; }
+@media (prefers-color-scheme: dark){ :root{ --bg:#161C24; --card:#1E2630; --ink:#EDE4D3; --mute:#A3A9B1; --line:#323C48; --accent:#C2566A; --accent-ink:#161C24; --ok:#7FC3A0; --warn:#E0A75E; } }
+*{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+.wrap{ max-width:1080px; margin:0 auto; padding:24px 16px 64px; }
+h1{ font-size:1.5rem; margin:0 0 4px; } h2{ font-size:1.15rem; margin:0 0 12px; }
+.sub{ color:var(--mute); margin:0 0 20px; }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:18px; }
+.row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+input[type=password],input[type=search],select{ font:inherit; color:inherit; background:transparent; border:1px solid var(--line); border-radius:8px; padding:8px 10px; min-width:0; }
+input[type=password]{ flex:1 1 240px; }
+button{ font:inherit; cursor:pointer; border-radius:8px; padding:8px 14px; border:1px solid var(--line); background:transparent; color:inherit; }
+button.primary{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:600; }
+button:disabled{ opacity:.5; cursor:default; }
+button.danger{ border-color:var(--accent); color:var(--accent); }
+.tabs{ display:flex; gap:6px; margin-bottom:16px; }
+.tabs button[aria-selected=true]{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:16px; }
+.kpi{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+.kpi b{ display:block; font-size:1.5rem; }
+.kpi span{ color:var(--mute); font-size:.85rem; }
+.tablebox{ overflow-x:auto; }
+table{ width:100%; border-collapse:collapse; font-size:.92rem; }
+th,td{ text-align:left; padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+th{ color:var(--mute); font-weight:600; font-size:.82rem; }
+td.n{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.muted{ color:var(--mute); } .ok{ color:var(--ok); } .warn{ color:var(--warn); }
+.msg{ min-height:1.4em; margin:8px 0 0; font-size:.9rem; }
+.bars{ display:flex; align-items:flex-end; gap:3px; height:90px; padding-top:6px; }
+.bars div{ flex:1; background:var(--accent); opacity:.8; border-radius:3px 3px 0 0; min-height:2px; position:relative; }
+.bars div:hover{ opacity:1; }
+.bars-legend{ display:flex; justify-content:space-between; color:var(--mute); font-size:.78rem; margin-top:4px; }
+.hint{ font-size:.85rem; color:var(--mute); margin:10px 0 0; }
+[hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Espace privé</h1>
+  <p class="sub">Inscrits aux alertes et mesure de ce que font les visiteurs sur noumensia.com.</p>
+
+  <div class="card" id="login">
+    <h2>Accès</h2>
+    <form class="row" id="login-form">
+      <input type="password" id="token" placeholder="Jeton d'accès" autocomplete="current-password" required>
+      <label class="row muted" style="gap:6px"><input type="checkbox" id="remember" checked> Se souvenir sur cet appareil</label>
+      <button class="primary" type="submit">Entrer</button>
+    </form>
+    <p class="msg" id="login-msg"></p>
+  </div>
+
+  <div id="app" hidden>
+    <div class="row" style="justify-content:space-between;margin-bottom:12px">
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-tab="inscrits">Inscrits</button>
+        <button role="tab" aria-selected="false" data-tab="mesure">Mesure</button>
+      </div>
+      <button id="logout" type="button">Se déconnecter</button>
+    </div>
+
+    <section id="tab-inscrits">
+      <div class="kpis">
+        <div class="kpi"><b id="k-total">–</b><span>inscrits</span></div>
+        <div class="kpi"><b id="k-attente">–</b><span>à prévenir</span></div>
+        <div class="kpi"><b id="k-envoyes">–</b><span>déjà prévenus</span></div>
+        <div class="kpi"><b id="k-recontact">–</b><span>d'accord pour être recontactés</span></div>
+      </div>
+      <div class="card">
+        <h2>Alerte AI Act : lignes directrices de la Commission</h2>
+        <div class="row">
+          <button class="primary" id="b-mail" type="button">Écrire aux personnes à prévenir</button>
+          <button id="b-copy" type="button">Copier leurs adresses</button>
+          <button id="b-csv" type="button">Exporter (CSV)</button>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button id="b-sent" type="button">Marquer la sélection comme prévenue</button>
+          <button id="b-purge" class="danger" type="button">Supprimer les adresses déjà prévenues</button>
+        </div>
+        <p class="msg" id="ins-msg"></p>
+        <p class="hint">Le bouton « Écrire » ouvre votre messagerie avec les adresses en copie cachée. Après l'envoi, marquez-les comme prévenues, puis supprimez-les : c'est l'engagement pris sur le site. La suppression garde les personnes qui ont coché « me recontacter », qui sont aussi ajoutées chaque semaine à votre CRM.</p>
+      </div>
+      <div class="card tablebox">
+        <table>
+          <thead><tr><th><input type="checkbox" id="all" aria-label="Tout sélectionner"></th><th>Adresse</th><th>Inscrit le</th><th>Prévenu le</th><th>Recontact</th><th>Page</th></tr></thead>
+          <tbody id="ins-body"><tr><td colspan="6" class="muted">Chargement…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="tab-mesure" hidden>
+      <div class="row" style="margin-bottom:12px">
+        <label class="muted" for="periode">Période</label>
+        <select id="periode"><option value="7">7 jours</option><option value="30" selected>30 jours</option><option value="90">90 jours</option><option value="365">12 mois</option></select>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><b id="m-vues">–</b><span>pages vues</span></div>
+        <div class="kpi"><b id="m-missions">–</b><span>clics vers les missions</span></div>
+        <div class="kpi"><b id="m-contact">–</b><span>vers contact ou rendez-vous</span></div>
+        <div class="kpi"><b id="m-envois">–</b><span>formulaires envoyés</span></div>
+        <div class="kpi"><b id="m-graphes">–</b><span>ouvertures de graphes ou simulateurs</span></div>
+      </div>
+      <div class="card">
+        <h2>Jour par jour</h2>
+        <div class="bars" id="bars"></div>
+        <div class="bars-legend"><span id="bars-from"></span><span class="muted">pages vues (survol : détail)</span><span id="bars-to"></span></div>
+      </div>
+      <div class="card tablebox">
+        <h2>Pages les plus vues</h2>
+        <table><thead><tr><th>Page</th><th class="n">Vues</th></tr></thead><tbody id="pages-body"></tbody></table>
+      </div>
+      <div class="card tablebox">
+        <div class="row" style="justify-content:space-between;margin-bottom:8px">
+          <h2 style="margin:0">Clics et actions</h2>
+          <input type="search" id="filtre" placeholder="Filtrer (ex. missions, hellixmap, parcours)">
+        </div>
+        <table><thead><tr><th>Action</th><th>Depuis la page</th><th class="n">Nombre</th></tr></thead><tbody id="actions-body"></tbody></table>
+        <p class="hint">Comptage sans cookie ni identifiant : on sait combien de clics, pas qui. Les pages vues peuvent différer de Cloudflare Web Analytics, qui mesure autrement.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var KEY = 'nm-admin-token';
+  var token = '';
+  try { token = localStorage.getItem(KEY) || ''; } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  var inscrits = [];
+  var stats = null;
+
+  function api(path, opts) {
+    opts = opts || {};
+    opts.headers = Object.assign({ 'Authorization': 'Bearer ' + token, 'Accept': 'application/json' }, opts.headers || {});
+    return fetch(path, opts).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (d) {
+        if (r.status === 401) { var e = new Error('auth'); e.auth = true; throw e; }
+        if (!r.ok || d.ok === false) throw new Error(d.error || ('Erreur ' + r.status));
+        return d;
+      });
+    });
+  }
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function fmt(d) { if (!d) return ''; var x = new Date(d.replace(' ', 'T') + 'Z'); return isNaN(x) ? d : x.toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' }); }
+  function num(n) { return (n || 0).toLocaleString('fr-FR'); }
+
+  // ---------- Accès ----------
+  function showApp() { $('login').hidden = true; $('app').hidden = false; loadInscrits(); }
+  function showLogin(msg) { $('app').hidden = true; $('login').hidden = false; $('login-msg').textContent = msg || ''; }
+  $('login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    token = $('token').value.trim();
+    api('/api/admin/inscrits').then(function (d) {
+      if ($('remember').checked) { try { localStorage.setItem(KEY, token); } catch (err) {} }
+      inscrits = d.inscrits; showApp();
+    }).catch(function (err) { showLogin(err.auth ? 'Jeton refusé.' : err.message); });
+  });
+  $('logout').addEventListener('click', function () { try { localStorage.removeItem(KEY); } catch (e) {} token = ''; showLogin(''); });
+
+  // ---------- Onglets ----------
+  document.querySelectorAll('[data-tab]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('[data-tab]').forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+      $('tab-inscrits').hidden = b.dataset.tab !== 'inscrits';
+      $('tab-mesure').hidden = b.dataset.tab !== 'mesure';
+      if (b.dataset.tab === 'mesure' && !stats) loadStats();
+    });
+  });
+
+  // ---------- Inscrits ----------
+  function loadInscrits() {
+    return api('/api/admin/inscrits').then(function (d) { inscrits = d.inscrits; renderInscrits(); })
+      .catch(function (err) { if (err.auth) showLogin('Jeton refusé.'); else $('ins-msg').textContent = err.message; });
+  }
+  function attente() { return inscrits.filter(function (i) { return !i.envoye_le; }); }
+  function renderInscrits() {
+    var a = attente();
+    $('k-total').textContent = num(inscrits.length);
+    $('k-attente').textContent = num(a.length);
+    $('k-envoyes').textContent = num(inscrits.length - a.length);
+    $('k-recontact').textContent = num(inscrits.filter(function (i) { return i.recontact; }).length);
+    $('ins-body').innerHTML = inscrits.length ? inscrits.map(function (i) {
+      return '<tr><td><input type="checkbox" data-id="' + i.id + '"' + (i.envoye_le ? '' : ' checked') + '></td>' +
+        '<td>' + esc(i.email) + '</td><td>' + esc(fmt(i.cree_le)) + '</td>' +
+        '<td>' + (i.envoye_le ? '<span class="ok">' + esc(fmt(i.envoye_le)) + '</span>' : '<span class="warn">à prévenir</span>') + '</td>' +
+        '<td>' + (i.recontact ? '<span class="ok">oui</span>' : '<span class="muted">non</span>') + '</td>' +
+        '<td class="muted">' + esc(i.page) + '</td></tr>';
+    }).join('') : '<tr><td colspan="6" class="muted">Personne pour l\'instant.</td></tr>';
+    $('all').checked = false;
+  }
+  function selection() { return Array.prototype.map.call(document.querySelectorAll('#ins-body input:checked'), function (c) { return +c.dataset.id; }); }
+  $('all').addEventListener('change', function () { var v = this.checked; document.querySelectorAll('#ins-body input[type=checkbox]').forEach(function (c) { c.checked = v; }); });
+
+  $('b-mail').addEventListener('click', function () {
+    var a = attente().map(function (i) { return i.email; });
+    if (!a.length) { $('ins-msg').textContent = 'Personne à prévenir.'; return; }
+    var subject = 'AI Act : les lignes directrices de la Commission sont parues';
+    location.href = 'mailto:contact@noumensia.com?bcc=' + encodeURIComponent(a.join(',')) + '&subject=' + encodeURIComponent(subject);
+    $('ins-msg').textContent = a.length + ' adresse(s) en copie cachée. Si votre messagerie ne s\'ouvre pas, utilisez « Copier leurs adresses ».';
+  });
+  $('b-copy').addEventListener('click', function () {
+    var txt = attente().map(function (i) { return i.email; }).join(', ');
+    if (!txt) { $('ins-msg').textContent = 'Personne à prévenir.'; return; }
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () {
+      $('ins-msg').textContent = 'Adresses copiées.';
+    }).catch(function () { window.prompt('Adresses :', txt); });
+  });
+  $('b-csv').addEventListener('click', function () {
+    var rows = [['email', 'liste', 'inscrit_le', 'prevenu_le', 'recontact', 'page']].concat(inscrits.map(function (i) { return [i.email, i.liste, i.cree_le, i.envoye_le || '', i.recontact ? 'oui' : 'non', i.page || '']; }));
+    var csv = '﻿' + rows.map(function (r) { return r.map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(';'); }).join('\r\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    a.download = 'inscrits-alertes-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+  $('b-sent').addEventListener('click', function () {
+    var ids = selection();
+    if (!ids.length) { $('ins-msg').textContent = 'Cochez d\'abord les adresses.'; return; }
+    api('/api/admin/inscrits', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'marquer_envoye', ids: ids }) })
+      .then(function (d) { $('ins-msg').textContent = d.modifies + ' adresse(s) marquée(s) comme prévenue(s).'; return loadInscrits(); })
+      .catch(function (err) { $('ins-msg').textContent = err.message; });
+  });
+  var purgeArmed = false;
+  $('b-purge').addEventListener('click', function () {
+    var n = inscrits.filter(function (i) { return i.envoye_le && !i.recontact; }).length;
+    if (!n) { $('ins-msg').textContent = 'Aucune adresse à supprimer (les personnes d\'accord pour être recontactées sont gardées).'; return; }
+    if (!purgeArmed) {
+      purgeArmed = true; this.textContent = 'Confirmer : supprimer ' + n + ' adresse(s)';
+      var b = this; setTimeout(function () { purgeArmed = false; b.textContent = 'Supprimer les adresses déjà prévenues'; }, 5000);
+      return;
+    }
+    purgeArmed = false; this.textContent = 'Supprimer les adresses déjà prévenues';
+    api('/api/admin/inscrits', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'supprimer_envoyes' }) })
+      .then(function (d) { $('ins-msg').textContent = d.modifies + ' adresse(s) supprimée(s).'; return loadInscrits(); })
+      .catch(function (err) { $('ins-msg').textContent = err.message; });
+  });
+
+  // ---------- Mesure ----------
+  var LABELS = {
+    'resultat:out_def': 'Parcours terminé : hors définition (logiciel classique)',
+    'resultat:out_terr': 'Parcours terminé : hors champ territorial',
+    'resultat:out_excl': 'Parcours terminé : hors champ par exclusion',
+    'resultat:out_interdit': 'Parcours terminé : pratique interdite',
+    'resultat:out_hr1': 'Parcours terminé : haut risque, voie produit (annexe I)',
+    'resultat:out_hr3': 'Parcours terminé : haut risque, voie domaine (annexe III)',
+    'resultat:out_derog': 'Parcours terminé : non haut risque par dérogation',
+    'resultat:out_transp': 'Parcours terminé : obligations de transparence',
+    'resultat:out_min': 'Parcours terminé : risque minimal',
+    'resultat:out_iaug': 'Parcours terminé : modèle à usage général',
+    'resultat:out_iaug_s': 'Parcours terminé : modèle à risque systémique'
+  };
+  function label(evt) {
+    if (LABELS[evt]) return LABELS[evt];
+    var i = evt.indexOf(':'), type = evt.slice(0, i), v = evt.slice(i + 1);
+    if (type === 'lien') return 'Lien → ' + v;
+    if (type === 'clic') return 'Bouton « ' + v + ' »';
+    if (type === 'envoi') return 'Formulaire envoyé : ' + v;
+    if (type === 'ouverture') return 'Question ouverte : ' + v;
+    if (type === 'resultat') return 'Parcours terminé : ' + v;
+    return evt;
+  }
+  function somme(test) { return (stats ? stats.lignes : []).reduce(function (s, l) { return test(l.evt) ? s + l.n : s; }, 0); }
+  function loadStats() {
+    api('/api/admin/stats?jours=' + $('periode').value).then(function (d) { stats = d; renderStats(); })
+      .catch(function (err) { if (err.auth) showLogin('Jeton refusé.'); else $('actions-body').innerHTML = '<tr><td colspan="3">' + esc(err.message) + '</td></tr>'; });
+  }
+  $('periode').addEventListener('change', loadStats);
+  $('filtre').addEventListener('input', renderActions);
+  function renderStats() {
+    $('m-vues').textContent = num(somme(function (e) { return e === 'vue'; }));
+    $('m-missions').textContent = num(somme(function (e) { return e !== 'vue' && /missions/.test(e); }));
+    $('m-contact').textContent = num(somme(function (e) { return /^(lien|clic):/.test(e) && /(\/contact|\/rendez-vous|\/rdv|cal\.eu|rdv|mailto|#question)/.test(e); }));
+    $('m-envois').textContent = num(somme(function (e) { return /^envoi:/.test(e); }));
+    $('m-graphes').textContent = num(somme(function (e) { return /^(lien|clic):/.test(e) && /(\/graphe|\/graphes|\/simulateur$|\/coach|hellixmap|bayesialab)/.test(e); }));
+    // Jour par jour : on complète les jours sans visite
+    var map = {}; stats.parJour.forEach(function (j) { map[j.jour] = j; });
+    var days = [], d0 = new Date(); d0.setUTCHours(0, 0, 0, 0);
+    for (var k = stats.jours - 1; k >= 0; k--) { var d = new Date(d0 - k * 864e5); days.push(d.toISOString().slice(0, 10)); }
+    var max = Math.max.apply(null, days.map(function (j) { return map[j] ? map[j].vues : 0; }).concat([1]));
+    $('bars').innerHTML = days.map(function (j) {
+      var v = map[j] ? map[j].vues : 0, a = map[j] ? map[j].actions : 0;
+      return '<div style="height:' + Math.max(2, Math.round(v / max * 100)) + '%" title="' + j + ' : ' + v + ' vues, ' + a + ' clics"></div>';
+    }).join('');
+    $('bars-from').textContent = days[0]; $('bars-to').textContent = days[days.length - 1];
+    var pages = stats.lignes.filter(function (l) { return l.evt === 'vue'; }).slice(0, 25);
+    $('pages-body').innerHTML = pages.length ? pages.map(function (l) { return '<tr><td>' + esc(l.page) + '</td><td class="n">' + num(l.n) + '</td></tr>'; }).join('') : '<tr><td colspan="2" class="muted">Pas encore de données.</td></tr>';
+    renderActions();
+  }
+  function renderActions() {
+    if (!stats) return;
+    var q = $('filtre').value.trim().toLowerCase();
+    var rows = stats.lignes.filter(function (l) { return l.evt !== 'vue' && (!q || (l.evt + ' ' + l.page + ' ' + label(l.evt)).toLowerCase().indexOf(q) !== -1); }).slice(0, 200);
+    $('actions-body').innerHTML = rows.length ? rows.map(function (l) { return '<tr><td>' + esc(label(l.evt)) + '</td><td class="muted">' + esc(l.page) + '</td><td class="n">' + num(l.n) + '</td></tr>'; }).join('') : '<tr><td colspan="3" class="muted">Rien pour cette période.</td></tr>';
+  }
+
+  if (token) {
+    api('/api/admin/inscrits').then(function (d) { inscrits = d.inscrits; $('login').hidden = true; $('app').hidden = false; renderInscrits(); })
+      .catch(function (err) { showLogin(err.auth ? 'Jeton expiré ou modifié : saisissez-le à nouveau.' : err.message); });
+  }
+})();
+</script>
+</body>
+</html>

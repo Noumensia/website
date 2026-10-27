@@ -234,6 +234,8 @@ html[data-theme="light"] .aa-gx__fig{ background:#1E2630; box-shadow:none; }
 .aa-alert label{ display:block; font-weight:600; margin-bottom:.6rem; }
 .aa-alert__row{ display:flex; gap:.6rem; flex-wrap:wrap; }
 .aa-alert__row input{ flex:1 1 14rem; min-width:0; padding:.7rem .85rem; border-radius:8px; border:1px solid var(--ardoise-3); background:transparent; color:var(--blanc-casse); font:inherit; }
+.aa-alert__opt{ display:flex !important; gap:.5rem; align-items:flex-start; font-weight:400 !important; font-size:.88rem; color:var(--gris-doux); margin:.7rem 0 0 !important; cursor:pointer; }
+.aa-alert__opt input{ margin-top:.2rem; accent-color:var(--bordeaux-vif); }
 .aa-alert__fine{ font-size:.82rem; color:var(--gris-doux); margin:.65rem 0 0; }
 .aa-alert__ok{ display:none; font-weight:600; color:var(--bordeaux-vif); margin-top:.6rem; }
 .aa-alert [data-fs-success].fs-success, .aa-alert__ok.fs-success{ display:block; }
@@ -685,10 +687,11 @@ html[data-theme="light"] .aa-gx__fig{ background:#1E2630; box-shadow:none; }
           <input type="email" id="aa-alert-email" name="email" placeholder="vous@organisation.com" required data-fs-field>
           <button type="submit" class="btn btn--primary" data-fs-submit-btn>Me prévenir</button>
         </div>
+        <label class="aa-alert__opt"><input type="checkbox" name="recontact" value="oui"> Et je veux bien qu'Arthur me recontacte ensuite pour en parler (facultatif)</label>
         <span data-fs-error="email" class="form-field-error"></span>
         <div data-fs-error class="form-error-global"></div>
         <div data-fs-success class="aa-alert__ok">C'est noté. Vous recevrez un seul e-mail, à leur parution.</div>
-        <p class="aa-alert__fine">Un seul e-mail, à leur parution, avec ce qu'elles changent dans les outils. Votre adresse ne sert qu'à ça et elle est supprimée après l'envoi. Voir la <a href="/mentions-legales/confidentialite">politique de confidentialité</a>.</p>
+        <p class="aa-alert__fine">Un seul e-mail, à leur parution, avec ce qu'elles changent dans les outils. Sans la case cochée, votre adresse ne sert qu'à ça et elle est supprimée après l'envoi. Voir la <a href="/mentions-legales/confidentialite">politique de confidentialité</a>.</p>
       </form>
       <ul class="sources">
         <li><a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02024R1689-20260727" target="_blank" rel="noopener">Règlement (UE) 2024/1689, version consolidée au 27/07/2026</a> — EUR-Lex</li>
@@ -816,9 +819,57 @@ html[data-theme="light"] .aa-gx__fig{ background:#1E2630; box-shadow:none; }
     (formspree.q = formspree.q || []).push(arguments);
   };
   formspree('initForm', { formElement: '#aiact-form', formId: 'mojzoazo' });
-  formspree('initForm', { formElement: '#aiact-alert', formId: 'mojzoazo' });
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+<script>
+// Alerte AI Act : l'adresse part vers /api/alerte (liste du site + e-mail à Arthur).
+// Si ce service ne répond pas, le formulaire repasse par Formspree directement.
+(function () {
+  var f = document.getElementById('aiact-alert');
+  if (!f) return;
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = f.querySelector('[name=email]');
+    var btn = f.querySelector('button[type=submit]');
+    var ok = f.querySelector('.aa-alert__ok');
+    var err = f.querySelector('.form-error-global');
+    err.textContent = '';
+    var v = (email.value || '').trim();
+    if (!v || !email.checkValidity()) { err.textContent = 'Cette adresse e-mail semble incomplète.'; email.focus(); return; }
+    btn.disabled = true;
+    var fini = function (reussi) {
+      if (reussi) {
+        ok.classList.add('fs-success');
+        f.querySelector('.aa-alert__row').style.display = 'none';
+        var opt = f.querySelector('.aa-alert__opt'); if (opt) opt.style.display = 'none';
+      } else {
+        err.textContent = "L'envoi n'a pas abouti. Réessayez dans un instant, ou écrivez à contact@noumensia.com.";
+        btn.disabled = false;
+      }
+    };
+    var parFormspree = function () {
+      fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } })
+        .then(function (r) { fini(r.ok); })
+        .catch(function () { fini(false); });
+    };
+    fetch('/api/alerte', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        email: v,
+        liste: 'ai-act-lignes-directrices',
+        page: location.pathname,
+        recontact: !!(f.querySelector('[name=recontact]') || {}).checked,
+        _gotcha: (f.querySelector('[name=_gotcha]') || {}).value || ''
+      })
+    }).then(function (r) {
+      if (r.ok) return fini(true);
+      if (r.status === 400) { err.textContent = 'Cette adresse e-mail semble incomplète.'; btn.disabled = false; return; }
+      parFormspree();
+    }).catch(parFormspree);
+  });
+})();
+</script>
 <script src="script.js"></script>
 <script src="interactions.js" defer></script>
 <script>

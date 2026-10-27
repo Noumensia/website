@@ -3,6 +3,9 @@
 
 User-agent: *
 Allow: /
+# Espace privé et services techniques
+Disallow: /admin/
+Disallow: /api/
 
 # Moteurs génératifs / assistants IA — explicitement autorisés
 User-agent: GPTBot
