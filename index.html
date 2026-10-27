@@ -137,10 +137,11 @@
   transition:background-size .35s cubic-bezier(.22,1,.36,1); }
 .une-card:hover .une-go{ background-size:100% 1.5px; }
 .une-figs{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; }
-.une-figs img{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; background:#1E2630; transition:transform var(--t-slow); }
+.une-figs img{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; background:#D6C3A1; transition:transform var(--t-slow); }
 .une-card:hover .une-figs img{ transform:scale(1.03); }
 .une-count{ grid-column:1/-1; font-family:var(--font-mono); font-size:.76rem; letter-spacing:.04em; color:var(--gris-doux); text-align:right; }
 @media (max-width:760px){ .une-card{ grid-template-columns:1fr; } }
+html[data-theme="light"] .une-figs img{ background:#1E2630; }
 html[data-theme="light"] .une-card{ background:radial-gradient(70% 140% at 100% 0%, rgba(122,31,45,.06), transparent 60%), var(--papier); border-color:#DCCBAA; box-shadow:var(--shadow-md); }
 html[data-theme="light"] .une-card:hover{ box-shadow:var(--shadow-lg); }
 @property --lk-fill{ syntax:"<percentage>"; inherits:false; initial-value:0%; }

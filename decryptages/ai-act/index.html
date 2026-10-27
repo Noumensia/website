@@ -214,10 +214,10 @@ html[data-theme="light"] .aa-hx__card{ background:#F5EBD6; box-shadow:var(--shad
 .aa-gx__links a:first-child::after{ content:""; position:absolute; inset:0; border-radius:inherit; z-index:2; }
 .aa-gx__links a:nth-child(2), .aa-gx__fig{ position:relative; z-index:3; }
 .aa-gx__card{ cursor:pointer; }
-/* Cartes de la galerie : îlots crème dans les deux thèmes, comme les cartes modèles,
-   pour que la vignette sombre du graphe ressorte aussi en thème sombre (26/10/2026) */
-.aa-gx__card{ --blanc-casse:#1E2630; --gris-doux:#4D5968; --bordeaux-vif:#8f2233; --ardoise-3:#D6C8AC;
-  background:#F1E7D3; border-color:#D6C8AC; color:#1E2630; box-shadow:0 8px 26px rgba(0,0,0,.30); }
+/* Vignettes de la galerie : fond crème brun en thème sombre pour adoucir le contraste,
+   fond ardoise en thème clair (26/10/2026) */
+.aa-gx__fig{ background:#D6C3A1; }
+html[data-theme="light"] .aa-gx__fig{ background:#1E2630; }
 .hx-ico--sm{ width:14px; height:14px; vertical-align:-2px; margin-right:.3rem; }
 .aa-gx__q{ font-family:var(--font-display); font-style:italic; font-size:1rem; line-height:1.35; color:var(--blanc-casse); margin:-.1rem 0 .1rem; }
 .aa-gx__tool{ display:inline-block; align-self:flex-start; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--creme); background:var(--bordeaux); padding:.15rem .5rem; border-radius:4px; }
