@@ -579,6 +579,9 @@ html body .wrap>.nm-intro{padding-left:0;padding-right:0}
 </style>
 <style>
 /* Liens de contenu : soulignement qui se dessine au survol, comme sur le reste du site */
+/* Renvoi sobre vers la mission IA et RH (27/10/2026) */
+.nm-mission{margin:18px 0 6px;padding:14px 16px;border-radius:10px;border:1px dashed var(--nm-bx,#7A1F2D);background:var(--nm-bx-soft,rgba(122,31,45,.06));font-size:14.5px;line-height:1.6;color:var(--ink,inherit)}
+.nm-mission a{color:var(--nm-bx,#7A1F2D);font-weight:600;white-space:nowrap}
 /* Pastille « Poser une question à ce graphe » : la fonction mise en avant (26/10/2026) */
 .nm-meta a.nm-hx{display:inline-flex;align-items:center;gap:.45rem;padding:.38rem .85rem .38rem .7rem;border:1px solid var(--nm-bx,#7A1F2D);border-radius:999px;background:var(--nm-bx-soft,rgba(122,31,45,.08))!important;background-image:none!important;color:var(--nm-bx,#7A1F2D);font-weight:600;transition:background-color .15s,color .15s}
 .nm-meta a.nm-hx:hover{background:var(--nm-bx,#7A1F2D)!important;color:#F7EFE2;text-decoration:none}
@@ -600,6 +603,7 @@ html[data-theme="light"] footer.nm-site-footer{--blanc-casse:#1E2630;--gris-doux
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
     <ul class="nav-links" id="nav-links">
       <li><a href="/">Accueil</a></li>
+      <li><a href="/missions">Missions</a></li>
       <li><a href="/modeles/">Modèles</a></li>
       <li><a href="/decryptages" aria-current="page">Décryptages</a></li>
       <li><a href="/articles">Articles</a></li>
@@ -935,6 +939,9 @@ function renderResult(){
     if(st.gpai) rg.push(st.gpai==='OUT_IAUG_S'?'R_IAUG_SYST':'R_IAUG');
     lien='<a class="btn yes" style="text-decoration:none" href="/decryptages/ai-act/registre-obligations#profil=roles:'+ro.join(',')+';regs:'+rg.join(',')+'">Voir mes obligations dans le registre →</a>';
   }
+  if(key==='OUT_HR1'||key==='OUT_HR3'){
+    h+='<p class="nm-mission">Votre outil relève du haut risque. Le registre liste ce qu\u2019il faut faire. Décider par quoi commencer avec un budget qui ne permet pas tout, ou mesurer ce que l\u2019outil change vraiment à vos recrutements, c\u2019est ce que je modélise en mission. <a href="/missions#ia-rh">Voir la mission&nbsp;→</a> · <a href="/decryptages/ai-act/#question">En parler&nbsp;→</a></p>';
+  }
   h+='<div class="foot">'+lien+'<button class="btn" id="again">Recommencer le parcours</button></div></div>';
   main.innerHTML=h;
   document.getElementById('again').addEventListener('click',reset);
@@ -1097,6 +1104,7 @@ window.addEventListener('resize',fitAll);
       </a>
       <nav aria-label="Pied de page">
         <ul>
+          <li><a href="/missions">Missions</a></li>
           <li><a href="/modeles/">Modèles</a></li>
           <li><a href="/decryptages">Décryptages</a></li>
           <li><a href="/articles">Articles</a></li>

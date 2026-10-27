@@ -229,6 +229,14 @@ html[data-theme="light"] .aa-gx__fig{ background:#1E2630; box-shadow:none; }
 .aa-gx__links a:nth-child(2)[data-hint]:hover::before{ opacity:1; transform:none; }
 .aa-gx__card:has(.aa-gx__links a:nth-child(2):hover) .aa-gx__links a:first-child[data-hint]::before{ opacity:0; }
 @media (hover:none){ .aa-gx__links a[data-hint]::before{ display:none; } }
+/* Alerte e-mail à la parution des lignes directrices (27/10/2026) */
+.aa-alert{ max-width:40rem; margin-top:1.75rem; padding:1.1rem 1.2rem; border:1px solid var(--ardoise-3); border-radius:12px; }
+.aa-alert label{ display:block; font-weight:600; margin-bottom:.6rem; }
+.aa-alert__row{ display:flex; gap:.6rem; flex-wrap:wrap; }
+.aa-alert__row input{ flex:1 1 14rem; min-width:0; padding:.7rem .85rem; border-radius:8px; border:1px solid var(--ardoise-3); background:transparent; color:var(--blanc-casse); font:inherit; }
+.aa-alert__fine{ font-size:.82rem; color:var(--gris-doux); margin:.65rem 0 0; }
+.aa-alert__ok{ display:none; font-weight:600; color:var(--bordeaux-vif); margin-top:.6rem; }
+.aa-alert [data-fs-success].fs-success, .aa-alert__ok.fs-success{ display:block; }
 .hx-ico--sm{ width:14px; height:14px; vertical-align:-2px; margin-right:.3rem; }
 .aa-gx__q{ font-family:var(--font-display); font-style:italic; font-size:1rem; line-height:1.35; color:var(--blanc-casse); margin:-.1rem 0 .1rem; }
 .aa-gx__tool{ display:inline-block; align-self:flex-start; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--creme); background:var(--bordeaux); padding:.15rem .5rem; border-radius:4px; }
@@ -255,6 +263,7 @@ html[data-theme="light"] .aa-gx__fig{ background:#1E2630; box-shadow:none; }
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle">Menu</button>
     <ul class="nav-links" id="nav-links">
       <li><a href="/">Accueil</a></li>
+      <li><a href="/missions">Missions</a></li>
       <li><a href="/modeles/">Modèles</a></li>
       <li><a href="/decryptages" aria-current="page">Décryptages</a></li>
       <li><a href="/articles">Articles</a></li>
@@ -667,6 +676,20 @@ html[data-theme="light"] .aa-gx__fig{ background:#1E2630; box-shadow:none; }
           Si vous relevez une erreur, signalez-la&nbsp;: je corrige et je l'indique.
         </p>
       </div>
+      <form id="aiact-alert" class="aa-alert" action="https://formspree.io/f/mojzoazo" method="POST" novalidate data-nm-submit="aiact-alerte">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="_subject" value="Alerte AI Act : inscription (lignes directrices haut risque)">
+        <input type="hidden" name="provenance" value="Page AI Act — alerte lignes directrices">
+        <label for="aa-alert-email">Être prévenu quand les lignes directrices de la Commission paraissent</label>
+        <div class="aa-alert__row">
+          <input type="email" id="aa-alert-email" name="email" placeholder="vous@organisation.com" required data-fs-field>
+          <button type="submit" class="btn btn--primary" data-fs-submit-btn>Me prévenir</button>
+        </div>
+        <span data-fs-error="email" class="form-field-error"></span>
+        <div data-fs-error class="form-error-global"></div>
+        <div data-fs-success class="aa-alert__ok">C'est noté. Vous recevrez un seul e-mail, à leur parution.</div>
+        <p class="aa-alert__fine">Un seul e-mail, à leur parution, avec ce qu'elles changent dans les outils. Votre adresse ne sert qu'à ça et elle est supprimée après l'envoi. Voir la <a href="/mentions-legales/confidentialite">politique de confidentialité</a>.</p>
+      </form>
       <ul class="sources">
         <li><a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02024R1689-20260727" target="_blank" rel="noopener">Règlement (UE) 2024/1689, version consolidée au 27/07/2026</a> — EUR-Lex</li>
         <li><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj?locale=fr" target="_blank" rel="noopener">Règlement (UE) 2024/1689, texte initial</a> — JO L du 12/07/2024</li>
@@ -692,6 +715,7 @@ html[data-theme="light"] .aa-gx__fig{ background:#1E2630; box-shadow:none; }
       <p class="aa-q-alt">
         Une question sur le texte lui-même&nbsp;? <a href="/decryptages/ai-act/cartographie/graphe" data-hint="Un assistant IA répond à vos questions à partir de ce graphe et cite ses sources, sur Hellixmap" target="_blank" rel="noopener" data-nm-click="aiact-contact-vers-assistant" title="Ouvre la cartographie du règlement et son assistant, dans un nouvel onglet (Hellixmap, la plateforme de graphes de Bayesia)">L'assistant de la cartographie y répond directement, en citant les articles&nbsp;↗</a>
       </p>
+      <p class="aa-q-alt">Ce que peut donner une mission, livrables, délais et prix&nbsp;: <a href="/missions" data-nm-click="aiact-contact-vers-missions">voir les missions</a>.</p>
 
       <div class="contact-card">
         <div data-fs-success class="form-success">
@@ -750,6 +774,7 @@ html[data-theme="light"] .aa-gx__fig{ background:#1E2630; box-shadow:none; }
       </a>
       <nav aria-label="Pied de page">
         <ul>
+          <li><a href="/missions">Missions</a></li>
           <li><a href="/modeles/">Modèles</a></li>
           <li><a href="/decryptages" aria-current="page">Décryptages</a></li>
           <li><a href="/articles">Articles</a></li>
@@ -791,6 +816,7 @@ html[data-theme="light"] .aa-gx__fig{ background:#1E2630; box-shadow:none; }
     (formspree.q = formspree.q || []).push(arguments);
   };
   formspree('initForm', { formElement: '#aiact-form', formId: 'mojzoazo' });
+  formspree('initForm', { formElement: '#aiact-alert', formId: 'mojzoazo' });
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 <script src="script.js"></script>

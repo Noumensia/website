@@ -21,6 +21,7 @@
   var PAGES = [
     { p: '/', t: 'Accueil', type: 'page', tags: [] },
     { p: '/modeles', t: 'Les modèles', type: 'page', tags: ['modeles'] },
+    { p: '/missions', t: 'Les missions', type: 'page', tags: [] },
     { p: '/modeles/turnover', t: 'Turnover volontaire, le modèle', type: 'modele', tags: ['turnover'] },
     { p: '/modeles/burnout', t: 'Burn-out et risques psychosociaux, le modèle', type: 'modele', tags: ['rps'] },
     { p: '/articles', t: 'Les articles', type: 'page', tags: [] },

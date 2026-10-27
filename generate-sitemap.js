@@ -22,6 +22,7 @@ const DOMAIN = 'https://noumensia.com';
 // Pages racine fixes : peu nombreuses, changent rarement -> déclarées ici.
 const STATIC_PAGES = [
   { file: 'index.html', url: '/', priority: '1.0', changefreq: 'monthly' },
+  { file: 'missions.html', url: '/missions', priority: '0.9', changefreq: 'monthly' },
   { file: 'modeles.html', url: '/modeles', priority: '0.9', changefreq: 'monthly' },
   { file: 'articles.html', url: '/articles', priority: '0.8', changefreq: 'weekly' },
   { file: 'methode.html', url: '/methode', priority: '0.8', changefreq: 'monthly' },
