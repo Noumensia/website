@@ -19,10 +19,12 @@ export async function onRequest({ request, env }) {
       posts: await q('SELECT * FROM li_posts ORDER BY publie_le DESC'),
       stats: await q('SELECT * FROM li_stats ORDER BY urn, releve_le'),
       compte: await q('SELECT * FROM li_compte ORDER BY jour, mesure'),
+      jours: await q('SELECT * FROM li_jour ORDER BY jour'),
+      demographie: await q('SELECT * FROM li_demographie WHERE releve_le = (SELECT MAX(releve_le) FROM li_demographie) ORDER BY type, categorie'),
       visites: await q(`SELECT jour, COUNT(DISTINCT session) sessions, SUM(evt='vue') vues FROM hits
-        WHERE session IN (SELECT session FROM hits WHERE entree=1 AND evt='vue' AND (source LIKE '%linkedin%' OR source LIKE 'lnkd.in%'))
+        WHERE robot = 0 AND moi = 0 AND session IN (SELECT session FROM hits WHERE entree=1 AND evt='vue' AND (source LIKE '%linkedin%' OR source LIKE 'lnkd.in%'))
         GROUP BY jour ORDER BY jour`),
-      pagesDepuisLinkedin: await q(`SELECT page, COUNT(*) n FROM hits WHERE entree=1 AND evt='vue' AND (source LIKE '%linkedin%' OR source LIKE 'lnkd.in%') GROUP BY page ORDER BY n DESC`),
+      pagesDepuisLinkedin: await q(`SELECT page, COUNT(*) n FROM hits WHERE robot = 0 AND moi = 0 AND entree=1 AND evt='vue' AND (source LIKE '%linkedin%' OR source LIKE 'lnkd.in%') GROUP BY page ORDER BY n DESC`),
       cf: await q(`SELECT jour, SUM(n) n FROM historique WHERE source='cf_web' AND dimension='ref' AND valeur LIKE '%linkedin%' GROUP BY jour ORDER BY jour`)
     });
   }
@@ -47,6 +49,14 @@ export async function onRequest({ request, env }) {
     for (const c of (Array.isArray(d.compte) ? d.compte : []).slice(0, 2000)) {
       if (!/^\d{4}-\d{2}-\d{2}$/.test(String(c.jour || '')) || !c.mesure) continue;
       st.push(DB.prepare('INSERT OR REPLACE INTO li_compte (jour, mesure, valeur) VALUES (?1, ?2, ?3)').bind(c.jour, String(c.mesure).slice(0, 60), c.valeur == null ? null : +c.valeur));
+    }
+    for (const j of (Array.isArray(d.jours) ? d.jours : []).slice(0, 2000)) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(String(j.jour || ''))) continue;
+      st.push(DB.prepare('INSERT OR REPLACE INTO li_jour (jour, impressions, engagements, nouveaux_abonnes) VALUES (?1, ?2, ?3, ?4)').bind(j.jour, j.impressions == null ? null : +j.impressions, j.engagements == null ? null : +j.engagements, j.nouveaux_abonnes == null ? null : +j.nouveaux_abonnes));
+    }
+    for (const m of (Array.isArray(d.demographie) ? d.demographie : []).slice(0, 1000)) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(String(m.releve_le || '')) || !m.type || !m.categorie || !m.valeur) continue;
+      st.push(DB.prepare('INSERT OR REPLACE INTO li_demographie (releve_le, type, categorie, valeur, pct) VALUES (?1, ?2, ?3, ?4, ?5)').bind(m.releve_le, String(m.type), String(m.categorie), String(m.valeur), m.pct == null ? null : String(m.pct)));
     }
     if (!st.length) return json({ ok: false, error: 'Rien à enregistrer' }, 400);
     for (let i = 0; i < st.length; i += 50) await DB.batch(st.slice(i, i + 50));

@@ -1,8 +1,8 @@
-// GET /api/admin/export?table=hits|evenements|historique|inscrits|li_posts|li_stats|li_compte&format=csv|json
+// GET /api/admin/export?table=<table>&format=csv|json (tables : voir TABLES)
 // Exporte une table entière (sauvegarde). Pour hits, découpe possible : &depuis_id=N (lots de 20 000 lignes).
 import { json, autorise } from '../../../functions-lib/admin-auth.js';
 
-const TABLES = ['hits', 'evenements', 'historique', 'inscrits', 'li_posts', 'li_stats', 'li_compte'];
+const TABLES = ['hits', 'evenements', 'historique', 'inscrits', 'li_posts', 'li_stats', 'li_compte', 'li_jour', 'li_demographie', 'recherche', 'exclusions'];
 
 export async function onRequestGet({ request, env }) {
   if (!(await autorise(request, env))) return json({ ok: false, error: 'Jeton refusé' }, 401);

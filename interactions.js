@@ -1,11 +1,13 @@
-// Mesure d'audience de noumensia.com : sans cookie, sans adresse IP, sans identifiant durable.
-// Les événements partent vers /api/ev (Pages Function, base Cloudflare D1 dans l'UE).
-// - Un numéro de visite tiré au hasard vit dans sessionStorage, le temps de l'onglet seulement.
-// - Rien n'est envoyé si le visiteur s'y est opposé (bouton sur la page Confidentialité,
-//   localStorage « nm-optout ») ou si son navigateur envoie le signal Global Privacy Control.
-// Config facultative : window.NOUMENSIA_TRACKING = { endpoint: null } pour couper l'envoi.
+// Mesure d'audience de noumensia.com (voir la page Confidentialité).
+// - Visiteur : identifiant tiré au hasard, gardé dans le navigateur (localStorage « nm-vid »).
+// - Visite : nouvelle après 30 minutes sans activité (localStorage « nm-sess »).
+// - Les événements partent vers /api/ev (base Cloudflare D1, dans l'UE).
+// - Rien n'est envoyé si le visiteur s'y est opposé (bouton de la page Confidentialité, « nm-optout »).
+// - « nm-moi » = 1 : appareil d'Arthur, ses visites sont gardées mais marquées et exclues des statistiques.
 (function () {
   'use strict';
+  // Pas de mesure dans un cadre (aperçu de la carte des clics du cockpit).
+  try { if (window.self !== window.top) return; } catch (e) { return; }
 
   var CONFIG = { endpoint: '/api/ev', logConsole: false };
   if (window.NOUMENSIA_TRACKING && typeof window.NOUMENSIA_TRACKING === 'object') {
@@ -13,28 +15,28 @@
       if (Object.prototype.hasOwnProperty.call(window.NOUMENSIA_TRACKING, k)) CONFIG[k] = window.NOUMENSIA_TRACKING[k];
     }
   }
-
-  function optedOut() {
-    try { if (localStorage.getItem('nm-optout') === '1') return true; } catch (e) {}
-    return navigator.globalPrivacyControl === true;
+  function ls(key, val) {
+    try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; }
+    return null;
   }
+  function rid() { return (Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2) + Date.now().toString(36)).slice(0, 24); }
+  function optedOut() { return ls('nm-optout') === '1'; }
 
-  // ---- Visite (session d'onglet) ----
-  var sid = null, entree = false;
-  try {
-    sid = sessionStorage.getItem('nm-sid');
-    if (!sid) {
-      sid = (Math.random().toString(36).slice(2) + Date.now().toString(36)).slice(0, 20);
-      sessionStorage.setItem('nm-sid', sid);
-      entree = true;
-    }
-  } catch (e) { sid = null; entree = true; }
+  // ---- Visiteur et visite ----
+  var vid = ls('nm-vid'), nouveau = false;
+  if (!vid) { vid = rid(); nouveau = true; ls('nm-vid', vid); }
+  var now = Date.now(), sess = null, entree = false;
+  try { sess = JSON.parse(ls('nm-sess') || 'null'); } catch (e) { sess = null; }
+  if (!sess || !sess.id || now - (sess.last || 0) > 30 * 60 * 1000) { sess = { id: rid(), last: now }; entree = true; }
+  function touch() { sess.last = Date.now(); ls('nm-sess', JSON.stringify(sess)); }
+  touch();
 
   var ctx = {};
   if (entree) {
     try {
       var r = document.referrer ? new URL(document.referrer) : null;
       ctx.ref = r && r.host !== location.host ? r.host : (r ? 'interne' : '');
+      ctx.ref_complet = document.referrer || '';
     } catch (e) { ctx.ref = ''; }
     try {
       var q = new URLSearchParams(location.search);
@@ -56,20 +58,22 @@
 
   var first = true;
   function record(name, props, extra) {
-    var payload = { event: name, props: props || {}, page: location.pathname, sid: sid };
+    touch();
+    var payload = { event: name, props: props || {}, page: location.pathname, url: location.pathname + location.search,
+      sid: sess.id, vid: vid, langue: navigator.language || '', ecran: window.innerWidth || null };
+    if (ls('nm-moi') === '1') payload.moi = 1;
     if (extra) for (var x in extra) if (Object.prototype.hasOwnProperty.call(extra, x)) payload[x] = extra[x];
     if (first && name === 'view') {
-      payload.entree = entree;
+      payload.entree = entree; payload.nouveau = nouveau; payload.titre = document.title;
       for (var c in ctx) if (Object.prototype.hasOwnProperty.call(ctx, c)) payload[c] = ctx[c];
       first = false;
     }
     if (CONFIG.logConsole) console.debug('[nm]', payload);
     send(payload);
   }
-
   window.nmRecord = function (name, props) { record(name, props); };
 
-  // ---- Temps passé (onglet visible seulement), défilement, interactions avec les outils ----
+  // ---- Temps passé (onglet visible), défilement, réglages des outils ----
   var visibleSince = document.visibilityState === 'visible' ? Date.now() : null;
   var engaged = 0, maxScroll = 0, scrollSent = {}, nInteractions = 0, flushed = false;
   function tick() { if (visibleSince) { engaged += Date.now() - visibleSince; visibleSince = null; } }
@@ -78,7 +82,6 @@
     else { visibleSince = Date.now(); flushed = false; }
   });
   window.addEventListener('pagehide', function () { tick(); flush(); });
-
   function flush() {
     if (flushed) return;
     flushed = true;
@@ -87,7 +90,6 @@
     if (nInteractions > 0) record('interactions', {}, { valeur: nInteractions });
     engaged = 0; nInteractions = 0;
   }
-
   function onScroll() {
     var h = document.documentElement.scrollHeight - window.innerHeight;
     var pct = h > 0 ? Math.min(100, Math.round(window.scrollY / h * 100)) : 100;
@@ -96,17 +98,25 @@
       if (maxScroll >= m && !scrollSent[m]) { scrollSent[m] = 1; record('scroll', {}, { valeur: m }); }
     });
   }
+  function texte(el) {
+    var t = (el.getAttribute('aria-label') || el.innerText || el.textContent || el.getAttribute('title') || '').replace(/\s+/g, ' ').trim();
+    return t.slice(0, 90);
+  }
+  function pos(e) {
+    var d = document.documentElement, w = Math.max(d.scrollWidth, 1), h = Math.max(d.scrollHeight, 1);
+    return { x: Math.round(e.pageX / w * 10000) / 10000, y: Math.round(e.pageY / h * 10000) / 10000 };
+  }
 
   document.addEventListener('DOMContentLoaded', function () {
     var load = (window.performance && performance.now) ? Math.round(performance.now()) : null;
-    var is404 = !!document.querySelector('.error-code') && /404/.test(document.title + document.querySelector('.error-code').textContent);
+    var ec = document.querySelector('.error-code');
+    var is404 = !!ec && /404/.test(document.title + ec.textContent);
     record('view', { title: document.title }, { valeur: load, detail: is404 ? 'page introuvable' : null });
     if (is404) record('notfound', {}, { detail: location.pathname + location.search });
 
     var st; window.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(onScroll, 200); }, { passive: true });
     setTimeout(onScroll, 1500);
 
-    // Outils : chaque réglage modifié (case, curseur, liste, bouton d'un formulaire d'outil)
     document.addEventListener('change', function (e) {
       if (e.target && e.target.closest && !e.target.closest('form.contact-form, #aiact-alert')) nInteractions++;
     }, true);
@@ -120,31 +130,33 @@
       });
     });
 
-    // Clics : un seul écouteur pour toute la page (y compris le contenu ajouté après coup).
+    // Clics : un seul écouteur pour toute la page. On garde le texte du lien ou du bouton
+    // et la position du clic (en proportion de la page) pour la carte des clics.
     document.addEventListener('click', function (e) {
       var t = e.target && e.target.closest ? e.target : null;
       if (!t) return;
       var named = t.closest('[data-nm-click]');
       var a = t.closest('a[href]');
+      var b = t.closest('button, [role=button], summary, input[type=checkbox], input[type=radio], label');
+      var p = pos(e);
       if (!named && !a) {
-        var b = t.closest('button');
-        if (b && !b.closest('form.contact-form, #aiact-alert')) nInteractions++;
+        if (b && !b.closest('form.contact-form, #aiact-alert')) { nInteractions++; record('button', { name: texte(b) }, { detail: texte(b), x: p.x, y: p.y }); }
         return;
       }
+      var el = named || a;
       var raw = a ? (a.getAttribute('href') || '') : '';
       var u = null;
       try { if (a) u = new URL(a.href, location.href); } catch (err) { u = null; }
       var interne = !!(u && u.host === location.host);
+      var info = { detail: texte(el), x: p.x, y: p.y };
       if (named) {
-        record('click', { name: named.getAttribute('data-nm-click'), href: raw || null });
+        record('click', { name: named.getAttribute('data-nm-click'), href: raw || null }, info);
       } else {
         if (!raw || /^(javascript|tel):/i.test(raw)) return;
-        if (/^mailto:/i.test(raw)) { record('link', { href: 'mailto' }); return; }
-        if (raw.charAt(0) === '#') { record('link', { href: location.pathname + raw }); return; }
-        record('link', { href: u ? (interne ? u.pathname + u.hash : u.host + u.pathname) : raw });
+        if (/^mailto:/i.test(raw)) { record('link', { href: 'mailto' }, info); return; }
+        if (raw.charAt(0) === '#') { record('link', { href: location.pathname + raw }, info); return; }
+        record('link', { href: u ? (interne ? u.pathname + u.hash : u.host + u.pathname) : raw }, info);
       }
-      // Navigation dans le même onglet vers une autre page : on envoie le temps passé tout de suite
-      // (plus fiable que d'attendre la fermeture de la page).
       if (interne && !e.ctrlKey && !e.metaKey && !e.shiftKey && a.target !== '_blank' && u.pathname !== location.pathname) { tick(); flush(); }
     }, true);
 

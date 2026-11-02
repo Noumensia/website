@@ -110,8 +110,7 @@
         <h3>Données collectées</h3>
         <p>
           Ce site ne dépose aucun cookie et n'utilise ni traceur publicitaire,
-          ni outil de profilage. Il ne collecte aucune donnée permettant
-          d'identifier individuellement un visiteur. Les seules données traitées
+          ni régie publicitaire, ni réseau social intégré. Les données traitées
           le sont dans les cas décrits ci-dessous : la mesure d'audience et,
           si vous nous écrivez, réservez un créneau ou demandez une alerte, la prise de contact.
         </p>
@@ -127,24 +126,34 @@
           traitement à comprendre l'usage de son site (article 6.1.f du RGPD).
         </p>
         <p>
-          Le site dispose aussi de sa propre mesure, plus détaillée, qui sert uniquement à comprendre
-          comment il est utilisé et à l'améliorer : pages vues, liens et boutons cliqués, part de la
-          page lue, temps passé, usage des outils, page d'arrivée et site d'où vous venez, pays,
-          type d'appareil, navigateur et système. Pour relier les pages d'une même visite, un numéro
-          tiré au hasard est gardé dans votre navigateur le temps de l'onglet seulement
-          (sessionStorage) : il disparaît à la fermeture de l'onglet et ne permet pas de vous
-          reconnaître d'une visite à l'autre. Aucun cookie n'est déposé, votre adresse IP n'est
-          jamais enregistrée (le pays est déduit par Cloudflare au moment de la visite), et ces
-          données ne sont ni croisées avec d'autres, ni transmises à quiconque. Elles sont conservées
-          vingt-cinq mois au plus, sur l'infrastructure de Cloudflare dans l'Union européenne. Ce
-          fonctionnement suit les conditions posées par la CNIL pour les mesures d'audience
-          dispensées de consentement (même base légale que ci-dessus).
+          Le site dispose aussi de sa propre mesure, plus détaillée, qui sert à comprendre comment il
+          est utilisé et à l'améliorer. Elle enregistre, pour chaque visite : les pages vues et leur
+          titre, les liens et boutons cliqués (avec leur texte et leur position sur la page), la part
+          de la page lue, le temps passé, l'usage des outils, la page d'arrivée, le site ou la campagne
+          d'où vous venez, la langue et la largeur d'écran de votre navigateur, le type d'appareil, le
+          navigateur et le système. Elle enregistre aussi votre adresse IP et les informations que
+          Cloudflare en déduit au moment de la visite : pays, région, ville, code postal, position
+          approximative et réseau de connexion (fournisseur d'accès ou, pour certaines organisations,
+          leur propre réseau).
+        </p>
+        <p>
+          Pour reconnaître les visites successives d'un même navigateur, un identifiant tiré au hasard
+          est gardé dans votre navigateur (stockage local, pas un cookie) ; une visite est considérée
+          comme terminée après trente minutes sans activité. Cet identifiant ne contient aucune
+          information sur vous et n'est utilisé que sur ce site. Ces données ne sont ni vendues, ni
+          transmises à des tiers, ni croisées avec des données extérieures ; elles sont accessibles au
+          seul responsable du traitement et hébergées par Cloudflare dans l'Union européenne. Elles
+          sont conservées tant qu'elles restent utiles à l'analyse de la fréquentation du site et
+          réexaminées au moins une fois par an, pour supprimer ou rendre anonymes celles qui ne le sont
+          plus. Ce traitement repose sur l'intérêt légitime du responsable à comprendre et améliorer
+          son site (article 6.1.f du RGPD).
         </p>
         <p>
           Vous pouvez vous opposer à cette mesure à tout moment, sur cet appareil et ce navigateur :
           <button type="button" class="btn btn--ghost" id="nm-optout">M'exclure de la mesure</button>
           <span id="nm-optout-etat" role="status"></span>
-          Si votre navigateur envoie le signal « Global Privacy Control », vous êtes exclu d'office.
+          Rien n'est alors plus enregistré depuis ce navigateur. Pour obtenir l'effacement des données
+          déjà enregistrées, écrivez à contact@noumensia.com.
         </p>
         <script>
           (function () {
@@ -152,7 +161,7 @@
             if (!b) return;
             function lire() { try { return localStorage.getItem('nm-optout') === '1'; } catch (x) { return false; } }
             function maj() {
-              var o = lire() || navigator.globalPrivacyControl === true;
+              var o = lire();
               b.textContent = lire() ? 'Réintégrer la mesure' : 'M\u2019exclure de la mesure';
               e.textContent = o ? '\u00a0Vous êtes exclu de la mesure sur ce navigateur.' : '';
             }
@@ -173,6 +182,8 @@
           (stockage local), n'est jamais transmise à Noumensia ni à un tiers, et
           s'efface d'elle-même au bout de 60 jours. Votre choix de thème clair ou
           sombre, et votre éventuelle opposition à la mesure d'audience, sont conservés de la même façon.
+          L'identifiant de la mesure d'audience décrit plus haut est lui aussi gardé dans le stockage
+          local ; le bouton ci-dessous l'efface, ainsi que la liste des contenus lus.
         </p>
         <p>
           La page depuis laquelle vous arrivez sur la prise de contact ou de rendez-vous
@@ -187,7 +198,7 @@
             var b = document.getElementById('nm-forget'), ok = document.getElementById('nm-forget-ok');
             if (!b) return;
             b.addEventListener('click', function () {
-              try { localStorage.removeItem('nm-parcours'); localStorage.removeItem('nm-ev'); sessionStorage.removeItem('nm-s'); sessionStorage.removeItem('nm-sid'); } catch (e) {}
+              try { localStorage.removeItem('nm-parcours'); localStorage.removeItem('nm-ev'); localStorage.removeItem('nm-vid'); localStorage.removeItem('nm-sess'); sessionStorage.removeItem('nm-s'); sessionStorage.removeItem('nm-sid'); } catch (e) {}
               if (ok) ok.hidden = false;
             });
           })();
@@ -244,7 +255,7 @@
           site et au traitement de vos demandes :
         </p>
         <ul>
-          <li>Cloudflare — hébergement du site, mesure d'audience, compteur de clics et enregistrement des inscriptions aux alertes (base située dans l'Union européenne) ;</li>
+          <li>Cloudflare — hébergement du site, mesure d'audience et enregistrement des inscriptions aux alertes (base située dans l'Union européenne) ;</li>
           <li>Formspree — acheminement des messages envoyés via les formulaires du site ;</li>
           <li>Cal.com (instance européenne cal.eu) — prise de rendez-vous en ligne ;</li>
           <li>le fournisseur de messagerie électronique utilisé pour recevoir et traiter vos e-mails.</li>
@@ -273,7 +284,7 @@
           Cette politique peut être mise à jour. La date de dernière modification
           est indiquée ci-dessous.
         </p>
-        <p><em>Dernière mise à jour : 30 octobre 2026</em></p>
+        <p><em>Dernière mise à jour : 2 novembre 2026</em></p>
 
       </div>
     </div>

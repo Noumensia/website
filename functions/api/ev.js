@@ -1,25 +1,25 @@
-// POST /api/ev : mesure d'audience du site, sans cookie ni adresse IP.
-// Chaque événement est gardé avec : la page, un numéro de visite tiré au hasard (il ne vit que le
-// temps de l'onglet, sessionStorage), la provenance de la visite, le pays (déduit par Cloudflare,
-// l'adresse IP n'est jamais enregistrée), le type d'appareil, le navigateur et le système.
-// Conservation : 25 mois au plus (purge automatique), conformément à la recommandation de la CNIL.
+// POST /api/ev : mesure d'audience de noumensia.com.
+// Chaque événement est gardé en entier, sans durée de conservation automatique :
+// page, adresse et titre, visiteur (identifiant tiré au hasard et gardé dans le navigateur),
+// visite (session de 30 minutes d'inactivité), provenance complète, adresse IP et ce que
+// Cloudflare en déduit (pays, région, ville, code postal, réseau / organisation, fuseau),
+// navigateur complet, langue, largeur d'écran, position des clics.
+// Les visites d'Arthur (appareil marqué ou IP exclue) sont gardées mais marquées moi = 1.
 
-const EVTS = { view: 'vue', click: 'clic', link: 'lien', submit: 'envoi', open: 'ouverture', resultat: 'resultat',
-  scroll: 'defilement', temps: 'temps', interactions: 'interactions', notfound: 'erreur404' };
+const EVTS = { view: 'vue', click: 'clic', link: 'lien', button: 'bouton', submit: 'envoi', open: 'ouverture',
+  resultat: 'resultat', scroll: 'defilement', temps: 'temps', interactions: 'interactions', notfound: 'erreur404' };
 
-const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|pingdom|monitor|curl|wget|python|httpclient|facebookexternalhit|embedly|quora|whatsapp|telegram|discord|skype|bingpreview|petalbot|semrush|ahrefs|yandex|baidu|bytespider|gptbot|claude|perplexity|ccbot/i;
+const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|pingdom|monitor|curl|wget|python|httpclient|facebookexternalhit|embedly|quora|whatsapp|telegram|discord|skype|bingpreview|petalbot|semrush|ahrefs|yandex|baidu|bytespider|gptbot|claudebot|perplexity|ccbot/i;
 
 function nettoie(s, max) {
-  return String(s == null ? '' : s).trim().replace(/[\u0000-\u001f<>"]/g, '').slice(0, max || 120);
+  return String(s == null ? '' : s).trim().replace(/[\u0000-\u001f<>]/g, '').slice(0, max || 120);
 }
-
 function chemin(p) {
-  let s = String(p || '/').split('#')[0].split('?')[0].slice(0, 160);
+  let s = String(p || '/').split('#')[0].split('?')[0].slice(0, 200);
   if (!s.startsWith('/')) return null;
   s = s.replace(/[.\s]+$/, '').replace(/\.html$/, '').replace(/\/index$/, '/');
   return s || '/';
 }
-
 function appareil(ua) {
   if (/ipad|tablet|kindle|silk|(android(?!.*mobile))/i.test(ua)) return 'tablette';
   if (/mobi|iphone|ipod|android.*mobile|windows phone/i.test(ua)) return 'mobile';
@@ -29,6 +29,7 @@ function navigateur(ua) {
   if (/edg\//i.test(ua)) return 'Edge';
   if (/opr\/|opera/i.test(ua)) return 'Opera';
   if (/samsungbrowser/i.test(ua)) return 'Samsung Internet';
+  if (/linkedinapp/i.test(ua)) return 'Appli LinkedIn';
   if (/firefox|fxios/i.test(ua)) return 'Firefox';
   if (/chrome|crios/i.test(ua)) return 'Chrome';
   if (/safari/i.test(ua)) return 'Safari';
@@ -46,26 +47,22 @@ function systeme(ua) {
 function libelle(type, p) {
   const n = (s) => nettoie(s, 100).toLowerCase().replace(/https?:\/\/(www\.)?/, '');
   switch (type) {
-    case 'vue': return 'vue';
+    case 'vue': case 'defilement': case 'temps': case 'interactions': case 'erreur404': return type;
     case 'clic': return p.name ? 'clic:' + n(p.name) : null;
     case 'lien': return p.href ? 'lien:' + n(p.href) : null;
+    case 'bouton': return 'bouton:' + (n(p.name) || 'sans nom');
     case 'envoi': return p.name ? 'envoi:' + n(p.name) : null;
     case 'ouverture': return 'ouverture:' + n(p.group) + ':' + n(p.id || p.label);
     case 'resultat': return p.name ? 'resultat:' + n(p.name) : null;
-    case 'defilement': return 'defilement';
-    case 'temps': return 'temps';
-    case 'interactions': return 'interactions';
-    case 'erreur404': return 'erreur404';
     default: return null;
   }
 }
-
+const ID = (s) => /^[a-z0-9]{8,40}$/i.test(String(s || '')) ? String(s) : null;
 const vide = () => new Response(null, { status: 204, headers: { 'Cache-Control': 'no-store' } });
 
-export async function onRequestPost({ request, env, waitUntil }) {
+export async function onRequestPost({ request, env }) {
   if (!env.DB) return vide();
   const ua = request.headers.get('user-agent') || '';
-  if (!ua || BOT.test(ua)) return vide();
   let d;
   try { d = JSON.parse(await request.text()); } catch (e) { return vide(); }
   if (!d || typeof d !== 'object') return vide();
@@ -77,46 +74,50 @@ export async function onRequestPost({ request, env, waitUntil }) {
   const page = chemin(d.page);
   if (!page) return vide();
 
-  const now = new Date();
-  const ts = now.toISOString().slice(0, 19).replace('T', ' ');
+  const ts = new Date().toISOString().slice(0, 19).replace('T', ' ');
   const jour = ts.slice(0, 10);
-  const session = /^[a-z0-9]{8,32}$/i.test(String(d.sid || '')) ? String(d.sid) : null;
+  const session = ID(d.sid), visiteur = ID(d.vid);
   const entree = d.entree ? 1 : 0;
-  let valeur = Number.isFinite(+d.valeur) ? Math.max(0, Math.min(Math.round(+d.valeur), 10000000)) : null;
-  const detail = nettoie(d.detail, 200) || null;
-  // Provenance : seulement pour la première page de la visite
-  let source = null, us = null, um = null, uc = null;
+  const num = (v, max) => (v == null || v === '' || !Number.isFinite(+v)) ? null : Math.max(0, Math.min(+v, max));
+  const valeur = num(d.valeur, 1e9) == null ? null : Math.round(num(d.valeur, 1e9));
+  const detail = nettoie(d.detail, 300) || null;
+  let source = null, us = null, um = null, uc = null, referrer = null;
   if (entree) {
-    const ref = nettoie(d.ref, 120).toLowerCase().replace(/^www\./, '');
-    source = ref || 'direct';
-    us = nettoie(d.utm_source, 60) || null;
-    um = nettoie(d.utm_medium, 60) || null;
-    uc = nettoie(d.utm_campaign, 80) || null;
+    source = nettoie(d.ref, 160).toLowerCase().replace(/^www\./, '') || 'direct';
+    referrer = nettoie(d.ref_complet, 500) || null;
+    us = nettoie(d.utm_source, 80) || null;
+    um = nettoie(d.utm_medium, 80) || null;
+    uc = nettoie(d.utm_campaign, 120) || null;
   }
   const cf = request.cf || {};
-  const pays = nettoie(cf.country, 3) || null;
+  const ip = request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || null;
+  const robot = (!ua || BOT.test(ua)) ? 1 : 0;
 
-  const stmts = [
-    env.DB.prepare(
-      'INSERT INTO hits (ts, jour, session, page, evt, detail, valeur, source, utm_source, utm_medium, utm_campaign, pays, appareil, navigateur, os, entree) ' +
-      'VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16)'
-    ).bind(ts, jour, session, page, evt, detail, valeur, source, us, um, uc, pays, appareil(ua), navigateur(ua), systeme(ua), entree)
-  ];
-  // Compteur agrégé historique (première version de la mesure, gardé pour la continuité)
-  if (['vue', 'clic', 'lien', 'envoi', 'ouverture', 'resultat'].includes(type)) {
-    stmts.push(env.DB.prepare(
-      'INSERT INTO evenements (jour, page, evt, n) VALUES (?1, ?2, ?3, 1) ON CONFLICT (jour, page, evt) DO UPDATE SET n = n + 1'
-    ).bind(jour, page, evt));
+  let moi = d.moi ? 1 : 0;
+  if (!moi && (ip || visiteur)) {
+    try {
+      const ex = await env.DB.prepare("SELECT 1 FROM exclusions WHERE (type='ip' AND valeur=?1) OR (type='visiteur' AND valeur=?2) LIMIT 1")
+        .bind(ip || '', visiteur || '').first();
+      if (ex) moi = 1;
+    } catch (e) {}
+  }
+
+  const cols = {
+    ts, jour, session, page, evt, detail, valeur, source, utm_source: us, utm_medium: um, utm_campaign: uc,
+    pays: nettoie(cf.country, 3) || null, appareil: appareil(ua), navigateur: navigateur(ua), os: systeme(ua), entree,
+    visiteur, ip, ua: nettoie(ua, 400) || null, ville: nettoie(cf.city, 80) || null, region: nettoie(cf.region, 80) || null,
+    code_postal: nettoie(cf.postalCode, 12) || null, asn: Number.isFinite(+cf.asn) ? +cf.asn : null,
+    organisation: nettoie(cf.asOrganization, 120) || null, fuseau: nettoie(cf.timezone, 60) || null,
+    langue: nettoie(d.langue, 20) || null, ecran: num(d.ecran, 20000) == null ? null : String(Math.round(num(d.ecran, 20000))),
+    moi, url: nettoie(d.url, 500) || null, referrer, titre: nettoie(d.titre, 200) || null,
+    x: num(d.x, 1), y: num(d.y, 1), lat: cf.latitude != null ? +cf.latitude : null, lon: cf.longitude != null ? +cf.longitude : null,
+    nouveau: d.nouveau ? 1 : 0, robot
+  };
+  const names = Object.keys(cols);
+  const stmts = [env.DB.prepare(`INSERT INTO hits (${names.join(', ')}) VALUES (${names.map(() => '?').join(', ')})`).bind(...names.map(k => cols[k]))];
+  if (!robot && !moi && ['vue', 'clic', 'lien', 'envoi', 'ouverture', 'resultat'].includes(type)) {
+    stmts.push(env.DB.prepare('INSERT INTO evenements (jour, page, evt, n) VALUES (?1, ?2, ?3, 1) ON CONFLICT (jour, page, evt) DO UPDATE SET n = n + 1').bind(jour, page, evt));
   }
   try { await env.DB.batch(stmts); } catch (e) {}
-
-  // Purge des données de plus de 25 mois, de temps en temps
-  if (Math.random() < 0.01) {
-    const purge = env.DB.batch([
-      env.DB.prepare("DELETE FROM hits WHERE jour < date('now', '-25 months')"),
-      env.DB.prepare("DELETE FROM evenements WHERE jour < date('now', '-25 months')")
-    ]).catch(() => {});
-    if (waitUntil) waitUntil(purge);
-  }
   return vide();
 }
