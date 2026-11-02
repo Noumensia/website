@@ -6,6 +6,7 @@
 import { json, autorise } from '../../../functions-lib/admin-auth.js';
 
 const NA = "('vue','temps','defilement','interactions')";
+const ASSETS = "('/api/ev','/interactions.js','/style.css','/script.js','/fonts/ibm-plex-sans-400.woff2','/fonts/newsreader-600.woff2')";
 const OFF = "CASE WHEN substr(ts,6,5) BETWEEN '03-29' AND '10-25' THEN '+2 hours' ELSE '+1 hours' END";
 // Expressions des dimensions, sur les colonnes de F (événements filtrés + attributs d'arrivée de la visite)
 const DIMS = {
@@ -320,6 +321,34 @@ export async function onRequestGet({ request, env }) {
     else if (vue === 'recherche') {
       R.lignes = await raw('SELECT * FROM recherche ORDER BY moteur, dimension, jour, clics DESC, impressions DESC');
       R.siteDepuisRecherche = await q("SELECT COALESCE(source,'inconnu') source, COUNT(*) visites, SUM(vues) vues FROM S WHERE source LIKE '%google%' OR source LIKE '%bing%' OR source LIKE '%duckduckgo%' OR source LIKE '%qwant%' OR source LIKE '%ecosia%' OR source LIKE '%yahoo%' GROUP BY 1 ORDER BY 2 DESC");
+    }
+
+    else if (vue === 'serveur') {
+      // Requêtes de pages reçues par Cloudflare (table cf_requetes, recopiée chaque semaine, 31 jours glissants chez Cloudflare).
+      // humain : 0 robot ou parasite, 1 navigateur probable, 2 confirmé (a chargé polices / style / script le même jour).
+      const niv = lim('niveau', 2, 2);
+      const PG = `page NOT IN ${ASSETS}`;
+      R.niveau = niv;
+      R.couverture = (await raw('SELECT MIN(jour) du, MAX(jour) au, COUNT(*) lignes FROM cf_requetes'))[0] || {};
+      R.totaux = await raw(`SELECT humain, SUM(n) vues, COUNT(DISTINCT ip) ips FROM cf_requetes WHERE ${PG} AND jour BETWEEN ? AND ? GROUP BY humain`, B.du, B.au);
+      R.parJour = await raw(`SELECT jour, SUM(CASE WHEN humain=2 THEN n ELSE 0 END) vues_confirmees, COUNT(DISTINCT CASE WHEN humain=2 THEN ip END) ips_confirmees,
+          SUM(CASE WHEN humain>=1 THEN n ELSE 0 END) vues_probables, COUNT(DISTINCT CASE WHEN humain>=1 THEN ip END) ips_probables, SUM(n) vues_toutes
+          FROM cf_requetes WHERE ${PG} AND jour BETWEEN ? AND ? GROUP BY jour ORDER BY jour`, B.du, B.au);
+      R.ips = await raw(`SELECT ip, MIN(ts) premier, MAX(ts) dernier, COUNT(DISTINCT jour) jours, SUM(n) vues, COUNT(DISTINCT page) pages, MAX(pays) pays,
+          MAX(appareil) appareil, MAX(ua) ua, MAX(humain) humain, MAX(echantillon) echantillon,
+          EXISTS (SELECT 1 FROM hits h WHERE h.ip = c.ip) mesure_site, EXISTS (SELECT 1 FROM exclusions x WHERE x.type='ip' AND x.valeur = c.ip) exclue,
+          (SELECT group_concat(page, ' · ') FROM (SELECT page FROM cf_requetes c2 WHERE c2.ip = c.ip AND c2.page NOT IN ${ASSETS} AND c2.jour BETWEEN ?1 AND ?2 GROUP BY page ORDER BY SUM(n) DESC LIMIT 4)) top_pages
+          FROM cf_requetes c WHERE ${PG} AND jour BETWEEN ?1 AND ?2 AND humain >= ?3 GROUP BY ip ORDER BY dernier DESC LIMIT 5000`, B.du, B.au, niv);
+      R.pages = await raw(`SELECT page, SUM(n) vues, COUNT(DISTINCT ip) ips FROM cf_requetes WHERE ${PG} AND jour BETWEEN ? AND ? AND humain >= ? GROUP BY page ORDER BY vues DESC LIMIT 500`, B.du, B.au, niv);
+    }
+
+    else if (vue === 'ip') {
+      const ip = (url.searchParams.get('ip') || '').slice(0, 64);
+      R.ip = ip;
+      R.requetes = await raw('SELECT ts, hote, page, ua, pays, appareil, statut, robot_verifie, n, echantillon, humain FROM cf_requetes WHERE ip = ? ORDER BY ts', ip);
+      R.visites = await raw(`SELECT session, MIN(ts) debut, MAX(visiteur) visiteur, SUM(evt='vue') vues, MAX(organisation) organisation, MAX(ville) ville, MAX(code_postal) code_postal,
+          MAX(appareil) appareil, MAX(moi) moi FROM hits WHERE ip = ? GROUP BY session ORDER BY debut DESC LIMIT 500`, ip);
+      R.exclue = !!(await raw("SELECT 1 x FROM exclusions WHERE type='ip' AND valeur = ?", ip)).length;
     }
 
     else if (vue === 'brut') {

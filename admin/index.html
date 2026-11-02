@@ -18,7 +18,7 @@
   --s1:#C26472; --s2:#E9D6B4; --s3:#6B7480; --s4:#E3A2AC; --s5:#7FB2D0; --s6:#D9B65E; --ok:#7FC3A0; --warn:#E0A75E; } }
 *{ box-sizing:border-box; }
 body{ margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 "IBM Plex Sans",system-ui,sans-serif; }
-.wrap{ max-width:1320px; margin:0 auto; padding:18px 16px 72px; }
+.wrap{ max-width:560px; margin:0 auto; padding:48px 16px 72px; }
 h1{ font-family:Newsreader,serif; font-weight:600; font-size:1.6rem; margin:0; }
 h2{ font-family:Newsreader,serif; font-weight:600; font-size:1.2rem; margin:0 0 10px; }
 h3{ font-size:.9rem; margin:12px 0 8px; color:var(--mute); font-weight:600; }
@@ -42,7 +42,8 @@ nav.tabs a:hover{ border-color:var(--line); }
 nav.tabs a.on{ background:var(--ink); color:var(--bg); }
 .bar-ctl{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:8px; }
 .bar-ctl .lbl{ color:var(--mute); font-size:.85rem; }
-.chips{ display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:12px; min-height:28px; }
+.chips{ display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+.chips:empty{ margin:0; }
 .chip{ display:inline-flex; align-items:center; gap:6px; background:var(--soft); border:1px solid var(--line); border-radius:20px; padding:2px 4px 2px 10px; font-size:.84rem; }
 .chip b{ font-weight:600; }
 .chip button{ border:0; padding:0 6px; font-size:1rem; line-height:1; }
@@ -97,16 +98,56 @@ td.mono{ font-family:"IBM Plex Mono",monospace; font-size:.8rem; }
 .cmap .band{ position:absolute; left:0; right:0; border-top:1px dashed rgba(122,31,45,.8); font:600 11px "IBM Plex Sans",sans-serif; color:#7A1F2D; background:rgba(255,255,255,.75); padding:1px 6px; width:max-content; }
 details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
 [hidden]{ display:none !important; }
+/* coque : barre latérale + contenu */
+.shell{ display:grid; grid-template-columns:232px minmax(0,1fr); min-height:100vh; }
+.side{ position:sticky; top:0; height:100vh; overflow:auto; padding:18px 12px 24px; border-right:1px solid var(--line); background:var(--card); }
+.side .brand{ font-family:Newsreader,serif; font-weight:600; font-size:1.25rem; padding:0 10px; }
+.side .brand small{ display:block; font-family:"IBM Plex Sans",sans-serif; font-weight:400; font-size:.78rem; color:var(--mute); }
+.side h4{ font-size:.68rem; text-transform:uppercase; letter-spacing:.09em; color:var(--mute); margin:18px 10px 4px; font-weight:600; }
+.side nav a{ display:flex; justify-content:space-between; align-items:center; padding:6px 10px; border-radius:8px; color:var(--ink); text-decoration:none; font-size:.92rem; }
+.side nav a:hover{ background:var(--soft); }
+.side nav a.on{ background:var(--ink); color:var(--bg); }
+.mode{ display:flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; margin:14px 4px 0; }
+.mode button{ flex:1; border:0; border-radius:0; padding:5px 6px; font-size:.82rem; }
+.side .foot{ margin:20px 4px 0; display:flex; flex-direction:column; gap:6px; }
+.menu-btn{ display:none; }
+.main{ min-width:0; padding:20px 28px 72px; max-width:1260px; width:100%; }
+body.simple [data-adv]{ display:none !important; }
+.hero{ font-family:Newsreader,serif; font-size:1.42rem; line-height:1.45; margin:4px 0 18px; max-width:62em; }
+.hero b{ color:var(--accent); font-weight:600; }
+.kpi svg.spark{ display:block; width:100%; height:34px; margin-top:6px; }
+.kpi.big b{ font-size:1.75rem; }
+.mini{ list-style:none; margin:0; padding:0; }
+.mini li{ position:relative; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; padding:6px 8px; border-radius:6px; font-size:.9rem; cursor:pointer; }
+.mini li:hover{ background:var(--soft); }
+.mini li .fill{ position:absolute; left:0; top:0; bottom:0; background:var(--accent); opacity:.09; border-radius:6px; pointer-events:none; }
+.mini li span{ position:relative; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.mini li b{ position:relative; font-variant-numeric:tabular-nums; font-weight:600; }
+.mini li small{ color:var(--mute); }
+.more{ display:inline-block; margin-top:10px; font-size:.86rem; text-decoration:none; }
+.card h2 .more{ float:right; margin:0; font-family:"IBM Plex Sans",sans-serif; font-weight:400; }
+.feed li{ grid-template-columns:62px minmax(0,1fr) auto; }
+.feed .t{ color:var(--mute); font-variant-numeric:tabular-nums; font-size:.82rem; }
+.grid3{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin-bottom:16px; }
+.grid3 > .card{ margin-bottom:0; }
+.pill{ display:inline-block; font-size:.74rem; padding:1px 8px; border-radius:20px; border:1px solid var(--line); color:var(--mute); }
+.pill.ok{ color:var(--ok); border-color:currentColor; } .pill.warn{ color:var(--warn); border-color:currentColor; }
+.showall{ margin-top:8px; }
+@media (max-width:900px){
+  .shell{ grid-template-columns:1fr; }
+  .side{ position:sticky; top:0; z-index:20; height:auto; max-height:100vh; border-right:0; border-bottom:1px solid var(--line); padding:10px 12px; }
+  .side .head{ display:flex; justify-content:space-between; align-items:center; }
+  .menu-btn{ display:inline-block; }
+  .side .body{ display:none; } .side.open .body{ display:block; }
+  .main{ padding:14px 14px 60px; }
+  .hero{ font-size:1.2rem; }
+}
 @media (max-width:600px){ .wrap{ padding:12px 12px 60px; } h1{ font-size:1.35rem; } .kpi b{ font-size:1.15rem; } .grid2{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <div><h1>Cockpit Noumensia</h1><p class="sub">Site, LinkedIn, recherche et inscrits, au même endroit</p></div>
-    <button id="logout" type="button" hidden>Se déconnecter</button>
-  </div>
-
+<div class="wrap" id="loginwrap">
+  <h1>Cockpit Noumensia</h1><p class="sub" style="margin-bottom:16px">Site, LinkedIn, recherche et inscrits, au même endroit</p>
   <div class="card" id="login">
     <h2>Accès</h2>
     <form class="row" id="login-form">
@@ -116,29 +157,44 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
     </form>
     <p class="msg" id="login-msg"></p>
   </div>
+</div>
 
-  <div id="app" hidden>
-    <nav class="tabs" id="tabs">
-      <a href="#/">Vue d'ensemble</a>
-      <a href="#/explorer">Explorateur</a>
-      <a href="#/parcours">Parcours</a>
-      <a href="#/clics">Carte des clics</a>
-      <a href="#/pages">Pages</a>
-      <a href="#/sources">Provenances</a>
-      <a href="#/actions">Clics et actions</a>
-      <a href="#/visiteurs">Visiteurs</a>
-      <a href="#/visites">Visites</a>
-      <a href="#/audience">Audience</a>
-      <a href="#/entonnoirs">Entonnoirs</a>
-      <a href="#/linkedin">LinkedIn</a>
-      <a href="#/recherche">Recherche</a>
-      <a href="#/historique">Cloudflare</a>
-      <a href="#/donnees">Données et réglages</a>
-      <a href="#/inscrits">Inscrits</a>
-    </nav>
+<div class="shell" id="app" hidden>
+  <aside class="side" id="side">
+    <div class="head"><div class="brand">Noumensia<small>Cockpit</small></div><button type="button" class="menu-btn small" id="menu">Menu</button></div>
+    <div class="body">
+      <div class="mode" role="group" aria-label="Niveau de détail"><button type="button" data-mode="simple">Simple</button><button type="button" data-mode="complet">Complet</button></div>
+      <nav id="nav">
+        <h4>Vue d'ensemble</h4>
+        <a href="#/">L'essentiel</a>
+        <a href="#/tendances">Tendances</a>
+        <h4>Comprendre</h4>
+        <a href="#/parcours">Parcours</a>
+        <a href="#/clics">Carte des clics</a>
+        <a href="#/entonnoirs" data-adv>Entonnoirs</a>
+        <a href="#/explorer" data-adv>Explorateur</a>
+        <h4>Détails</h4>
+        <a href="#/pages">Pages</a>
+        <a href="#/sources">Provenances</a>
+        <a href="#/actions">Clics et actions</a>
+        <a href="#/visiteurs">Visiteurs</a>
+        <a href="#/visites">Visites</a>
+        <a href="#/audience" data-adv>Audience</a>
+        <h4>Hors du site</h4>
+        <a href="#/linkedin">LinkedIn</a>
+        <a href="#/recherche">Recherche</a>
+        <a href="#/serveur">Requêtes et IP</a>
+        <a href="#/historique" data-adv>Cloudflare Analytics</a>
+        <h4>Gestion</h4>
+        <a href="#/donnees">Données et réglages</a>
+        <a href="#/inscrits">Inscrits</a>
+      </nav>
+      <div class="foot"><button id="logout" type="button" class="small">Se déconnecter</button></div>
+    </div>
+  </aside>
+  <main class="main">
     <div id="controls">
       <div class="bar-ctl">
-        <span class="lbl">Période</span>
         <button type="button" class="small" id="prev" title="Période précédente">‹</button>
         <select id="preset">
           <option value="0">Aujourd'hui</option>
@@ -153,10 +209,10 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
           <option value="perso">Personnalisée</option>
         </select>
         <button type="button" class="small" id="next" title="Période suivante">›</button>
-        <input type="date" id="du"> <input type="date" id="au">
-        <label class="row muted" style="gap:5px;font-size:.85rem"><input type="checkbox" id="moi"> inclure mes visites</label>
-        <button type="button" class="small" id="addf">+ Filtre</button>
-        <button type="button" class="small" id="refresh">Actualiser</button>
+        <span data-adv class="row" style="gap:6px"><input type="date" id="du"> <input type="date" id="au"></span>
+        <label class="row muted" style="gap:5px;font-size:.85rem" data-adv><input type="checkbox" id="moi"> inclure mes visites</label>
+        <button type="button" class="small" id="addf" data-adv>+ Filtre</button>
+        <button type="button" class="small" id="refresh" title="Actualiser">↻</button>
       </div>
       <div class="bar-ctl" id="fbox" hidden>
         <select id="fdim"></select>
@@ -168,7 +224,7 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
       <div class="chips" id="chips"></div>
     </div>
     <div id="view"></div>
-  </div>
+  </main>
 </div>
 
 <script>
@@ -236,7 +292,7 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
   }
 
   // ---------- état : période, filtres, mes visites ----------
-  var S = { preset: '30', du: '', au: '', moi: false, f: [] };
+  var S = { preset: '30', du: '', au: '', moi: false, f: [], mode: 'simple' };
   try { var sv = JSON.parse(localStorage.getItem(PKEY) || 'null'); if (sv && sv.preset) S = Object.assign(S, sv); } catch (e) {}
   function save() { try { localStorage.setItem(PKEY, JSON.stringify(S)); } catch (e) {} }
   function range() {
@@ -260,6 +316,12 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
     $('chips').innerHTML = S.f.map(function (f, i) { return '<span class="chip">' + esc(DIMS[f.dim] || f.dim) + ' ' + (f.neg ? 'n\'est pas' : '=') + ' <b>' + esc(dimVal(f.dim, f.val)) + '</b><button type="button" data-i="' + i + '" title="Retirer">×</button></span>'; }).join('') +
       (S.f.length ? '<button type="button" class="small" id="fclear">Tout retirer</button>' : '');
   }
+  function applyMode() {
+    document.body.classList.toggle('simple', S.mode !== 'complet');
+    document.querySelectorAll('.mode button').forEach(function (b) { b.classList.toggle('on', b.dataset.mode === (S.mode === 'complet' ? 'complet' : 'simple')); });
+  }
+  document.querySelectorAll('.mode button').forEach(function (b) { b.onclick = function () { S.mode = b.dataset.mode; if (S.mode !== 'complet') { S.f = []; S.moi = false; } save(); applyMode(); syncUI(); route(); }; });
+  $('menu').onclick = function () { $('side').classList.toggle('open'); };
   $('preset').onchange = function () { S.preset = this.value; if (S.preset === 'perso') { var r = range(); S.du = r.du; S.au = r.au; } save(); syncUI(); route(); };
   $('du').onchange = function () { S.preset = 'perso'; S.du = this.value; S.au = S.au || $('au').value; save(); syncUI(); route(); };
   $('au').onchange = function () { S.preset = 'perso'; S.au = this.value; S.du = S.du || $('du').value; save(); syncUI(); route(); };
@@ -315,12 +377,14 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
   // ---------- composants ----------
   function table(el, cols, rows, opt) {
     opt = opt || {};
-    var sortK = opt.sort || null, asc = false, filt = '';
+    var sortK = opt.sort || null, asc = false, filt = '', cap = S.mode === 'complet' || opt.full ? 0 : (opt.cap || 12);
     var box = document.createElement('div');
     box.innerHTML = '<div class="tbl-tools"><span class="count"></span><span class="row">' + (rows.length > 8 ? '<input type="search" placeholder="Filtrer…" style="width:170px">' : '') +
       '<button type="button" class="small">CSV</button></span></div><div class="tablebox"><table><thead></thead><tbody></tbody></table></div>';
     el.appendChild(box);
     var thead = box.querySelector('thead'), tbody = box.querySelector('tbody');
+    var showAll = document.createElement('button'); showAll.type = 'button'; showAll.className = 'small showall'; showAll.hidden = true;
+    showAll.onclick = function () { cap = 0; draw(); }; box.appendChild(showAll);
     var val = function (r, c) { return c.raw ? c.raw(r) : r[c.k]; };
     var maxBar = {}; cols.forEach(function (c) { if (c.bar) maxBar[c.k] = Math.max.apply(null, rows.map(function (r) { return +val(r, c) || 0; }).concat([1])); });
     function draw() {
@@ -331,6 +395,9 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
         list = list.slice().sort(function (a, b) { var x = val(a, c), y = val(b, c); if (c.n) { x = +x || 0; y = +y || 0; } else { x = String(x == null ? '' : x).toLowerCase(); y = String(y == null ? '' : y).toLowerCase(); } return (x < y ? -1 : x > y ? 1 : 0) * (asc ? 1 : -1); });
       }
       box.querySelector('.count').textContent = list.length === rows.length ? num(rows.length) + ' ligne' + (rows.length > 1 ? 's' : '') : num(list.length) + ' sur ' + num(rows.length);
+      var hidden = cap && !filt && list.length > cap ? list.length - cap : 0;
+      if (hidden) list = list.slice(0, cap);
+      showAll.hidden = !hidden; showAll.textContent = 'Afficher les ' + num(hidden + cap) + ' lignes';
       tbody.innerHTML = list.length ? list.map(function (r) {
         return '<tr' + (opt.click ? ' class="click" data-i="' + rows.indexOf(r) + '"' : '') + '>' + cols.map(function (c) {
           var v = val(r, c), h = c.f ? c.f(r) : (c.n ? num(v, c.d) : esc(v));
@@ -420,7 +487,7 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
   var serieMetric = 'visiteurs', serieG = 'jour', overlays = { li: true, rech: true, cf: false, v1: false };
 
   var views = {
-    '': function () {
+    tendances: function () {
       loading();
       Promise.all([analyse('resume'), analyse('serie', { g: serieG }), analyse('pages'), analyse('sources')]).then(function (a) {
         var d = a[0], s = a[1], pg = a[2], so = a[3], t = d.totaux || {}, p = d.precedent || {};
@@ -902,7 +969,7 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
           $('ex-ip').onclick = function () { api('/api/admin/exclusions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'ajouter', type: 'ip', note: 'ajoutée depuis le cockpit' }) }).then(function (r) { $('ex-msg').textContent = 'IP ' + r.valeur + ' exclue, ' + r.requalifies + ' événements marqués.'; setTimeout(load, 900); }).catch(function (e) { $('ex-msg').textContent = e.message; }); };
           $('ex-req').onclick = function () { api('/api/admin/exclusions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'requalifier' }) }).then(function (r) { $('ex-msg').textContent = r.requalifies + ' événements marqués.'; }).catch(function (e) { $('ex-msg').textContent = e.message; }); };
           var e = section('Export complet');
-          e.insertAdjacentHTML('beforeend', '<div class="row">' + ['hits', 'evenements', 'historique', 'li_posts', 'li_stats', 'li_compte', 'li_jour', 'li_demographie', 'recherche', 'exclusions', 'inscrits'].map(function (t) { return '<button type="button" class="small" data-t="' + t + '">' + t + '.csv</button>'; }).join('') + '</div><p class="hint">Tables entières, toutes périodes confondues. Une copie complète est aussi faite chaque vendredi sur votre ordinateur (Projets\\Site Noumensia\\donnees). La table hits est exportée par lots de 20 000 lignes.</p><p class="msg" id="exp-msg"></p>');
+          e.insertAdjacentHTML('beforeend', '<div class="row">' + ['hits', 'evenements', 'historique', 'li_posts', 'li_stats', 'li_compte', 'li_jour', 'li_demographie', 'recherche', 'cf_requetes', 'exclusions', 'inscrits'].map(function (t) { return '<button type="button" class="small" data-t="' + t + '">' + t + '.csv</button>'; }).join('') + '</div><p class="hint">Tables entières, toutes périodes confondues. Une copie complète est aussi faite chaque vendredi sur votre ordinateur (Projets\\Site Noumensia\\donnees). La table hits est exportée par lots de 20 000 lignes.</p><p class="msg" id="exp-msg"></p>');
           e.querySelectorAll('button[data-t]').forEach(function (b) { b.onclick = function () { $('exp-msg').textContent = 'Préparation…'; download('/api/admin/export?table=' + b.dataset.t, 'noumensia-' + b.dataset.t + '-' + iso(new Date()) + '.csv').then(function () { $('exp-msg').textContent = ''; }).catch(function (er) { $('exp-msg').textContent = er.message; }); }; });
           V.appendChild(e);
           var c = section('Journal des événements <span class="tag">' + num(d.total) + ' pour la sélection</span>');
@@ -936,6 +1003,128 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
         $('b-sent').onclick = function () { var ids = sel(); if (!ids.length) { $('ins-msg').textContent = 'Cochez d\'abord les adresses.'; return; } api('/api/admin/inscrits', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'marquer_envoye', ids: ids }) }).then(function (r) { $('ins-msg').textContent = r.modifies + ' adresse(s) marquée(s) comme prévenue(s).'; setTimeout(route, 800); }).catch(function (e) { $('ins-msg').textContent = e.message; }); };
       }).catch(fail);
     }
+  };
+
+  // ---------- L'essentiel, Requêtes et IP ----------
+  function periodLabel() {
+    var r = range();
+    return { '0': 'Aujourd\'hui', '1': 'Hier', '7': 'Ces 7 derniers jours', '30': 'Ces 30 derniers jours', '90': 'Ces 90 derniers jours', '365': 'Ces 12 derniers mois', mois: 'Depuis le début du mois', moisprec: 'Le mois dernier', tout: 'Depuis l\'ouverture de la mesure' }[S.preset] || ('Du ' + dday(r.du) + ' au ' + dday(r.au));
+  }
+  function spark(vals) {
+    if (!vals.length) return '';
+    var mx = Math.max.apply(null, vals.concat([1])), n = vals.length;
+    var pts = vals.map(function (v, i) { return (n < 2 ? 50 : i / (n - 1) * 100).toFixed(1) + ',' + (28 - v / mx * 25).toFixed(1); }).join(' ');
+    return '<svg class="spark" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,30 ' + pts + ' 100,30" fill="var(--accent)" opacity=".1"/><polyline points="' + pts + '" fill="none" stroke="var(--accent)" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>';
+  }
+  function mini(items, max) {
+    items = items.slice(0, max || 6);
+    if (!items.length) return '<p class="muted" style="margin:4px 8px">Rien sur cette période.</p>';
+    var mx = Math.max.apply(null, items.map(function (i) { return +i.v || 0; }).concat([1]));
+    return '<ul class="mini">' + items.map(function (i) {
+      return '<li' + (i.href ? ' data-href="' + esc(i.href) + '"' : '') + '><i class="fill" style="width:' + Math.round((+i.v || 0) / mx * 100) + '%"></i><span title="' + esc(i.l) + '">' + esc(i.l) + (i.sub ? ' <small>' + esc(i.sub) + '</small>' : '') + '</span><b>' + (i.vf || num(i.v)) + '</b></li>';
+    }).join('') + '</ul>';
+  }
+  V.addEventListener('click', function (e) { var li = e.target.closest('li[data-href]'); if (li) go(li.dataset.href); });
+  function ago(ts) {
+    var s = (Date.now() - utc(ts)) / 1000;
+    if (s < 3600) return Math.max(1, Math.round(s / 60)) + ' min';
+    if (s < 86400) return Math.round(s / 3600) + ' h';
+    if (s < 7 * 86400) return Math.round(s / 86400) + ' j';
+    return dday(String(ts).slice(0, 10));
+  }
+
+  views[''] = function () {
+    loading();
+    var soft = function (p) { return p.catch(function () { return null; }); };
+    Promise.all([analyse('resume'), analyse('serie', { g: 'jour' }), analyse('sessions', { limite: 8 }), analyse('pages'), analyse('sources'),
+      soft(liData()), soft(analyse('recherche')), soft(analyse('serveur', { niveau: 2 }))]).then(function (a) {
+      var d = a[0], s = a[1], se = a[2], pg = a[3], so = a[4], li = a[5], re = a[6], sv = a[7], t = d.totaux || {}, p = d.precedent || {};
+      noteTitres(pg.lignes);
+      var xs = days(s.du, s.au), ser = function (k) { var o = byKey(s.lignes, 't', k); return xs.map(function (j) { return o[j] || 0; }); };
+      var liV = (so.lignes || []).filter(function (x) { return /linkedin/i.test(x.source); }).reduce(function (x, y) { return x + (y.visiteurs || 0); }, 0);
+      var hero = !t.visites ? periodLabel() + ', aucune visite mesurée sur le site.' :
+        periodLabel() + ', <b>' + num(t.visiteurs) + ' personne' + (t.visiteurs > 1 ? 's' : '') + '</b> ' + (t.visiteurs > 1 ? 'ont' : 'a') + ' visité le site' + (p.visiteurs ? ' (' + (t.visiteurs >= p.visiteurs ? '+' : '') + Math.round((t.visiteurs - p.visiteurs) / p.visiteurs * 100) + ' % par rapport à la période d\'avant)' : '') +
+        ', pour ' + num(t.visites) + ' visite' + (t.visites > 1 ? 's' : '') + ' et ' + num(t.vues) + ' pages vues' + (liV ? ', dont <b>' + num(liV) + '</b> venue' + (liV > 1 ? 's' : '') + ' de LinkedIn' : '') + '.' +
+        (t.envois ? ' <b>' + num(t.envois) + ' formulaire' + (t.envois > 1 ? 's' : '') + '</b> envoyé' + (t.envois > 1 ? 's' : '') + '.' : ' Aucun formulaire envoyé.');
+      var k = function (v, l, dl, vals, sub) { return '<div class="kpi big"><b>' + v + (dl || '') + '</b><span>' + l + '</span>' + (sub ? '<small>' + sub + '</small>' : '') + spark(vals) + '</div>'; };
+      mount('<p class="hero">' + hero + '</p><div class="kpis">' +
+        k(num(t.visiteurs), 'visiteurs', delta(t.visiteurs, p.visiteurs), ser('visiteurs'), num(t.nouveaux) + ' nouveaux · ' + num(d.revenants) + ' revenants') +
+        k(num(t.visites), 'visites', delta(t.visites, p.visites), ser('visites'), num(t.pages_par_visite, 1) + ' pages par visite') +
+        k(num(t.vues), 'pages vues', delta(t.vues, p.vues), ser('vues'), dur(t.secondes_moy) + ' par visite en moyenne') +
+        k(num(t.envois), 'formulaires envoyés', delta(t.envois, p.envois), ser('envois'), num(t.actions) + ' clics et actions') + '</div>');
+      var g = document.createElement('div'); g.className = 'grid3'; V.appendChild(g);
+      var card = function (title, href, inner, label) { var c = section(title + (href ? '<a class="more" href="' + href + '">' + (label || 'Détail') + ' →</a>' : ''), inner); g.appendChild(c); return c; };
+      card('Dernières visites', '#/visites', '<ul class="mini feed">' + ((se.lignes || []).length ? se.lignes.map(function (v) {
+        var lieu = [v.ville, v.organisation].filter(Boolean).join(' · ');
+        return '<li data-href="#/visite/' + enc(v.session) + '"><span class="t">' + esc(ago(v.debut)) + '</span><span>' + esc(ptitle(v.entree_page) || v.entree_page || '?') + ' <small>' + esc([v.source, lieu].filter(Boolean).join(' · ')) + '</small></span><b>' + num(v.vues) + ' p.</b></li>';
+      }).join('') : '<li class="muted">Pas encore de visite.</li>') + '</ul>', 'Toutes');
+      card('Ce qu\'ils regardent', '#/pages', mini((d.topPages || []).map(function (r) { return { l: ptitle(r.page) || r.page, v: r.vues, href: '#/page/' + enc(r.page) }; })), 'Pages');
+      card('D\'où ils viennent', '#/sources', mini((d.topSources || []).map(function (r) { return { l: r.source, v: r.visites, sub: num(r.visiteurs) + ' pers.', href: '#/source/' + enc(r.source) }; })), 'Provenances');
+      card('Ce qu\'ils font', '#/actions', mini((d.topActions || []).map(function (r) { return { l: label(r.evt, r.libelle), v: r.n, href: '#/action/' + enc(r.evt) }; })), 'Clics et actions');
+      if (li) {
+        var r = range(), J = (li.jours || []).filter(function (j) { return j.jour >= r.du && j.jour <= r.au; }), sum = function (x) { return J.reduce(function (s2, j) { return s2 + (j[x] || 0); }, 0); };
+        var ab = (li.compte || []).filter(function (c) { return c.mesure === 'abonnes'; }).pop();
+        var last = {}; (li.stats || []).forEach(function (st) { if (!last[st.urn] || st.releve_le > last[st.urn].releve_le) last[st.urn] = st; });
+        var posts = (li.posts || []).slice().sort(function (x, y) { return (y.publie_le || '') < (x.publie_le || '') ? -1 : 1; });
+        var lp = posts[0];
+        card('LinkedIn', '#/linkedin', '<div class="kpis" style="margin-bottom:8px;grid-template-columns:repeat(3,1fr)"><div class="kpi"><b>' + num(ab && ab.valeur) + '</b><span>abonnés</span></div><div class="kpi"><b>' + num(sum('impressions')) + '</b><span>impressions</span></div><div class="kpi"><b>' + num(sum('nouveaux_abonnes')) + '</b><span>nouveaux abonnés</span></div></div>' +
+          (lp ? '<ul class="mini"><li data-href="#/post/' + enc(lp.urn) + '"><span>Dernier post : ' + esc(lp.titre || lp.extrait || '') + ' <small>' + esc(dday((lp.publie_le || '').slice(0, 10))) + '</small></span><b>' + num((last[lp.urn] || {}).impressions) + '</b></li></ul>' : ''));
+      }
+      if (re) {
+        var r2 = range(), tot = (re.lignes || []).filter(function (x) { return x.dimension === 'total' && x.moteur === 'bing' && x.jour >= r2.du && x.jour <= r2.au; });
+        var si = function (x) { return tot.reduce(function (s2, y) { return s2 + (y[x] || 0); }, 0); };
+        card('Moteurs de recherche', '#/recherche', '<div class="kpis" style="margin-bottom:8px;grid-template-columns:repeat(2,1fr)"><div class="kpi"><b>' + num(si('impressions')) + '</b><span>apparitions dans Bing</span></div><div class="kpi"><b>' + num(si('clics')) + '</b><span>clics depuis Bing</span></div></div>' +
+          mini((re.lignes || []).filter(function (x) { return x.dimension === 'requete'; }).sort(function (x, y) { return (y.impressions || 0) - (x.impressions || 0); }).map(function (x) { return { l: x.valeur, v: x.impressions }; }), 3) + '<p class="hint">Requêtes sur 24 mois. Google Search Console pas encore relié.</p>');
+      }
+      if (sv && sv.totaux) {
+        var tt = {}; sv.totaux.forEach(function (x) { tt[x.humain] = x; });
+        card('Requêtes et IP (Cloudflare)', '#/serveur', '<div class="kpis" style="margin-bottom:8px;grid-template-columns:repeat(2,1fr)"><div class="kpi"><b>' + num((tt[2] || {}).ips || 0) + '</b><span>IP de vrais navigateurs</span></div><div class="kpi"><b>' + num((tt[0] || {}).ips || 0) + '</b><span>IP de robots</span></div></div><p class="hint">Vu côté serveur, indépendamment de la mesure du site.</p>');
+      }
+      var ins = insights(d, pg.lignes || [], so.lignes || []);
+      if (ins.length) V.appendChild(section('Constats', '<ul class="insights">' + ins.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul><p class="hint">Calculés automatiquement sur la période. Avec peu de visites, à lire comme des pistes.</p>'));
+    }).catch(fail);
+  };
+
+  var NIV = { 0: 'robot / parasite', 1: 'navigateur probable', 2: 'navigateur confirmé' };
+  views.serveur = function () {
+    var st = views._sv || (views._sv = { niveau: 2 });
+    loading();
+    Promise.all([analyse('serveur', { niveau: st.niveau }), api('/api/admin/exclusions').catch(function () { return {}; })]).then(function (a) {
+      var d = a[0], mon = a[1].monIp, tot = {}; (d.totaux || []).forEach(function (r) { tot[r.humain] = r; });
+      var cv = d.couverture || {};
+      mount('<p class="note">Cloudflare voit chaque page demandée au serveur, avec l\'adresse IP, mais ne garde ces requêtes que 31 jours. Elles sont recopiées chaque semaine dans la base du site' + (cv.du ? ' (disponibles depuis le ' + esc(dday(cv.du)) + ')' : '') + '. La plupart viennent de robots déguisés en navigateurs : une IP est dite <b>confirmée</b> quand elle a aussi chargé les polices, la feuille de style ou le script du site le même jour, ce que seul un vrai navigateur fait. Un visiteur qui revient avec ces fichiers en cache peut rester « probable ». Une même personne peut changer d\'IP (téléphone, box redémarrée).</p>' +
+        kpis([[num((tot[2] || {}).ips || 0), 'IP confirmées', '', num((tot[2] || {}).vues || 0) + ' pages vues'], [num((tot[1] || {}).ips || 0), 'IP probables', '', 'navigateur, non confirmé'], [num((tot[0] || {}).ips || 0), 'IP de robots ou requêtes parasites', '', num((tot[0] || {}).vues || 0) + ' requêtes']]) +
+        '<div class="row" style="margin:-4px 0 14px"><span class="muted">Afficher</span>' + [[2, 'les IP confirmées'], [1, 'confirmées et probables'], [0, 'tout, robots compris']].map(function (n) { return '<button type="button" class="small' + (st.niveau === n[0] ? ' on' : '') + '" data-n="' + n[0] + '">' + n[1] + '</button>'; }).join('') + '</div>');
+      V.querySelectorAll('button[data-n]').forEach(function (b) { b.onclick = function () { st.niveau = +b.dataset.n; route(); }; });
+      var x = days(d.du, d.au), c = section('IP distinctes par jour');
+      lineChart(c, x, [{ name: 'IP confirmées', color: 'var(--s1)', values: byKey(d.parJour, 'jour', 'ips_confirmees') }, { name: 'IP probables ou confirmées', color: 'var(--s3)', dash: '4 3', values: byKey(d.parJour, 'jour', 'ips_probables') }, { name: 'pages vues confirmées', color: 'var(--s5)', axis: 'd', bars: true, values: byKey(d.parJour, 'jour', 'vues_confirmees') }]);
+      V.appendChild(c);
+      var t = section('Adresses IP <span class="tag">' + num((d.ips || []).length) + '</span>');
+      table(t, [{ k: 'ip', t: 'IP', mono: true, f: function (r) { return esc(r.ip) + (r.ip === mon ? '<span class="tag">vous, maintenant</span>' : '') + (r.exclue ? '<span class="tag">exclue</span>' : ''); } },
+        { k: 'dernier', t: 'Dernière fois', f: function (r) { return esc(dt(r.dernier)); } }, { k: 'premier', t: 'Première', f: function (r) { return esc(dt(r.premier)); } },
+        { k: 'jours', t: 'Jours', n: true }, { k: 'vues', t: 'Pages vues', n: true, bar: true }, { k: 'top_pages', t: 'Pages', w: true },
+        { k: 'pays', t: 'Pays', raw: function (r) { return pays(r.pays); } }, { k: 'appareil', t: 'Appareil' },
+        { k: 'humain', t: 'Type', raw: function (r) { return NIV[r.humain]; } }, { k: 'mesure_site', t: 'Vue par la mesure', raw: function (r) { return r.mesure_site ? 'oui' : ''; } }], d.ips || [], { click: function (r) { go('#/ip/' + enc(r.ip)); }, csv: 'ip-cloudflare' });
+      V.appendChild(t);
+      var pz = section('Pages demandées'); table(pz, [{ k: 'page', t: 'Page', w: true, f: function (r) { return plabel(r.page); } }, { k: 'ips', t: 'IP', n: true }, { k: 'vues', t: 'Vues', n: true, bar: true }], d.pages || [], { csv: 'pages-cloudflare' }); V.appendChild(pz);
+    }).catch(fail);
+  };
+
+  views.ip = function (ip) {
+    loading();
+    Promise.all([api('/api/admin/analyse?vue=ip&ip=' + enc(ip)), api('/api/admin/exclusions').catch(function () { return {}; })]).then(function (a) {
+      var d = a[0], mon = a[1].monIp, rq = d.requetes || [], pagesR = rq.filter(function (r) { return r.humain || !/^\/(api|fonts)\/|\.(css|js)$/.test(r.page); });
+      var jours = {}; rq.forEach(function (r) { jours[r.ts.slice(0, 10)] = 1; });
+      var lvl = Math.max.apply(null, rq.map(function (r) { return r.humain; }).concat([0]));
+      mount(crumb([['Requêtes et IP', '#/serveur'], [ip]]) + kpis([[num(pagesR.reduce(function (s, r) { return s + (r.n || 0); }, 0)), 'requêtes de pages'], [num(Object.keys(jours).length), 'jours'], [esc(NIV[lvl]), 'type'], [num((d.visites || []).length), 'visites vues par la mesure du site']]) +
+        '<div class="row" style="margin:-6px 0 14px">' + (ip === mon ? '<span class="tag">c\'est votre adresse actuelle</span>' : '') + (d.exclue ? '<span class="pill ok">exclue des statistiques</span>' : '<button type="button" class="small" id="exip">C\'est moi : exclure cette IP</button>') + '</div>');
+      if ($('exip')) $('exip').onclick = function () { api('/api/admin/exclusions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'ajouter', type: 'ip', valeur: ip, note: 'depuis Requêtes et IP' }) }).then(function (r) { $('exip').textContent = 'Exclue (' + r.requalifies + ' événements marqués)'; $('exip').disabled = true; }).catch(function (e) { alert(e.message); }); };
+      if ((d.visites || []).length) { var v = section('Visites enregistrées par la mesure du site'); table(v, [{ k: 'debut', t: 'Début', f: function (r) { return esc(dt(r.debut)); } }, { k: 'vues', t: 'Pages', n: true }, { k: 'organisation', t: 'Réseau', w: true }, { k: 'ville', t: 'Ville' }, { k: 'appareil', t: 'Appareil' }, { k: 'moi', t: 'Moi', raw: function (r) { return r.moi ? 'oui' : ''; } }], d.visites, { click: openSession, csv: 'visites-ip' }); V.appendChild(v); }
+      var c = section('Requêtes reçues par Cloudflare');
+      table(c, [{ k: 'ts', t: 'Quand', f: function (r) { return esc(dt(r.ts)); } }, { k: 'page', t: 'Adresse', w: true, f: function (r) { return plabel(r.page); } }, { k: 'statut', t: 'Statut', n: true }, { k: 'n', t: 'Fois', n: true },
+        { k: 'appareil', t: 'Appareil' }, { k: 'pays', t: 'Pays', raw: function (r) { return pays(r.pays); } }, { k: 'ua', t: 'Navigateur', w: true }, { k: 'humain', t: 'Type', raw: function (r) { return NIV[r.humain]; } }], rq, { csv: 'requetes-' + ip, full: true });
+      V.appendChild(c);
+    }).catch(fail);
   };
 
   function pager(c, d, cb) {
@@ -1000,15 +1189,16 @@ details.opts summary{ cursor:pointer; color:var(--mute); font-size:.86rem; }
   // ---------- routeur ----------
   function route() {
     var h = (location.hash || '#/').slice(2), parts = h.split('/'), name = parts[0] || '', arg = parts.length > 1 ? decodeURIComponent(parts.slice(1).join('/')) : null;
-    var tab = { page: 'pages', source: 'sources', action: 'actions', visite: 'visites', visiteur: 'visiteurs', post: 'linkedin' }[name] || name;
-    document.querySelectorAll('#tabs a').forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#/' + tab); });
-    $('controls').hidden = ['inscrits', 'visite', 'visiteur', 'post'].indexOf(name) !== -1;
+    var tab = { page: 'pages', source: 'sources', action: 'actions', visite: 'visites', visiteur: 'visiteurs', post: 'linkedin', ip: 'serveur' }[name] || name;
+    document.querySelectorAll('#nav a').forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#/' + tab); });
+    $('side').classList.remove('open');
+    $('controls').hidden = ['inscrits', 'visite', 'visiteur', 'post', 'ip'].indexOf(name) !== -1;
     (views[name] || views[''])(arg);
   }
   window.addEventListener('hashchange', function () { route(); window.scrollTo(0, 0); });
 
-  function showApp() { $('login').hidden = true; $('app').hidden = false; $('logout').hidden = false; syncUI(); route(); }
-  function showLogin(msg) { $('app').hidden = true; $('logout').hidden = true; $('login').hidden = false; $('login-msg').textContent = msg || ''; }
+  function showApp() { $('loginwrap').hidden = true; $('app').hidden = false; applyMode(); syncUI(); route(); }
+  function showLogin(msg) { $('app').hidden = true; $('loginwrap').hidden = false; $('login-msg').textContent = msg || ''; }
   $('login-form').addEventListener('submit', function (e) {
     e.preventDefault(); token = $('token').value.trim();
     api('/api/admin/inscrits').then(function () { if ($('remember').checked) { try { localStorage.setItem(KEY, token); } catch (err) {} } showApp(); }).catch(function (err) { showLogin(err.auth ? 'Jeton refusé.' : err.message); });

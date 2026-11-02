@@ -1,8 +1,8 @@
 // GET /api/admin/export?table=<table>&format=csv|json (tables : voir TABLES)
-// Exporte une table entière (sauvegarde). Pour hits, découpe possible : &depuis_id=N (lots de 20 000 lignes).
+// Exporte une table entière (sauvegarde). Pour hits et cf_requetes, découpe possible : &depuis_id=N (lots de 20 000 lignes).
 import { json, autorise } from '../../../functions-lib/admin-auth.js';
 
-const TABLES = ['hits', 'evenements', 'historique', 'inscrits', 'li_posts', 'li_stats', 'li_compte', 'li_jour', 'li_demographie', 'recherche', 'exclusions'];
+const TABLES = ['hits', 'evenements', 'historique', 'inscrits', 'li_posts', 'li_stats', 'li_compte', 'li_jour', 'li_demographie', 'recherche', 'exclusions', 'cf_requetes'];
 
 export async function onRequestGet({ request, env }) {
   if (!(await autorise(request, env))) return json({ ok: false, error: 'Jeton refusé' }, 401);
@@ -14,6 +14,9 @@ export async function onRequestGet({ request, env }) {
   if (t === 'hits') {
     const dep = parseInt(url.searchParams.get('depuis_id') || '0', 10) || 0;
     rows = (await env.DB.prepare('SELECT * FROM hits WHERE id > ?1 ORDER BY id LIMIT 20000').bind(dep).all()).results || [];
+  } else if (t === 'cf_requetes') {
+    const dep = parseInt(url.searchParams.get('depuis_id') || '0', 10) || 0;
+    rows = (await env.DB.prepare('SELECT rowid AS _id, * FROM cf_requetes WHERE rowid > ?1 ORDER BY rowid LIMIT 20000').bind(dep).all()).results || [];
   } else {
     rows = (await env.DB.prepare(`SELECT * FROM ${t}`).all()).results || [];
   }
