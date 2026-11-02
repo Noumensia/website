@@ -7,51 +7,95 @@
 <title>Espace privé · Noumensia</title>
 <link rel="icon" href="/favicon-32.png">
 <style>
-:root{ --bg:#F3E9D8; --card:#FBF6EE; --ink:#1E2630; --mute:#5E6670; --line:#DCCDB4; --accent:#7A1F2D; --accent-ink:#fff; --ok:#2F6B4F; --warn:#9A5B12; }
-@media (prefers-color-scheme: dark){ :root{ --bg:#161C24; --card:#1E2630; --ink:#EDE4D3; --mute:#A3A9B1; --line:#323C48; --accent:#C2566A; --accent-ink:#161C24; --ok:#7FC3A0; --warn:#E0A75E; } }
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-600.woff2") format("woff2");font-weight:600}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-400.woff2") format("woff2");font-weight:400}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-500.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"IBM Plex Sans";src:url("/fonts/ibm-plex-sans-600.woff2") format("woff2");font-weight:600}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-400.woff2") format("woff2");font-weight:400}
+:root{ --bg:#F1E7D3; --card:#FAF4E8; --ink:#1E2630; --mute:#5E6670; --line:#DCCDB4; --soft:#EADDC4; --accent:#7A1F2D; --accent2:#C26472; --accent-ink:#fff;
+  --s1:#7A1F2D; --s2:#1E2630; --s3:#B8AF9F; --s4:#C26472; --ok:#2F6B4F; --warn:#9A5B12; }
+@media (prefers-color-scheme: dark){ :root{ --bg:#161C24; --card:#1E2630; --ink:#E9D6B4; --mute:#A3A9B1; --line:#323C48; --soft:#26303C; --accent:#C26472; --accent2:#E3A2AC; --accent-ink:#161C24;
+  --s1:#C26472; --s2:#E9D6B4; --s3:#6B7480; --s4:#E3A2AC; --ok:#7FC3A0; --warn:#E0A75E; } }
 *{ box-sizing:border-box; }
-body{ margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
-.wrap{ max-width:1080px; margin:0 auto; padding:24px 16px 64px; }
-h1{ font-size:1.5rem; margin:0 0 4px; } h2{ font-size:1.15rem; margin:0 0 12px; }
-.sub{ color:var(--mute); margin:0 0 20px; }
-.card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:18px; }
+body{ margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 "IBM Plex Sans",system-ui,sans-serif; }
+.wrap{ max-width:1240px; margin:0 auto; padding:20px 16px 72px; }
+h1{ font-family:Newsreader,serif; font-weight:600; font-size:1.7rem; margin:0; }
+h2{ font-family:Newsreader,serif; font-weight:600; font-size:1.25rem; margin:0 0 12px; }
+h3{ font-size:.95rem; margin:0 0 10px; color:var(--mute); font-weight:600; }
+a{ color:var(--accent); }
+.top{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+.sub{ color:var(--mute); margin:2px 0 0; font-size:.9rem; }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:16px; min-width:0; }
 .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-input[type=password],input[type=search],select{ font:inherit; color:inherit; background:transparent; border:1px solid var(--line); border-radius:8px; padding:8px 10px; min-width:0; }
-input[type=password]{ flex:1 1 240px; }
-button{ font:inherit; cursor:pointer; border-radius:8px; padding:8px 14px; border:1px solid var(--line); background:transparent; color:inherit; }
+.grid2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; }
+.grid2 > .card{ margin-bottom:0; }
+.stack > * + *{ margin-top:16px; }
+input,select{ font:inherit; color:inherit; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:7px 10px; min-width:0; }
+button{ font:inherit; cursor:pointer; border-radius:8px; padding:7px 13px; border:1px solid var(--line); background:transparent; color:inherit; }
 button.primary{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:600; }
-button:disabled{ opacity:.5; cursor:default; }
 button.danger{ border-color:var(--accent); color:var(--accent); }
-.tabs{ display:flex; gap:6px; margin-bottom:16px; }
-.tabs button[aria-selected=true]{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+button.small{ padding:4px 9px; font-size:.82rem; }
+button:disabled{ opacity:.5; cursor:default; }
+nav.tabs{ display:flex; gap:4px; overflow-x:auto; padding-bottom:4px; margin-bottom:14px; scrollbar-width:thin; }
+nav.tabs a{ white-space:nowrap; text-decoration:none; color:var(--ink); padding:7px 12px; border-radius:8px; border:1px solid transparent; font-size:.92rem; }
+nav.tabs a:hover{ border-color:var(--line); }
+nav.tabs a.on{ background:var(--ink); color:var(--bg); }
+.period{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+.period .lbl{ color:var(--mute); font-size:.88rem; }
+.crumb{ font-size:.88rem; color:var(--mute); margin:-4px 0 12px; }
+.crumb a{ color:var(--mute); }
 .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:16px; }
-.kpi{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
-.kpi b{ display:block; font-size:1.5rem; }
-.kpi span{ color:var(--mute); font-size:.85rem; }
-.tablebox{ overflow-x:auto; }
-table{ width:100%; border-collapse:collapse; font-size:.92rem; }
-th,td{ text-align:left; padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
-th{ color:var(--mute); font-weight:600; font-size:.82rem; }
-td.n{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
-.muted{ color:var(--mute); } .ok{ color:var(--ok); } .warn{ color:var(--warn); }
-.msg{ min-height:1.4em; margin:8px 0 0; font-size:.9rem; }
-.bars{ display:flex; align-items:flex-end; gap:3px; height:90px; padding-top:6px; }
-.bars div{ flex:1; background:var(--accent); opacity:.8; border-radius:3px 3px 0 0; min-height:2px; position:relative; }
-.bars div:hover{ opacity:1; }
-.bars-legend{ display:flex; justify-content:space-between; color:var(--mute); font-size:.78rem; margin-top:4px; }
-.hint{ font-size:.85rem; color:var(--mute); margin:10px 0 0; }
+.kpi{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:11px 13px; }
+.kpi b{ display:block; font-size:1.45rem; font-variant-numeric:tabular-nums; line-height:1.2; }
+.kpi span{ color:var(--mute); font-size:.82rem; }
+.kpi i{ font-style:normal; font-size:.78rem; margin-left:4px; }
+.up{ color:var(--ok); } .down{ color:var(--accent); } .muted{ color:var(--mute); } .ok{ color:var(--ok); } .warn{ color:var(--warn); }
+.tbl-tools{ display:flex; gap:8px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:8px; }
+.tbl-tools .count{ color:var(--mute); font-size:.85rem; }
+.tablebox{ overflow-x:auto; max-height:640px; overflow-y:auto; border-radius:8px; }
+table{ width:100%; border-collapse:collapse; font-size:.9rem; }
+th,td{ text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+th{ color:var(--mute); font-weight:600; font-size:.8rem; position:sticky; top:0; background:var(--card); cursor:pointer; user-select:none; white-space:nowrap; z-index:1; }
+th.sorted::after{ content:" ↓"; } th.sorted.asc::after{ content:" ↑"; }
+td.n, th.n{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+tr.click{ cursor:pointer; } tr.click:hover td{ background:var(--soft); }
+td.wrap{ word-break:break-word; max-width:420px; }
+td.mono{ font-family:"IBM Plex Mono",monospace; font-size:.82rem; }
+.bar{ display:inline-block; height:8px; background:var(--accent); opacity:.75; border-radius:2px; vertical-align:middle; margin-right:6px; }
+.msg{ min-height:1.3em; margin:8px 0 0; font-size:.9rem; }
+.hint{ font-size:.84rem; color:var(--mute); margin:8px 0 0; }
+.chart{ position:relative; }
+.chart svg{ display:block; width:100%; height:auto; overflow:visible; }
+.chart .tip{ position:absolute; pointer-events:none; background:var(--ink); color:var(--bg); font-size:.8rem; padding:6px 8px; border-radius:6px; white-space:nowrap; transform:translate(-50%,-110%); display:none; z-index:2; }
+.legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:.82rem; color:var(--mute); margin-top:6px; }
+.legend span::before{ content:""; display:inline-block; width:14px; height:3px; margin-right:6px; vertical-align:middle; background:var(--c); border-top:var(--b,none); }
+.funnel .step{ margin:6px 0; }
+.funnel .lab{ display:flex; justify-content:space-between; font-size:.9rem; gap:10px; }
+.funnel .track{ height:22px; background:var(--soft); border-radius:6px; overflow:hidden; margin-top:3px; }
+.funnel .fill{ height:100%; background:var(--accent); opacity:.85; }
+.heat{ display:grid; grid-template-columns:40px repeat(24,1fr); gap:2px; font-size:.7rem; color:var(--mute); }
+.heat div{ aspect-ratio:1; border-radius:3px; }
+.heat .h{ aspect-ratio:auto; text-align:center; }
+.timeline{ list-style:none; margin:0; padding:0; }
+.timeline li{ display:grid; grid-template-columns:70px 1fr; gap:10px; padding:7px 0; border-bottom:1px solid var(--line); font-size:.9rem; }
+.timeline .t{ color:var(--mute); font-variant-numeric:tabular-nums; }
+.tag{ display:inline-block; font-size:.75rem; padding:1px 7px; border-radius:20px; background:var(--soft); color:var(--mute); margin-left:6px; }
+.note{ border-left:3px solid var(--line); padding:4px 0 4px 10px; color:var(--mute); font-size:.85rem; margin:0 0 14px; }
 [hidden]{ display:none !important; }
+@media (max-width:600px){ .wrap{ padding:14px 12px 60px; } h1{ font-size:1.4rem; } .kpi b{ font-size:1.2rem; } }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Espace privé</h1>
-  <p class="sub">Inscrits aux alertes et mesure de ce que font les visiteurs sur noumensia.com.</p>
+  <div class="top">
+    <div><h1>Espace privé</h1><p class="sub">Mesure du site, LinkedIn et inscrits · noumensia.com</p></div>
+    <button id="logout" type="button" hidden>Se déconnecter</button>
+  </div>
 
   <div class="card" id="login">
     <h2>Accès</h2>
     <form class="row" id="login-form">
-      <input type="password" id="token" placeholder="Jeton d'accès" autocomplete="current-password" required>
+      <input type="password" id="token" placeholder="Jeton d'accès" autocomplete="current-password" required style="flex:1 1 240px">
       <label class="row muted" style="gap:6px"><input type="checkbox" id="remember" checked> Se souvenir sur cet appareil</label>
       <button class="primary" type="submit">Entrer</button>
     </form>
@@ -59,86 +103,101 @@ td.n{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
   </div>
 
   <div id="app" hidden>
-    <div class="row" style="justify-content:space-between;margin-bottom:12px">
-      <div class="tabs" role="tablist">
-        <button role="tab" aria-selected="true" data-tab="inscrits">Inscrits</button>
-        <button role="tab" aria-selected="false" data-tab="mesure">Mesure</button>
-      </div>
-      <button id="logout" type="button">Se déconnecter</button>
+    <nav class="tabs" id="tabs">
+      <a href="#/">Vue d'ensemble</a>
+      <a href="#/pages">Pages</a>
+      <a href="#/sources">Provenances</a>
+      <a href="#/actions">Clics et actions</a>
+      <a href="#/visites">Visites</a>
+      <a href="#/audience">Audience</a>
+      <a href="#/entonnoirs">Entonnoirs</a>
+      <a href="#/linkedin">LinkedIn</a>
+      <a href="#/historique">Historique Cloudflare</a>
+      <a href="#/brut">Données brutes</a>
+      <a href="#/inscrits">Inscrits</a>
+    </nav>
+    <div class="period" id="period">
+      <span class="lbl">Période</span>
+      <select id="preset">
+        <option value="7">7 derniers jours</option>
+        <option value="30" selected>30 derniers jours</option>
+        <option value="90">90 derniers jours</option>
+        <option value="365">12 derniers mois</option>
+        <option value="tout">Depuis le début</option>
+        <option value="perso">Personnalisée</option>
+      </select>
+      <input type="date" id="du" hidden> <input type="date" id="au" hidden>
+      <button type="button" class="small" id="refresh">Actualiser</button>
     </div>
-
-    <section id="tab-inscrits">
-      <div class="kpis">
-        <div class="kpi"><b id="k-total">–</b><span>inscrits</span></div>
-        <div class="kpi"><b id="k-attente">–</b><span>à prévenir</span></div>
-        <div class="kpi"><b id="k-envoyes">–</b><span>déjà prévenus</span></div>
-        <div class="kpi"><b id="k-recontact">–</b><span>d'accord pour être recontactés</span></div>
-      </div>
-      <div class="card">
-        <h2>Alerte AI Act : lignes directrices de la Commission</h2>
-        <div class="row">
-          <button class="primary" id="b-mail" type="button">Écrire aux personnes à prévenir</button>
-          <button id="b-copy" type="button">Copier leurs adresses</button>
-          <button id="b-csv" type="button">Exporter (CSV)</button>
-        </div>
-        <div class="row" style="margin-top:10px">
-          <button id="b-sent" type="button">Marquer la sélection comme prévenue</button>
-          <button id="b-purge" class="danger" type="button">Supprimer les adresses déjà prévenues</button>
-        </div>
-        <p class="msg" id="ins-msg"></p>
-        <p class="hint">Le bouton « Écrire » ouvre votre messagerie avec les adresses en copie cachée. Après l'envoi, marquez-les comme prévenues, puis supprimez-les : c'est l'engagement pris sur le site. La suppression garde les personnes qui ont coché « me recontacter », qui sont aussi ajoutées chaque semaine à votre CRM.</p>
-      </div>
-      <div class="card tablebox">
-        <table>
-          <thead><tr><th><input type="checkbox" id="all" aria-label="Tout sélectionner"></th><th>Adresse</th><th>Inscrit le</th><th>Prévenu le</th><th>Recontact</th><th>Page</th></tr></thead>
-          <tbody id="ins-body"><tr><td colspan="6" class="muted">Chargement…</td></tr></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="tab-mesure" hidden>
-      <div class="row" style="margin-bottom:12px">
-        <label class="muted" for="periode">Période</label>
-        <select id="periode"><option value="7">7 jours</option><option value="30" selected>30 jours</option><option value="90">90 jours</option><option value="365">12 mois</option></select>
-      </div>
-      <div class="kpis">
-        <div class="kpi"><b id="m-vues">–</b><span>pages vues</span></div>
-        <div class="kpi"><b id="m-missions">–</b><span>clics vers les missions</span></div>
-        <div class="kpi"><b id="m-contact">–</b><span>vers contact ou rendez-vous</span></div>
-        <div class="kpi"><b id="m-envois">–</b><span>formulaires envoyés</span></div>
-        <div class="kpi"><b id="m-graphes">–</b><span>ouvertures de graphes ou simulateurs</span></div>
-      </div>
-      <div class="card">
-        <h2>Jour par jour</h2>
-        <div class="bars" id="bars"></div>
-        <div class="bars-legend"><span id="bars-from"></span><span class="muted">pages vues (survol : détail)</span><span id="bars-to"></span></div>
-      </div>
-      <div class="card tablebox">
-        <h2>Pages les plus vues</h2>
-        <table><thead><tr><th>Page</th><th class="n">Vues</th></tr></thead><tbody id="pages-body"></tbody></table>
-      </div>
-      <div class="card tablebox">
-        <div class="row" style="justify-content:space-between;margin-bottom:8px">
-          <h2 style="margin:0">Clics et actions</h2>
-          <input type="search" id="filtre" placeholder="Filtrer (ex. missions, hellixmap, parcours)">
-        </div>
-        <table><thead><tr><th>Action</th><th>Depuis la page</th><th class="n">Nombre</th></tr></thead><tbody id="actions-body"></tbody></table>
-        <p class="hint">Comptage sans cookie ni identifiant : on sait combien de clics, pas qui. Les pages vues peuvent différer de Cloudflare Web Analytics, qui mesure autrement.</p>
-      </div>
-    </section>
+    <div id="view"></div>
   </div>
 </div>
 
 <script>
 (function () {
   'use strict';
-  var KEY = 'nm-admin-token';
+  var KEY = 'nm-admin-token', PKEY = 'nm-admin-periode', DEBUT = '2026-06-01';
   var token = '';
   try { token = localStorage.getItem(KEY) || ''; } catch (e) {}
   var $ = function (id) { return document.getElementById(id); };
-  var inscrits = [];
-  var stats = null;
+  var V = $('view');
+  var REG = (function () { try { return new Intl.DisplayNames(['fr'], { type: 'region' }); } catch (e) { return null; } })();
 
+  // ---------- utilitaires ----------
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function num(n, d) { if (n == null || n === '' || isNaN(n)) return '–'; return Number(n).toLocaleString('fr-FR', { maximumFractionDigits: d == null ? 0 : d }); }
+  function pct(a, b) { return b ? Math.round(a / b * 1000) / 10 : 0; }
+  function dur(s) { if (s == null || isNaN(s)) return '–'; s = Math.round(s); if (s < 60) return s + ' s'; var m = Math.floor(s / 60), r = s % 60; if (m < 60) return m + ' min' + (r ? ' ' + r + ' s' : ''); return Math.floor(m / 60) + ' h ' + (m % 60) + ' min'; }
+  function utc(ts) { return new Date(String(ts).replace(' ', 'T') + (String(ts).length <= 19 ? 'Z' : '')); }
+  function dt(ts) { if (!ts) return ''; var d = utc(ts); return isNaN(d) ? ts : d.toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short', timeZone: 'Europe/Paris' }); }
+  function dday(j) { if (!j) return ''; var d = new Date(j + 'T12:00:00Z'); return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: '2-digit' }); }
+  function pays(c) { if (!c || c === '?') return 'inconnu'; try { return REG ? (REG.of(c) || c) : c; } catch (e) { return c; } }
+  function iso(d) { return d.toISOString().slice(0, 10); }
+  function days(du, au) { var out = [], d = new Date(du + 'T00:00:00Z'), e = new Date(au + 'T00:00:00Z'); while (d <= e && out.length < 800) { out.push(iso(d)); d.setUTCDate(d.getUTCDate() + 1); } return out; }
+  function delta(a, b) { if (!b) return ''; var p = Math.round((a - b) / b * 100); return '<i class="' + (p >= 0 ? 'up' : 'down') + '">' + (p >= 0 ? '+' : '') + p + ' %</i>'; }
+  function go(h) { location.hash = h; }
+  function enc(s) { return encodeURIComponent(s); }
+
+  var RES = { out_def: 'hors définition (logiciel classique)', out_terr: 'hors champ territorial', out_excl: 'hors champ par exclusion',
+    out_interdit: 'pratique interdite', out_hr1: 'haut risque, voie produit (annexe I)', out_hr3: 'haut risque, voie domaine (annexe III)',
+    out_derog: 'non haut risque par dérogation', out_transp: 'obligations de transparence', out_min: 'risque minimal',
+    out_iaug: 'modèle à usage général', out_iaug_s: 'modèle à risque systémique' };
+  function label(evt) {
+    if (!evt) return '';
+    if (evt === 'vue') return 'Page vue';
+    if (evt === 'temps') return 'Temps passé';
+    if (evt === 'defilement') return 'Défilement';
+    if (evt === 'interactions') return 'Usage d\'outil (réglages modifiés)';
+    if (evt === 'erreur404') return 'Page introuvable (404)';
+    var i = evt.indexOf(':'), type = evt.slice(0, i), v = evt.slice(i + 1);
+    if (type === 'lien') return v.charAt(0) === '/' ? 'Lien → ' + v : (v === 'mailto' ? 'Lien e-mail' : 'Lien sortant → ' + v);
+    if (type === 'clic') return 'Bouton « ' + v + ' »';
+    if (type === 'envoi') return 'Formulaire envoyé · ' + v;
+    if (type === 'ouverture') { var p = v.split(':'); return 'Question dépliée · ' + (p.slice(1).join(':') || p[0]); }
+    if (type === 'resultat') return 'Parcours terminé · ' + (RES[v] || v);
+    return evt;
+  }
+
+  // ---------- période ----------
+  var P = { preset: '30', du: '', au: '' };
+  try { var sp = JSON.parse(localStorage.getItem(PKEY) || 'null'); if (sp && sp.preset) P = sp; } catch (e) {}
+  function range() {
+    var au = iso(new Date());
+    if (P.preset === 'perso' && P.du && P.au) return { du: P.du, au: P.au };
+    if (P.preset === 'tout') return { du: DEBUT, au: au };
+    var n = parseInt(P.preset, 10) || 30, d = new Date(); d.setUTCDate(d.getUTCDate() - (n - 1));
+    return { du: iso(d), au: au };
+  }
+  function savePeriod() { try { localStorage.setItem(PKEY, JSON.stringify(P)); } catch (e) {} }
+  $('preset').value = P.preset;
+  function syncPeriodUI() { var r = range(); $('du').hidden = $('au').hidden = P.preset !== 'perso'; $('du').value = r.du; $('au').value = r.au; }
+  $('preset').addEventListener('change', function () { P.preset = this.value; if (P.preset === 'perso') { var r = range(); P.du = r.du; P.au = r.au; } savePeriod(); syncPeriodUI(); route(); });
+  $('du').addEventListener('change', function () { P.du = this.value; savePeriod(); route(); });
+  $('au').addEventListener('change', function () { P.au = this.value; savePeriod(); route(); });
+  $('refresh').addEventListener('click', function () { route(); });
+  syncPeriodUI();
+
+  // ---------- API ----------
   function api(path, opts) {
     opts = opts || {};
     opts.headers = Object.assign({ 'Authorization': 'Bearer ' + token, 'Accept': 'application/json' }, opts.headers || {});
@@ -150,164 +209,496 @@ td.n{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
       });
     });
   }
+  function analyse(vue, extra) {
+    var r = range(), qs = 'vue=' + vue + '&du=' + r.du + '&au=' + r.au;
+    for (var k in (extra || {})) qs += '&' + k + '=' + enc(extra[k]);
+    return api('/api/admin/analyse?' + qs);
+  }
+  function download(path, name) {
+    return fetch(path, { headers: { 'Authorization': 'Bearer ' + token } }).then(function (r) {
+      if (!r.ok) throw new Error('Erreur ' + r.status); return r.blob();
+    }).then(function (b) {
+      var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    });
+  }
+  function csvDownload(name, cols, rows) {
+    var e = function (v) { v = v == null ? '' : String(v); return /[";\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+    var csv = '﻿' + [cols.map(function (c) { return e(c.t); }).join(';')].concat(rows.map(function (r) { return cols.map(function (c) { return e(c.raw ? c.raw(r) : r[c.k]); }).join(';'); })).join('\r\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    a.download = name + '-' + iso(new Date()) + '.csv'; document.body.appendChild(a); a.click(); a.remove();
+  }
 
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function fmt(d) { if (!d) return ''; var x = new Date(d.replace(' ', 'T') + 'Z'); return isNaN(x) ? d : x.toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' }); }
-  function num(n) { return (n || 0).toLocaleString('fr-FR'); }
+  // ---------- composants ----------
+  // table : cols = [{k, t, n (numérique), f (format html), raw (valeur pour tri/CSV), w (wrap), bar}]
+  function table(el, cols, rows, opt) {
+    opt = opt || {};
+    var sortK = opt.sort || null, asc = false, filt = '';
+    var box = document.createElement('div');
+    box.innerHTML = '<div class="tbl-tools"><span class="count"></span><span class="row">' +
+      (rows.length > 8 ? '<input type="search" placeholder="Filtrer…" style="width:180px">' : '') +
+      '<button type="button" class="small">Exporter (CSV)</button></span></div><div class="tablebox"><table><thead></thead><tbody></tbody></table></div>';
+    el.appendChild(box);
+    var thead = box.querySelector('thead'), tbody = box.querySelector('tbody');
+    var val = function (r, c) { return c.raw ? c.raw(r) : r[c.k]; };
+    var maxBar = {}; cols.forEach(function (c) { if (c.bar) maxBar[c.k] = Math.max.apply(null, rows.map(function (r) { return +val(r, c) || 0; }).concat([1])); });
+    function draw() {
+      thead.innerHTML = '<tr>' + cols.map(function (c) { return '<th data-k="' + c.k + '" class="' + (c.n ? 'n ' : '') + (sortK === c.k ? 'sorted' + (asc ? ' asc' : '') : '') + '">' + esc(c.t) + '</th>'; }).join('') + '</tr>';
+      var list = rows.filter(function (r) { return !filt || cols.some(function (c) { return String(val(r, c) == null ? '' : val(r, c)).toLowerCase().indexOf(filt) !== -1 || (c.k === 'evt' && label(r.evt).toLowerCase().indexOf(filt) !== -1); }); });
+      if (sortK) {
+        var c = cols.filter(function (x) { return x.k === sortK; })[0];
+        list = list.slice().sort(function (a, b) { var x = val(a, c), y = val(b, c); if (c.n) { x = +x || 0; y = +y || 0; } else { x = String(x == null ? '' : x).toLowerCase(); y = String(y == null ? '' : y).toLowerCase(); } return (x < y ? -1 : x > y ? 1 : 0) * (asc ? 1 : -1); });
+      }
+      box.querySelector('.count').textContent = list.length === rows.length ? num(rows.length) + ' ligne' + (rows.length > 1 ? 's' : '') : num(list.length) + ' sur ' + num(rows.length);
+      tbody.innerHTML = list.length ? list.map(function (r, i) {
+        return '<tr' + (opt.click ? ' class="click" data-i="' + rows.indexOf(r) + '"' : '') + '>' + cols.map(function (c) {
+          var v = val(r, c), h = c.f ? c.f(r) : (c.n ? num(v, c.d) : esc(v));
+          if (c.bar) h = '<span class="bar" style="width:' + Math.max(2, Math.round((+v || 0) / maxBar[c.k] * 80)) + 'px"></span>' + h;
+          return '<td class="' + (c.n ? 'n' : '') + (c.w ? ' wrap' : '') + (c.mono ? ' mono' : '') + '">' + h + '</td>';
+        }).join('') + '</tr>';
+      }).join('') : '<tr><td colspan="' + cols.length + '" class="muted">Rien sur cette période.</td></tr>';
+    }
+    thead.addEventListener('click', function (e) { var th = e.target.closest('th'); if (!th) return; var k = th.dataset.k; if (sortK === k) asc = !asc; else { sortK = k; asc = false; } draw(); });
+    tbody.addEventListener('click', function (e) { var tr = e.target.closest('tr.click'); if (tr && opt.click) opt.click(rows[+tr.dataset.i]); });
+    var inp = box.querySelector('input[type=search]'); if (inp) inp.addEventListener('input', function () { filt = this.value.trim().toLowerCase(); draw(); });
+    box.querySelector('button').addEventListener('click', function () { csvDownload(opt.csv || 'noumensia', cols, rows); });
+    draw();
+  }
 
-  // ---------- Accès ----------
-  function showApp() { $('login').hidden = true; $('app').hidden = false; loadInscrits(); }
-  function showLogin(msg) { $('app').hidden = true; $('login').hidden = false; $('login-msg').textContent = msg || ''; }
+  // graphique en lignes : series = [{name, color, dash, values:{jour:valeur}}], x = liste de jours, marks = [{jour, label}]
+  function lineChart(el, x, series, opt) {
+    opt = opt || {};
+    var W = 900, H = opt.h || 220, pl = 40, pr = 10, pt = 12, pb = 26;
+    var all = []; series.forEach(function (s) { x.forEach(function (j) { if (s.values[j] != null) all.push(+s.values[j]); }); });
+    var max = Math.max.apply(null, all.concat([1])); var nice = Math.pow(10, Math.floor(Math.log10(max))); max = Math.ceil(max / nice) * nice;
+    var X = function (i) { return pl + (x.length < 2 ? (W - pl - pr) / 2 : i * (W - pl - pr) / (x.length - 1)); };
+    var Y = function (v) { return pt + (H - pt - pb) * (1 - v / max); };
+    var g = '';
+    for (var k = 0; k <= 4; k++) { var v = max * k / 4, y = Y(v); g += '<line x1="' + pl + '" x2="' + (W - pr) + '" y1="' + y + '" y2="' + y + '" stroke="var(--line)" stroke-width="1"/><text x="' + (pl - 6) + '" y="' + (y + 4) + '" font-size="11" text-anchor="end" fill="var(--mute)">' + num(v) + '</text>'; }
+    var step = Math.max(1, Math.ceil(x.length / 8));
+    x.forEach(function (j, i) { if (i % step === 0 || i === x.length - 1) g += '<text x="' + X(i) + '" y="' + (H - 6) + '" font-size="11" text-anchor="middle" fill="var(--mute)">' + dday(j) + '</text>'; });
+    (opt.marks || []).forEach(function (m) { var i = x.indexOf(m.jour); if (i < 0) return; g += '<line x1="' + X(i) + '" x2="' + X(i) + '" y1="' + pt + '" y2="' + (H - pb) + '" stroke="var(--accent2)" stroke-dasharray="3 3" stroke-width="1.2"/><circle cx="' + X(i) + '" cy="' + (pt + 4) + '" r="4" fill="var(--accent2)"><title>' + esc(m.label) + '</title></circle>'; });
+    series.forEach(function (s) {
+      var pts = [], bars = '';
+      x.forEach(function (j, i) { var v = s.values[j]; if (v == null) { if (pts.length) pts.push(null); return; } pts.push([X(i), Y(+v)]); });
+      var d = '', pen = false; pts.forEach(function (p) { if (!p) { pen = false; return; } d += (pen ? 'L' : 'M') + p[0].toFixed(1) + ',' + p[1].toFixed(1); pen = true; });
+      g += '<path d="' + d + '" fill="none" stroke="' + s.color + '" stroke-width="' + (s.w || 2) + '"' + (s.dash ? ' stroke-dasharray="' + s.dash + '"' : '') + ' stroke-linejoin="round"/>';
+      if (x.length <= 60) pts.forEach(function (p) { if (p) g += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2.2" fill="' + s.color + '"/>'; });
+    });
+    g += '<rect class="hov" x="' + pl + '" y="' + pt + '" width="' + (W - pl - pr) + '" height="' + (H - pt - pb) + '" fill="transparent"/><line class="cur" y1="' + pt + '" y2="' + (H - pb) + '" stroke="var(--mute)" stroke-width="1" opacity="0"/>';
+    el.innerHTML = '<div class="chart"><svg viewBox="0 0 ' + W + ' ' + H + '">' + g + '</svg><div class="tip"></div></div>' +
+      '<div class="legend">' + series.map(function (s) { return '<span style="--c:' + s.color + (s.dash ? ';--b:2px dashed ' + s.color + ';--c:transparent' : '') + '">' + esc(s.name) + '</span>'; }).join('') + (opt.marks && opt.marks.length ? '<span style="--c:var(--accent2)">post LinkedIn</span>' : '') + '</div>';
+    var svg = el.querySelector('svg'), tip = el.querySelector('.tip'), cur = el.querySelector('.cur');
+    svg.addEventListener('mousemove', function (e) {
+      var r = svg.getBoundingClientRect(), sx = (e.clientX - r.left) / r.width * W;
+      var i = Math.round((sx - pl) / ((W - pl - pr) / Math.max(1, x.length - 1))); i = Math.max(0, Math.min(x.length - 1, i));
+      var j = x[i]; cur.setAttribute('x1', X(i)); cur.setAttribute('x2', X(i)); cur.setAttribute('opacity', '.5');
+      var m = (opt.marks || []).filter(function (k) { return k.jour === j; }).map(function (k) { return '◆ ' + esc(k.label); });
+      tip.innerHTML = '<b>' + dday(j) + '</b><br>' + series.map(function (s) { return esc(s.name) + ' : ' + (s.values[j] == null ? '–' : num(s.values[j])); }).join('<br>') + (m.length ? '<br>' + m.join('<br>') : '');
+      tip.style.display = 'block'; tip.style.left = (X(i) / W * r.width) + 'px'; tip.style.top = (pt / H * r.height + 10) + 'px';
+    });
+    svg.addEventListener('mouseleave', function () { tip.style.display = 'none'; cur.setAttribute('opacity', '0'); });
+  }
+  function byDay(rows, k, v) { var o = {}; (rows || []).forEach(function (r) { o[r[k || 'jour']] = (o[r[k || 'jour']] || 0) + (+r[v] || 0); }); return o; }
+  function since(rows, x) { var m = (rows || []).reduce(function (a, r) { return !a || r.jour < a ? r.jour : a; }, null); return m ? x.filter(function (j) { return j >= m; }) : []; }
+  function fill(o, x) { var r = {}; x.forEach(function (j) { r[j] = o[j] || 0; }); return r; }
+
+  function section(title, inner) { var d = document.createElement('div'); d.className = 'card'; d.innerHTML = (title ? '<h2>' + title + '</h2>' : '') + (inner || ''); return d; }
+  function mount(html) { V.innerHTML = html || ''; return V; }
+  function kpis(list) { return '<div class="kpis">' + list.map(function (k) { return '<div class="kpi"><b>' + k[0] + (k[2] || '') + '</b><span>' + k[1] + '</span></div>'; }).join('') + '</div>'; }
+  function loading() { mount('<div class="card muted">Chargement…</div>'); }
+  function fail(err) { if (err && err.auth) { showLogin('Jeton refusé.'); return; } mount('<div class="card">Erreur : ' + esc(err && err.message) + '</div>'); }
+  function crumb(parts) { return '<div class="crumb">' + parts.map(function (p) { return p[1] ? '<a href="' + p[1] + '">' + esc(p[0]) + '</a>' : esc(p[0]); }).join(' › ') + '</div>'; }
+
+  var sessCols = [
+    { k: 'debut', t: 'Début', f: function (r) { return esc(dt(r.debut)); } },
+    { k: 'entree_page', t: 'Page d\'arrivée', w: true },
+    { k: 'source', t: 'Provenance' },
+    { k: 'pays', t: 'Pays', raw: function (r) { return pays(r.pays); } },
+    { k: 'appareil', t: 'Appareil' },
+    { k: 'vues', t: 'Pages', n: true },
+    { k: 'secondes', t: 'Temps', n: true, f: function (r) { return dur(r.secondes); } },
+    { k: 'actions', t: 'Actions', n: true }
+  ];
+  function openSession(r) { go('#/visite/' + enc(r.session)); }
+
+  // ---------- vues ----------
+  var LI = null;
+  function liPosts() { return LI ? Promise.resolve(LI) : api('/api/admin/linkedin').then(function (d) { LI = d; return d; }); }
+
+  var views = {
+    '': function () {
+      loading();
+      Promise.all([analyse('resume'), liPosts().catch(function () { return { posts: [] }; })]).then(function (a) {
+        var d = a[0], li = a[1], t = d.totaux || {}, p = d.precedent || {}, x = days(d.du, d.au);
+        mount(kpis([
+          [num(t.sessions), 'visites', delta(t.sessions, p.sessions)],
+          [num(t.vues), 'pages vues', delta(t.vues, p.vues)],
+          [num(t.pages_par_session, 1), 'pages par visite'],
+          [dur(t.secondes_moy), 'temps moyen par visite', delta(t.secondes_moy, p.secondes_moy)],
+          [num(t.rebond_pct, 1) + ' %', 'visites d\'une seule page'],
+          [num(t.actions), 'clics et actions', delta(t.actions, p.actions)]
+        ]));
+        var c = section('Jour par jour');
+        var cf = {}, zone = {}; (d.historique || []).forEach(function (h) { if (h.source === 'cf_web') cf[h.jour] = (cf[h.jour] || 0) + h.n; else zone[h.jour] = (zone[h.jour] || 0) + h.n; });
+        var marks = (li.posts || []).filter(function (p) { var j = (p.publie_le || '').slice(0, 10); return j >= d.du && j <= d.au; }).map(function (p) { return { jour: p.publie_le.slice(0, 10), label: p.titre || 'post' }; });
+        var series = [{ name: 'pages vues (mesure du site)', color: 'var(--s1)', values: fill(byDay(d.parJour, 'jour', 'vues'), since(d.parJour, x)) },
+          { name: 'visites', color: 'var(--s2)', values: fill(byDay(d.parJour, 'jour', 'sessions'), since(d.parJour, x)) },
+          { name: 'pages vues (premier compteur, 27-29/10)', color: 'var(--s4)', dash: '5 4', values: byDay(d.v1, 'jour', 'vues') },
+          { name: 'pages vues estimées par Cloudflare', color: 'var(--s3)', dash: '2 3', values: cf }];
+        lineChart(c, x, series, { marks: marks });
+        c.insertAdjacentHTML('beforeend', '<p class="hint">Trois sources se relaient : la mesure du site, détaillée, depuis sa mise en service ; le premier compteur du site (27-29/10) ; Cloudflare Web Analytics depuis le 16/06, dont les chiffres sont des estimations échantillonnées (multiples de 10) et ne voient pas les visiteurs qui bloquent son script.</p>');
+        V.appendChild(c);
+        var g = document.createElement('div'); g.className = 'grid2'; V.appendChild(g);
+        var c1 = section('Pages les plus vues'); g.appendChild(c1);
+        table(c1, [{ k: 'page', t: 'Page', w: true }, { k: 'vues', t: 'Vues', n: true, bar: true }], d.topPages || [], { click: function (r) { go('#/page/' + enc(r.page)); }, csv: 'top-pages' });
+        c1.insertAdjacentHTML('beforeend', '<p class="hint"><a href="#/pages">Toutes les pages →</a></p>');
+        var c2 = section('Provenances'); g.appendChild(c2);
+        table(c2, [{ k: 'source', t: 'Provenance' }, { k: 'sessions', t: 'Visites', n: true, bar: true }], d.topSources || [], { click: function (r) { go('#/source/' + enc(r.source)); }, csv: 'top-provenances' });
+        c2.insertAdjacentHTML('beforeend', '<p class="hint"><a href="#/sources">Toutes les provenances →</a></p>');
+        var c3 = section('Clics et actions'); g.appendChild(c3);
+        table(c3, [{ k: 'evt', t: 'Action', raw: function (r) { return label(r.evt); }, w: true }, { k: 'n', t: 'Nombre', n: true, bar: true }], d.topActions || [], { click: function (r) { go('#/action/' + enc(r.evt)); }, csv: 'top-actions' });
+        c3.insertAdjacentHTML('beforeend', '<p class="hint"><a href="#/actions">Toutes les actions →</a></p>');
+      }).catch(fail);
+    },
+
+    pages: function () {
+      loading();
+      analyse('pages').then(function (d) {
+        mount('');
+        var c = section('Toutes les pages');
+        table(c, [
+          { k: 'page', t: 'Page', w: true }, { k: 'vues', t: 'Vues', n: true, bar: true }, { k: 'sessions', t: 'Visites', n: true },
+          { k: 'entrees', t: 'Arrivées', n: true }, { k: 'sorties', t: 'Sorties', n: true },
+          { k: 'secondes_moy', t: 'Temps moyen', n: true, f: function (r) { return dur(r.secondes_moy); } },
+          { k: 'defilement_moy', t: 'Lu (moy.)', n: true, f: function (r) { return r.defilement_moy == null ? '–' : r.defilement_moy + ' %'; } },
+          { k: 'lu_en_entier', t: 'Lue en entier', n: true }, { k: 'clics', t: 'Clics', n: true }, { k: 'usages_outil', t: 'Usages outil', n: true },
+          { k: 'chargement_ms', t: 'Chargement', n: true, f: function (r) { return r.chargement_ms == null ? '–' : num(r.chargement_ms) + ' ms'; } }
+        ], d.lignes, { click: function (r) { go('#/page/' + enc(r.page)); }, csv: 'pages', sort: 'vues' });
+        c.insertAdjacentHTML('beforeend', '<p class="hint">Cliquez une page pour son détail : jour par jour, d\'où arrivent les visiteurs, où ils vont ensuite, ce qu\'ils cliquent, jusqu\'où ils lisent, et la liste des visites.</p>');
+        V.appendChild(c);
+      }).catch(fail);
+    },
+
+    page: function (p) {
+      loading();
+      analyse('page', { p: p }).then(function (d) {
+        var x = days(d.du, d.au), vues = d.parJour.reduce(function (s, r) { return s + r.vues; }, 0);
+        var sess = d.parJour.reduce(function (s, r) { return s + r.sessions; }, 0);
+        var temps = d.temps.reduce(function (s, r) { return s + r.n; }, 0);
+        var full = (d.defilement.filter(function (r) { return r.palier === 100; })[0] || {}).n || 0;
+        mount(crumb([['Pages', '#/pages'], [p]]) + kpis([[num(vues), 'vues'], [num(sess), 'visites (jour par jour)'], [num(d.entrees.reduce(function (s, r) { return s + r.n; }, 0)), 'arrivées sur le site par cette page'], [num(pct(full, vues), 1) + ' %', 'lue jusqu\'en bas'], [num(d.actions.reduce(function (s, r) { return s + r.n; }, 0)), 'clics et actions depuis la page']]) +
+          '<p class="hint" style="margin:-6px 0 14px"><a href="' + esc(p) + '" target="_blank" rel="noopener">Ouvrir la page ↗</a></p>');
+        var c = section('Jour par jour');
+        lineChart(c, x, [{ name: 'vues', color: 'var(--s1)', values: fill(byDay(d.parJour, 'jour', 'vues'), since(d.parJour, x)) },
+          { name: 'premier compteur', color: 'var(--s4)', dash: '5 4', values: byDay(d.v1, 'jour', 'vues') },
+          { name: 'Cloudflare (estimation)', color: 'var(--s3)', dash: '2 3', values: byDay(d.cf, 'jour', 'n') }]);
+        V.appendChild(c);
+        var g = document.createElement('div'); g.className = 'grid2'; V.appendChild(g);
+        var pg = function (r) { if (r.page && r.page.charAt(0) === '/') go('#/page/' + enc(r.page)); };
+        var a1 = section('Page vue juste avant'); g.appendChild(a1); table(a1, [{ k: 'page', t: 'Page', w: true }, { k: 'n', t: 'Fois', n: true, bar: true }], d.avant, { click: pg, csv: 'avant' });
+        var a2 = section('Page vue juste après'); g.appendChild(a2); table(a2, [{ k: 'page', t: 'Page', w: true }, { k: 'n', t: 'Fois', n: true, bar: true }], d.apres, { click: pg, csv: 'apres' });
+        var a3 = section('Clics et actions depuis cette page'); g.appendChild(a3); table(a3, [{ k: 'evt', t: 'Action', raw: function (r) { return label(r.evt); }, w: true }, { k: 'n', t: 'Nombre', n: true, bar: true }, { k: 'sessions', t: 'Visites', n: true }], d.actions, { click: function (r) { go('#/action/' + enc(r.evt)); }, csv: 'actions-page' });
+        var a4 = section('Provenance des visites arrivées ici'); g.appendChild(a4); table(a4, [{ k: 'source', t: 'Provenance' }, { k: 'n', t: 'Visites', n: true, bar: true }], d.entrees, { click: function (r) { go('#/source/' + enc(r.source)); }, csv: 'entrees' });
+        var a5 = section('Jusqu\'où la page est lue'); g.appendChild(a5); table(a5, [{ k: 'palier', t: 'Palier atteint', f: function (r) { return r.palier + ' %'; }, raw: function (r) { return r.palier; }, n: true }, { k: 'n', t: 'Vues', n: true, bar: true }, { k: 'p', t: 'Part des vues', n: true, raw: function (r) { return pct(r.n, vues); }, f: function (r) { return num(pct(r.n, vues), 1) + ' %'; } }], d.defilement, { csv: 'defilement' });
+        var a6 = section('Temps passé sur la page'); g.appendChild(a6); table(a6, [{ k: 'tranche', t: 'Tranche' }, { k: 'n', t: 'Vues', n: true, bar: true }, { k: 'p', t: 'Part', n: true, raw: function (r) { return pct(r.n, temps); }, f: function (r) { return num(pct(r.n, temps), 1) + ' %'; } }], d.temps, { csv: 'temps' });
+        var a7 = section('Appareils'); g.appendChild(a7); table(a7, [{ k: 'appareil', t: 'Appareil' }, { k: 'n', t: 'Vues', n: true, bar: true }], d.appareils, { csv: 'appareils' });
+        var a8 = section('Pays'); g.appendChild(a8); table(a8, [{ k: 'pays', t: 'Pays', raw: function (r) { return pays(r.pays); } }, { k: 'n', t: 'Vues', n: true, bar: true }], d.pays, { csv: 'pays' });
+        var s = section('Visites passées par cette page'); V.appendChild(s); table(s, sessCols, d.sessions, { click: openSession, csv: 'visites-page' });
+      }).catch(fail);
+    },
+
+    sources: function () {
+      loading();
+      analyse('sources').then(function (d) {
+        mount('');
+        var c = section('Toutes les provenances');
+        table(c, [{ k: 'source', t: 'Provenance' }, { k: 'utm_source', t: 'utm_source' }, { k: 'utm_campaign', t: 'Campagne' },
+          { k: 'sessions', t: 'Visites', n: true, bar: true }, { k: 'vues', t: 'Pages vues', n: true }, { k: 'pages_par_session', t: 'Pages / visite', n: true, d: 1 },
+          { k: 'secondes_moy', t: 'Temps moyen', n: true, f: function (r) { return dur(r.secondes_moy); } }, { k: 'actions', t: 'Actions', n: true },
+          { k: 'rebond_pct', t: 'Une seule page', n: true, f: function (r) { return num(r.rebond_pct, 1) + ' %'; } }],
+          d.lignes, { click: function (r) { go('#/source/' + enc(r.source)); }, csv: 'provenances', sort: 'sessions' });
+        c.insertAdjacentHTML('beforeend', '<p class="hint">« direct » : adresse tapée, favori, application (LinkedIn sur mobile n\'indique souvent pas sa provenance) ; « interne » : nouvel onglet ouvert depuis le site. Pour suivre une publication, ajoutez à vos liens ?utm_source=linkedin&amp;utm_campaign=nom-du-post.</p>');
+        V.appendChild(c);
+        if (d.cf && d.cf.length) { var h = section('Provenances vues par Cloudflare (estimations, depuis le 16/06)'); table(h, [{ k: 'source', t: 'Site d\'origine', raw: function (r) { return r.source || '(aucun / direct)'; } }, { k: 'n', t: 'Pages vues estimées', n: true, bar: true }], d.cf, { csv: 'provenances-cloudflare' }); V.appendChild(h); }
+      }).catch(fail);
+    },
+
+    source: function (s) {
+      loading();
+      analyse('source', { s: s }).then(function (d) {
+        var x = days(d.du, d.au), tot = d.parJour.reduce(function (a, r) { return a + r.sessions; }, 0);
+        mount(crumb([['Provenances', '#/sources'], [s]]) + kpis([[num(tot), 'visites'], [num(d.pages.reduce(function (a, r) { return a + r.n; }, 0)), 'pages vues'], [num(d.actions.reduce(function (a, r) { return a + r.n; }, 0)), 'actions']]));
+        var c = section('Visites par jour'); lineChart(c, x, [{ name: 'visites', color: 'var(--s1)', values: fill(byDay(d.parJour, 'jour', 'sessions'), since(d.parJour, x)) }]); V.appendChild(c);
+        var g = document.createElement('div'); g.className = 'grid2'; V.appendChild(g);
+        var a1 = section('Pages d\'arrivée'); g.appendChild(a1); table(a1, [{ k: 'page', t: 'Page', w: true }, { k: 'n', t: 'Visites', n: true, bar: true }], d.entrees, { click: function (r) { go('#/page/' + enc(r.page)); }, csv: 'arrivees' });
+        var a2 = section('Toutes les pages vues par ces visites'); g.appendChild(a2); table(a2, [{ k: 'page', t: 'Page', w: true }, { k: 'n', t: 'Vues', n: true, bar: true }], d.pages, { click: function (r) { go('#/page/' + enc(r.page)); }, csv: 'pages-source' });
+        var a3 = section('Actions'); g.appendChild(a3); table(a3, [{ k: 'evt', t: 'Action', raw: function (r) { return label(r.evt); }, w: true }, { k: 'n', t: 'Nombre', n: true, bar: true }], d.actions, { click: function (r) { go('#/action/' + enc(r.evt)); }, csv: 'actions-source' });
+        var a4 = section('Campagnes (utm)'); g.appendChild(a4); table(a4, [{ k: 'utm_source', t: 'utm_source' }, { k: 'utm_medium', t: 'utm_medium' }, { k: 'utm_campaign', t: 'utm_campaign' }, { k: 'n', t: 'Visites', n: true }], d.campagnes, { csv: 'campagnes' });
+        var v = section('Les visites'); V.appendChild(v); table(v, sessCols, d.sessions, { click: openSession, csv: 'visites-source' });
+      }).catch(fail);
+    },
+
+    actions: function () {
+      loading();
+      analyse('actions').then(function (d) {
+        mount('');
+        var c = section('Tous les clics et actions');
+        table(c, [{ k: 'evt', t: 'Action', raw: function (r) { return label(r.evt); }, w: true }, { k: 'n', t: 'Nombre', n: true, bar: true }, { k: 'sessions', t: 'Visites', n: true }, { k: 'pages', t: 'Pages', n: true },
+          { k: 'dernier', t: 'Dernière fois', f: function (r) { return esc(dt(r.dernier)); } }], d.lignes, { click: function (r) { go('#/action/' + enc(r.evt)); }, csv: 'actions', sort: 'n' });
+        V.appendChild(c);
+        if (d.v1 && d.v1.length) { var h = section('Premier compteur (27-29/10, avant la mesure détaillée)'); table(h, [{ k: 'evt', t: 'Action', raw: function (r) { return label(r.evt); }, w: true }, { k: 'page', t: 'Page', w: true }, { k: 'n', t: 'Nombre', n: true, bar: true }], d.v1, { csv: 'actions-v1' }); V.appendChild(h); }
+      }).catch(fail);
+    },
+
+    action: function (e) {
+      loading();
+      analyse('action', { e: e }).then(function (d) {
+        var x = days(d.du, d.au), tot = d.parJour.reduce(function (a, r) { return a + r.n; }, 0);
+        mount(crumb([['Clics et actions', '#/actions'], [label(e)]]) + kpis([[num(tot), 'fois'], [num(d.sessions.length), 'visites'], [num(d.pages.length), 'pages']]));
+        var c = section('Par jour'); lineChart(c, x, [{ name: label(e), color: 'var(--s1)', values: fill(byDay(d.parJour, 'jour', 'n'), since(d.parJour, x)) }]); V.appendChild(c);
+        var g = document.createElement('div'); g.className = 'grid2'; V.appendChild(g);
+        var a1 = section('Depuis quelles pages'); g.appendChild(a1); table(a1, [{ k: 'page', t: 'Page', w: true }, { k: 'n', t: 'Nombre', n: true, bar: true }, { k: 'sessions', t: 'Visites', n: true }], d.pages, { click: function (r) { go('#/page/' + enc(r.page)); }, csv: 'pages-action' });
+        if (d.details.some(function (r) { return r.detail || r.valeur != null; })) { var a2 = section('Détail'); g.appendChild(a2); table(a2, [{ k: 'detail', t: 'Détail', w: true }, { k: 'valeur', t: 'Valeur', n: true }, { k: 'n', t: 'Fois', n: true, bar: true }], d.details, { csv: 'details-action' }); }
+        var v = section('Les visites'); V.appendChild(v); table(v, sessCols, d.sessions, { click: openSession, csv: 'visites-action' });
+      }).catch(fail);
+    },
+
+    visites: function () {
+      var depart = 0, lim = 200;
+      function load() {
+        loading();
+        analyse('sessions', { limite: lim, depart: depart }).then(function (d) {
+          mount('');
+          var c = section('Toutes les visites <span class="tag">' + num(d.total) + '</span>');
+          table(c, sessCols.concat([{ k: 'navigateur', t: 'Navigateur' }, { k: 'os', t: 'Système' }, { k: 'utm_campaign', t: 'Campagne' }]), d.lignes, { click: openSession, csv: 'visites' });
+          var nav = document.createElement('div'); nav.className = 'row'; nav.style.marginTop = '10px';
+          nav.innerHTML = '<button type="button" class="small" ' + (depart ? '' : 'disabled') + '>← Plus récentes</button><span class="muted">' + num(depart + 1) + '–' + num(Math.min(depart + lim, d.total)) + ' sur ' + num(d.total) + '</span><button type="button" class="small" ' + (depart + lim < d.total ? '' : 'disabled') + '>Plus anciennes →</button>';
+          nav.children[0].onclick = function () { depart = Math.max(0, depart - lim); load(); };
+          nav.children[2].onclick = function () { depart += lim; load(); };
+          c.appendChild(nav);
+          c.insertAdjacentHTML('beforeend', '<p class="hint">Une visite = un onglet ouvert sur le site. Elle n\'est jamais reliée à une personne ni à une autre visite.</p>');
+          V.appendChild(c);
+        }).catch(fail);
+      }
+      load();
+    },
+
+    visite: function (id) {
+      loading();
+      api('/api/admin/analyse?vue=session&id=' + enc(id)).then(function (d) {
+        var ev = d.evenements || [], first = ev[0] || {}, t0 = ev.length ? utc(ev[0].ts) : null;
+        var entree = ev.filter(function (e) { return e.entree; })[0] || first;
+        var sec = ev.filter(function (e) { return e.evt === 'temps'; }).reduce(function (s, e) { return s + (e.valeur || 0); }, 0);
+        mount(crumb([['Visites', '#/visites'], [dt(first.ts)]]) + kpis([[num(ev.filter(function (e) { return e.evt === 'vue'; }).length), 'pages vues'], [dur(sec), 'temps actif'], [esc(entree.source || '–'), 'provenance'], [esc(pays(entree.pays)), 'pays'], [esc((entree.appareil || '') + ' · ' + (entree.navigateur || '')), 'appareil']]));
+        var c = section('Déroulé de la visite');
+        c.insertAdjacentHTML('beforeend', '<ul class="timeline">' + ev.map(function (e) {
+          var off = t0 ? Math.round((utc(e.ts) - t0) / 1000) : 0;
+          var what = e.evt === 'vue' ? '<b>' + esc(e.page) + '</b>' + (e.valeur ? '<span class="tag">' + num(e.valeur) + ' ms</span>' : '') :
+            e.evt === 'temps' ? 'reste ' + dur(e.valeur) + ' sur ' + esc(e.page) + (e.detail ? ', lu à ' + esc(e.detail) + ' %' : '') :
+            e.evt === 'defilement' ? 'descend à ' + e.valeur + ' % de ' + esc(e.page) :
+            e.evt === 'interactions' ? esc(e.valeur) + ' réglage(s) modifié(s) sur ' + esc(e.page) :
+            esc(label(e.evt)) + (e.detail ? ' <span class="tag">' + esc(e.detail) + '</span>' : '') + ' <span class="muted">sur ' + esc(e.page) + '</span>';
+          return '<li><span class="t">+' + dur(off) + '</span><span>' + what + '</span></li>';
+        }).join('') + '</ul>');
+        V.appendChild(c);
+        if (entree.utm_source || entree.utm_campaign) V.appendChild(section('Campagne', '<p>' + esc([entree.utm_source, entree.utm_medium, entree.utm_campaign].filter(Boolean).join(' · ')) + '</p>'));
+      }).catch(fail);
+    },
+
+    audience: function () {
+      loading();
+      analyse('audience').then(function (d) {
+        mount('');
+        var g = document.createElement('div'); g.className = 'grid2'; V.appendChild(g);
+        var t = function (title, rows, raw) { var c = section(title); g.appendChild(c); table(c, [{ k: 'valeur', t: 'Valeur', raw: raw }, { k: 'sessions', t: 'Visites', n: true, bar: true }], rows, { csv: title }); };
+        t('Pays', d.pays, function (r) { return pays(r.valeur); }); t('Appareils', d.appareils); t('Navigateurs', d.navigateurs); t('Systèmes', d.systemes);
+        // carte de chaleur heure × jour (heure de Paris)
+        var M = {}, mx = 1, J = ['lun', 'mar', 'mer', 'jeu', 'ven', 'sam', 'dim'];
+        (d.heures || []).forEach(function (r) {
+          var dd = utc(r.ts), parts = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', weekday: 'short', hour: '2-digit', hour12: false }).formatToParts(dd);
+          var wd = (parts.filter(function (p) { return p.type === 'weekday'; })[0] || {}).value || '', h = +((parts.filter(function (p) { return p.type === 'hour'; })[0] || {}).value || 0) % 24;
+          var k = J.indexOf(wd.replace('.', '').slice(0, 3)) + ':' + h; M[k] = (M[k] || 0) + 1; mx = Math.max(mx, M[k]);
+        });
+        var h = '<div class="heat"><div class="h"></div>' + Array.from({ length: 24 }, function (_, i) { return '<div class="h">' + (i % 3 ? '' : i + 'h') + '</div>'; }).join('');
+        J.forEach(function (j, wi) { h += '<div class="h" style="text-align:left">' + j + '</div>'; for (var i = 0; i < 24; i++) { var v = M[wi + ':' + i] || 0; h += '<div title="' + j + ' ' + i + 'h : ' + v + ' pages vues" style="background:' + (v ? 'color-mix(in srgb, var(--accent) ' + Math.round(15 + 85 * v / mx) + '%, transparent)' : 'var(--soft)') + '"></div>'; } });
+        var c = section('Quand le site est consulté (pages vues, heure de Paris)', h + '</div>'); V.appendChild(c);
+        if (d.cf && d.cf.length) { var cc = section('Selon Cloudflare depuis le 16/06 (estimations)'); table(cc, [{ k: 'dimension', t: 'Dimension' }, { k: 'valeur', t: 'Valeur' }, { k: 'n', t: 'Pages vues estimées', n: true, bar: true }], d.cf, { csv: 'audience-cloudflare' }); V.appendChild(cc); }
+      }).catch(fail);
+    },
+
+    entonnoirs: function () {
+      loading();
+      analyse('entonnoirs').then(function (d) {
+        mount('');
+        var f = function (title, steps) {
+          var first = steps[0][1] || 0;
+          return section(title, '<div class="funnel">' + steps.map(function (s, i) {
+            var prev = i ? steps[i - 1][1] : s[1];
+            return '<div class="step"><div class="lab"><span>' + esc(s[0]) + '</span><span><b>' + num(s[1]) + '</b> <span class="muted">' + (i ? num(pct(s[1], first), 1) + ' % du départ · ' + num(pct(s[1], prev), 1) + ' % de l\'étape précédente' : '') + '</span></span></div><div class="track"><div class="fill" style="width:' + (first ? Math.max(1, pct(s[1], first)) : 0) + '%"></div></div></div>';
+          }).join('') + '</div>');
+        };
+        V.appendChild(f('Du site au contact', d.site));
+        V.appendChild(f('Décryptage AI Act', d.aiact));
+        var r = section('Résultats du parcours de qualification'); table(r, [{ k: 'evt', t: 'Résultat', raw: function (x) { return label(x.evt); } }, { k: 'n', t: 'Fois', n: true, bar: true }], d.resultats, { click: function (x) { go('#/action/' + enc(x.evt)); }, csv: 'resultats-parcours' }); V.appendChild(r);
+        V.insertAdjacentHTML('beforeend', '<p class="hint">Chaque étape compte des visites (onglets), pas des personnes. Calculé à partir de la mesure détaillée, donc depuis sa mise en service.</p>');
+      }).catch(fail);
+    },
+
+    linkedin: function () {
+      loading();
+      LI = null;
+      liPosts().then(function (d) {
+        var last = {}; (d.stats || []).forEach(function (s) { if (!last[s.urn] || s.releve_le > last[s.urn].releve_le) last[s.urn] = s; });
+        var rows = (d.posts || []).map(function (p) { var s = last[p.urn] || {}; return Object.assign({}, p, s, { jour: (p.publie_le || '').slice(0, 10), taux: s.impressions ? Math.round((s.engagements || 0) / s.impressions * 1000) / 10 : null, hors: s.reseau_pct == null ? null : 100 - s.reseau_pct }); });
+        var cpt = {}; (d.compte || []).forEach(function (c) { (cpt[c.mesure] = cpt[c.mesure] || []).push(c); });
+        var lastOf = function (m) { var a = cpt[m] || []; return a.length ? a[a.length - 1].valeur : null; };
+        var imp = rows.reduce(function (s, r) { return s + (r.impressions || 0); }, 0), eng = rows.reduce(function (s, r) { return s + (r.engagements || 0); }, 0);
+        mount(kpis([[num(lastOf('abonnes')), 'abonnés'], [num(rows.length), 'posts suivis'], [num(imp), 'impressions (tous posts)'], [num(rows.length ? imp / rows.length : 0), 'impressions par post'], [num(pct(eng, imp), 1) + ' %', 'taux d\'engagement'], [num(lastOf('impressions_365j')), 'impressions sur 12 mois']]));
+        var c = section('Les posts');
+        table(c, [
+          { k: 'jour', t: 'Publié', f: function (r) { return esc(dday(r.jour)); } },
+          { k: 'titre', t: 'Post', w: true, f: function (r) { return esc(r.titre || r.extrait || r.urn) + (r.format ? '<span class="tag">' + esc(r.format) + '</span>' : ''); } },
+          { k: 'impressions', t: 'Impressions', n: true, bar: true }, { k: 'membres_atteints', t: 'Personnes', n: true },
+          { k: 'reactions', t: 'Réactions', n: true }, { k: 'commentaires', t: 'Comm.', n: true }, { k: 'republications', t: 'Republ.', n: true },
+          { k: 'enregistrements', t: 'Enreg.', n: true }, { k: 'envois', t: 'Envois', n: true },
+          { k: 'taux', t: 'Engagement', n: true, f: function (r) { return r.taux == null ? '–' : num(r.taux, 1) + ' %'; } },
+          { k: 'hors', t: 'Hors réseau', n: true, f: function (r) { return r.hors == null ? '–' : r.hors + ' %'; } },
+          { k: 'vues_profil', t: 'Vues profil', n: true }, { k: 'abonnes_gagnes', t: 'Abonnés +', n: true },
+          { k: 'releve_le', t: 'Relevé', f: function (r) { return esc(dday(r.releve_le)); } }
+        ], rows, { click: function (r) { go('#/post/' + r.urn); }, csv: 'linkedin-posts', sort: 'jour' });
+        V.appendChild(c);
+        // visites venues de LinkedIn
+        var x = days(range().du, range().au);
+        var v = section('Visites du site venues de LinkedIn');
+        lineChart(v, x, [{ name: 'visites venues de LinkedIn (mesure du site)', color: 'var(--s1)', values: fill(byDay(d.visites, 'jour', 'sessions'), since(d.visites, x)) },
+          { name: 'pages vues venues de LinkedIn (Cloudflare, estimation)', color: 'var(--s3)', dash: '2 3', values: byDay(d.cf, 'jour', 'n') }],
+          { marks: rows.map(function (r) { return { jour: r.jour, label: r.titre || 'post' }; }) });
+        v.insertAdjacentHTML('beforeend', '<p class="hint">LinkedIn sur mobile n\'indique souvent pas sa provenance : une partie de ces visites apparaît en « direct ». Des liens avec ?utm_source=linkedin les rendent identifiables.</p>');
+        V.appendChild(v);
+        var g = document.createElement('div'); g.className = 'grid2'; V.appendChild(g);
+        var p1 = section('Pages d\'arrivée depuis LinkedIn'); g.appendChild(p1); table(p1, [{ k: 'page', t: 'Page', w: true }, { k: 'n', t: 'Visites', n: true, bar: true }], d.pagesDepuisLinkedin, { click: function (r) { go('#/page/' + enc(r.page)); }, csv: 'arrivees-linkedin' });
+        var p2 = section('Chiffres du compte, relevé après relevé'); g.appendChild(p2); table(p2, [{ k: 'jour', t: 'Relevé', f: function (r) { return esc(dday(r.jour)); } }, { k: 'mesure', t: 'Mesure' }, { k: 'valeur', t: 'Valeur', n: true }], d.compte || [], { csv: 'linkedin-compte' });
+      }).catch(fail);
+    },
+
+    post: function (urn) {
+      loading();
+      liPosts().then(function (d) {
+        var p = (d.posts || []).filter(function (x) { return x.urn === urn; })[0] || { urn: urn };
+        var st = (d.stats || []).filter(function (s) { return s.urn === urn; });
+        var last = st[st.length - 1] || {};
+        var demo = {}; try { demo = JSON.parse(last.demographie || '{}'); } catch (e) {}
+        var j0 = (p.publie_le || '').slice(0, 10);
+        var after = (d.visites || []).filter(function (v) { return v.jour >= j0 && v.jour <= iso(new Date(Date.parse(j0 + 'T00:00:00Z') + 6 * 864e5)); });
+        mount(crumb([['LinkedIn', '#/linkedin'], [p.titre || urn]]) + kpis([[num(last.impressions), 'impressions'], [num(last.membres_atteints), 'personnes atteintes'], [num(last.engagements), 'engagements'], [num(pct(last.engagements, last.impressions), 1) + ' %', 'taux d\'engagement'], [num(last.vues_profil), 'vues de profil'], [num(last.abonnes_gagnes), 'abonnés gagnés'], [num(after.reduce(function (s, v) { return s + v.sessions; }, 0)), 'visites venues de LinkedIn dans les 7 jours']]) +
+          '<p class="hint" style="margin:-6px 0 14px">Publié le ' + esc(dt(p.publie_le)) + ' · <a href="' + esc(p.url || ('https://www.linkedin.com/feed/update/urn:li:activity:' + urn + '/')) + '" target="_blank" rel="noopener">voir le post ↗</a> · <a href="https://www.linkedin.com/analytics/post-summary/urn:li:activity:' + esc(urn) + '/" target="_blank" rel="noopener">statistiques LinkedIn ↗</a></p>');
+        if (p.extrait) V.appendChild(section('', '<p style="margin:0">« ' + esc(p.extrait) + ' »</p>'));
+        var c = section('Relevés successifs');
+        if (st.length > 1) { var xs = st.map(function (s) { return s.releve_le; }); lineChart(c, xs, [{ name: 'impressions', color: 'var(--s1)', values: byDay(st, 'releve_le', 'impressions') }, { name: 'engagements', color: 'var(--s2)', values: byDay(st, 'releve_le', 'engagements') }]); }
+        table(c, [{ k: 'releve_le', t: 'Relevé' }, { k: 'impressions', t: 'Impressions', n: true }, { k: 'membres_atteints', t: 'Personnes', n: true }, { k: 'reactions', t: 'Réactions', n: true }, { k: 'commentaires', t: 'Comm.', n: true }, { k: 'republications', t: 'Republ.', n: true }, { k: 'enregistrements', t: 'Enreg.', n: true }, { k: 'envois', t: 'Envois', n: true }, { k: 'vues_profil', t: 'Vues profil', n: true }, { k: 'abonnes_gagnes', t: 'Abonnés +', n: true }, { k: 'reseau_pct', t: 'Dans le réseau', n: true, f: function (r) { return r.reseau_pct == null ? '–' : r.reseau_pct + ' %'; } }], st, { csv: 'releves-' + urn });
+        V.appendChild(c);
+        var dm = Object.keys(demo).map(function (k) { return { k: { 'Location': 'Lieu', 'Seniority': 'Niveau', 'Industry': 'Secteur', 'Company size': 'Taille d\'entreprise', 'Job title': 'Poste' }[k] || k, v: demo[k][0], p: demo[k][1] }; });
+        if (dm.length) { var dd = section('Qui l\'a vu (premier segment de chaque catégorie, selon LinkedIn)'); table(dd, [{ k: 'k', t: 'Catégorie' }, { k: 'v', t: 'Segment', w: true }, { k: 'p', t: 'Part' }], dm, { csv: 'demographie-' + urn }); V.appendChild(dd); }
+      }).catch(fail);
+    },
+
+    historique: function () {
+      loading();
+      analyse('historique').then(function (d) {
+        var x = days(d.du, d.au), web = {}, vis = {}, html = {}, req = {}, dims = {};
+        d.lignes.forEach(function (r) {
+          if (r.source === 'cf_web' && r.dimension === 'path') { web[r.jour] = (web[r.jour] || 0) + r.n; vis[r.jour] = (vis[r.jour] || 0) + r.visites; }
+          if (r.source === 'cf_zone' && r.dimension === 'pages_html') html[r.jour] = r.n;
+          if (r.source === 'cf_zone' && r.dimension === 'requetes') req[r.jour] = r.n;
+          if (r.source === 'cf_web') { var k = r.dimension + '\u0001' + r.valeur; dims[k] = (dims[k] || 0) + r.n; }
+        });
+        var sum = function (o) { return Object.keys(o).reduce(function (s, k) { return s + o[k]; }, 0); };
+        mount('<p class="note">Cloudflare garde six mois de Web Analytics et ses chiffres sont des estimations échantillonnées. Ces données ont été recopiées dans la base du site le 30/10 (depuis le 16/06) et sont complétées chaque jour, donc elles ne seront plus perdues.</p>' +
+          kpis([[num(sum(web)), 'pages vues estimées (Web Analytics)'], [num(sum(vis)), 'visites estimées'], [num(sum(html)), 'pages servies par le serveur (robots compris)']]));
+        var c = section('Jour par jour'); lineChart(c, x, [{ name: 'pages vues estimées (Web Analytics)', color: 'var(--s1)', values: web }, { name: 'visites estimées', color: 'var(--s2)', values: vis }]); V.appendChild(c);
+        var z = section('Pages servies par le serveur (robots et aperçus de liens compris)'); lineChart(z, x, [{ name: 'pages HTML servies', color: 'var(--s3)', values: html }]); V.appendChild(z);
+        var g = document.createElement('div'); g.className = 'grid2'; V.appendChild(g);
+        var N = { path: 'Pages', ref: 'Sites d\'origine', pays: 'Pays', appareil: 'Appareils', navigateur: 'Navigateurs', os: 'Systèmes' };
+        Object.keys(N).forEach(function (dim) {
+          var rows = Object.keys(dims).filter(function (k) { return k.split('\u0001')[0] === dim; }).map(function (k) { return { valeur: k.split('\u0001')[1] || '(aucun)', n: dims[k] }; }).sort(function (a, b) { return b.n - a.n; });
+          var s = section(N[dim]); g.appendChild(s); table(s, [{ k: 'valeur', t: 'Valeur', w: true }, { k: 'n', t: 'Pages vues estimées', n: true, bar: true }], rows, { csv: 'cloudflare-' + dim, click: dim === 'path' ? function (r) { go('#/page/' + enc(r.valeur)); } : null });
+        });
+      }).catch(fail);
+    },
+
+    brut: function () {
+      var depart = 0, lim = 500;
+      function load() {
+        loading();
+        analyse('brut', { limite: lim, depart: depart }).then(function (d) {
+          mount('');
+          var e = section('Sauvegarde et export complet');
+          e.insertAdjacentHTML('beforeend', '<div class="row">' + ['hits', 'evenements', 'historique', 'li_posts', 'li_stats', 'li_compte', 'inscrits'].map(function (t) { return '<button type="button" class="small" data-t="' + t + '">' + t + '.csv</button>'; }).join('') + '</div><p class="hint">Tables entières, toutes périodes confondues. Une copie complète est aussi enregistrée chaque semaine sur votre ordinateur (dossier Projets\\Site Noumensia\\donnees). La table hits est exportée par lots de 20 000 lignes.</p><p class="msg" id="exp-msg"></p>');
+          e.querySelectorAll('button[data-t]').forEach(function (b) { b.onclick = function () { $('exp-msg').textContent = 'Préparation…'; download('/api/admin/export?table=' + b.dataset.t, 'noumensia-' + b.dataset.t + '-' + iso(new Date()) + '.csv').then(function () { $('exp-msg').textContent = ''; }).catch(function (er) { $('exp-msg').textContent = er.message; }); }; });
+          V.appendChild(e);
+          var c = section('Journal des événements <span class="tag">' + num(d.total) + ' sur la période</span>');
+          table(c, [{ k: 'ts', t: 'Quand', f: function (r) { return esc(dt(r.ts)); } }, { k: 'page', t: 'Page', w: true }, { k: 'evt', t: 'Événement', raw: function (r) { return label(r.evt); }, w: true },
+            { k: 'detail', t: 'Détail', w: true }, { k: 'valeur', t: 'Valeur', n: true }, { k: 'source', t: 'Provenance' }, { k: 'pays', t: 'Pays' }, { k: 'appareil', t: 'Appareil' },
+            { k: 'navigateur', t: 'Navigateur' }, { k: 'os', t: 'Système' }, { k: 'session', t: 'Visite', mono: true, f: function (r) { return r.session ? '<a href="#/visite/' + enc(r.session) + '">' + esc(r.session.slice(0, 8)) + '</a>' : ''; } }], d.lignes, { csv: 'journal' });
+          var nav = document.createElement('div'); nav.className = 'row'; nav.style.marginTop = '10px';
+          nav.innerHTML = '<button type="button" class="small" ' + (depart ? '' : 'disabled') + '>← Plus récents</button><span class="muted">' + num(depart + 1) + '–' + num(Math.min(depart + lim, d.total)) + ' sur ' + num(d.total) + '</span><button type="button" class="small" ' + (depart + lim < d.total ? '' : 'disabled') + '>Plus anciens →</button>';
+          nav.children[0].onclick = function () { depart = Math.max(0, depart - lim); load(); };
+          nav.children[2].onclick = function () { depart += lim; load(); };
+          c.appendChild(nav); V.appendChild(c);
+        }).catch(fail);
+      }
+      load();
+    },
+
+    inscrits: function () {
+      loading();
+      api('/api/admin/inscrits').then(function (d) {
+        var ins = d.inscrits || [], att = ins.filter(function (i) { return !i.envoye_le; });
+        mount(kpis([[num(ins.length), 'inscrits'], [num(att.length), 'à prévenir'], [num(ins.length - att.length), 'déjà prévenus'], [num(ins.filter(function (i) { return i.recontact; }).length), 'd\'accord pour être recontactés']]));
+        var c = section('Alerte AI Act : lignes directrices de la Commission');
+        c.insertAdjacentHTML('beforeend', '<div class="row"><button class="primary" id="b-mail" type="button">Écrire aux personnes à prévenir</button><button id="b-copy" type="button">Copier leurs adresses</button></div>' +
+          '<div class="row" style="margin-top:10px"><button id="b-sent" type="button">Marquer la sélection comme prévenue</button><button id="b-purge" class="danger" type="button">Supprimer de la liste du site les adresses prévenues depuis plus de 8 jours</button></div>' +
+          '<p class="msg" id="ins-msg"></p><p class="hint">« Écrire » ouvre votre messagerie avec les adresses en copie cachée. Tous les inscrits sont aussi reportés chaque vendredi dans votre CRM ; ceux qui n\'ont pas coché « me recontacter » y sont marqués NE PAS CONTACTER, avec la date limite d\'effacement (trois mois après l\'envoi, engagement pris sur le site).</p>');
+        V.appendChild(c);
+        var tb = section(''); V.appendChild(tb);
+        var rows = ins.map(function (i) { return Object.assign({ sel: !i.envoye_le }, i); });
+        table(tb, [{ k: 'sel', t: '✓', f: function (r) { return '<input type="checkbox" data-id="' + r.id + '"' + (r.sel ? ' checked' : '') + '>'; } }, { k: 'email', t: 'Adresse' }, { k: 'cree_le', t: 'Inscrit le', f: function (r) { return esc(dt(r.cree_le)); } },
+          { k: 'envoye_le', t: 'Prévenu le', f: function (r) { return r.envoye_le ? '<span class="ok">' + esc(dt(r.envoye_le)) + '</span>' : '<span class="warn">à prévenir</span>'; } },
+          { k: 'recontact', t: 'Recontact', raw: function (r) { return r.recontact ? 'oui' : 'non'; }, f: function (r) { return r.recontact ? '<span class="ok">oui</span>' : '<span class="muted">non</span>'; } }, { k: 'page', t: 'Page' }], rows, { csv: 'inscrits' });
+        var sel = function () { return Array.prototype.map.call(tb.querySelectorAll('input[data-id]:checked'), function (x) { return +x.dataset.id; }); };
+        $('b-mail').onclick = function () { var a = att.map(function (i) { return i.email; }); if (!a.length) { $('ins-msg').textContent = 'Personne à prévenir.'; return; } location.href = 'mailto:contact@noumensia.com?bcc=' + enc(a.join(',')) + '&subject=' + enc('AI Act : les lignes directrices de la Commission sont parues'); $('ins-msg').textContent = a.length + ' adresse(s) en copie cachée.'; };
+        $('b-copy').onclick = function () { var t = att.map(function (i) { return i.email; }).join(', '); if (!t) { $('ins-msg').textContent = 'Personne à prévenir.'; return; } (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { $('ins-msg').textContent = 'Adresses copiées.'; }).catch(function () { window.prompt('Adresses :', t); }); };
+        $('b-sent').onclick = function () { var ids = sel(); if (!ids.length) { $('ins-msg').textContent = 'Cochez d\'abord les adresses.'; return; } api('/api/admin/inscrits', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'marquer_envoye', ids: ids }) }).then(function (r) { $('ins-msg').textContent = r.modifies + ' adresse(s) marquée(s) comme prévenue(s).'; setTimeout(route, 800); }).catch(function (e) { $('ins-msg').textContent = e.message; }); };
+        var armed = false;
+        $('b-purge').onclick = function () { var b = this; if (!armed) { armed = true; b.textContent = 'Confirmer la suppression'; setTimeout(function () { armed = false; b.textContent = 'Supprimer de la liste du site les adresses prévenues depuis plus de 8 jours'; }, 5000); return; } armed = false; api('/api/admin/inscrits', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'supprimer_envoyes' }) }).then(function (r) { $('ins-msg').textContent = r.modifies + ' adresse(s) supprimée(s).'; setTimeout(route, 800); }).catch(function (e) { $('ins-msg').textContent = e.message; }); };
+      }).catch(fail);
+    }
+  };
+
+  // ---------- routeur ----------
+  function route() {
+    var h = (location.hash || '#/').slice(2), parts = h.split('/'), name = parts[0] || '', arg = parts.length > 1 ? decodeURIComponent(parts.slice(1).join('/')) : null;
+    var tab = { page: 'pages', source: 'sources', action: 'actions', visite: 'visites', post: 'linkedin' }[name] || name;
+    document.querySelectorAll('#tabs a').forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#/' + tab); });
+    $('period').hidden = ['inscrits', 'visite', 'post'].indexOf(name) !== -1;
+    (views[name] || views[''])(arg);
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+
+  // ---------- accès ----------
+  function showApp() { $('login').hidden = true; $('app').hidden = false; $('logout').hidden = false; route(); }
+  function showLogin(msg) { $('app').hidden = true; $('logout').hidden = true; $('login').hidden = false; $('login-msg').textContent = msg || ''; }
   $('login-form').addEventListener('submit', function (e) {
     e.preventDefault();
     token = $('token').value.trim();
-    api('/api/admin/inscrits').then(function (d) {
+    api('/api/admin/inscrits').then(function () {
       if ($('remember').checked) { try { localStorage.setItem(KEY, token); } catch (err) {} }
-      inscrits = d.inscrits; showApp();
+      showApp();
     }).catch(function (err) { showLogin(err.auth ? 'Jeton refusé.' : err.message); });
   });
   $('logout').addEventListener('click', function () { try { localStorage.removeItem(KEY); } catch (e) {} token = ''; showLogin(''); });
-
-  // ---------- Onglets ----------
-  document.querySelectorAll('[data-tab]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      document.querySelectorAll('[data-tab]').forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
-      $('tab-inscrits').hidden = b.dataset.tab !== 'inscrits';
-      $('tab-mesure').hidden = b.dataset.tab !== 'mesure';
-      if (b.dataset.tab === 'mesure' && !stats) loadStats();
-    });
-  });
-
-  // ---------- Inscrits ----------
-  function loadInscrits() {
-    return api('/api/admin/inscrits').then(function (d) { inscrits = d.inscrits; renderInscrits(); })
-      .catch(function (err) { if (err.auth) showLogin('Jeton refusé.'); else $('ins-msg').textContent = err.message; });
-  }
-  function attente() { return inscrits.filter(function (i) { return !i.envoye_le; }); }
-  function renderInscrits() {
-    var a = attente();
-    $('k-total').textContent = num(inscrits.length);
-    $('k-attente').textContent = num(a.length);
-    $('k-envoyes').textContent = num(inscrits.length - a.length);
-    $('k-recontact').textContent = num(inscrits.filter(function (i) { return i.recontact; }).length);
-    $('ins-body').innerHTML = inscrits.length ? inscrits.map(function (i) {
-      return '<tr><td><input type="checkbox" data-id="' + i.id + '"' + (i.envoye_le ? '' : ' checked') + '></td>' +
-        '<td>' + esc(i.email) + '</td><td>' + esc(fmt(i.cree_le)) + '</td>' +
-        '<td>' + (i.envoye_le ? '<span class="ok">' + esc(fmt(i.envoye_le)) + '</span>' : '<span class="warn">à prévenir</span>') + '</td>' +
-        '<td>' + (i.recontact ? '<span class="ok">oui</span>' : '<span class="muted">non</span>') + '</td>' +
-        '<td class="muted">' + esc(i.page) + '</td></tr>';
-    }).join('') : '<tr><td colspan="6" class="muted">Personne pour l\'instant.</td></tr>';
-    $('all').checked = false;
-  }
-  function selection() { return Array.prototype.map.call(document.querySelectorAll('#ins-body input:checked'), function (c) { return +c.dataset.id; }); }
-  $('all').addEventListener('change', function () { var v = this.checked; document.querySelectorAll('#ins-body input[type=checkbox]').forEach(function (c) { c.checked = v; }); });
-
-  $('b-mail').addEventListener('click', function () {
-    var a = attente().map(function (i) { return i.email; });
-    if (!a.length) { $('ins-msg').textContent = 'Personne à prévenir.'; return; }
-    var subject = 'AI Act : les lignes directrices de la Commission sont parues';
-    location.href = 'mailto:contact@noumensia.com?bcc=' + encodeURIComponent(a.join(',')) + '&subject=' + encodeURIComponent(subject);
-    $('ins-msg').textContent = a.length + ' adresse(s) en copie cachée. Si votre messagerie ne s\'ouvre pas, utilisez « Copier leurs adresses ».';
-  });
-  $('b-copy').addEventListener('click', function () {
-    var txt = attente().map(function (i) { return i.email; }).join(', ');
-    if (!txt) { $('ins-msg').textContent = 'Personne à prévenir.'; return; }
-    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () {
-      $('ins-msg').textContent = 'Adresses copiées.';
-    }).catch(function () { window.prompt('Adresses :', txt); });
-  });
-  $('b-csv').addEventListener('click', function () {
-    var rows = [['email', 'liste', 'inscrit_le', 'prevenu_le', 'recontact', 'page']].concat(inscrits.map(function (i) { return [i.email, i.liste, i.cree_le, i.envoye_le || '', i.recontact ? 'oui' : 'non', i.page || '']; }));
-    var csv = '﻿' + rows.map(function (r) { return r.map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(';'); }).join('\r\n');
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
-    a.download = 'inscrits-alertes-' + new Date().toISOString().slice(0, 10) + '.csv';
-    document.body.appendChild(a); a.click(); a.remove();
-  });
-  $('b-sent').addEventListener('click', function () {
-    var ids = selection();
-    if (!ids.length) { $('ins-msg').textContent = 'Cochez d\'abord les adresses.'; return; }
-    api('/api/admin/inscrits', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'marquer_envoye', ids: ids }) })
-      .then(function (d) { $('ins-msg').textContent = d.modifies + ' adresse(s) marquée(s) comme prévenue(s).'; return loadInscrits(); })
-      .catch(function (err) { $('ins-msg').textContent = err.message; });
-  });
-  var purgeArmed = false;
-  $('b-purge').addEventListener('click', function () {
-    var n = inscrits.filter(function (i) { return i.envoye_le && !i.recontact; }).length;
-    if (!n) { $('ins-msg').textContent = 'Aucune adresse à supprimer (les personnes d\'accord pour être recontactées sont gardées).'; return; }
-    if (!purgeArmed) {
-      purgeArmed = true; this.textContent = 'Confirmer : supprimer ' + n + ' adresse(s)';
-      var b = this; setTimeout(function () { purgeArmed = false; b.textContent = 'Supprimer les adresses déjà prévenues'; }, 5000);
-      return;
-    }
-    purgeArmed = false; this.textContent = 'Supprimer les adresses déjà prévenues';
-    api('/api/admin/inscrits', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'supprimer_envoyes' }) })
-      .then(function (d) { $('ins-msg').textContent = d.modifies + ' adresse(s) supprimée(s).'; return loadInscrits(); })
-      .catch(function (err) { $('ins-msg').textContent = err.message; });
-  });
-
-  // ---------- Mesure ----------
-  var LABELS = {
-    'resultat:out_def': 'Parcours terminé : hors définition (logiciel classique)',
-    'resultat:out_terr': 'Parcours terminé : hors champ territorial',
-    'resultat:out_excl': 'Parcours terminé : hors champ par exclusion',
-    'resultat:out_interdit': 'Parcours terminé : pratique interdite',
-    'resultat:out_hr1': 'Parcours terminé : haut risque, voie produit (annexe I)',
-    'resultat:out_hr3': 'Parcours terminé : haut risque, voie domaine (annexe III)',
-    'resultat:out_derog': 'Parcours terminé : non haut risque par dérogation',
-    'resultat:out_transp': 'Parcours terminé : obligations de transparence',
-    'resultat:out_min': 'Parcours terminé : risque minimal',
-    'resultat:out_iaug': 'Parcours terminé : modèle à usage général',
-    'resultat:out_iaug_s': 'Parcours terminé : modèle à risque systémique'
-  };
-  function label(evt) {
-    if (LABELS[evt]) return LABELS[evt];
-    var i = evt.indexOf(':'), type = evt.slice(0, i), v = evt.slice(i + 1);
-    if (type === 'lien') return 'Lien → ' + v;
-    if (type === 'clic') return 'Bouton « ' + v + ' »';
-    if (type === 'envoi') return 'Formulaire envoyé : ' + v;
-    if (type === 'ouverture') return 'Question ouverte : ' + v;
-    if (type === 'resultat') return 'Parcours terminé : ' + v;
-    return evt;
-  }
-  function somme(test) { return (stats ? stats.lignes : []).reduce(function (s, l) { return test(l.evt) ? s + l.n : s; }, 0); }
-  function loadStats() {
-    api('/api/admin/stats?jours=' + $('periode').value).then(function (d) { stats = d; renderStats(); })
-      .catch(function (err) { if (err.auth) showLogin('Jeton refusé.'); else $('actions-body').innerHTML = '<tr><td colspan="3">' + esc(err.message) + '</td></tr>'; });
-  }
-  $('periode').addEventListener('change', loadStats);
-  $('filtre').addEventListener('input', renderActions);
-  function renderStats() {
-    $('m-vues').textContent = num(somme(function (e) { return e === 'vue'; }));
-    $('m-missions').textContent = num(somme(function (e) { return e !== 'vue' && /missions/.test(e); }));
-    $('m-contact').textContent = num(somme(function (e) { return /^(lien|clic):/.test(e) && /(\/contact|\/rendez-vous|\/rdv|cal\.eu|rdv|mailto|#question)/.test(e); }));
-    $('m-envois').textContent = num(somme(function (e) { return /^envoi:/.test(e); }));
-    $('m-graphes').textContent = num(somme(function (e) { return /^(lien|clic):/.test(e) && /(\/graphe|\/graphes|\/simulateur$|\/coach|hellixmap|bayesialab)/.test(e); }));
-    // Jour par jour : on complète les jours sans visite
-    var map = {}; stats.parJour.forEach(function (j) { map[j.jour] = j; });
-    var days = [], d0 = new Date(); d0.setUTCHours(0, 0, 0, 0);
-    for (var k = stats.jours - 1; k >= 0; k--) { var d = new Date(d0 - k * 864e5); days.push(d.toISOString().slice(0, 10)); }
-    var max = Math.max.apply(null, days.map(function (j) { return map[j] ? map[j].vues : 0; }).concat([1]));
-    $('bars').innerHTML = days.map(function (j) {
-      var v = map[j] ? map[j].vues : 0, a = map[j] ? map[j].actions : 0;
-      return '<div style="height:' + Math.max(2, Math.round(v / max * 100)) + '%" title="' + j + ' : ' + v + ' vues, ' + a + ' clics"></div>';
-    }).join('');
-    $('bars-from').textContent = days[0]; $('bars-to').textContent = days[days.length - 1];
-    var pages = stats.lignes.filter(function (l) { return l.evt === 'vue'; }).slice(0, 25);
-    $('pages-body').innerHTML = pages.length ? pages.map(function (l) { return '<tr><td>' + esc(l.page) + '</td><td class="n">' + num(l.n) + '</td></tr>'; }).join('') : '<tr><td colspan="2" class="muted">Pas encore de données.</td></tr>';
-    renderActions();
-  }
-  function renderActions() {
-    if (!stats) return;
-    var q = $('filtre').value.trim().toLowerCase();
-    var rows = stats.lignes.filter(function (l) { return l.evt !== 'vue' && (!q || (l.evt + ' ' + l.page + ' ' + label(l.evt)).toLowerCase().indexOf(q) !== -1); }).slice(0, 200);
-    $('actions-body').innerHTML = rows.length ? rows.map(function (l) { return '<tr><td>' + esc(label(l.evt)) + '</td><td class="muted">' + esc(l.page) + '</td><td class="n">' + num(l.n) + '</td></tr>'; }).join('') : '<tr><td colspan="3" class="muted">Rien pour cette période.</td></tr>';
-  }
-
-  if (token) {
-    api('/api/admin/inscrits').then(function (d) { inscrits = d.inscrits; $('login').hidden = true; $('app').hidden = false; renderInscrits(); })
-      .catch(function (err) { showLogin(err.auth ? 'Jeton expiré ou modifié : saisissez-le à nouveau.' : err.message); });
-  }
+  if (token) api('/api/admin/inscrits').then(showApp).catch(function (err) { showLogin(err.auth ? 'Jeton expiré ou modifié : saisissez-le à nouveau.' : err.message); });
 })();
 </script>
 </body>

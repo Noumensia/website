@@ -1,6 +1,7 @@
 // GET  /api/admin/inscrits : liste des inscrits aux alertes.
 // POST /api/admin/inscrits : { action: 'marquer_envoye' | 'supprimer', ids: [...] } ou { action: 'supprimer_envoyes' }
-// La purge « supprimer_envoyes » garde les personnes qui ont accepté d'être recontactées.
+// La purge « supprimer_envoyes » ne touche que les adresses prévenues depuis plus de 8 jours,
+// pour laisser au bilan hebdomadaire le temps de reporter la date d'envoi dans le CRM.
 import { json, autorise } from '../../../functions-lib/admin-auth.js';
 
 export async function onRequest({ request, env }) {
@@ -25,7 +26,7 @@ export async function onRequest({ request, env }) {
     } else if (d.action === 'supprimer' && ids.length) {
       r = await env.DB.prepare(`DELETE FROM inscrits WHERE id IN (${ph})`).bind(...ids).run();
     } else if (d.action === 'supprimer_envoyes') {
-      r = await env.DB.prepare('DELETE FROM inscrits WHERE envoye_le IS NOT NULL AND recontact = 0').run();
+      r = await env.DB.prepare("DELETE FROM inscrits WHERE envoye_le IS NOT NULL AND envoye_le < datetime('now', '-8 days')").run();
     } else {
       return json({ ok: false, error: 'Action inconnue' }, 400);
     }
