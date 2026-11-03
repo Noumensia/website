@@ -954,18 +954,18 @@ body.simple [data-adv]{ display:none !important; }
       function load() {
         loading();
         Promise.all([analyse('brut', { limite: lim, depart: depart }), api('/api/admin/exclusions')]).then(function (a) {
-          var d = a[0], ex = a[1], moi = (function () { try { return localStorage.getItem('nm-moi') === '1'; } catch (e) { return false; } })();
+          var d = a[0], ex = a[1], moi = MOI;
           mount('');
           var m = section('Mes visites', '<p style="margin-top:0">Vos propres visites sont gardées mais marquées, et exclues des statistiques (cochez « inclure mes visites » en haut pour les voir).</p>' +
-            '<div class="row"><button type="button" class="' + (moi ? '' : 'primary') + '" id="ex-dev">' + (moi ? 'Cet appareil est marqué comme le vôtre ✓ (annuler)' : 'Marquer cet appareil comme le mien') + '</button>' +
+            (moi === 'ok' ? '<p class="ok" style="margin:0 0 10px">Cet appareil est maintenant marqué comme le vôtre ✓</p>' : moi === 'retire' ? '<p class="warn" style="margin:0 0 10px">La marque a été retirée de cet appareil.</p>' : '') +
+            '<div class="row"><a class="primary" style="text-decoration:none;padding:6px 12px;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-weight:600" href="https://noumensia.com/admin/?moi=1">Marquer cet appareil comme le mien</a>' +
+            '<a style="font-size:.86rem" href="https://noumensia.com/admin/?moi=0">retirer la marque</a>' +
             '<button type="button" id="ex-ip">Exclure mon adresse IP actuelle (' + esc(ex.monIp) + ', ' + esc(ex.monReseau || '') + ')</button><button type="button" id="ex-req">Réappliquer les exclusions à tout l\'historique</button></div><p class="msg" id="ex-msg"></p>' +
-            '<p class="hint">Marquez chaque appareil (ordinateur, téléphone) en ouvrant cette page dessus. L\'exclusion par IP couvre votre box tant que son adresse ne change pas. ' + num(ex.evenementsMarques) + ' événements déjà marqués comme les vôtres.</p>');
+            '<p class="hint">Le marquage passe par noumensia.com, le domaine du site, puis revient ici. Faites-le une fois sur chaque appareil (ordinateur, téléphone) et chaque navigateur. L\'exclusion par IP couvre votre box tant que son adresse ne change pas. ' + num(ex.evenementsMarques) + ' événements déjà marqués comme les vôtres.</p>');
           V.appendChild(m);
           var lst = document.createElement('div'); m.appendChild(lst);
           table(lst, [{ k: 'type', t: 'Type' }, { k: 'valeur', t: 'Valeur', mono: true }, { k: 'note', t: 'Note' }, { k: 'ajoute_le', t: 'Ajouté le', f: function (r) { return esc(dt(r.ajoute_le)); } }, { k: 'x', t: '', f: function (r) { return '<button type="button" class="small" data-del="' + esc(r.type) + '|' + esc(r.valeur) + '">Retirer</button>'; } }], ex.exclusions || [], { csv: 'exclusions' });
           lst.addEventListener('click', function (e) { var b = e.target.closest('button[data-del]'); if (!b) return; var p = b.dataset.del.split('|'); api('/api/admin/exclusions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'retirer', type: p[0], valeur: p.slice(1).join('|') }) }).then(load); });
-          $('ex-dev').onclick = function () { try { if (moi) localStorage.removeItem('nm-moi'); else localStorage.setItem('nm-moi', '1'); } catch (e) {} var vid = null; try { vid = localStorage.getItem('nm-vid'); } catch (e) {}
-            if (!moi && vid) api('/api/admin/exclusions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'ajouter', type: 'visiteur', valeur: vid, note: navigator.userAgent.slice(0, 100) }) }).then(load).catch(load); else load(); };
           $('ex-ip').onclick = function () { api('/api/admin/exclusions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'ajouter', type: 'ip', note: 'ajoutée depuis le cockpit' }) }).then(function (r) { $('ex-msg').textContent = 'IP ' + r.valeur + ' exclue, ' + r.requalifies + ' événements marqués.'; setTimeout(load, 900); }).catch(function (e) { $('ex-msg').textContent = e.message; }); };
           $('ex-req').onclick = function () { api('/api/admin/exclusions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'requalifier' }) }).then(function (r) { $('ex-msg').textContent = r.requalifies + ' événements marqués.'; }).catch(function (e) { $('ex-msg').textContent = e.message; }); };
           var e = section('Export complet');
@@ -1197,7 +1197,14 @@ body.simple [data-adv]{ display:none !important; }
   }
   window.addEventListener('hashchange', function () { route(); window.scrollTo(0, 0); });
 
-  function showApp() { $('loginwrap').hidden = true; $('app').hidden = false; applyMode(); syncUI(); route(); }
+  // Retour de noumensia.com/admin/?moi=1|0 : #/donnees?moi=ok&vid=… (l'identifiant de visiteur de cet appareil sur le site)
+  var MOI = null, RETOUR = null;
+  (function () { var h = location.hash, i = h.indexOf('?'); if (i < 0) return; RETOUR = new URLSearchParams(h.slice(i + 1)); MOI = RETOUR.get('moi'); history.replaceState(null, '', location.pathname + h.slice(0, i)); })();
+  function traiterRetour() {
+    var vid = RETOUR && RETOUR.get('vid'); RETOUR = null;
+    if (MOI === 'ok' && vid && /^[a-z0-9]{8,40}$/i.test(vid)) api('/api/admin/exclusions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'ajouter', type: 'visiteur', valeur: vid, note: 'appareil marqué · ' + navigator.userAgent.slice(0, 80) }) }).then(function () { if (/^#\/donnees/.test(location.hash)) route(); }).catch(function () {});
+  }
+  function showApp() { traiterRetour(); $('loginwrap').hidden = true; $('app').hidden = false; applyMode(); syncUI(); route(); }
   function showLogin(msg) { $('app').hidden = true; $('loginwrap').hidden = false; $('login-msg').textContent = msg || ''; }
   $('login-form').addEventListener('submit', function (e) {
     e.preventDefault(); token = $('token').value.trim();

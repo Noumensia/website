@@ -63,8 +63,9 @@ const vide = () => new Response(null, { status: 204, headers: { 'Cache-Control':
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return vide();
   const ua = request.headers.get('user-agent') || '';
+  if ((+request.headers.get('content-length') || 0) > 16384) return vide();
   let d;
-  try { d = JSON.parse(await request.text()); } catch (e) { return vide(); }
+  try { const txt = await request.text(); if (txt.length > 16384) return vide(); d = JSON.parse(txt); } catch (e) { return vide(); }
   if (!d || typeof d !== 'object') return vide();
   const type = EVTS[d.event];
   if (!type) return vide();

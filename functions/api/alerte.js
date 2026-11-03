@@ -16,6 +16,7 @@ function json(obj, status = 200) {
 }
 
 export async function onRequestPost({ request, env }) {
+  if ((+request.headers.get('content-length') || 0) > 8192) return json({ ok: false, error: 'taille' }, 413);
   let d = {};
   try {
     const ct = request.headers.get('content-type') || '';
