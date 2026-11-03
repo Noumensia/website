@@ -22,7 +22,9 @@ export async function onRequestGet({ request, env }) {
   }
   if (url.searchParams.get('format') === 'json') return json({ ok: true, table: t, lignes: rows });
   const cols = rows.length ? Object.keys(rows[0]) : [];
-  const esc = v => v == null ? '' : /[";\n\r]/.test(String(v)) ? '"' + String(v).replace(/"/g, '""') + '"' : String(v);
+  // Une valeur qui commence par = + - @ serait lue comme une formule par Excel : on la préfixe d'une apostrophe.
+  const sur = v => { v = String(v); return /^[=+\-@\t\r]/.test(v) && !/^-?\d+([.,]\d+)?$/.test(v) ? "'" + v : v; };
+  const esc = v => { if (v == null) return ''; v = sur(v); return /[";\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
   const csv = '﻿' + [cols.join(';')].concat(rows.map(r => cols.map(c => esc(r[c])).join(';'))).join('\r\n');
   return new Response(csv, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Cache-Control': 'no-store',
     'Content-Disposition': `attachment; filename="noumensia-${t}-${new Date().toISOString().slice(0, 10)}.csv"` } });

@@ -16,7 +16,7 @@ function nettoie(s, max) {
 }
 function chemin(p) {
   let s = String(p || '/').split('#')[0].split('?')[0].slice(0, 200);
-  if (!s.startsWith('/')) return null;
+  if (!s.startsWith('/') || s.startsWith('//') || s.includes('\\')) return null;
   s = s.replace(/[.\s]+$/, '').replace(/\.html$/, '').replace(/\/index$/, '/');
   return s || '/';
 }
