@@ -64,6 +64,10 @@
 /modeles/burnout/graphe        https://hellixmap.bayesia.com/display/1b71489e10f4d684?panel=1&openChat=expert   302
 /modeles/turnover/simulateur   https://simulator.bayesialab.com/simulator/60898933782   302
 /modeles/burnout/simulateur    https://simulator.bayesialab.com/simulator/47192424779   302
+/modeles/turnover/coach        https://hellixmap.bayesia.com/display/1b6247c58b13fe6b?panel=0&openChat=coach&fullscreen=0   302
+/modeles/burnout/coach         https://hellixmap.bayesia.com/display/1b71489e10f4d684?panel=0&openChat=coach&fullscreen=0   302
+# Collection vitrine : tous les graphes publics de Noumensia (modèles RH + AI Act)
+/graphes                       https://hellixmap.bayesia.com/collections/zbR9t614hJJaWWrMQIWpyw   302
 
 /ai-act                 /decryptages/ai-act/     301
 /ai-act/                /decryptages/ai-act/     301
